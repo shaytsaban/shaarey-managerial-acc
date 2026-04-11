@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חשבונאות ניהולית - ד"ר שי צבאן</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Heebo:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <!-- KaTeX for beautiful math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInDocument()"></script>
+
+    <style>
+        :root {
+            --navy: #1e3a8a;
+            --blue: #1e40af;
+            --blue-light: #3b82f6;
+            --gold: #d97706;
+            --gold-light: #fbbf24;
+            --bg: #f0f4f8;
+        }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: var(--bg);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Heebo', sans-serif;
+            font-weight: 800;
+        }
+
+        /* ===== NAV ===== */
+        .step-content { display: none; animation: fadeUp 0.4s ease forwards; }
+        .step-content.active { display: block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+        .glass { background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); }
+        .nav-btn { background: white; color: #1e3a8a; border: 2px solid #e2e8f0; transition: all .2s; }
+        .nav-btn:hover { background: #f0f4ff; border-color: #3b82f6; }
+        .nav-btn-active { background: #1e40af !important; color: white !important; border-color: #1e3a8a !important; box-shadow: 0 8px 20px -4px rgba(30,64,175,.4); }
+
+        /* ===== MATH STYLING ===== */
+        /* Beautiful formula box */
+        .formula-box {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            border-radius: 1.25rem;
+            padding: 2rem 2.5rem;
+            margin: 1.25rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px -10px rgba(30,58,138,.45);
+            direction: ltr;
+        }
+        .formula-box::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 160px; height: 160px;
+            border-radius: 50%;
+            background: rgba(59,130,246,.15);
+        }
+        .formula-box .formula-label {
+            font-family: 'Assistant', sans-serif;
+            font-weight: 700;
+            font-size: .8rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #93c5fd;
+            margin-bottom: .6rem;
+            text-align: right;
+            direction: rtl;
+        }
+        .formula-box .katex-display, .formula-box .katex { color: #f8fafc; }
+        .formula-box .katex { font-size: 1.5rem !important; }
+        .formula-box .katex-display { margin: 0 !important; }
+
+        /* Step-by-step formula steps */
+        .formula-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            border-radius: .875rem;
+            background: white;
+            border: 2px solid #e2e8f0;
+            margin-bottom: .75rem;
+            direction: ltr;
+        }
+        .formula-step-num {
+            width: 2rem; height: 2rem;
+            border-radius: 50%;
+            background: var(--blue);
+            color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: .9rem;
+            flex-shrink: 0;
+        }
+        .formula-step .katex { font-size: 1.25rem !important; }
+
+        /* Inline math highlight */
+        .math-inline {
+            display: inline-block;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: .4rem;
+            padding: .1rem .5rem;
+            direction: ltr;
+        }
+        .math-inline .katex { font-size: 1.1rem !important; }
+
+        /* ===== SIMULATOR SLIDER ===== */
+        .slider-custom { -webkit-appearance: none; width: 100%; height: 8px; border-radius: 5px; background: #334155; outline: none; }
+        .slider-custom::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: var(--gold-light); cursor: pointer; box-shadow: 0 0 0 4px rgba(251,191,36,.3); transition: .15s; }
+        .slider-custom::-webkit-slider-thumb:hover { background: #fcd34d; transform: scale(1.1); }
+
+        /* ===== MCQ QUIZ ===== */
+        .mcq-option {
+            display: flex; align-items: center; gap: .75rem;
+            padding: .9rem 1.25rem;
+            border-radius: .875rem;
+            border: 2px solid #e2e8f0;
+            background: white;
+            cursor: pointer;
+            transition: all .2s;
+            text-align: right;
+        }
+        .mcq-option:hover { border-color: #93c5fd; background: #eff6ff; }
+        .mcq-option.correct { border-color: #16a34a; background: #f0fdf4; }
+        .mcq-option.incorrect { border-color: #dc2626; background: #fef2f2; }
+        .mcq-option.reveal-correct { border-color: #16a34a; background: #f0fdf4; border-style: dashed; }
+        .mcq-option input[type="radio"] { accent-color: var(--blue); width: 18px; height: 18px; flex-shrink: 0; }
+        .mcq-feedback { border-radius: .875rem; padding: 1rem 1.5rem; font-weight: 700; font-size: 1.05rem; margin-top: .75rem; display: none; }
+        .mcq-feedback.show { display: block; }
+        .mcq-feedback.correct { background: #f0fdf4; color: #15803d; border: 2px solid #86efac; }
+        .mcq-feedback.incorrect { background: #fef2f2; color: #b91c1c; border: 2px solid #fca5a5; }
+        .mcq-check-btn { transition: all .2s; }
+        .mcq-check-btn:disabled { opacity: .5; cursor: not-allowed; }
+
+        /* Progress bar */
+        #progressBar { transition: width .6s cubic-bezier(.4,0,.2,1); }
+
+        /* dir helpers */
+        .dir-ltr { direction: ltr; text-align: left; }
+
+        /* Table zebra */
+        tbody tr:nth-child(even) td { background-color: #f8fafc; }
+
+        /* Reveal card */
+        .reveal-card { cursor: pointer; transition: all .2s; }
+        .reveal-card:hover { transform: scale(1.02); box-shadow: 0 8px 24px -4px rgba(0,0,0,.12); }
+    </style>
+</head>
+<body class="min-h-screen text-gray-900 overflow-x-hidden pb-24">
+
+<!-- ====== NAV ====== -->
+<nav class="sticky top-0 z-50 glass border-b border-blue-100 py-4 px-6 shadow-md">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-gradient-to-br from-blue-700 to-blue-900 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-xl rotate-2">₪</div>
+            <div>
+                <h1 class="text-2xl text-blue-900 leading-tight">חשבונאות ניהולית</h1>
+                <p class="text-sm text-blue-600 font-bold uppercase tracking-wide">מרצה: ד"ר שי צבאן</p>
+            </div>
+        </div>
+        <div class="flex flex-col items-end gap-1 w-full md:w-auto">
+            <span id="progress-text" class="text-xs font-bold text-blue-800">התקדמות: 17%</span>
+            <div class="w-full md:w-72 bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner border border-gray-300">
+                <div id="progressBar" class="bg-gradient-to-l from-blue-700 to-blue-400 h-full" style="width:17%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-7xl mx-auto px-4 py-8">
+
+    <!-- CHAPTER BUTTONS -->
+    <div class="grid grid-cols-3 md:grid-cols-6 gap-2 mb-10">
+        <button onclick="goToStep(1)" id="nav-1" class="nav-btn py-3 px-2 rounded-2xl font-bold text-sm nav-btn-active">1. מבוא</button>
+        <button onclick="goToStep(2)" id="nav-2" class="nav-btn py-3 px-2 rounded-2xl font-bold text-sm">2. התנהגות עלויות</button>
+        <button onclick="goToStep(3)" id="nav-3" class="nav-btn py-3 px-2 rounded-2xl font-bold text-sm">3. ייחוס</button>
+        <button onclick="goToStep(4)" id="nav-4" class="nav-btn py-3 px-2 rounded-2xl font-bold text-sm">4. שיטת גבוה-נמוך</button>
+        <button onclick="goToStep(5)" id="nav-5" class="nav-btn py-3 px-2 rounded-2xl font-bold text-sm">5. מעבדה</button>
+        <button onclick="goToStep(6)" id="nav-6" class="nav-btn py-3 px-2 rounded-2xl font-bold text-sm">6. מבחן סיכום</button>
+    </div>
+
+    <!-- =================== פרק 1 =================== -->
+    <div id="step-1" class="step-content active">
+        <div class="bg-white rounded-[2.5rem] p-10 shadow-2xl border-t-8 border-blue-800">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-4xl mb-6 leading-tight text-gray-900">מבוא לחשבונאות ניהולית</h2>
+
+                <h3 class="text-2xl font-bold text-blue-800 mb-4">מהי חשבונאות ניהולית?</h3>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                    חשבונאות ניהולית היא ענף בחשבונאות שמטרתו לספק מידע כמותי ואיכותי למנהלים בארגון לצורך קבלת החלטות, תכנון ובקרה.
+                    בניגוד לחשבונאות הפיננסית, שמוכוונת לגורמי חוץ ומתמקדת בדיווח על מה שכבר קרה, <strong>החשבונאות הניהולית מסתכלת פנימה ואל העתיד</strong>.
+                </p>
+
+                <h3 class="text-2xl font-bold text-blue-800 mb-4">ההבדלים המרכזיים</h3>
+                <div class="overflow-x-auto rounded-xl border border-gray-200 shadow-sm mb-8">
+                    <table class="w-full text-right bg-white">
+                        <thead class="bg-gray-100 text-gray-800">
+                            <tr>
+                                <th class="p-4 border-b w-1/4">מאפיין</th>
+                                <th class="p-4 border-b font-bold text-blue-700">חשבונאות ניהולית</th>
+                                <th class="p-4 border-b font-bold text-gray-600">חשבונאות פיננסית</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b"><td class="p-4 font-bold bg-gray-50">משתמשים</td><td class="p-4">מנהלים פנימיים (מנכ"ל, מנהלי מחלקות)</td><td class="p-4">גורמים חיצוניים (משקיעים, בנקים, רשויות)</td></tr>
+                            <tr class="border-b"><td class="p-4 font-bold bg-gray-50">זמן</td><td class="p-4"><strong>עתיד</strong> — תכנון, תחזיות, תקצוב</td><td class="p-4"><strong>עבר</strong> — דוחות היסטוריים</td></tr>
+                            <tr class="border-b"><td class="p-4 font-bold bg-gray-50">כללים</td><td class="p-4">גמישות מוחלטת. כלל אחד: תועלת > עלות</td><td class="p-4">חובה לציית ל-GAAP/IFRS</td></tr>
+                            <tr><td class="p-4 font-bold bg-gray-50">פירוט</td><td class="p-4">גבוה מאוד — ברמת מחלקה / מוצר / הזמנה</td><td class="p-4">מצרפי — על החברה כולה</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="text-2xl font-bold text-blue-800 mb-4">מטרות החשבונאות הניהולית</h3>
+                <div class="grid md:grid-cols-3 gap-6 mb-10">
+                    <div class="p-6 bg-blue-50 rounded-2xl border-t-4 border-blue-500 shadow-sm">
+                        <h4 class="font-bold text-blue-900 text-xl mb-3">1. תכנון</h4>
+                        <p class="text-gray-700">בניית תקציבים וקביעת יעדים פיננסיים לעתיד.</p>
+                    </div>
+                    <div class="p-6 bg-green-50 rounded-2xl border-t-4 border-green-500 shadow-sm">
+                        <h4 class="font-bold text-green-900 text-xl mb-3">2. בקרה</h4>
+                        <p class="text-gray-700">השוואת ביצועים בפועל מול התקציב וניתוח פערים.</p>
+                    </div>
+                    <div class="p-6 bg-purple-50 rounded-2xl border-t-4 border-purple-500 shadow-sm">
+                        <h4 class="font-bold text-purple-900 text-xl mb-3">3. קבלת החלטות</h4>
+                        <p class="text-gray-700">בחירה בין חלופות עסקיות על סמך נתונים.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button onclick="goToStep(2)" class="w-full md:w-1/2 py-4 bg-blue-800 text-white rounded-full font-bold text-lg hover:bg-blue-900 transition shadow-lg hover:scale-105">המשך לפרק 2 ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== פרק 2 =================== -->
+    <div id="step-2" class="step-content">
+        <div class="bg-white rounded-[2.5rem] p-10 shadow-xl border border-gray-100">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl mb-2 text-blue-900">התנהגות עלויות <span class="text-xl font-normal text-gray-500 font-sans">(Cost Behavior)</span></h2>
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">כיצד עלות <em>מגיבה</em> כאשר חל שינוי בהיקף הפעילות? אנו מסווגים את העלויות לשלוש קבוצות:</p>
+
+                <!-- עלות קבועה -->
+                <div class="bg-orange-50 p-6 rounded-2xl border border-orange-200 shadow-sm mb-6">
+                    <h3 class="text-2xl font-bold text-orange-900 mb-3">1. עלות קבועה <span class="text-base font-normal text-orange-700">(Fixed Cost)</span></h3>
+                    <p class="text-gray-800 mb-4 text-lg">סכומה הכולל <strong>אינו משתנה</strong> בעקבות שינוי בהיקף הייצור, בטווח הרלוונטי.
+                        <span class="block text-base text-gray-600 mt-1">דוגמאות: שכר דירה, ארנונה, שכר מנהל מפעל.</span>
+                    </p>
+                    <div class="formula-box">
+                        <div class="formula-label">משוואת העלות הקבועה הכוללת</div>
+                        <div class="text-center" id="formula-fc"></div>
+                    </div>
+                    <p class="text-gray-700 text-base mt-3 pr-1"><span class="font-mono font-bold text-orange-700">FC</span> — Fixed Cost, הסכום הקבוע שנשלם בכל מקרה.</p>
+                </div>
+
+                <!-- עלות משתנה -->
+                <div class="bg-emerald-50 p-6 rounded-2xl border border-emerald-200 shadow-sm mb-6">
+                    <h3 class="text-2xl font-bold text-emerald-900 mb-3">2. עלות משתנה <span class="text-base font-normal text-emerald-700">(Variable Cost)</span></h3>
+                    <p class="text-gray-800 mb-4 text-lg">סכומה הכולל <strong>משתנה ביחס ישר</strong> להיקף הייצור — כל יחידה נוספת מוסיפה עלות זהה.
+                        <span class="block text-base text-gray-600 mt-1">דוגמאות: חומרי גלם, שכר פועלי ייצור לפי יחידה.</span>
+                    </p>
+                    <div class="formula-box" style="background: linear-gradient(135deg,#064e3b,#065f46);">
+                        <div class="formula-label">משוואת העלות המשתנה הכוללת</div>
+                        <div class="text-center" id="formula-vc"></div>
+                    </div>
+                    <div class="mt-3 text-base text-gray-700 space-y-1 pr-1">
+                        <p><span class="font-mono font-bold text-emerald-700">VC</span> — Variable Cost, סך כל העלות המשתנה.</p>
+                        <p><span class="font-mono font-bold text-emerald-700">v</span> — עלות משתנה ליחידה אחת בלבד.</p>
+                        <p><span class="font-mono font-bold text-emerald-700">Q</span> — כמות היחידות המיוצרות (Quantity).</p>
+                    </div>
+                    <div class="mt-4 p-4 bg-yellow-100 rounded-xl border-r-4 border-yellow-500">
+                        <span class="font-bold text-lg block mb-1">הנחת עבודה מרכזית — "v נשאר קבוע":</span>
+                        <p class="text-gray-800">לאורך כל הקורס, אנו מניחים שהעלות המשתנה ליחידה <strong>v</strong> נשארת קבועה לחלוטין לכל היקף ייצור. בטווח פעילות שגרתי, כמות חומר הגלם לכל מוצר זהה — לכן עלות החומר ליחידה אינה משתנה.</p>
+                    </div>
+                </div>
+
+                <!-- עלות מעורבת -->
+                <div class="bg-indigo-50 p-6 rounded-2xl border border-indigo-200 shadow-sm mb-8">
+                    <h3 class="text-2xl font-bold text-indigo-900 mb-3">3. עלות מעורבת <span class="text-base font-normal text-indigo-700">(Mixed Cost)</span></h3>
+                    <p class="text-gray-800 mb-4 text-lg">כוללת <strong>מרכיב קבוע</strong> ו<strong>מרכיב משתנה</strong> גם יחד.
+                        <span class="block text-base text-gray-600 mt-1">דוגמאות: חשמל (דמי שימוש קבועים + צריכה משתנה), שכר מכירות (בסיס + עמלה).</span>
+                    </p>
+                    <div class="formula-box" style="background: linear-gradient(135deg,#1e1b4b,#3730a3);">
+                        <div class="formula-label">משוואת העלות הכוללת — המודל הכללי</div>
+                        <div class="text-center" id="formula-tc"></div>
+                    </div>
+                    <div class="mt-3 text-base text-gray-700 space-y-1 pr-1">
+                        <p><span class="font-mono font-bold text-indigo-700">TC</span> — Total Cost, סך כל העלות הכוללת.</p>
+                        <p><span class="font-mono font-bold text-indigo-700">FC</span> — המרכיב הקבוע.</p>
+                        <p><span class="font-mono font-bold text-indigo-700">v × Q</span> — סך המרכיב המשתנה.</p>
+                    </div>
+                </div>
+
+                <!-- סימולטור -->
+                <div class="bg-gray-800 rounded-3xl p-8 text-white shadow-2xl">
+                    <h3 class="text-3xl mb-1 text-yellow-400">סימולטור דינמי — "כסאות העתיד בע"מ"</h3>
+                    <p class="text-gray-400 text-base mb-5">חברה לייצור כסאות משרדיים. להלן מבנה העלויות החודשי שלה:</p>
+
+                    <div class="grid md:grid-cols-2 gap-4 mb-5">
+                        <div class="bg-gray-700 p-5 rounded-xl border border-orange-500/40">
+                            <h4 class="text-orange-400 font-bold text-lg mb-1">עלויות קבועות — Fixed Cost (FC)</h4>
+                            <p class="text-gray-400 text-sm mb-3">עלויות שהחברה משלמת <strong class="text-gray-200">בכל חודש ללא קשר לכמות הייצור</strong>. גם אם לא ייוצר ולו כסא אחד — חובה לשלם אותן.</p>
+                            <div class="text-gray-200 space-y-2 text-sm">
+                                <div class="flex justify-between items-center border-b border-gray-600 pb-2">
+                                    <span>שכר דירה למפעל</span>
+                                    <span class="font-mono bg-gray-800 px-2 py-0.5 rounded">8,000 ש"ח</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-600 pb-2">
+                                    <span>פחת מכונות (קו ישר)</span>
+                                    <span class="font-mono bg-gray-800 px-2 py-0.5 rounded">2,000 ש"ח</span>
+                                </div>
+                                <div class="flex justify-between items-center font-bold text-orange-300 pt-1">
+                                    <span>סך עלות קבועה (FC) לחודש</span>
+                                    <span class="font-mono text-lg">10,000 ש"ח</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gray-700 p-5 rounded-xl border border-emerald-500/40">
+                            <h4 class="text-emerald-400 font-bold text-lg mb-1">עלות משתנה ליחידה — Variable Cost (v)</h4>
+                            <p class="text-gray-400 text-sm mb-3">עלות <strong class="text-gray-200">לייצור כסא בודד אחד</strong>. כמות הכסאות × עלות זו = סך העלות המשתנה הכוללת.</p>
+                            <div class="text-gray-200 space-y-2 text-sm">
+                                <div class="flex justify-between items-center border-b border-gray-600 pb-2">
+                                    <span>חומרי גלם (פלסטיק + מתכת) לכסא</span>
+                                    <span class="font-mono bg-gray-800 px-2 py-0.5 rounded">30 ש"ח</span>
+                                </div>
+                                <div class="flex justify-between items-center border-b border-gray-600 pb-2">
+                                    <span>שכר פועל ייצור לכסא (עבודה ישירה)</span>
+                                    <span class="font-mono bg-gray-800 px-2 py-0.5 rounded">20 ש"ח</span>
+                                </div>
+                                <div class="flex justify-between items-center font-bold text-emerald-300 pt-1">
+                                    <span>סך עלות משתנה לכסא אחד (v)</span>
+                                    <span class="font-mono text-lg">50 ש"ח</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-900/50 p-5 rounded-xl border border-blue-500 mb-2">
+                        <label class="block text-lg font-bold mb-1">שנו את כמות הייצור החודשית <span class="text-yellow-400">(Q)</span> בכסאות:</label>
+                        <p class="text-gray-400 text-sm mb-4">הזיזו את המחוון וצפו כיצד כל סוג עלות מגיב — נסו להסביר מדוע עלות אחת נשארת קבועה ואחרת גדלה.</p>
+                        <div class="flex items-center gap-5">
+                            <input type="range" id="sim-q" min="0" max="1000" step="10" value="100" class="slider-custom flex-grow" oninput="updateSimulator()">
+                            <div class="text-center">
+                                <div id="sim-q-val" class="text-yellow-400 text-3xl font-black bg-gray-900 py-2 px-5 rounded-lg border border-yellow-500 w-28 text-center">100</div>
+                                <div class="text-gray-400 text-xs mt-1">יחידות</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-500 text-xs text-center mb-5">💡 הזזו ל-0 יחידות — שימו לב שהעלות הקבועה לא נעלמת. המפעל עדיין חייב לשלם שכר דירה!</p>
+
+                    <div class="space-y-3">
+                        <div class="bg-gray-900 p-4 rounded-xl border-l-8 border-orange-500">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
+                                <div>
+                                    <div class="text-orange-400 font-bold text-lg">עלות קבועה — Fixed Cost (FC)</div>
+                                    <div class="text-gray-500 text-sm">לא תשתנה בכל היקף ייצור שיהיה</div>
+                                </div>
+                                <div id="sim-calc-fc" class="text-gray-300 font-mono text-base dir-ltr flex-1 text-center"></div>
+                                <span class="text-2xl font-black text-white whitespace-nowrap"><span id="sim-total-fc">10,000</span> ש"ח</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-900 p-4 rounded-xl border-l-8 border-emerald-500">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
+                                <div>
+                                    <div class="text-emerald-400 font-bold text-lg">עלות משתנה — Variable Cost (VC)</div>
+                                    <div class="text-gray-500 text-sm">עלות משתנה ליחידה (v=50 ש"ח) × כמות הכסאות (Q)</div>
+                                </div>
+                                <div id="sim-calc-vc" class="text-gray-300 font-mono text-base dir-ltr flex-1 text-center"></div>
+                                <span class="text-2xl font-black text-white whitespace-nowrap"><span id="sim-total-vc">5,000</span> ש"ח</span>
+                            </div>
+                        </div>
+                        <div class="bg-gray-700 p-5 rounded-xl border-l-8 border-blue-400 shadow-lg">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
+                                <div>
+                                    <div class="text-blue-300 font-bold text-xl">עלות כוללת — Total Cost (TC)</div>
+                                    <div class="text-gray-400 text-sm">עלות קבועה (FC) + סך העלות המשתנה (v × Q)</div>
+                                </div>
+                                <div id="sim-calc-tc" class="text-gray-100 font-mono text-base dir-ltr flex-1 text-center"></div>
+                                <span class="text-4xl font-black text-yellow-400 whitespace-nowrap"><span id="sim-total-cost">15,000</span> ש"ח</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <button onclick="goToStep(3)" class="w-full md:w-1/2 py-4 bg-blue-800 text-white rounded-full font-bold text-lg hover:bg-blue-900 transition shadow-lg hover:scale-105">המשך לפרק 3 ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== פרק 3 =================== -->
+    <div id="step-3" class="step-content">
+        <div class="bg-white rounded-[2.5rem] p-10 shadow-xl border border-gray-100">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl mb-6 text-indigo-900">יכולת ייחוס: עלויות ישירות מול עקיפות</h2>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                    בפרק הקודם סיווגנו עלויות לפי <em>התנהגותן</em> מול נפח הפעילות. עתה נסווג לפי <strong>יכולת הייחוס</strong> — עד כמה קל לשייך עלות למוצר בודד.
+                </p>
+                <div class="bg-yellow-50 border-r-4 border-yellow-500 p-5 rounded-lg mb-8 text-gray-800">
+                    <strong>מדוע חשוב להבחין?</strong> עלויות ישירות נשייך ישירות לכל מוצר. עלויות עקיפות הן הוצאות <em>משותפות</em> לכלל המוצרים — בפרקים הבאים נלמד שיטות <b>העמסת עלויות</b> לחלקן בצורה הגיונית.
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-10">
+                    <div class="border-2 border-blue-200 rounded-3xl p-8 bg-blue-50/50">
+                        <h3 class="text-2xl font-bold text-blue-800 mb-4">עלות ישירה <span class="text-base font-normal">(Direct Cost)</span></h3>
+                        <p class="text-gray-800 mb-4">ניתן לעקוב אחריה ולשייך אותה בצורה ישירה, מדויקת <b>וכדאית כלכלית</b> למוצר בודד.</p>
+                        <ul class="space-y-2 text-gray-800">
+                            <li>✅ <strong>חומרי גלם עיקריים:</strong> משטח עץ לשולחן — ידוע בדיוק כמה עלה.</li>
+                            <li>✅ <strong>עבודה ישירה:</strong> שכר פועל שמקדיש שעתיים להרכבת מוצר ספציפי.</li>
+                        </ul>
+                    </div>
+                    <div class="border-2 border-purple-200 rounded-3xl p-8 bg-purple-50/50">
+                        <h3 class="text-2xl font-bold text-purple-800 mb-4">עלות עקיפה <span class="text-base font-normal">(Indirect / Overhead)</span></h3>
+                        <p class="text-gray-800 mb-4"><b>לא ניתן</b> או <b>לא משתלם</b> לייחס ישירות למוצר בודד.</p>
+                        <ul class="space-y-2 text-gray-800">
+                            <li>⚙️ <strong>חומרי עזר:</strong> דבק, מסמרים — לא הגיוני לעקוב אחרי כל בורג.</li>
+                            <li>⚙️ <strong>עבודה עקיפה:</strong> שכר מנהל עבודה המפקח על כלל הייצור.</li>
+                            <li>⚙️ <strong>אחרות:</strong> פחת מכונות, חשמל, שכר דירה, ארנונה.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button onclick="goToStep(4)" class="w-full md:w-1/2 py-4 bg-blue-800 text-white rounded-full font-bold text-lg hover:bg-blue-900 transition shadow-lg hover:scale-105">המשך לפרק 4 ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== פרק 4 =================== -->
+    <div id="step-4" class="step-content">
+        <div class="bg-white rounded-[2.5rem] p-10 shadow-xl border border-gray-100">
+            <div class="max-w-5xl mx-auto">
+                <h2 class="text-3xl mb-4 border-b-2 border-gray-200 pb-4">שיטת <strong>היקף ייצור גבוה ונמוך</strong></h2>
+                <p class="text-lg text-gray-700 mb-6 leading-relaxed">
+                    כאשר מקבלים רק את <b>סך ההוצאה הכוללת</b> וחושדים שמדובר ב<b>עלות מעורבת</b> — עלינו "לחלץ" ממנה את <b>v</b> ואת <b>FC</b>.
+                    <br>השיטה: בחירת שתי נקודות היסטוריות — החודש עם <strong>היקף הייצור הגבוה ביותר</strong> והחודש עם <strong>היקף הייצור הנמוך ביותר</strong>.
+                </p>
+
+                <!-- formula steps -->
+                <div class="bg-blue-50 border-r-4 border-blue-600 p-8 rounded-2xl mb-10">
+                    <h3 class="font-bold text-2xl mb-6 text-blue-900">שלבי העבודה:</h3>
+
+                    <div class="mb-6">
+                        <div class="flex items-start gap-3 mb-3">
+                            <div class="formula-step-num mt-0.5">1</div>
+                            <div>
+                                <p class="font-bold text-blue-800 text-lg mb-1">מציאת העלות המשתנה ליחידה (v)</p>
+                                <p class="text-gray-700 mb-3">מאחר שהעלות הקבועה <em>אינה משתנה</em>, כל הפרש בעלות הכוללת בין שני החודשים נובע אך ורק מהיחידות הנוספות.</p>
+                            </div>
+                        </div>
+                        <div class="formula-box">
+                            <div class="formula-label">נוסחת חילוץ העלות המשתנה ליחידה</div>
+                            <div class="text-center" id="formula-v-extract"></div>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2 pr-2">
+                            <span class="font-mono font-bold">TC<sub>H</sub>, TC<sub>L</sub></span> = עלות כוללת בחודש הייצור הגבוה / הנמוך &nbsp;|&nbsp;
+                            <span class="font-mono font-bold">Q<sub>H</sub>, Q<sub>L</sub></span> = כמות יחידות בחודש הגבוה / הנמוך
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="flex items-start gap-3 mb-3">
+                            <div class="formula-step-num mt-0.5">2</div>
+                            <div>
+                                <p class="font-bold text-blue-800 text-lg mb-1">מציאת סך העלות הקבועה (FC)</p>
+                                <p class="text-gray-700 mb-3">לאחר מציאת v — נחשב את העלות המשתנה ב<em>נקודה הגבוהה</em> ונחסיר מסך העלות. השארית היא המרכיב הקבוע.</p>
+                            </div>
+                        </div>
+                        <div class="formula-box">
+                            <div class="formula-label">נוסחת חילוץ העלות הקבועה</div>
+                            <div class="text-center" id="formula-fc-extract"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- תרגיל 1 — TABLE FORMAT (עמודות = חודשים) -->
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-200 mb-8">
+                    <h4 class="text-2xl font-bold mb-2">תרגיל מודרך 1: חילוץ עלות תחזוקה מעורבת</h4>
+                    <p class="text-gray-700 mb-6">להלן סך ההוצאות על שירותי תחזוקה בשלושה חודשים. מצאו את <b>v</b> ואת <b>FC</b>.</p>
+
+                    <div class="overflow-x-auto rounded-xl border border-gray-300 mb-6">
+                        <table class="w-full text-center bg-white text-lg">
+                            <thead>
+                                <tr class="bg-gray-800 text-white">
+                                    <th class="py-4 px-4 text-right border-l border-gray-600">סעיף</th>
+                                    <th class="py-4 px-4 border-l border-gray-600">אפריל</th>
+                                    <th class="py-4 px-4 bg-red-900 border-l border-gray-600">מאי<br><span class="text-xs font-normal text-red-300">היקף נמוך</span></th>
+                                    <th class="py-4 px-4 bg-green-900">יוני<br><span class="text-xs font-normal text-green-300">היקף גבוה</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-4 px-4 font-bold text-right bg-gray-50">היקף ייצור (יח׳)</td>
+                                    <td class="py-4 px-4 font-mono">5,000</td>
+                                    <td class="py-4 px-4 font-mono bg-red-50 font-bold text-red-800">4,000</td>
+                                    <td class="py-4 px-4 font-mono bg-green-50 font-bold text-green-800">8,000</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 font-bold text-right bg-gray-50">סך עלות תחזוקה (ש"ח)</td>
+                                    <td class="py-4 px-4 font-mono">12,000</td>
+                                    <td class="py-4 px-4 font-mono bg-red-50 font-bold text-red-800">10,000</td>
+                                    <td class="py-4 px-4 font-mono bg-green-50 font-bold text-green-800">18,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                            <label class="block text-lg font-bold text-gray-800 mb-3">מהי העלות המשתנה ליחידה (v)?</label>
+                            <div class="flex items-center gap-3 dir-ltr justify-end">
+                                <span class="font-bold text-lg">v =</span>
+                                <input type="number" id="quiz_v" class="w-28 p-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 outline-none text-xl font-mono text-center">
+                                <span class="text-gray-500">ש"ח/יח'</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+                            <label class="block text-lg font-bold text-gray-800 mb-3">מהו סך העלות הקבועה (FC)?</label>
+                            <div class="flex items-center gap-3 dir-ltr justify-end">
+                                <span class="font-bold text-lg">FC =</span>
+                                <input type="number" id="quiz_fc" class="w-28 p-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 outline-none text-xl font-mono text-center">
+                                <span class="text-gray-500">ש"ח</span>
+                            </div>
+                        </div>
+                        <button onclick="checkHighLow1()" class="w-full py-4 bg-blue-600 text-white rounded-xl font-black text-xl hover:bg-blue-700 transition shadow">בדוק תרגיל 1</button>
+                        <div id="hl-feedback-1" class="hidden p-5 rounded-xl text-lg text-center font-bold border-2 mt-2"></div>
+                    </div>
+                </div>
+
+                <!-- תרגיל 2 -->
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-200">
+                    <h4 class="text-2xl font-bold mb-2">תרגיל מודרך 2: חילוץ מתוך טבלת השוואה</h4>
+                    <p class="text-gray-700 mb-6">הטבלה מציגה שני חודשי ייצור. חלצו את פונקציית העלות של <strong>שכר העבודה בלבד</strong>.</p>
+
+                    <div class="overflow-x-auto rounded-xl border border-gray-300 mb-6">
+                        <table class="w-full text-center bg-white text-lg">
+                            <thead>
+                                <tr class="bg-gray-800 text-white">
+                                    <th class="py-4 px-4 text-right border-l border-gray-600">סעיף ההוצאה</th>
+                                    <th class="py-4 px-4 bg-red-900 border-l border-gray-600">יולי<br><span class="text-xs font-normal text-red-300">היקף נמוך — 10,000 יח׳</span></th>
+                                    <th class="py-4 px-4 bg-green-900">אוגוסט<br><span class="text-xs font-normal text-green-300">היקף גבוה — 15,000 יח׳</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-200">
+                                    <td class="py-4 px-4 font-bold text-right bg-gray-50">שכר דירה (ש"ח)</td>
+                                    <td class="py-4 px-4 font-mono bg-red-50">25,000</td>
+                                    <td class="py-4 px-4 font-mono bg-green-50">25,000</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 font-bold text-right bg-gray-50">שכר עבודה (ש"ח)</td>
+                                    <td class="py-4 px-4 font-mono bg-red-50 font-bold text-red-800">80,000</td>
+                                    <td class="py-4 px-4 font-mono bg-green-50 font-bold text-green-800">100,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+                            <label class="text-lg font-bold text-gray-800">עבור שכר העבודה (v):</label>
+                            <div class="flex items-center gap-3 dir-ltr">
+                                <span class="font-bold text-lg">v =</span>
+                                <input type="number" id="quiz2_v" class="w-28 p-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 outline-none text-xl font-mono text-center">
+                                <span class="text-gray-500">ש"ח/יח'</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
+                            <label class="text-lg font-bold text-gray-800">עבור שכר העבודה (FC):</label>
+                            <div class="flex items-center gap-3 dir-ltr">
+                                <span class="font-bold text-lg">FC =</span>
+                                <input type="number" id="quiz2_fc" class="w-28 p-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 outline-none text-xl font-mono text-center">
+                                <span class="text-gray-500">ש"ח</span>
+                            </div>
+                        </div>
+                        <button onclick="checkHighLow2()" class="w-full py-4 bg-blue-600 text-white rounded-xl font-black text-xl hover:bg-blue-700 transition shadow">בדוק תרגיל 2</button>
+                        <div id="hl-feedback-2" class="hidden p-5 rounded-xl text-lg text-center font-bold border-2 mt-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <button onclick="goToStep(5)" class="w-full md:w-1/2 py-4 bg-blue-800 text-white rounded-full font-bold text-xl hover:bg-blue-900 transition shadow-lg hover:scale-105">למעבדה המסכמת ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== פרק 5 =================== -->
+    <div id="step-5" class="step-content">
+        <div class="bg-white rounded-[2.5rem] p-8 shadow-xl border-t-8 border-indigo-600">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-4xl mb-4 text-indigo-900 text-center">מעבדות מסכמות</h2>
+                <p class="text-lg text-gray-700 mb-8 text-center leading-relaxed">
+                    עבור כל סעיף: קבעו את סיווג העלות (קבועה / משתנה / מעורבת) ורשמו את <strong>v</strong> ו-<strong>FC</strong>. אם אין רכיב — רשמו 0.
+                </p>
+
+                <!-- מעבדה א -->
+                <div class="bg-indigo-50 p-6 rounded-2xl border-2 border-indigo-200 mb-10 shadow-sm">
+                    <h3 class="text-2xl font-bold text-indigo-800 mb-4">מעבדה א' — "מפעל השולחנות"</h3>
+                    <div class="overflow-x-auto bg-white rounded-xl border border-gray-300">
+                        <table class="w-full text-right">
+                            <thead>
+                                <tr class="bg-gray-800 text-white font-bold border-b-2 border-gray-500 text-base">
+                                    <th class="py-4 px-3 border-l border-gray-600">תיאור העלות</th>
+                                    <th class="py-4 px-3 text-center border-l border-gray-600">עלות ב-<span class="text-yellow-300 font-mono">10,000 יח׳</span></th>
+                                    <th class="py-4 px-3 text-center border-l border-gray-600">עלות ב-<span class="text-yellow-300 font-mono">15,000 יח׳</span></th>
+                                    <th class="py-4 px-3 text-center bg-gray-700 border-l border-gray-600">התנהגות</th>
+                                    <th class="py-4 px-3 text-center bg-gray-700 border-l border-gray-600">v (ליח')</th>
+                                    <th class="py-4 px-3 text-center bg-gray-700">FC</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mass1-table-body" class="text-base text-gray-900"></tbody>
+                        </table>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button onclick="checkMassExercise(1)" class="w-full md:w-1/2 py-4 bg-indigo-600 text-white rounded-xl font-bold text-xl hover:bg-indigo-700 transition shadow">בדוק מעבדה א'</button>
+                    </div>
+                    <div id="mass-feedback-1" class="mt-5 p-5 rounded-2xl text-lg font-bold hidden border-4"></div>
+                </div>
+
+                <!-- מעבדה ב -->
+                <div class="bg-emerald-50 p-6 rounded-2xl border-2 border-emerald-200 mb-6 shadow-sm">
+                    <h3 class="text-2xl font-bold text-emerald-800 mb-4">מעבדה ב' — "מפעל אריזות קרטון"</h3>
+                    <div class="overflow-x-auto bg-white rounded-xl border border-gray-300">
+                        <table class="w-full text-right">
+                            <thead>
+                                <tr class="bg-gray-800 text-white font-bold border-b-2 border-gray-500 text-base">
+                                    <th class="py-4 px-3 border-l border-gray-600">תיאור העלות</th>
+                                    <th class="py-4 px-3 text-center border-l border-gray-600">עלות ב-<span class="text-yellow-300 font-mono">2,000 יח׳</span></th>
+                                    <th class="py-4 px-3 text-center border-l border-gray-600">עלות ב-<span class="text-yellow-300 font-mono">5,000 יח׳</span></th>
+                                    <th class="py-4 px-3 text-center bg-gray-700 border-l border-gray-600">התנהגות</th>
+                                    <th class="py-4 px-3 text-center bg-gray-700 border-l border-gray-600">v (ליח')</th>
+                                    <th class="py-4 px-3 text-center bg-gray-700">FC</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mass2-table-body" class="text-base text-gray-900"></tbody>
+                        </table>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <button onclick="checkMassExercise(2)" class="w-full md:w-1/2 py-4 bg-emerald-600 text-white rounded-xl font-bold text-xl hover:bg-emerald-700 transition shadow">בדוק מעבדה ב'</button>
+                    </div>
+                    <div id="mass-feedback-2" class="mt-5 p-5 rounded-2xl text-lg font-bold hidden border-4"></div>
+                </div>
+            </div>
+
+            <div class="mt-6 text-center">
+                <button onclick="goToStep(6)" class="w-full md:w-1/2 py-4 bg-blue-800 text-white rounded-full font-bold text-xl hover:bg-blue-900 transition shadow-lg hover:scale-105">למבחן הסיכום ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== פרק 6 — MCQ EXAM =================== -->
+    <div id="step-6" class="step-content">
+        <div class="bg-white rounded-[2.5rem] p-8 shadow-2xl border-t-8 border-amber-500">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <div class="inline-block bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm font-bold mb-3 tracking-wide">מבחן סיכום</div>
+                    <h2 class="text-4xl text-gray-900 mb-3">שאלון אמריקאי — כלל חומר הפרק</h2>
+                    <p class="text-gray-600 text-lg">10 שאלות רב-ברירה. קבלו משוב מיידי לכל שאלה.</p>
+                    <!-- score counter -->
+                    <div class="mt-4 flex justify-center gap-6">
+                        <div class="text-center"><div class="text-3xl font-black text-green-600" id="score-correct">0</div><div class="text-sm text-gray-500">נכון</div></div>
+                        <div class="text-center"><div class="text-3xl font-black text-red-500" id="score-wrong">0</div><div class="text-sm text-gray-500">שגוי</div></div>
+                        <div class="text-center"><div class="text-3xl font-black text-gray-400" id="score-left">10</div><div class="text-sm text-gray-500">נותרו</div></div>
+                    </div>
+                </div>
+
+                <div id="mcq-container" class="space-y-8"></div>
+
+                <div class="mt-10 text-center">
+                    <button onclick="resetExam()" class="px-8 py-3 bg-amber-500 text-white rounded-full font-bold text-lg hover:bg-amber-600 transition shadow-md">🔄 אפס מבחן</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer class="text-center text-gray-600 py-10 text-sm bg-gray-200 mt-12 border-t border-gray-300">
+    <p class="font-bold text-base">© 2024 קורס חשבונאות ניהולית | ד"ר שי צבאן</p>
+    <p class="mt-2 opacity-70 max-w-lg mx-auto">"מערכת החשבונאות הניהולית איננה מטרה בפני עצמה, אלא אמצעי לשרת את המנהל בקבלת החלטות."</p>
+</footer>
+
+<!-- =================== SCRIPTS =================== -->
+<script>
+/* ===== KATEX RENDER ===== */
+function renderMathInDocument() {
+    // Render all inline \( \) and display \[ \] math
+    renderMathInElement(document.body, {
+        delimiters: [
+            { left: "\\[", right: "\\]", display: true },
+            { left: "\\(", right: "\\)", display: false }
+        ],
+        throwOnError: false
+    });
+
+    // Render specific formula boxes
+    renderFormulas();
+}
+
+function renderFormulas() {
+    const renders = [
+        { id: 'formula-fc',        tex: 'TC_{\\text{קבועה}} = FC',                                       display: true },
+        { id: 'formula-vc',        tex: 'TC_{\\text{משתנה}} = VC = v \\times Q',                          display: true },
+        { id: 'formula-tc',        tex: 'TC = FC + v \\times Q',                                          display: true },
+        { id: 'formula-v-extract', tex: 'v = \\dfrac{TC_{H} - TC_{L}}{Q_{H} - Q_{L}}',                    display: true },
+        { id: 'formula-fc-extract',tex: 'FC = TC_{H} - (v \\times Q_{H})',                                display: true },
+    ];
+
+    renders.forEach(r => {
+        const el = document.getElementById(r.id);
+        if (el) {
+            katex.render(r.tex, el, { displayMode: r.display, throwOnError: false });
+            // KaTeX renders white text on dark formula-box backgrounds — fix color
+            if (el.closest('.formula-box')) {
+                el.querySelectorAll('.katex, .katex *').forEach(n => n.style.color = '#f8fafc');
+            }
+        }
+    });
+}
+
+/* ===== NAVIGATION ===== */
+let currentStep = 1;
+const totalSteps = 6;
+
+window.goToStep = function(step) {
+    document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('nav-btn-active'));
+    document.getElementById(`step-${step}`).classList.add('active');
+    document.getElementById(`nav-${step}`).classList.add('nav-btn-active');
+    currentStep = step;
+    const pct = Math.round((step / totalSteps) * 100);
+    document.getElementById('progressBar').style.width = `${pct}%`;
+    document.getElementById('progress-text').innerText = `התקדמות: ${pct}%`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+/* ===== SIMULATOR ===== */
+window.updateSimulator = function() {
+    const q   = parseInt(document.getElementById('sim-q').value);
+    const fc  = 10000, v = 50;
+    const vc  = v * q;
+    const tc  = fc + vc;
+    document.getElementById('sim-q-val').innerText     = q.toLocaleString();
+    document.getElementById('sim-total-fc').innerText  = fc.toLocaleString();
+    document.getElementById('sim-total-vc').innerText  = vc.toLocaleString();
+    document.getElementById('sim-total-cost').innerText= tc.toLocaleString();
+    document.getElementById('sim-calc-fc').innerHTML   = `<span style="color:#fb923c">${fc.toLocaleString()}</span>`;
+    document.getElementById('sim-calc-vc').innerHTML   = `<span style="color:#34d399">${v}</span> × <span style="color:#fbbf24">${q.toLocaleString()}</span> = ${vc.toLocaleString()}`;
+    document.getElementById('sim-calc-tc').innerHTML   = `<span style="color:#fb923c">${fc.toLocaleString()}</span> + <span style="color:#34d399">${vc.toLocaleString()}</span> = <span style="color:#fbbf24;font-weight:900">${tc.toLocaleString()}</span>`;
+};
+
+/* ===== CHAPTER 4 CHECKS ===== */
+function showFeedback(id, correct, msg) {
+    const el = document.getElementById(id);
+    el.classList.remove('hidden','bg-red-100','text-red-900','border-red-500','bg-emerald-100','text-emerald-900','border-emerald-500');
+    el.innerHTML = msg;
+    el.classList.add(correct ? 'bg-emerald-100' : 'bg-red-100', correct ? 'text-emerald-900' : 'text-red-900', correct ? 'border-emerald-500' : 'border-red-500');
+}
+
+window.checkHighLow1 = function() {
+    const v  = parseFloat(document.getElementById('quiz_v').value);
+    const fc = parseFloat(document.getElementById('quiz_fc').value);
+    // High: יוני 8000 yc, 18000; Low: מאי 4000 yc, 10000. v=(18000-10000)/(8000-4000)=2, FC=18000-2*8000=2000
+    if (v === 2 && fc === 2000) {
+        showFeedback('hl-feedback-1', true, '🎉 מצוין! v = 2 ש"ח/יח\' | FC = 2,000 ש"ח<br>משוואת העלות: TC = 2,000 + 2Q');
+    } else {
+        let hint = '';
+        if (v !== 2)  hint += `רמז לחישוב v: (18,000 − 10,000) ÷ (8,000 − 4,000) = ? `;
+        if (fc !== 2000 && v === 2) hint += `רמז ל-FC: 18,000 − (2 × 8,000) = ?`;
+        showFeedback('hl-feedback-1', false, `✗ יש טעות. ${hint}`);
+    }
+};
+
+window.checkHighLow2 = function() {
+    const v  = parseFloat(document.getElementById('quiz2_v').value);
+    const fc = parseFloat(document.getElementById('quiz2_fc').value);
+    // v=(100000-80000)/(15000-10000)=4, FC=100000-4*15000=40000
+    if (v === 4 && fc === 40000) {
+        showFeedback('hl-feedback-2', true, '🎉 מצוין! v = 4 ש"ח/יח\' | FC = 40,000 ש"ח<br>משוואת שכר העבודה: TC = 40,000 + 4Q');
+    } else {
+        let hint = '';
+        if (v !== 4)  hint += `רמז: (100,000 − 80,000) ÷ (15,000 − 10,000) = ? `;
+        if (fc !== 40000 && v === 4) hint += `רמז ל-FC: 100,000 − (4 × 15,000) = ?`;
+        showFeedback('hl-feedback-2', false, `✗ יש טעות. ${hint}`);
+    }
+};
+
+/* ===== MASS EXERCISE DATA ===== */
+const massData1 = [
+    { id: '1_wood',      name: 'חומרי גלם (עץ)',          cost1: 100000, cost2: 150000, expectedBehavior: 'variable', expectedV: 10,   expectedFC: 0 },
+    { id: '1_rent',      name: 'שכר דירה למפעל',          cost1: 45000,  cost2: 45000,  expectedBehavior: 'fixed',    expectedV: 0,    expectedFC: 45000 },
+    { id: '1_electricity',name:'חשבון חשמל',              cost1: 30000,  cost2: 40000,  expectedBehavior: 'mixed',    expectedV: 2,    expectedFC: 10000 },
+    { id: '1_glue',      name: 'חומרי עזר (דבק)',         cost1: 5000,   cost2: 7500,   expectedBehavior: 'variable', expectedV: 0.5,  expectedFC: 0 },
+    { id: '1_manager',   name: 'שכר מנהל קו הייצור',     cost1: 18000,  cost2: 18000,  expectedBehavior: 'fixed',    expectedV: 0,    expectedFC: 18000 },
+    { id: '1_total',     name: 'סך הכל עלויות',           cost1: 198000, cost2: 260500, expectedBehavior: 'mixed',    expectedV: 12.5, expectedFC: 73000, isTotal: true }
+];
+
+const massData2 = [
+    { id: '2_plastic',     name: 'פולימרים (פלסטיק)',        cost1: 40000, cost2: 100000, expectedBehavior: 'variable', expectedV: 20, expectedFC: 0 },
+    { id: '2_depr',        name: 'פחת מכונות (קו ישר)',      cost1: 15000, cost2: 15000,  expectedBehavior: 'fixed',    expectedV: 0,  expectedFC: 15000 },
+    { id: '2_maintenance', name: 'שירותי תחזוקה',            cost1: 8000,  cost2: 14000,  expectedBehavior: 'mixed',    expectedV: 2,  expectedFC: 4000 },
+    { id: '2_salary',      name: 'שכר מנכ"ל החברה',          cost1: 12000, cost2: 12000,  expectedBehavior: 'fixed',    expectedV: 0,  expectedFC: 12000 },
+    { id: '2_total',       name: 'סך הכל עלויות',            cost1: 75000, cost2: 141000, expectedBehavior: 'mixed',    expectedV: 22, expectedFC: 31000, isTotal: true }
+];
+
+function renderMassTable(bodyId, dataArray) {
+    const body = document.getElementById(bodyId);
+    body.innerHTML = dataArray.map((item, i) => {
+        const totalRow = item.isTotal ? 'border-t-4 border-gray-800 bg-gray-100' : 'border-b border-gray-200 hover:bg-gray-50';
+        return `
+        <tr class="${totalRow}" id="row-${item.id}">
+            <td class="py-4 px-3 font-bold border-l border-gray-200 ${item.isTotal ? 'text-lg' : ''}">${item.isTotal ? '' : `${i+1}. `}${item.name}</td>
+            <td class="py-4 px-3 text-center border-l border-gray-200 font-mono text-lg">${item.cost1.toLocaleString()}</td>
+            <td class="py-4 px-3 text-center border-l border-gray-200 font-mono text-lg">${item.cost2.toLocaleString()}</td>
+            <td class="py-4 px-3 text-center border-l border-gray-200">
+                <select id="sel_beh_${item.id}" class="w-full p-2 border border-gray-300 rounded-lg text-base font-bold outline-none focus:border-blue-500">
+                    <option value="">-- בחר --</option>
+                    <option value="fixed">קבועה</option>
+                    <option value="variable">משתנה</option>
+                    <option value="mixed">מעורבת</option>
+                </select>
+            </td>
+            <td class="py-4 px-3 text-center border-l border-gray-200 dir-ltr">
+                <div class="flex items-center justify-center gap-1">
+                    <input type="number" id="inp_v_${item.id}" step="0.1" class="w-20 p-2 border border-gray-300 rounded-lg text-center font-mono text-base outline-none focus:border-blue-500">
+                </div>
+            </td>
+            <td class="py-4 px-3 text-center dir-ltr">
+                <input type="number" id="inp_fc_${item.id}" class="w-24 p-2 border border-gray-300 rounded-lg text-center font-mono text-base outline-none focus:border-blue-500">
+            </td>
+        </tr>
+        <tr id="feedback-row-${item.id}" class="hidden">
+            <td colspan="6" id="feedback-content-${item.id}" class="p-3 text-base font-semibold border-b-2 border-gray-300 text-right"></td>
+        </tr>`;
+    }).join('');
+}
+
+window.checkMassExercise = function(labNum) {
+    const dataArray = labNum === 1 ? massData1 : massData2;
+    let allCorrect = true;
+    dataArray.forEach(item => {
+        const selBeh = document.getElementById(`sel_beh_${item.id}`).value;
+        const inpV   = parseFloat(document.getElementById(`inp_v_${item.id}`).value);
+        const inpFC  = parseFloat(document.getElementById(`inp_fc_${item.id}`).value);
+        const rowFeedback = document.getElementById(`feedback-row-${item.id}`);
+        const rowContent  = document.getElementById(`feedback-content-${item.id}`);
+        rowFeedback.classList.remove('hidden');
+        let ok = selBeh === item.expectedBehavior && inpV === item.expectedV && inpFC === item.expectedFC && !isNaN(inpV) && !isNaN(inpFC);
+        if (ok) {
+            rowContent.innerHTML = `<span class="text-green-700">✓ נכון!</span> <span class="text-gray-600 font-normal">TC = ${item.expectedFC.toLocaleString()} + ${item.expectedV}Q</span>`;
+            rowContent.className = 'p-3 text-base font-semibold border-b-2 border-gray-300 bg-green-50 text-right';
+        } else {
+            allCorrect = false;
+            let hints = [];
+            if (selBeh !== item.expectedBehavior && selBeh) hints.push(`סיווג שגוי`);
+            if (!isNaN(inpV) && inpV !== item.expectedV)  hints.push(`v שגוי`);
+            if (!isNaN(inpFC) && inpFC !== item.expectedFC) hints.push(`FC שגוי`);
+            if (!selBeh || isNaN(inpV) || isNaN(inpFC)) hints.push('חסרים נתונים');
+            rowContent.innerHTML = `<span class="text-red-700">✗ ${hints.join(' | ')}</span>`;
+            rowContent.className = 'p-3 text-base font-bold border-b-2 border-gray-300 bg-red-50 text-right';
+        }
+    });
+    const fb = document.getElementById(`mass-feedback-${labNum}`);
+    fb.classList.remove('hidden','bg-emerald-100','text-emerald-900','border-emerald-500','bg-red-100','text-red-900','border-red-500');
+    if (allCorrect) {
+        fb.innerHTML = `🏆 עבודה מושלמת! כל הסיווגים, ה-v וה-FC נכונים — כולל שורת הסיכום.`;
+        fb.classList.add('bg-emerald-100','text-emerald-900','border-emerald-500');
+    } else {
+        fb.innerHTML = `ישנן שגיאות. קראו את ההערות שמתחת לכל שורה ותקנו.`;
+        fb.classList.add('bg-red-100','text-red-900','border-red-500');
+    }
+};
+
+/* ===== MCQ EXAM ===== */
+const mcqData = [
+    {
+        q: "מה ההבדל המרכזי בין חשבונאות ניהולית לפיננסית?",
+        options: [
+            "חשבונאות ניהולית חייבת לציית לכללי IFRS, פיננסית לא",
+            "חשבונאות ניהולית מכוונת למנהלים פנימיים ומסתכלת לעתיד; פיננסית מכוונת לגורמי חוץ ומסתכלת לעבר",
+            "חשבונאות פיננסית מאפשרת גמישות מלאה, ניהולית נוקשה",
+            "שתיהן זהות במטרותיהן אך שונות בקהל היעד"
+        ],
+        correct: 1,
+        explanation: "חשבונאות ניהולית מכוונת למנהלים בארגון, מסתכלת לעתיד ואין לה כללי תקינה מחייבים. פיננסית מכוונת לגורמי חוץ ומסתכלת על העבר לפי GAAP/IFRS."
+    },
+    {
+        q: "מפעל משלם שכר דירה חודשי של 20,000 ש\"ח. בחודש א' הוא ייצר 1,000 יח' ובחודש ב' 3,000 יח'. כמה ישלם על שכר הדירה בחודש ב'?",
+        options: ["20,000 ש\"ח", "60,000 ש\"ח", "40,000 ש\"ח", "תלוי בהסכם השכירות"],
+        correct: 0,
+        explanation: "שכר דירה הוא עלות קבועה (FC). עלות קבועה אינה משתנה עם היקף הייצור — בשני החודשים תשלם אותם 20,000 ש\"ח."
+    },
+    {
+        q: "עלות חומרי הגלם לייצור יחידה אחת היא 15 ש\"ח. המפעל מייצר 400 יחידות. מה הוא סך עלות חומרי הגלם?",
+        options: ["15 ש\"ח", "415 ש\"ח", "6,000 ש\"ח", "4,000 ש\"ח"],
+        correct: 2,
+        explanation: "VC = v × Q = 15 × 400 = 6,000 ש\"ח. חומרי גלם הם עלות משתנה — הסכום הכולל גדל ביחס ישר לכמות."
+    },
+    {
+        q: "איזו מהנוסחאות הבאות מתארת נכונה את העלות הכוללת (TC)?",
+        options: ["TC = FC × Q", "TC = FC + v", "TC = FC + v × Q", "TC = v × Q − FC"],
+        correct: 2,
+        explanation: "TC = FC + v × Q. עלות כוללת = מרכיב קבוע + (עלות משתנה ליחידה × כמות)."
+    },
+    {
+        q: "מנהל עבודה במפעל מפקח על כל תהליך הייצור ומקבל שכר חודשי קבוע. כיצד יסווג שכרו?",
+        options: [
+            "עלות ישירה ומשתנה",
+            "עלות עקיפה וקבועה",
+            "עלות ישירה וקבועה",
+            "עלות עקיפה ומשתנה"
+        ],
+        correct: 1,
+        explanation: "שכרו קבוע (לא תלוי בייצור) — לכן עלות קבועה. הוא מפקח על כלל הייצור ולא ניתן לשייכו למוצר בודד — לכן עלות עקיפה."
+    },
+    {
+        q: "בשיטת היקף ייצור גבוה ונמוך, אילו שתי נקודות נבחר?",
+        options: [
+            "החודשים עם העלות הגבוהה והנמוכה ביותר",
+            "החודשים עם היקף הייצור הגבוה והנמוך ביותר",
+            "החודש הראשון והאחרון בנתונים",
+            "כל שני חודשים בעלי הפרש מקסימלי בעלות"
+        ],
+        correct: 1,
+        explanation: "הבחירה מבוססת על היקף הייצור (Q) — לא על העלות. נבחר את החודש עם הכמות הגבוהה ביותר ואת החודש עם הכמות הנמוכה ביותר."
+    },
+    {
+        q: "בחודש ינואר (1,000 יח') TC = 8,000 ש\"ח. בחודש מרץ (3,000 יח') TC = 14,000 ש\"ח. מהי העלות המשתנה ליחידה (v)?",
+        options: ["2 ש\"ח", "3 ש\"ח", "4 ש\"ח", "6 ש\"ח"],
+        correct: 1,
+        explanation: "v = (14,000 − 8,000) ÷ (3,000 − 1,000) = 6,000 ÷ 2,000 = 3 ש\"ח לכל יחידה."
+    },
+    {
+        q: "בהמשך לשאלה הקודמת (v = 3 ש\"ח), מהי העלות הקבועה (FC)?",
+        options: ["2,000 ש\"ח", "5,000 ש\"ח", "8,000 ש\"ח", "3,000 ש\"ח"],
+        correct: 1,
+        explanation: "FC = TC_H − (v × Q_H) = 14,000 − (3 × 3,000) = 14,000 − 9,000 = 5,000 ש\"ח."
+    },
+    {
+        q: "חשבון חשמל מורכב מ-500 ש\"ח קבועים + 0.8 ש\"ח לכל יחידת ייצור. כיצד נסווג את חשבון החשמל?",
+        options: ["עלות קבועה", "עלות משתנה", "עלות מעורבת", "אי אפשר לסווג ללא מידע נוסף"],
+        correct: 2,
+        explanation: "חשבון החשמל כולל גם מרכיב קבוע (500 ש\"ח) וגם מרכיב משתנה (0.8 × Q) — זוהי הגדרת עלות מעורבת (Mixed Cost)."
+    },
+    {
+        q: "חברה רוצה לתקצב את עלויות החודש הבא בו תייצר 5,000 יחידות. ידוע: FC = 12,000, v = 8 ש\"ח/יח'. מהו ה-TC הצפוי?",
+        options: ["40,000 ש\"ח", "52,000 ש\"ח", "60,000 ש\"ח", "20,000 ש\"ח"],
+        correct: 1,
+        explanation: "TC = FC + v × Q = 12,000 + 8 × 5,000 = 12,000 + 40,000 = 52,000 ש\"ח."
+    }
+];
+
+let scoreCorrect = 0, scoreWrong = 0, answered = new Set();
+
+function buildMCQ() {
+    const container = document.getElementById('mcq-container');
+    container.innerHTML = mcqData.map((item, i) => `
+        <div class="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200 shadow-sm" id="mcq-block-${i}">
+            <div class="flex items-start gap-3 mb-5">
+                <span class="w-9 h-9 rounded-full bg-amber-500 text-white font-black flex items-center justify-center text-lg flex-shrink-0">${i+1}</span>
+                <p class="text-xl font-bold text-gray-900 leading-snug">${item.q}</p>
+            </div>
+            <div class="space-y-3" id="opts-${i}">
+                ${item.options.map((opt, j) => `
+                    <label class="mcq-option" id="opt-${i}-${j}" onclick="selectOption(${i},${j})">
+                        <input type="radio" name="q${i}" value="${j}" style="pointer-events:none">
+                        <span class="text-base text-gray-800">${opt}</span>
+                    </label>
+                `).join('')}
+            </div>
+            <div class="mcq-feedback" id="mcq-fb-${i}"></div>
+        </div>
+    `).join('');
+    updateScoreDisplay();
+}
+
+function selectOption(qi, oi) {
+    if (answered.has(qi)) return;
+    answered.add(qi);
+
+    const item = mcqData[qi];
+    const fb   = document.getElementById(`mcq-fb-${qi}`);
+    const correct = oi === item.correct;
+
+    // Style all options
+    item.options.forEach((_, j) => {
+        const lbl = document.getElementById(`opt-${qi}-${j}`);
+        if (j === item.correct) lbl.classList.add('reveal-correct');
+        if (j === oi && !correct) lbl.classList.add('incorrect');
+        if (j === oi && correct)  lbl.classList.add('correct');
+    });
+
+    fb.classList.add('show', correct ? 'correct' : 'incorrect');
+    fb.innerHTML = correct
+        ? `✅ נכון! ${item.explanation}`
+        : `❌ תשובה שגויה. ${item.explanation}`;
+
+    if (correct) scoreCorrect++; else scoreWrong++;
+    updateScoreDisplay();
+}
+
+function updateScoreDisplay() {
+    document.getElementById('score-correct').innerText = scoreCorrect;
+    document.getElementById('score-wrong').innerText   = scoreWrong;
+    document.getElementById('score-left').innerText    = mcqData.length - answered.size;
+}
+
+window.resetExam = function() {
+    scoreCorrect = 0; scoreWrong = 0; answered.clear();
+    buildMCQ();
+};
+
+/* ===== INIT ===== */
+window.onload = function() {
+    renderMassTable('mass1-table-body', massData1);
+    renderMassTable('mass2-table-body', massData2);
+    buildMCQ();
+    updateSimulator();
+    // If KaTeX loaded already
+    if (typeof katex !== 'undefined') renderFormulas();
+};
+</script>
+</body>
+</html>
