@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סילבוס: חשבונאות ניהולית - המרכז האקדמי שערי מדע ומשפט</title>
+    <style>
+        :root {
+            --primary-color: #0f2c59; /* כחול אקדמי עמוק */
+            --secondary-color: #f8f9fa;
+            --text-main: #2b2b2b;
+            --text-muted: #555555;
+            --border-light: #e0e0e0;
+            --accent: #c49a45; /* זהב עדין להדגשות */
+        }
+        
+        body {
+            font-family: 'David Libre', 'Frank Ruhl Libre', 'Segoe UI', Tahoma, sans-serif;
+            background-color: #eef2f5;
+            color: var(--text-main);
+            line-height: 1.7;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .document-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 60px 70px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-top: 10px solid var(--primary-color);
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .institution-name {
+            font-size: 1.6em;
+            color: var(--text-muted);
+            margin: 0 0 10px 0;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .course-title {
+            font-size: 2.8em;
+            color: var(--primary-color);
+            margin: 0 0 5px 0;
+            font-weight: 700;
+        }
+
+        .course-subtitle {
+            font-size: 1.4em;
+            color: var(--accent);
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* Meta Information Grid */
+        .meta-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px 30px;
+            background-color: var(--secondary-color);
+            padding: 30px;
+            border: 1px solid var(--border-light);
+            margin-bottom: 40px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 1.05em;
+        }
+
+        .meta-item strong {
+            color: var(--primary-color);
+            display: inline-block;
+            min-width: 140px;
+            font-weight: 600;
+        }
+
+        .meta-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .meta-item a:hover {
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        /* Section Headings */
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.6em;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            margin-top: 45px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: var(--text-main);
+            font-size: 1.3em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Text Content */
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            padding-right: 30px;
+            margin-bottom: 25px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        /* Course Plan Table */
+        .syllabus-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 0.95em;
+        }
+
+        .syllabus-table th, .syllabus-table td {
+            border: 1px solid var(--border-light);
+            padding: 16px;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        .syllabus-table th {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: right;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .syllabus-table tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        .syllabus-table tr:hover {
+            background-color: #f1f4f8;
+        }
+
+        .col-week { width: 8%; text-align: center; font-weight: bold; }
+        .col-topic { width: 32%; font-weight: bold; color: var(--primary-color); }
+        .col-details { width: 60%; color: var(--text-muted); }
+
+        /* Grading Box */
+        .grading-section {
+            background-color: #fdfbf7;
+            border-right: 5px solid var(--accent);
+            padding: 25px 30px;
+            margin: 30px 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
+        }
+
+        .grading-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .grading-section li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .grading-section .weight {
+            font-weight: bold;
+            color: var(--primary-color);
+            min-width: 60px;
+            font-size: 1.2em;
+        }
+
+        /* Bibliography (APA Style) */
+        .biblio-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.05em;
+        }
+        
+        .apa-ref {
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .apa-en {
+            direction: ltr;
+            text-align: left;
+            padding-left: 36px;
+            text-indent: -36px; /* APA Hanging Indent */
+        }
+
+        .apa-he {
+            direction: rtl;
+            text-align: right;
+            padding-right: 36px;
+            text-indent: -36px; /* APA Hanging Indent for Hebrew */
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-light);
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--text-muted);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+        }
+
+        @media (max-width: 768px) {
+            .document-container { padding: 30px 20px; }
+            .meta-info { grid-template-columns: 1fr; gap: 10px; }
+            .course-title { font-size: 2.2em; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="document-container">
+    <header>
+        <div class="institution-name">המרכז האקדמי שערי מדע ומשפט</div>
+        <h1 class="course-title">חשבונאות ניהולית</h1>
+        <h2 class="course-subtitle">Strategic Managerial Accounting</h2>
+    </header>
+
+    <div class="meta-info">
+        <div class="meta-item"><strong>שנת לימודים וסמסטר:</strong> תשפ"ו, סמסטר א'</div>
+        <div class="meta-item"><strong>מרצה הקורס:</strong> ד"ר שי צבאן</div>
+        <div class="meta-item"><strong>היקף הקורס:</strong> שעה וחצי</div>
+        <div class="meta-item"><strong>דוא"ל ליצירת קשר:</strong> <a href="mailto:shay.tsaban@gmail.com">shay.tsaban@gmail.com</a></div>
+        <div class="meta-item"><strong>שעות קבלה:</strong> בתיאום מראש באמצעות הדוא"ל</div>
+        <div class="meta-item"><strong>אתר הקורס:</strong> אתר חומרי הלמידה המוסדי - מערכת ידיעון</div>
+    </div>
+
+    <h2>1. תיאור ומטרות הקורס</h2>
+    <p>הקורס "חשבונאות ניהולית" נועד להעניק לסטודנטים תשתית תיאורטית וכלים פרקטיים מתקדמים להבנת תפקידה של מערכת המידע החשבונאי-פנימי בארגונים עסקיים מודרניים. בניגוד לחשבונאות הפיננסית, המכוונת כלפי חוץ ופועלת תחת כללי תקינה נוקשים (GAAP/IFRS), החשבונאות הניהולית היא גמישה, צופה פני עתיד, ונועדה לשרת את שדרת הניהול בארגון בתהליכי קבלת החלטות, תכנון אסטרטגי, מדידת ביצועים ויצירת ערך.</p>
+    <p>הקורס יסקור מודלים מסורתיים לצד גישות עכשוויות בתמחיר ובקרה, תוך התמקדות בחיבור שבין נתונים פיננסיים להתנהגות עסקית. נבחן כיצד מנהלים משתמשים במידע עלויות לצורך קביעת מחירי מוצרים, ניהול רווחיות לקוחות, הקצאת משאבים אופטימלית בתנאי אי-ודאות ומגבלות, ובניית מערכות תמרוץ והערכת ביצועים.</p>
+
+    <h2>2. תוצרי למידה (Learning Outcomes)</h2>
+    <p>עם סיום הקורס בהצלחה, הסטודנטים יהיו מסוגלים:</p>
+    <ol>
+        <li><strong>לנתח התנהגות עלויות:</strong> לאבחן ולסווג עלויות בסביבות ייצור ושירות, וליישם ניתוחי עלות-היקף-רווח (CVP) לתכנון פיננסי ובחינת רגישות.</li>
+        <li><strong>להעריך מערכות תמחיר:</strong> להשוות בין מערכות תמחיר מסורתיות למערכות מתקדמות (כגון ABC ו-TDABC) ולהמליץ על המערכת המתאימה לארגון על בסיס מורכבות הפעילות התפעולית שלו.</li>
+        <li><strong>לתכנן ולבקר:</strong> לבנות תקציבים תפעוליים מקיפים, ליישם טכניקות של תקציב גמיש ותמחיר תקן, ולבצע ניתוח סטיות מעמיק לאיתור כשלי יעילות.</li>
+        <li><strong>לקבל החלטות מבוססות מידע:</strong> ליישם עקרונות של "עלויות רלוונטיות" בתרחישי קבלת החלטות לטווח קצר (כגון סגירת מחלקות, קבלת הזמנה מיוחדת, וייצור מול רכישה חוץ-ארגונית).</li>
+        <li><strong>לנהל משאבים אסטרטגיים:</strong> לאתר צווארי בקבוק (Theory of Constraints) ולחשב תמהיל ייצור אופטימלי תחת אילוצי משאבים במערכות מרובות-מוצרים.</li>
+        <li><strong>ליישם מודלים כמותיים משלימים:</strong> להשתמש בכלים מתקדמים כגון עקומות למידה (Learning Curves) וניתוח נתיב קריטי (PERT/CPM) לבקרת פרויקטים תכליתית.</li>
+    </ol>
+
+    <h2>3. גישה פדגוגית ואופן ההוראה</h2>
+    <p>הקורס משלב הרצאות פרונטליות יחד עם שיעורי זום. תהליך הלמידה מבוסס על התנסות אישית ואקטיבית במהלך השיעור באמצעות לומדות אינטראקטיביות וניתוח נתונים בזמן אמת. במסגרת הקורס ייעשה שימוש נרחב במחשב, באתרים ייעודיים ללמידה וכן במיומנויות בסיסיות ומתקדמות בתוכנת אקסל (Microsoft Excel) לצורך מידול חשבונאי ופתרון דילמות ניהוליות מורכבות.</p>
+
+    <div class="grading-section">
+        <h2>4. דרישות הקורס והרכב הציון</h2>
+        <ul>
+            <li>
+                <span class="weight">10%</span>
+                <span><strong>מטלות שוטפות ותרגילי בית:</strong> לאורך הסמסטר יינתנו מטלות חובה אותן יש להגיש באמצעות מערכת הלמידה המקוונת. התרגילים נועדו לבסס את ההבנה הטכנית והאנליטית של המודלים הנלמדים בכיתה.</span>
+            </li>
+            <li>
+                <span class="weight">90%</span>
+                <span><strong>בחינה מסכמת:</strong> בחינה בכתב (חומר סגור, מותר שימוש במחשבון) המעריכה הבנה תיאורטית ויכולת חישובית-אנליטית כאחד. <br><em>תנאי מעבר: על מנת לעבור את הקורס נדרש ציון עובר (60 לפחות) בבחינה המסכמת.</em></span>
+            </li>
+        </ul>
+    </div>
+
+    <h2>5. תוכנית הקורס (Course Outline)</h2>
+    <p><em>הערה: התוכנית הינה טנטטיבית ועשויה להשתנות בהתאם להתקדמות הלמידה בכיתה והדינמיקה בקורס.</em></p>
+    
+    <table class="syllabus-table">
+        <thead>
+            <tr>
+                <th class="col-week">מפגש</th>
+                <th class="col-topic">נושא אקדמי מרכזי</th>
+                <th class="col-details">פירוט תכנים ותת-נושאים (Sub-Topics)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-week">1</td>
+                <td class="col-topic">מבוא לחשבונאות ניהולית וסוגיות עלויות</td>
+                <td class="col-details">מהות החשבונאות הניהולית אל מול החשבונאות הפיננסית, שרשרת הערך (Value Chain), סיווג והתנהגות עלויות בארגון (קבועות, משתנות, מעורבות, עקיפות, וישירות), זרם העלויות במערכות ייצור.</td>
+            </tr>
+            <tr>
+                <td class="col-week">2</td>
+                <td class="col-topic">מערכת תמחיר הזמנה (Job-Order Costing) - חלק א'</td>
+                <td class="col-details">מבוא לצבירת עלויות לפי הזמנות עבודה מובחנות. רישום חומרי גלם ועבודה ישירה, תהליך העמסת תקורה ושימוש בתעריף העמסה תקני מראש (Predetermined Overhead Rate).</td>
+            </tr>
+            <tr>
+                <td class="col-week">3</td>
+                <td class="col-topic">מערכת תמחיר הזמנה - חלק ב'</td>
+                <td class="col-details">העמקת המודל: התמודדות עם פערי העמסת תקורה (תקורה בחסר ותקורה ביתר). הטיפול החשבונאי בסטיות, חלוקת סטיות, והשפעתן על עלות המכר ודו"ח רווח והפסד.</td>
+            </tr>
+            <tr>
+                <td class="col-week">4</td>
+                <td class="col-topic">תמחיר מבוסס פעילויות (Activity-Based Costing - ABC)</td>
+                <td class="col-details">זיהוי הכשלים במערכות העמסה מסורתיות. חלוקה למאגרי פעילויות (Activity Pools), קביעת מחוללי עלות (Cost Drivers) רב-ממדיים, והקצאת עלויות מדויקת לשיפור קבלת החלטות תמחור.</td>
+            </tr>
+            <tr>
+                <td class="col-week">5</td>
+                <td class="col-topic">מדידת רווח: תמחיר תרומה מול תמחיר ספיגה</td>
+                <td class="col-details">השוואה אנליטית בין גישת הספיגה (Absorption) לגישה הישירה/תרומה (Variable/Direct Costing). ניתוח השפעת שינויים במלאי על הרווח והשלכות הגישות על הערכת ביצועי מנהלים.</td>
+            </tr>
+            <tr>
+                <td class="col-week">6</td>
+                <td class="col-topic">ניתוח עלויות ונקודת איזון (CVP Analysis)</td>
+                <td class="col-details">מודל עלות-היקף-רווח. חישוב נקודת איזון (Break-even Point), קביעת יעדי רווח תפעולי, מרווח ביטחון ומינוף תפעולי בסביבה של מוצר בודד או מרובה מוצרים.</td>
+            </tr>
+            <tr>
+                <td class="col-week">7</td>
+                <td class="col-topic">תכנון אסטרטגי ותקצוב - בניית תזרימי מזומנים</td>
+                <td class="col-details">התקציב ככלי ניהולי (Master Budget). בניית התקציב התפעולי מהמסד (מכירות, ייצור, רכש), וגיבוש התקציב הפיננסי עם דגש נרחב על תכנון והרכבת תקציב תזרימי המזומנים (Cash Budget).</td>
+            </tr>
+            <tr>
+                <td class="col-week">8</td>
+                <td class="col-topic">בקרה ניהולית: תקציב גמיש וניתוח סטיות</td>
+                <td class="col-details">תקציב קשיח מול תקציב גמיש. יסודות תמחיר תקן (Standard Costing) ופירוק סטיות בעלויות ישירות (חומרי גלם ועבודה) לסטיות מחיר וסטיות כמות/יעילות.</td>
+            </tr>
+            <tr>
+                <td class="col-week">9</td>
+                <td class="col-topic">קבלת החלטות טקטיות לטווח קצר ועלויות רלוונטיות</td>
+                <td class="col-details">זיהוי עלויות שקועות מול עלויות רלוונטיות. ניתוח דילמות יומיומיות כגון: "ייצר או קנה" (Make or Buy), קבלת הזמנה במחיר מיוחד, וסגירה או שימור של מחלקה/מוצר בהפסד.</td>
+            </tr>
+            <tr>
+                <td class="col-week">10</td>
+                <td class="col-topic">קבלת החלטות בתנאי אילוצים (TOC)</td>
+                <td class="col-details">אופטימיזציה של תמהיל מוצרים (Product Mix) בתנאי מגבלת יכולת (צוואר בקבוק). מקסום התרומה ליחידת המשאב המוגבל, ומבוא לתורת האילוצים של גולדרט.</td>
+            </tr>
+            <tr>
+                <td class="col-week">11</td>
+                <td class="col-topic">מערכות מדידה מתקדמות: TDABC ותמחיר מטרה</td>
+                <td class="col-details">מודל ה-ABC מבוסס זמן (Time-Driven ABC) למדידת קיבולת עודפת. יישום מודל תמחיר מטרה (Target Costing) בניהול עלויות בשלבי התכנון והפיתוח.</td>
+            </tr>
+            <tr>
+                <td class="col-week">12</td>
+                <td class="col-topic">התנהגות ארגונית ושיפור ביצועים: עקומות למידה</td>
+                <td class="col-details">השפעת הניסיון והלמידה האנושית על זמני ייצור. שימוש במודל עקומות למידה (Learning Curves) לצרכי תמחור, חיזוי זמנים ותכנון כוח אדם נדרש בחוזים ממושכים.</td>
+            </tr>
+            <tr>
+                <td class="col-week">13</td>
+                <td class="col-topic">ניהול פרויקטים וסיכום הקורס</td>
+                <td class="col-details">מבוא לניהול ותזמון פרויקטים, זיהוי נתיב קריטי, ותכנון פעולות במערכות מורכבות. סקירה אינטגרטיבית מסכמת של כלל הכלים שנלמדו לקראת בחינת הגמר.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>6. רשימת מקורות (Bibliography)</h2>
+    <p style="font-size: 0.9em; margin-bottom: 20px;">הספרות מפורטת על פי כללי הציטוט של אגודת הפסיכולוגים האמריקאית (APA מהדורה 7).</p>
+    
+    <h3>ספרות חובה (Textbooks):</h3>
+    <ul class="biblio-list">
+        <li class="apa-ref apa-en">
+            Datar, S. M., & Rajan, M. V. (2021). <em>Horngren's cost accounting: A managerial emphasis</em> (17th ed.). Pearson.
+        </li>
+        <li class="apa-ref apa-en">
+            Garrison, R. H., Noreen, E. W., & Brewer, P. C. (2024). <em>Managerial accounting</em> (18th ed.). McGraw-Hill Education.
+        </li>
+    </ul>
+
+    <h3>מאמרים אקדמיים ומקצועיים (Articles & Literature):</h3>
+    <ul class="biblio-list">
+        <li class="apa-ref apa-he">
+            גולדרט, א' מ', וקוקס, ג' (1993). <em>המטרה</em> (מהדורה מתוקנת). סיאל.
+        </li>
+        <li class="apa-ref apa-he">
+            עדן, י', ורונן, ב' (1992). קל כמו ABC? על יישום תמחיר מבוסס פעילויות. <em>רואה החשבון</em>, <em>41</em>(5), 525–539.
+        </li>
+        <li class="apa-ref apa-he">
+            עדן, י', ורונן, ב' (1995). תמחיר מטרה (Target Costing). <em>רואה החשבון</em>, <em>44</em>(2), 135–139.
+        </li>
+        <li class="apa-ref apa-en">
+            Appelbaum, D., Kogan, A., Vasarhelyi, M. A., & Yan, Z. (2017). Impact of business analytics and enterprise systems on managerial accounting. <em>International Journal of Accounting Information Systems</em>, <em>25</em>, 29–44. https://doi.org/10.1016/j.accinf.2017.03.003
+        </li>
+        <li class="apa-ref apa-en">
+            Lawson, R. (2019). How to successfully implement ABC. <em>Strategic Finance</em>, <em>101</em>(4), 48–55.
+        </li>
+        <li class="apa-ref apa-en">
+            Rikhardsson, P., & Yigitbasioglu, O. (2018). Business intelligence & analytics in management accounting research: Status and future focus. <em>International Journal of Accounting Information Systems</em>, <em>29</em>, 37–58. https://doi.org/10.1016/j.accinf.2018.03.001
+        </li>
+    </ul>
+
+    <footer>
+        <p>נכתב ונערך על ידי ד"ר שי צבאן. טל"ח.</p>
+    </footer>
+</div>
+
+</body>
+</html>
