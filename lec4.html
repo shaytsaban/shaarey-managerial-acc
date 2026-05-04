@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>שיעור 4 | תמחיר הזמנה: המשך - ד"ר שי צבאן</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Heebo:wght@400;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for beautiful math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: #f8fafc;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Heebo', sans-serif;
+            font-weight: 800;
+        }
+
+        /* ===== NAV & STEPS ===== */
+        .step-content { display: none; animation: fadeUp 0.4s ease forwards; }
+        .step-content.active { display: block; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+        .glass { background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); }
+        .nav-btn { background: white; color: #1e293b; border: 2px solid #e2e8f0; transition: all .2s; }
+        .nav-btn:hover { background: #f1f5f9; border-color: #3b82f6; }
+        .nav-btn-active { background: #1e40af !important; color: white !important; border-color: #1e3a8a !important; box-shadow: 0 8px 20px -4px rgba(30,64,175,.4); }
+
+        /* ===== UI COMPONENTS ===== */
+        .step-card {
+            background: white;
+            border-radius: 1.25rem;
+            padding: 2rem;
+            border: 2px solid #e2e8f0;
+            margin-bottom: 1.5rem;
+            transition: all .2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .step-card:hover {
+            border-color: #93c5fd;
+            box-shadow: 0 10px 25px -5px rgba(59,130,246,.15);
+            transform: translateY(-2px);
+        }
+
+        .formula-step-num {
+            width: 2.5rem; height: 2.5rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(59,130,246,.3);
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-right: 6px solid #2563eb;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 4px rgba(37,99,235,.1);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-right: 6px solid #dc2626;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-right: 6px solid #d97706;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        /* ===== TABLES ===== */
+        .modern-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .modern-table th {
+            background: #1e293b;
+            color: white;
+            font-weight: 700;
+            padding: 1rem;
+            text-align: right;
+        }
+        .modern-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            background: white;
+        }
+        .modern-table tr:last-child td {
+            border-bottom: none;
+        }
+        .modern-table tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+        .modern-table .total-row td {
+            background-color: #f1f5f9;
+            font-weight: 800;
+            border-top: 2px solid #cbd5e1;
+        }
+
+        /* ===== PROGRESS BAR ===== */
+        #progressBar { transition: width .6s cubic-bezier(.4,0,.2,1); }
+
+    </style>
+</head>
+<body class="min-h-screen text-gray-900 overflow-x-hidden pb-24">
+
+<!-- ====== NAV ====== -->
+<nav class="sticky top-0 z-50 glass border-b border-blue-100 py-4 px-6 shadow-md">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-4">
+            <div class="w-14 h-14 bg-gradient-to-br from-blue-700 to-blue-900 rounded-2xl flex items-center justify-center text-white font-black text-2xl shadow-xl rotate-2">₪</div>
+            <div>
+                <h1 class="text-2xl text-blue-900 leading-tight">שיעור 4 | תמחיר הזמנה: המשך</h1>
+                <p class="text-sm text-blue-600 font-bold uppercase tracking-wide">חשבונאות ניהולית · ד"ר שי צבאן</p>
+            </div>
+        </div>
+        <div class="flex flex-col items-end gap-1 w-full md:w-auto">
+            <span id="progress-text" class="text-xs font-bold text-blue-800">התקדמות: 25%</span>
+            <div class="w-full md:w-72 bg-gray-200 rounded-full h-3 overflow-hidden shadow-inner border border-gray-300">
+                <div id="progressBar" class="bg-gradient-to-l from-blue-700 to-blue-400 h-full" style="width:25%"></div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main class="max-w-5xl mx-auto px-4 py-10">
+
+    <!-- CHAPTER BUTTONS -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
+        <button onclick="goToStep(1)" id="nav-1" class="nav-btn py-4 px-3 rounded-2xl font-bold text-sm md:text-base nav-btn-active">1. תזכורת</button>
+        <button onclick="goToStep(2)" id="nav-2" class="nav-btn py-4 px-3 rounded-2xl font-bold text-sm md:text-base">2. שלבי העבודה</button>
+        <button onclick="goToStep(3)" id="nav-3" class="nav-btn py-4 px-3 rounded-2xl font-bold text-sm md:text-base">3. תרגיל מקיף: בובו בע"מ</button>
+        <button onclick="goToStep(4)" id="nav-4" class="nav-btn py-4 px-3 rounded-2xl font-bold text-sm md:text-base">4. פתרון ומסקנות</button>
+    </div>
+
+    <!-- =================== פרק 1 — תזכורת מהשיעורים הקודמים =================== -->
+    <div id="step-1" class="step-content active">
+        <div class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl border-t-8 border-blue-800 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-64 h-64 bg-blue-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2"></div>
+            
+            <div class="relative z-10">
+                <div class="inline-block bg-blue-100 text-blue-800 px-4 py-1 rounded-full text-sm font-bold mb-4 tracking-wide">יישור קו</div>
+                <h2 class="text-4xl text-gray-900 mb-4">תזכורת מהשיעורים הקודמים</h2>
+                <p class="text-xl text-gray-600 mb-10 leading-relaxed">לפני שנתחיל לבנות את דוח תמחיר ההזמנה, עלינו לזכור שני מושגי יסוד שליוו אותנו בהקצאת עלויות למוצרים:</p>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <!-- Direct Costs -->
+                    <div class="bg-gradient-to-br from-white to-blue-50 p-8 rounded-2xl border border-blue-100 shadow-md">
+                        <div class="w-12 h-12 bg-blue-600 text-white rounded-xl flex items-center justify-center text-2xl mb-4 shadow-lg">🎯</div>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-2">עלויות ישירות</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            עלויות שניתן לעקוב אחריהן ולייחס אותן <strong>ישירות</strong> למוצר או להזמנה ספציפית, בצורה כלכלית וברורה.
+                        </p>
+                        <ul class="mt-4 space-y-2 text-gray-600 font-medium">
+                            <li class="flex items-center gap-2"><span class="text-blue-500">✓</span> <strong>חומרי גלם ישירים:</strong> עץ לשולחן, מנוע לרכב.</li>
+                            <li class="flex items-center gap-2"><span class="text-blue-500">✓</span> <strong>עבודה ישירה:</strong> שכר הנגר שבנה את השולחן.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Indirect Costs -->
+                    <div class="bg-gradient-to-br from-white to-purple-50 p-8 rounded-2xl border border-purple-100 shadow-md">
+                        <div class="w-12 h-12 bg-purple-600 text-white rounded-xl flex items-center justify-center text-2xl mb-4 shadow-lg">🌫️</div>
+                        <h3 class="text-2xl font-bold text-purple-900 mb-2">עלויות עקיפות (תקורה)</h3>
+                        <p class="text-gray-700 text-lg leading-relaxed">
+                            עלויות <strong>שלא ניתן</strong> (או לא משתלם) לייחס ישירות להזמנה ספציפית, מכיוון שהן משרתות מספר הזמנות יחד.
+                        </p>
+                        <ul class="mt-4 space-y-2 text-gray-600 font-medium">
+                            <li class="flex items-center gap-2"><span class="text-purple-500">✓</span> <strong>חומרי עזר:</strong> דבק, מסמרים קטנים.</li>
+                            <li class="flex items-center gap-2"><span class="text-purple-500">✓</span> <strong>שונות:</strong> פחת מכונות, חשמל למפעל, שכר מנהל.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4 class="font-bold text-xl mb-2 text-amber-900">💡 אבן הפינה של השיעור שלנו:</h4>
+                    <p class="text-gray-800 text-lg">
+                        בעוד שעלויות ישירות מוזרמות בקלות לכל הזמנה, האתגר שלנו הוא <strong>העלויות העקיפות</strong>. אנו נשתמש ב<strong>בסיס העמסה</strong> (כמו שעות עבודה או שעות מכונה) כדי <em>"להעמיס"</em> באופן יחסי את העלויות הללו על ההזמנות השונות תוך כדי עבודה.
+                    </p>
+                </div>
+
+                <div class="text-center mt-10">
+                    <button onclick="goToStep(2)" class="px-8 py-4 bg-blue-800 text-white rounded-full font-bold text-xl hover:bg-blue-900 transition shadow-xl hover:-translate-y-1">
+                        המשך לשלבי בניית הדוח
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== פרק 2 — שלבי העבודה =================== -->
+    <div id="step-2" class="step-content">
+        <div class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl border-t-8 border-emerald-600">
+            <div class="inline-block bg-emerald-100 text-emerald-800 px-4 py-1 rounded-full text-sm font-bold mb-4 tracking-wide">הפרקטיקה</div>
+            <h2 class="text-4xl text-gray-900 mb-4">איך מבצעים את הבנייה בפועל?</h2>
+            <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+                מערכת תמחיר הזמנה בנויה על <strong>זרימה לוגית</strong> של עלויות. אנו עוקבים אחרי הכסף מרגע קניית החומרים, דרך תהליך הייצור בנפרד לכל הזמנה, ועד למכירתה ללקוח. בואו נפרק את זה לאט לאט לשלבים.
+            </p>
+
+            <div class="space-y-6">
+                <!-- STEP A -->
+                <div class="step-card">
+                    <div class="flex items-start gap-5">
+                        <div class="formula-step-num">1</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-slate-800 mb-3">מלאי חומרים (במחסן)</h3>
+                            <p class="text-lg text-gray-700 mb-4">
+                                השלב הראשון מתחיל במחסן. לכאן נכנסים כל החומרים שנקנו, ומכאן הם "נמשכים" אל רצפת הייצור.
+                            </p>
+                            <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                                <h4 class="font-bold text-slate-900 mb-2">מה הטבלה/חשבון הזה כולל?</h4>
+                                <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                    <li><strong>חומרי גלם:</strong> החומרים העיקריים. כשמושכים אותם, הם עוברים <em>ישירות</em> להזמנה ספציפית.</li>
+                                    <li><strong>חומרי עזר:</strong> החומרים המשניים. כשמושכים אותם, הם נרשמים כ<em>הוצאה עקיפה כללית</em>.</li>
+                                </ul>
+                                <div class="mt-4 p-3 bg-white rounded-lg text-sm text-gray-600 border border-slate-100 font-medium">
+                                    <span class="text-emerald-600 font-bold">+</span> יתרת פתיחה <span class="text-emerald-600 font-bold">+</span> קניות של חומרים <span class="text-red-500 font-bold">-</span> חומרים שנצרכו = <strong>יתרת סגירה במחסן</strong>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP B -->
+                <div class="step-card border-blue-200 bg-blue-50/30">
+                    <div class="flex items-start gap-5">
+                        <div class="formula-step-num bg-blue-600">2</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-blue-900 mb-3">מעקב נפרד: הזמנות בתהליך (WIP)</h3>
+                            <p class="text-lg text-gray-700 mb-4">
+                                זהו לב המערכת. כל הזמנה מקבלת "כרטיסייה" משלה. כל פרויקט שעדיין לא הסתיים צובר כאן עלויות. אנו מזרימים לכל הזמנה שלושה רכיבים:
+                            </p>
+                            <div class="grid md:grid-cols-3 gap-4 mt-4">
+                                <div class="bg-white p-4 rounded-xl shadow-sm border border-blue-100">
+                                    <div class="text-2xl mb-2">🧱</div>
+                                    <h4 class="font-bold text-slate-800 mb-1">1. חומרי גלם</h4>
+                                    <p class="text-sm text-gray-600">החומרים הישירים שנמשכו מהמחסן בדיוק עבור הזמנה זו.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-xl shadow-sm border border-blue-100">
+                                    <div class="text-2xl mb-2">⏱️</div>
+                                    <h4 class="font-bold text-slate-800 mb-1">2. עבודה ישירה</h4>
+                                    <p class="text-sm text-gray-600">שעות העבודה שהושקעו בפועל על ההזמנה × תעריף השכר.</p>
+                                </div>
+                                <div class="bg-white p-4 rounded-xl shadow-sm border border-blue-100">
+                                    <div class="text-2xl mb-2">🌫️</div>
+                                    <h4 class="font-bold text-slate-800 mb-1">3. העמסת עקיפות</h4>
+                                    <p class="text-sm text-gray-600">שעות העבודה של ההזמנה × <em>תעריף העמסה מוערך מראש</em>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP C -->
+                <div class="step-card">
+                    <div class="flex items-start gap-5">
+                        <div class="formula-step-num bg-emerald-600">3</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-emerald-900 mb-3">מעבר לתוצרת גמורה (Finished Goods)</h3>
+                            <p class="text-lg text-gray-700">
+                                הרגע המאושר: ההזמנה הסתיימה! <br>
+                                אנו לוקחים את כל העלויות שהצטברו בכרטיסייה של ההזמנה (פתיחה + חומרים + עבודה + עקיפות שהועמסו), מסכמים אותן, ומעבירים את הסכום מחשבון "הזמנות בתהליך" אל חשבון "תוצרת גמורה". המוצר מחכה כעת למסירה.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP D -->
+                <div class="step-card">
+                    <div class="flex items-start gap-5">
+                        <div class="formula-step-num bg-rose-600">4</div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-bold text-rose-900 mb-3">מה עושים כשהזמנה נמכרת? (עלות המכר)</h3>
+                            <p class="text-lg text-gray-700 mb-4">
+                                כשהלקוח מקבל את המוצר, הוא יוצא משערי החברה, וזה הזמן לרשום אותו בדוח רווח והפסד כהוצאה.
+                            </p>
+                            <div class="warning-box my-4">
+                                <h4 class="font-bold text-rose-900 mb-1">⚠️ חוק ברזל:</h4>
+                                <p class="text-gray-800">
+                                    כשהזמנה נמכרת, אנו מושכים ממלאי תוצרת גמורה אל עלות המכר את <strong>עלות הייצור שלה בלבד</strong>. 
+                                    לא את מחיר המכירה! (מחיר המכירה נרשם כהכנסה, הפער הוא הרווח הגולמי).
+                                </p>
+                            </div>
+                            <div class="bg-rose-50 p-4 rounded-xl border border-rose-100">
+                                <h4 class="font-bold text-slate-800 mb-1">סגירת פערים בסוף תקופה:</h4>
+                                <p class="text-sm text-gray-700">
+                                    מכיוון שהשתמשנו ב"העמסה מראש" לפי אומדן (בשלב 2), ייווצר פער לעומת העלויות העקיפות ששולמו בפועל. 
+                                    אם הסטייה לא מהותית, אנחנו פשוט זוקפים את ההפרש לחשבון עלות המכר (מגדילים או מקטינים את הוצאות המכר בהתאם לפער).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-10">
+                <button onclick="goToStep(3)" class="px-8 py-4 bg-emerald-700 text-white rounded-full font-bold text-xl hover:bg-emerald-800 transition shadow-xl hover:-translate-y-1">
+                    הבנתי! בואו נפתור שאלה
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== פרק 3 — תרגיל מקיף =================== -->
+    <div id="step-3" class="step-content">
+        <div class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl border-t-8 border-amber-500">
+            
+            <div class="inline-block bg-amber-100 text-amber-800 px-4 py-1 rounded-full text-sm font-bold mb-4 tracking-wide">זמן תרגול מעשי</div>
+            <h2 class="text-4xl text-gray-900 mb-8">שאלה – תמחיר הזמנה מקיף</h2>
+
+            <div class="bg-slate-50 p-8 rounded-2xl border-2 border-slate-200">
+                
+                <h3 class="text-3xl font-bold text-slate-800 mb-6 pb-4 border-b-2 border-slate-300">להלן נתונים מספרי חברת "בובו בע״מ" ליום 1.2.2021:</h3>
+                
+                <!-- Opening Balances -->
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-blue-900 mb-3 flex items-center gap-2"><span class="text-2xl">📦</span> יתרות פתיחה במלאי:</h4>
+                    <ul class="space-y-2 text-lg text-gray-800 list-disc list-inside bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <li>יתרת <strong>חומרי גלם וחומרי עזר</strong> במחסן: 80,000 ש״ח.</li>
+                        <li>יתרת <strong>תוצרת גמורה</strong> במחסן: 190,000 ש״ח (שייכת ל<strong>הזמנה מס׳ 100</strong> שייצורה הושלם בחודש הקודם).</li>
+                        <li><strong>הזמנות בתהליך</strong> (שייצורן טרם הסתיים): ההזמנות הבאות מפורטות בטבלה.</li>
+                    </ul>
+                </div>
+
+                <div class="overflow-x-auto mb-10">
+                    <table class="modern-table text-center text-lg shadow-sm">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="border-r border-slate-600">מס׳ הזמנה</th>
+                                <th rowspan="2" class="border-r border-slate-600">סך עלות ההזמנה (יתרת פתיחה)</th>
+                                <th colspan="3" class="text-center">פירוט יתרת הפתיחה</th>
+                            </tr>
+                            <tr>
+                                <th class="border-r border-slate-600 bg-slate-700">חומרי גלם ישירים</th>
+                                <th class="border-r border-slate-600 bg-slate-700">עבודה ישירה</th>
+                                <th class="bg-slate-700">עקיפות שהועמסו</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="font-bold border-r border-slate-200">101</td>
+                                <td class="font-mono text-blue-700 font-bold border-r border-slate-200">180,000</td>
+                                <td class="font-mono border-r border-slate-200">80,000</td>
+                                <td class="font-mono border-r border-slate-200">70,000</td>
+                                <td class="font-mono">30,000</td>
+                            </tr>
+                            <tr>
+                                <td class="font-bold border-r border-slate-200">107</td>
+                                <td class="font-mono text-blue-700 font-bold border-r border-slate-200">220,000</td>
+                                <td class="font-mono border-r border-slate-200">150,000</td>
+                                <td class="font-mono border-r border-slate-200">60,000</td>
+                                <td class="font-mono">10,000</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td class="border-r border-slate-300">סה״כ</td>
+                                <td class="font-mono text-blue-800 border-r border-slate-300">400,000</td>
+                                <td class="font-mono border-r border-slate-300">230,000</td>
+                                <td class="font-mono border-r border-slate-300">130,000</td>
+                                <td class="font-mono">40,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Monthly Transactions -->
+                <div class="mb-8">
+                    <h4 class="text-xl font-bold text-emerald-900 mb-4 flex items-center gap-2"><span class="text-2xl">🔄</span> אירועי חודש פברואר 2021:</h4>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h5 class="font-bold text-slate-800 mb-1">1. קניות ורכש:</h5>
+                            <p class="text-gray-700 text-lg">במהלך החודש נרכשו מהספקים <strong>חומרי גלם</strong> בעלות של 200,000 ש״ח ו<strong>חומרי עזר</strong> בעלות של 60,000 ש״ח.</p>
+                        </div>
+                        
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h5 class="font-bold text-slate-800 mb-2">2. צריכת חומרים בייצור:</h5>
+                            <p class="text-gray-700 text-lg mb-2">נמשכו מהמחסן והוכנסו לרצפת הייצור חומרי גלם ישירים בעלות כוללת של 370,000 ש״ח. חומרים אלו פוצלו בין ההזמנות כך:</p>
+                            <ul class="list-disc list-inside text-gray-700 ml-4 mb-2">
+                                <li>הזמנה 101: 90,000 ש״ח</li>
+                                <li>הזמנה 107: 120,000 ש״ח</li>
+                                <li>הזמנה 108 (הזמנה חדשה): 160,000 ש״ח</li>
+                            </ul>
+                            <p class="text-gray-700 text-lg">בנוסף, נצרכו בייצור <strong>חומרי עזר</strong> (עקיפות) בעלות של 40,000 ש״ח.</p>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h5 class="font-bold text-slate-800 mb-2">3. שכר עבודה:</h5>
+                            <p class="text-gray-700 text-lg mb-2">סך עלות שכר העבודה לחודש פברואר הסתכמה ב-500,000 ש״ח. תעריף העלות של החברה לעובד ייצור עומד על <strong>110 ש״ח לשעה</strong>.</p>
+                            <p class="text-gray-700 text-lg mb-2">פירוט שעות העבודה הישירות שהושקעו בפועל בכל הזמנה:</p>
+                            <ul class="list-disc list-inside text-gray-700 ml-4 mb-2">
+                                <li>הזמנה 101: 1,500 שעות עבודה</li>
+                                <li>הזמנה 107: 1,000 שעות עבודה</li>
+                                <li>הזמנה 108: 1,500 שעות עבודה</li>
+                            </ul>
+                            <p class="text-gray-700 text-lg">היתרה מעלות השכר הכוללת (60,000 ש״ח) הינה בגין <strong>עבודה עקיפה</strong> (שכר מנהל עבודה, אנשי תחזוקה וכו׳).</p>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h5 class="font-bold text-slate-800 mb-2">4. עלויות עקיפות (העמסה ובפועל):</h5>
+                            <p class="text-gray-700 text-lg mb-4">החברה מעמיסה את העלויות העקיפות על ההזמנות לפי בסיס של <strong>שעות עבודה ישירה</strong>. לקראת שנת 2021, החברה אמדה מראש כי סך העלויות העקיפות השנתיות יעמדו על 1,200,000 ש״ח, וסך שעות העבודה הישירות יסתכמו ב-12,000 שעות. <span class="text-slate-500 text-base">(יש לחשב את תעריף ההעמסה מנתונים אלו)</span>.</p>
+                            
+                            <p class="text-gray-700 text-lg mb-3">העלויות העקיפות שנוצרו <strong>בפועל</strong> במהלך חודש פברואר מפורטות להלן:</p>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-center text-lg border border-slate-300 rounded-lg overflow-hidden shadow-sm">
+                                    <thead class="bg-slate-700 text-white">
+                                        <tr>
+                                            <th class="py-3 px-4 border-r border-slate-600 text-right">סוג העלות העקיפה</th>
+                                            <th class="py-3 px-4">סכום (ב-ש״ח)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-slate-200 bg-white">
+                                            <td class="py-3 px-4 text-right">חומרי עזר (נמשכו מהמחסן)</td>
+                                            <td class="py-3 px-4 font-mono">40,000</td>
+                                        </tr>
+                                        <tr class="border-b border-slate-200 bg-slate-50">
+                                            <td class="py-3 px-4 text-right">עבודה עקיפה (מתוך השכר הכולל)</td>
+                                            <td class="py-3 px-4 font-mono">60,000</td>
+                                        </tr>
+                                        <tr class="border-b border-slate-200 bg-white">
+                                            <td class="py-3 px-4 text-right">פחת מכונות וציוד ייצור</td>
+                                            <td class="py-3 px-4 font-mono">160,000</td>
+                                        </tr>
+                                        <tr class="border-b border-slate-200 bg-slate-50">
+                                            <td class="py-3 px-4 text-right">חשמל, ארנונה וביטוח למפעל</td>
+                                            <td class="py-3 px-4 font-mono">120,000</td>
+                                        </tr>
+                                        <tr class="font-bold bg-slate-200 border-t-2 border-slate-400">
+                                            <td class="py-3 px-4 text-right">סה״כ עלויות עקיפות בפועל</td>
+                                            <td class="py-3 px-4 font-mono text-blue-800">380,000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <h5 class="font-bold text-slate-800 mb-1">5. השלמת ייצור ומכירות:</h5>
+                            <p class="text-gray-700 text-lg mb-2">במהלך פברואר הסתיים לחלוטין ייצורן של <strong>הזמנה 101 והזמנה 107</strong>. הזמנות אלו הועברו בהצלחה למחסן התוצרת הגמורה <span class="text-slate-500 text-base">(עליכם לחשב את עלותן הכוללת בהתאם לזרימת העלויות)</span>.</p>
+                            <p class="text-gray-700 text-lg">באותו חודש, נמסרו ללקוחות החברה (נמכרו) <strong>הזמנה 100 והזמנה 107</strong> מתוך מחסן התוצרת הגמורה. התמורה במזומן שהתקבלה מהלקוחות עבור שתי ההזמנות יחד עמדה על 1,200,000 ש״ח.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Required -->
+                <div class="mt-10">
+                    <h4 class="text-3xl font-bold text-slate-900 mb-6 border-b-2 border-slate-300 pb-2">הנדרש:</h4>
+                    <ol class="list-decimal list-inside space-y-4 text-xl text-slate-800 font-bold bg-amber-50 p-8 rounded-2xl border-2 border-amber-200 shadow-sm">
+                        <li>חשבו את תעריף ההעמסה שנקבע מראש לתקופה.</li>
+                        <li>הציגו דוח תמחיר הזמנה מפורט <span class="text-lg font-normal text-slate-600">(יש לעקוב אחר זרימת העלויות בחשבונות מלאי החומרים, ההזמנות בתהליך ומלאי התוצרת הגמורה עד לסוף החודש)</span>.</li>
+                        <li>חשבו את הרווח או ההפסד הגולמי של החברה לחודש פברואר <span class="text-lg font-normal text-slate-600">(יש לטפל בסטיית ההעמסה ולסגור אותה לעלות המכר, בהנחה שהסטייה אינה מהותית)</span>.</li>
+                        <li>הסבירו בקצרה ובמילים שלכם את שלבי התהליך וההיגיון מאחורי זרימת העלויות שביצעתם בדוח.</li>
+                    </ol>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-10">
+                <button onclick="goToStep(4)" class="px-8 py-4 bg-amber-500 text-white rounded-full font-bold text-xl hover:bg-amber-600 transition shadow-xl hover:-translate-y-1">
+                    לצפייה בפתרון המפורט
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================== פרק 4 — פתרון מלא ומסקנות =================== -->
+    <div id="step-4" class="step-content">
+        <div class="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl border-t-8 border-slate-800 text-center">
+            
+            <div class="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-4xl mx-auto mb-6">📊</div>
+            <h2 class="text-4xl text-gray-900 mb-6">הפתרון המלא</h2>
+            
+            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed">
+                לעיון בפתרון המפורט, הכולל את כל החישובים, תנועות המלאי וטבלאות המעקב שלמדנו לבנות, אנא לחצו על הכפתור מטה. 
+            </p>
+
+            <a href="https://mypac-my.sharepoint.com/:x:/g/personal/shay_tsaban_pac_org_il/IQBL0R_xCJ-ET5N_79caMJNnAdPcZMCBo3dmbT9232Q8pQg?e=r5YrHO" 
+               target="_blank" 
+               class="inline-block px-10 py-5 bg-slate-800 text-white rounded-full font-black text-xl hover:bg-slate-700 transition-all shadow-2xl hover:scale-105 mb-16">
+                📄 צפה בפתרון באקסל
+            </a>
+
+            <hr class="border-slate-200 mb-10">
+
+            <div class="text-right max-w-3xl mx-auto">
+                <h3 class="text-2xl font-bold text-slate-800 mb-4">סיכום הכלים שרכשנו היום:</h3>
+                <ul class="space-y-4 text-lg text-gray-700">
+                    <li class="flex items-start gap-3">
+                        <span class="text-emerald-500 font-bold text-2xl mt-1">✓</span>
+                        <div>
+                            <strong>בניית דוח שיטתי:</strong> למדנו לקחת ים של נתונים מבולגנים ולהזרים אותם בסדר הגיוני: ממחסן החומרים, אל רצפת הייצור (לפי הזמנה מפורטת), לתוצרת הגמורה, ועד לדוח רווח והפסד.
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-emerald-500 font-bold text-2xl mt-1">✓</span>
+                        <div>
+                            <strong>מעקב רווחיות פרויקטאלי:</strong> אנו מבינים עכשיו איך חברות (קבלנים, בתי דפוס, חברות ייעוץ) יכולות לדעת בדיוק כמה שעות עבודה וחומרים צרך כל פרויקט ספציפי כדי לדעת אם הוא הרוויח או הפסיד.
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-emerald-500 font-bold text-2xl mt-1">✓</span>
+                        <div>
+                            <strong>טיפול בפערים (סטייה בהעמסה):</strong> למדנו כיצב להתמודד עם הפער שבין העלויות העקיפות שהועמסו <em>במהלך החודש</em> (לפי האומדן) לבין ההוצאות החשבונאיות <em>בפועל</em>, וכיצד לסגור את ההפרש הזה (סטיית ההעמסה) דרך סעיף עלות המכר.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<footer class="text-center text-gray-500 py-8 text-sm mt-12 border-t border-slate-200">
+    <p class="font-bold text-base text-slate-700">© 2026 קורס חשבונאות ניהולית | ד"ר שי צבאן</p>
+    <p class="mt-2 max-w-2xl mx-auto">נבנה במיוחד עבור הסטודנטים בקורס.</p>
+</footer>
+
+<script>
+    const totalSteps = 4;
+
+    window.goToStep = function(step) {
+        // Update Content
+        document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+        const target = document.getElementById(`step-${step}`);
+        if (target) target.classList.add('active');
+        
+        // Update Nav Buttons
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('nav-btn-active'));
+        const nav = document.getElementById(`nav-${step}`);
+        if (nav) nav.classList.add('nav-btn-active');
+        
+        // Update Progress Bar
+        const pct = Math.round((step / totalSteps) * 100);
+        const bar = document.getElementById('progressBar');
+        const txt = document.getElementById('progress-text');
+        if (bar) bar.style.width = `${pct}%`;
+        if (txt) txt.innerText = `התקדמות: ${pct}%`;
+        
+        // Scroll slightly down to clear header
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Initialize Math Rendering
+    function renderMathInDocument() {
+        if (typeof renderMathInElement === 'undefined') { return; }
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "\\[", right: "\\]", display: true },
+                { left: "\\(", right: "\\)", display: false }
+            ],
+            throwOnError: false
+        });
+    }
+
+    // Attempt to render math once DOM is fully loaded, just in case the script loads late
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof renderMathInDocument === "function") {
+            renderMathInDocument();
+        }
+    });
+
+</script>
+
+</body>
+</html>
