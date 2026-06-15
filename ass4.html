@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תרגיל הגשה – תמחיר הזמנה | חשבונאות ניהולית</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:      #1B3A6B;
+    --blue:      #2E6DB4;
+    --sky:       #D6E8F7;
+    --gold:      #C8971A;
+    --gold-bg:   #FEF9EC;
+    --gold-border:#E8C96A;
+    --teal:      #1A6B5F;
+    --teal-bg:   #E8F5F2;
+    --teal-b:    #A8D4CD;
+    --amber:     #7A5000;
+    --bg:        #F4F6FA;
+    --surface:   #FFFFFF;
+    --border:    #CBD8EC;
+    --text:      #1A1D2E;
+    --muted:     #6B7799;
+    --thead:     #E4EDF8;
+    --warn-bg:   #FFF3E0;
+    --warn-b:    #FFB74D;
+  }
+
+  body {
+    font-family: 'Heebo', 'David', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.8;
+    padding: 32px 16px 60px;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--surface);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 2px 18px rgba(27,58,107,.09);
+  }
+
+  /* ── Banner ── */
+  .banner {
+    background: linear-gradient(135deg, #1B3A6B 0%, #243F72 100%);
+    color: #fff;
+    padding: 30px 36px 24px;
+    position: relative; overflow: hidden;
+  }
+  .banner::after {
+    content: '';
+    position: absolute; right: -50px; top: -50px;
+    width: 280px; height: 280px; border-radius: 50%;
+    background: rgba(255,255,255,.04); pointer-events: none;
+  }
+  .banner-course { font-size: 12px; font-weight: 500; letter-spacing: .08em; color: #92B8E0; text-transform: uppercase; margin-bottom: 6px; }
+  .banner-title  { font-size: 26px; font-weight: 800; line-height: 1.25; margin-bottom: 8px; }
+  .banner-sub    { font-size: 13.5px; color: #C8D9EF; line-height: 1.7; }
+  .banner-sub strong { color: #FFD580; }
+
+  /* ── Meta bar ── */
+  .meta-bar {
+    background: var(--sky); border-bottom: 1px solid var(--border);
+    padding: 10px 36px;
+    display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
+    font-size: 13px; color: var(--navy);
+  }
+  .meta-item { display: flex; align-items: center; gap: 6px; }
+  .meta-label { font-weight: 700; }
+
+  /* ── Content ── */
+  .content { padding: 30px 36px 44px; }
+
+  /* ── Submission note ── */
+  .submission-note {
+    background: #EEF2FD; border: 1.5px solid #B0C4F0;
+    border-radius: 6px; padding: 13px 17px;
+    font-size: 13.5px; color: #1B3A6B; margin-bottom: 28px; line-height: 1.8;
+  }
+  .sn-title { font-weight: 800; font-size: 14px; margin-bottom: 3px; display: flex; align-items: center; gap: 7px; }
+
+  /* ── Section heading ── */
+  .sec-head {
+    font-size: 17px; font-weight: 800; color: var(--navy);
+    border-right: 5px solid var(--gold);
+    padding-right: 12px; margin: 26px 0 14px;
+  }
+  .sec-head span { font-size: 13px; font-weight: 500; color: var(--muted); margin-right: 8px; }
+
+  /* ── Company intro box ── */
+  .company-box {
+    background: var(--teal-bg); border: 1px solid var(--teal-b);
+    border-right: 4px solid var(--teal);
+    border-radius: 5px; padding: 15px 18px;
+    font-size: 14.5px; line-height: 1.85; margin-bottom: 22px;
+  }
+  .company-name { font-weight: 800; font-size: 17px; color: var(--teal); }
+
+  /* ── Opening balance box ── */
+  .opening-box {
+    border: 1.5px solid var(--border); border-radius: 6px;
+    overflow: hidden; margin-bottom: 22px;
+  }
+  .box-header {
+    background: var(--navy); color: #fff;
+    padding: 10px 18px; font-size: 14px; font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .box-body { padding: 16px 18px; }
+
+  /* ── Info row ── */
+  .info-row {
+    display: flex; gap: 8px; align-items: baseline;
+    margin-bottom: 8px; font-size: 14px;
+  }
+  .info-row:last-child { margin-bottom: 0; }
+  .info-dot { color: var(--gold); font-size: 16px; flex-shrink: 0; }
+
+  /* ── Tables ── */
+  .table-wrap { overflow-x: auto; margin: 14px 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th {
+    background: var(--thead); color: var(--navy); font-weight: 700;
+    padding: 9px 13px; text-align: right; border: 1px solid var(--border);
+    font-size: 13px;
+  }
+  th.center { text-align: center; }
+  td { padding: 8px 13px; border: 1px solid var(--border); text-align: right; }
+  td.center { text-align: center; }
+  td.num { text-align: left; font-variant-numeric: tabular-nums; direction: ltr; font-weight: 600; }
+  tr:nth-child(even) td { background: #FAFCFF; }
+  tr.total-row td { font-weight: 800; background: var(--thead) !important; color: var(--navy); }
+  tr.total-row td.num { color: var(--navy); }
+  .th-dark { background: var(--navy) !important; color: #fff !important; }
+  .td-label { font-weight: 600; color: var(--navy); }
+
+  /* ── Event block ── */
+  .event-block {
+    border: 1px solid var(--border); border-radius: 5px;
+    overflow: hidden; margin-bottom: 18px;
+  }
+  .event-header {
+    background: var(--thead); padding: 9px 16px;
+    font-size: 14.5px; font-weight: 700; color: var(--navy);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .event-num {
+    background: var(--navy); color: #fff;
+    font-size: 12px; font-weight: 800;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .event-body { padding: 14px 16px 16px; font-size: 14px; line-height: 1.85; }
+
+  /* ── Overhead actual table ── */
+  table.oh-table th { background: #F0ECF7; color: #3A1F6B; }
+  table.oh-table tr.oh-total td { background: #F0ECF7 !important; font-weight: 800; color: #3A1F6B; }
+
+  /* ── Note / tip boxes ── */
+  .note-box {
+    background: var(--gold-bg); border: 1px solid var(--gold-border);
+    border-radius: 5px; padding: 10px 14px;
+    font-size: 13px; color: var(--amber);
+    margin: 10px 0; display: flex; gap: 8px; align-items: flex-start; line-height: 1.6;
+  }
+  .note-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+  .warn-box {
+    background: var(--warn-bg); border: 1px solid var(--warn-b);
+    border-radius: 5px; padding: 10px 14px;
+    font-size: 13.5px; color: #6D3A00;
+    margin: 10px 0; line-height: 1.7;
+  }
+
+  /* ── Required section ── */
+  .required-label {
+    font-size: 13.5px; font-weight: 800; color: var(--navy);
+    text-transform: uppercase; letter-spacing: .06em;
+    border-right: 4px solid var(--gold);
+    padding-right: 10px; margin: 26px 0 16px;
+  }
+  .question-list { list-style: none; }
+  .question-list li {
+    display: flex; gap: 13px; margin-bottom: 18px;
+    align-items: flex-start; font-size: 14.5px; line-height: 1.8;
+  }
+  .q-letter {
+    min-width: 30px; height: 30px;
+    background: var(--navy); color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 13px;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .q-text { flex: 1; }
+
+  /* ── Divider ── */
+  .divider { border: none; border-top: 1px dashed var(--border); margin: 22px 0; }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--navy); color: #92B8E0;
+    text-align: center; font-size: 12px;
+    padding: 14px 36px; line-height: 1.7;
+  }
+  .footer strong { color: #fff; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Banner -->
+  <div class="banner">
+    <div class="banner-course">חשבונאות ניהולית &nbsp;|&nbsp; תרגיל הגשה מס׳ 4</div>
+    <div class="banner-title">שאלה — תמחיר הזמנה מקיף:<br>מידות רהיטים בע"מ</div>
+    <div class="banner-sub">
+      זכרו — <strong>חובה להגיש תרגיל אחד בלבד</strong> מבין כלל תרגילי הקורס בסך הכל.<br>
+      הגשה של תרגיל זה <strong>ו/או</strong> אחד האחרים מספקת.<br>
+      <strong>תאריך אחרון להגשה: 28.6.2026</strong>
+    </div>
+  </div>
+
+  <!-- Meta bar -->
+  <div class="meta-bar">
+    <div class="meta-item"><span class="meta-label">קורס:</span><span>חשבונאות ניהולית</span></div>
+    <div class="meta-item"><span class="meta-label">נושא:</span><span>מערכת תמחיר הזמנה — זרימת עלויות</span></div>
+    <div class="meta-item"><span class="meta-label">הגשה:</span><span>28.6.2026</span></div>
+    <div class="meta-item"><span class="meta-label">תרגיל:</span><span>4 מתוך 4</span></div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Submission note -->
+    <div class="submission-note">
+      <div class="sn-title">📋&nbsp; תזכורת מנהלית</div>
+      בקורס ייתנו בסך הכל <strong>4 תרגילי הגשה</strong>. כל סטודנט נדרש להגיש <strong>אחד בלבד</strong> מביניהם.
+      מי שכבר הגיש תרגיל קודם — סגר את חובות ההגשה.
+      פתרון מפורט יפורסם לאחר מועד ההגשה.
+    </div>
+
+    <!-- Company intro -->
+    <div class="company-box">
+      להלן נתונים מספריים של <span class="company-name">חברת "מידות רהיטים בע"מ"</span>,
+      יצרנית ריהוט מותאם אישית לגופים מסחריים ומוסדיים (מלונות, מרפאות, משרדים),
+      לחודש <strong>ספטמבר 2023</strong>. החברה עובדת לפי מערכת <strong>תמחיר הזמנה</strong>,
+      כאשר כל פרויקט עיצובי מנוהל כהזמנה נפרדת.
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 1 — Overhead estimation (moved first)
+    ═══════════════════════════════════════════════ -->
+    <div class="sec-head">הערכות תקופתיות ובסיס ההעמסה <span>נתוני מחלקת הכלכלה</span></div>
+
+    <div class="event-block">
+      <div class="event-header">
+        <div class="event-num">א</div>
+        <span>תעריף העמסת עלויות עקיפות — קביעה מראשית לשנת 2023</span>
+      </div>
+      <div class="event-body">
+        החברה מעמיסה עלויות עקיפות על ההזמנות לפי <strong>שעות עבודה ישירה</strong>.
+        לקראת שנת 2023, הנהלת החברה אמדה מראש:
+        <div style="margin-top:10px;">
+          <div class="info-row"><span class="info-dot">◆</span><span>סך <strong>העלויות העקיפות השנתיות</strong> הצפויות: <strong>1,200,000 ש"ח</strong></span></div>
+          <div class="info-row"><span class="info-dot">◆</span><span>סך <strong>שעות העבודה הישירות השנתיות</strong> הצפויות: <strong>10,000 שעות</strong></span></div>
+        </div>
+        <div class="note-box" style="margin-top:12px;">
+          <span class="note-icon">💡</span>
+          <span>מהנתונים הללו ניתן לחשב את התעריף — זהו הנדרש הראשון בשאלה.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 2 — Opening balances
+    ═══════════════════════════════════════════════ -->
+    <div class="sec-head">יתרות פתיחה במלאי <span>ליום 1.9.2023</span></div>
+
+    <!-- Raw materials -->
+    <div class="opening-box">
+      <div class="box-header">🪵&nbsp; חומרי גלם וחומרי עזר במחסן</div>
+      <div class="box-body">
+        <div class="info-row">
+          <span class="info-dot">◆</span>
+          <span>יתרת חומרי גלם (עץ, פורניר, חומרת חיבור) וחומרי עזר (נייר שמיר, דבק, צבע גמר) במחסן:
+          <strong>150,000 ש"ח</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Finished goods -->
+    <div class="opening-box">
+      <div class="box-header">🏢&nbsp; תוצרת גמורה במחסן</div>
+      <div class="box-body">
+        <div class="info-row">
+          <span class="info-dot">◆</span>
+          <span>יתרת תוצרת גמורה במחסן: <strong>340,000 ש"ח</strong><br>
+          שייכת להזמנה <strong>K1</strong> — ריהוט לובי לחברת עורכי דין, ייצורה הושלם בחודש אוגוסט 2023.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WIP -->
+    <div class="opening-box">
+      <div class="box-header">🔧&nbsp; הזמנות בתהליך ייצור — פירוט</div>
+      <div class="box-body">
+        <div style="font-size:13.5px; color:var(--muted); margin-bottom:10px;">
+          שתי הזמנות שייצורן טרם הושלם ביום 1.9.2023:
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>מס׳ הזמנה</th>
+                <th class="center">תיאור הפרויקט</th>
+                <th class="center">חומרי גלם ישירים</th>
+                <th class="center">עבודה ישירה</th>
+                <th class="center">עקיפות שהועמסו</th>
+                <th class="center">סך עלות הזמנה (יתרת פתיחה)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="td-label center">L2</td>
+                <td>ריהוט חדרי אורחים — מלון בוטיק</td>
+                <td class="num center">140,000</td>
+                <td class="num center">90,000</td>
+                <td class="num center">63,000</td>
+                <td class="num center">293,000</td>
+              </tr>
+              <tr>
+                <td class="td-label center">M3</td>
+                <td>ריהוט אזור המתנה — רשת מרפאות</td>
+                <td class="num center">190,000</td>
+                <td class="num center">120,000</td>
+                <td class="num center">84,000</td>
+                <td class="num center">394,000</td>
+              </tr>
+              <tr class="total-row">
+                <td class="center">סה"כ</td>
+                <td></td>
+                <td class="num center">330,000</td>
+                <td class="num center">210,000</td>
+                <td class="num center">147,000</td>
+                <td class="num center">687,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         SECTION 3 — Events
+    ═══════════════════════════════════════════════ -->
+    <div class="sec-head">אירועי חודש ספטמבר 2023</div>
+
+    <!-- Event 1: Labor (moved before materials) -->
+    <div class="event-block">
+      <div class="event-header">
+        <div class="event-num">1</div>
+        <span>שכר עבודה</span>
+      </div>
+      <div class="event-body">
+        סך עלות שכר העבודה לחודש ספטמבר הסתכמה ב<strong>630,000 ש"ח</strong>.
+        תעריף עלות העבודה של החברה לעובד ייצור עומד על <strong>140 ש"ח לשעה</strong>.
+        <br><br>
+        פירוט שעות העבודה הישירות שהושקעו בפועל בכל הזמנה:
+
+        <div class="table-wrap" style="margin-top:12px;">
+          <table style="max-width:420px;">
+            <thead>
+              <tr>
+                <th>מס׳ הזמנה</th>
+                <th class="center">שעות עבודה ישירות</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="td-label center">L2</td><td class="num center">800 שעות</td></tr>
+              <tr><td class="td-label center">M3</td><td class="num center">1,000 שעות</td></tr>
+              <tr><td class="td-label center">N4 (הזמנה חדשה)</td><td class="num center">1,200 שעות</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="warn-box" style="margin-top:12px;">
+          ⚠️ <strong>שימו לב:</strong> יתרת עלות השכר הכוללת, מעבר לשכר הישיר המחושב לפי הפירוט לעיל, הינה
+          בגין <strong>עבודה עקיפה</strong> — שכר מנהלי מחלקה, בודקי איכות גמר ועובדי תחזוקה — ונכללת
+          בעלויות העקיפות בפועל.
+        </div>
+      </div>
+    </div>
+
+    <!-- Event 2: Purchases + consumption (merged) -->
+    <div class="event-block">
+      <div class="event-header">
+        <div class="event-num">2</div>
+        <span>קניות ורכש, וצריכת חומרים בייצור</span>
+      </div>
+      <div class="event-body">
+        <strong>א. קניות מספקים:</strong><br>
+        במהלך החודש נרכשו מהספקים חומרי גלם (עץ מלא, פורניר, מוטות מתכת) בעלות של
+        <strong>300,000 ש"ח</strong> וחומרי עזר (נייר שמיר, דבק, צבע וורניש) בעלות של <strong>50,000 ש"ח</strong>.
+
+        <div class="divider"></div>
+
+        <strong>ב. צריכת חומרים בייצור:</strong><br>
+        נמשכו מהמחסן והוכנסו לרצפת הייצור <strong>חומרי גלם ישירים</strong> בעלות כוללת של <strong>400,000 ש"ח</strong>.
+        חומרים אלו פוצלו בין ההזמנות כך:
+
+        <div class="table-wrap" style="margin-top:10px;">
+          <table style="max-width:360px;">
+            <thead>
+              <tr>
+                <th>הזמנה</th>
+                <th class="center">חומרי גלם ישירים</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td class="td-label center">L2</td><td class="num center">110,000</td></tr>
+              <tr><td class="td-label center">M3</td><td class="num center">130,000</td></tr>
+              <tr><td class="td-label center">N4 (הזמנה חדשה — אולם כנסים בבית מלון)</td><td class="num center">160,000</td></tr>
+              <tr class="total-row"><td class="center">סה"כ</td><td class="num center">400,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top:12px;">
+          בנוסף, נצרכו בייצור <strong>חומרי עזר (עלות עקיפה)</strong> בעלות של <strong>50,000 ש"ח</strong>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Event 3: Actual overhead (separate event) -->
+    <div class="event-block">
+      <div class="event-header">
+        <div class="event-num">3</div>
+        <span>עלויות עקיפות בפועל — ספטמבר 2023</span>
+      </div>
+      <div class="event-body">
+        העלויות העקיפות שנוצרו בפועל במהלך חודש ספטמבר מפורטות להלן:
+
+        <div class="table-wrap" style="margin-top:12px;">
+          <table class="oh-table" style="max-width:480px;">
+            <thead>
+              <tr>
+                <th>סוג העלות העקיפה</th>
+                <th class="center">סכום (ש"ח)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>חומרי עזר (נמשכו מהמחסן)</td><td class="num center">50,000</td></tr>
+              <tr><td>עבודה עקיפה (מתוך סך עלות השכר)</td><td class="num center">210,000</td></tr>
+              <tr><td>פחת מכונות עיבוד עץ וציפוי</td><td class="num center">100,000</td></tr>
+              <tr><td>שכירות סדנה, חשמל וביטוח</td><td class="num center">100,000</td></tr>
+              <tr class="oh-total"><td>סה"כ עלויות עקיפות בפועל</td><td class="num center">460,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="note-box" style="margin-top:12px;">
+          <span class="note-icon">💡</span>
+          <span>
+            זכרו להבחין בין עלויות עקיפות <strong>בפועל</strong> לבין עלויות עקיפות
+            <strong>מועמסות</strong> (לפי התעריף). ההפרש הוא <em>סטיית ההעמסה</em> — תטפלו בה בסעיף הרווח הגולמי.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event 4: Completion and sales -->
+    <div class="event-block">
+      <div class="event-header">
+        <div class="event-num">4</div>
+        <span>השלמת ייצור ומכירות</span>
+      </div>
+      <div class="event-body">
+        <div class="info-row"><span class="info-dot">◆</span>
+        <span>במהלך ספטמבר הסתיים לחלוטין ייצורן של <strong>הזמנה L2</strong> ו<strong>הזמנה M3</strong>.
+        הזמנות אלו הועברו למחסן התוצרת הגמורה.</span></div>
+
+        <div class="info-row"><span class="info-dot">◆</span>
+        <span>באותו חודש נמסרו ללקוחות החברה (נמכרו) <strong>הזמנה K1</strong> ו<strong>הזמנה M3</strong>
+        מתוך מחסן התוצרת הגמורה.</span></div>
+
+        <div class="info-row"><span class="info-dot">◆</span>
+        <span>התמורה במזומן שהתקבלה מהלקוחות עבור שתי ההזמנות יחד עמדה על
+        <strong>1,500,000 ש"ח</strong>.</span></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ═══════════════════════════════════════════
+         REQUIRED
+    ═══════════════════════════════════════════ -->
+    <div class="required-label">הנדרש</div>
+
+    <ul class="question-list">
+
+      <li>
+        <div class="q-letter">1</div>
+        <div class="q-text">
+          חשבו את <strong>תעריף ההעמסה שנקבע מראש</strong> לשנת 2023.
+        </div>
+      </li>
+
+      <li>
+        <div class="q-letter">2</div>
+        <div class="q-text">
+          הציגו <strong>דוח תמחיר הזמנה מפורט</strong> — עקבו אחר זרימת העלויות בחשבונות המלאי:
+          חומרי גלם ← הזמנות בתהליך ← תוצרת גמורה ← עלות מכר; עד סוף חודש ספטמבר.
+          הדוח יכלול את פירוט העלויות בכל הזמנה לאורך החודש.
+        </div>
+      </li>
+
+      <li>
+        <div class="q-letter">3</div>
+        <div class="q-text">
+          הסבירו בקצרה את <strong>שלבי התהליך וההיגיון</strong> מאחורי זרימת העלויות שביצעתם בדוח —
+          מדוע חומרי עזר נרשמים כעלות עקיפה? מדוע ממיינים בין שכר ישיר לשכר עקיף?
+          כיצד התעריף פותר את בעיית ה"זמינות" של עלויות עקיפות בזמן אמת?
+        </div>
+      </li>
+
+      <li>
+        <div class="q-letter">4</div>
+        <div class="q-text">
+          חשבו את <strong>הרווח (ההפסד) הגולמי</strong> של החברה לחודש ספטמבר 2023.
+          טפלו בסטיית ההעמסה וסגרו אותה לעלות המכר.
+        </div>
+      </li>
+
+    </ul>
+
+  </div><!-- /content -->
+
+  <!-- Footer -->
+  <div class="footer">
+    <strong>חשבונאות ניהולית</strong> &nbsp;|&nbsp; תרגיל הגשה מס׳ 4 — תמחיר הזמנה מקיף
+    &nbsp;|&nbsp; הגשה עד <strong>28.6.2026</strong>
+    &nbsp;|&nbsp; פתרון מפורט יפורסם לאחר מועד ההגשה
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>
