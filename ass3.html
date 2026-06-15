@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שאלות הגשה – העמסת עלויות מחלקות שירות | חשבונאות ניהולית</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #1B3A6B;
+    --blue:   #2E6DB4;
+    --sky:    #D6E8F7;
+    --gold:   #C8971A;
+    --gold-bg:#FEF9EC;
+    --teal:   #1A6B5F;
+    --teal-bg:#E8F5F2;
+    --teal-border:#A8D4CD;
+    --purple: #5B3FA6;
+    --purple-bg:#F0ECFA;
+    --bg:     #F4F6FA;
+    --surface:#FFFFFF;
+    --border: #CBD8EC;
+    --text:   #1A1D2E;
+    --muted:  #6B7799;
+    --thead:  #E4EDF8;
+    --thead2: #E8F0FB;
+  }
+
+  body {
+    font-family: 'Heebo', 'David', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.75;
+    padding: 32px 16px 60px;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--surface);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(27,58,107,.08);
+  }
+
+  /* ── Banner ── */
+  .banner {
+    background: var(--navy);
+    color: #fff;
+    padding: 28px 36px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .banner::before {
+    content: '';
+    position: absolute;
+    left: -60px; bottom: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.04);
+    pointer-events: none;
+  }
+  .banner-course { font-size: 12px; font-weight: 500; letter-spacing: .08em; color: #92B8E0; text-transform: uppercase; margin-bottom: 6px; }
+  .banner-title  { font-size: 23px; font-weight: 800; line-height: 1.3; margin-bottom: 10px; }
+  .banner-sub    { font-size: 13.5px; color: #C8D9EF; line-height: 1.7; max-width: 640px; }
+  .banner-sub strong { color: #FFD580; }
+
+  /* ── Meta bar ── */
+  .meta-bar {
+    background: var(--sky);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 36px;
+    display: flex; gap: 24px; align-items: center; flex-wrap: wrap;
+    font-size: 13px; color: var(--navy);
+  }
+  .meta-item { display: flex; align-items: center; gap: 6px; }
+  .meta-label { font-weight: 700; }
+
+  /* ── Content ── */
+  .content { padding: 30px 36px 40px; }
+
+  /* ── Submission note ── */
+  .submission-note {
+    background: #EEF2FD;
+    border: 1.5px solid #B0C4F0;
+    border-radius: 6px;
+    padding: 13px 17px;
+    font-size: 13.5px; color: #1B3A6B;
+    margin-bottom: 26px; line-height: 1.8;
+  }
+  .sn-title { font-weight: 800; font-size: 14px; margin-bottom: 3px; display: flex; align-items: center; gap: 7px; }
+
+  /* ── Exercise block ── */
+  .exercise {
+    border: 1.5px solid var(--border);
+    border-radius: 6px; overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .exercise-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 13px 22px;
+    font-size: 15px; font-weight: 700;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .ex-num {
+    background: var(--gold); color: #1A1D2E;
+    font-size: 12px; font-weight: 800;
+    padding: 2px 10px; border-radius: 20px; letter-spacing: .04em;
+  }
+  .exercise-body { padding: 22px 22px 28px; }
+
+  /* ── Company description ── */
+  .company-desc {
+    font-size: 14.5px; margin-bottom: 20px; line-height: 1.85;
+    padding: 14px 16px;
+    background: var(--teal-bg);
+    border: 1px solid var(--teal-border);
+    border-right: 4px solid var(--teal);
+    border-radius: 4px;
+  }
+  .company-name { font-weight: 800; font-size: 16px; color: var(--teal); }
+
+  /* ── Main data table (5 columns) ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 18px 0;
+  }
+  table.main-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    min-width: 620px;
+  }
+  table.main-table th {
+    background: var(--thead);
+    color: var(--navy);
+    font-weight: 700;
+    padding: 9px 12px;
+    text-align: center;
+    border: 1px solid var(--border);
+    font-size: 13px;
+  }
+  table.main-table th.row-header {
+    text-align: right;
+    background: var(--navy);
+    color: #fff;
+    min-width: 160px;
+  }
+  table.main-table th.prod-header  { background: #1B5E4F; color: #fff; }
+  table.main-table th.svc-header   { background: #4A2A80; color: #fff; }
+  table.main-table td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  table.main-table td.row-label {
+    text-align: right;
+    font-weight: 600;
+    color: var(--navy);
+    background: #F7F9FC;
+  }
+  table.main-table tr:nth-child(even) td:not(.row-label) { background: #FAFCFF; }
+  table.main-table tr.total-row td {
+    font-weight: 800;
+    background: var(--thead2) !important;
+    color: var(--navy);
+  }
+  table.main-table tr.total-row td.row-label {
+    background: var(--thead) !important;
+  }
+  table.main-table tr.basis-row td {
+    background: #F5F0FA !important;
+    color: var(--purple);
+    font-weight: 600;
+  }
+  table.main-table tr.basis-row td.row-label {
+    background: #F5F0FA !important;
+    color: var(--purple);
+  }
+  .basis-note { font-size: 11px; color: var(--muted); font-weight: 400; display: block; margin-top: 2px; }
+
+  /* ── Column group labels ── */
+  .col-group-label { font-size: 11px; font-weight: 500; letter-spacing: .05em; }
+
+  /* ── Extra data ── */
+  .extra-data {
+    background: var(--gold-bg);
+    border: 1px solid #E8C96A;
+    border-radius: 5px;
+    padding: 13px 16px;
+    font-size: 14px; margin: 18px 0 22px; line-height: 1.9;
+  }
+  .extra-data strong { color: #7A5000; font-weight: 800; }
+  .extra-data .data-row { display: flex; gap: 10px; align-items: baseline; margin-bottom: 4px; }
+  .extra-data .data-row:last-child { margin-bottom: 0; }
+  .data-bullet { color: var(--gold); font-size: 16px; line-height: 1; }
+
+  /* ── Required ── */
+  .required-label {
+    font-size: 13.5px; font-weight: 800; color: var(--navy);
+    text-transform: uppercase; letter-spacing: .06em;
+    border-right: 4px solid var(--gold);
+    padding-right: 10px; margin-bottom: 16px;
+  }
+
+  .question-list { list-style: none; }
+  .question-list li {
+    display: flex; gap: 13px; margin-bottom: 18px;
+    align-items: flex-start; font-size: 14.5px; line-height: 1.8;
+  }
+  .q-letter {
+    min-width: 30px; height: 30px;
+    background: var(--navy); color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 13px;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .q-text { flex: 1; }
+  .q-sub { font-size: 13px; color: var(--muted); margin-top: 4px; font-style: italic; }
+
+  /* ── Method badge ── */
+  .method-badge {
+    display: inline-block;
+    font-size: 12px; font-weight: 700;
+    padding: 2px 10px; border-radius: 20px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge-direct  { background: #DFF0D8; color: #1A5C30; border: 1px solid #B2D8A0; }
+  .badge-steps   { background: var(--purple-bg); color: var(--purple); border: 1px solid #C0AEEF; }
+
+  /* ── Tip box ── */
+  .tip-box {
+    background: var(--gold-bg);
+    border: 1px solid #E8C96A;
+    border-radius: 5px;
+    padding: 9px 13px; font-size: 13px; color: #7A5C00;
+    margin-top: 9px; display: flex; gap: 8px; align-items: flex-start;
+    line-height: 1.6;
+  }
+  .tip-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── Summary table (approach comparison) ── */
+  .approach-table-wrap { margin: 22px 0 0; }
+  .approach-label {
+    font-size: 12px; font-weight: 700; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px;
+  }
+  table.approach-table {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+  }
+  table.approach-table th {
+    background: var(--thead);
+    color: var(--navy); font-weight: 700;
+    padding: 8px 12px; text-align: right;
+    border: 1px solid var(--border);
+  }
+  table.approach-table td {
+    padding: 7px 12px; border: 1px solid var(--border); text-align: right;
+  }
+  table.approach-table tr:nth-child(even) td { background: #FAFCFF; }
+  .acc-high { font-weight: 700; color: var(--teal); }
+  .acc-med  { font-weight: 700; color: var(--navy); }
+  .acc-low  { font-weight: 700; color: #7A5000; }
+
+  /* ── Divider ── */
+  .divider { border: none; border-top: 1px dashed var(--border); margin: 24px 0; }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--navy); color: #92B8E0;
+    text-align: center; font-size: 12px;
+    padding: 14px 36px; line-height: 1.7;
+  }
+  .footer strong { color: #fff; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ── Banner ── -->
+  <div class="banner">
+    <div class="banner-course">חשבונאות ניהולית &nbsp;|&nbsp; תרגיל הגשה מס׳ 3</div>
+    <div class="banner-title">שאלות הגשה בנושא העמסת עלויות מחלקות שירות</div>
+    <div class="banner-sub">
+      זכרו — <strong>חובה להגיש תרגיל אחד בלבד</strong> מבין כלל תרגילי הקורס בסך הכל.<br>
+      הגשה של תרגיל זה <strong>ו/או</strong> אחד האחרים מספקת.<br>
+      <strong>תאריך אחרון להגשה: 28.6.2026</strong>
+    </div>
+  </div>
+
+  <!-- ── Meta bar ── -->
+  <div class="meta-bar">
+    <div class="meta-item"><span class="meta-label">קורס:</span><span>חשבונאות ניהולית</span></div>
+    <div class="meta-item"><span class="meta-label">נושא:</span><span>העמסת עלויות מחלקות שירות — גישה ישירה וגישת הצעדים</span></div>
+    <div class="meta-item"><span class="meta-label">הגשה:</span><span>28.6.2026</span></div>
+    <div class="meta-item"><span class="meta-label">תרגיל:</span><span>3 מתוך 4</span></div>
+  </div>
+
+  <!-- ── Content ── -->
+  <div class="content">
+
+    <!-- Submission reminder -->
+    <div class="submission-note">
+      <div class="sn-title">📋&nbsp; תזכורת מנהלית</div>
+      בקורס ייתנו בסך הכל <strong>4 תרגילי הגשה</strong>. כל סטודנט נדרש להגיש <strong>אחד בלבד</strong> מביניהם.
+      מי שכבר הגיש תרגיל קודם — סגר את חובות ההגשה. מי שלא הגיש — יכול לבחור כל אחד מהתרגילים הנותרים.
+      פתרון מפורט יפורסם לאחר מועד ההגשה.
+    </div>
+
+    <!-- Approach summary -->
+    <div class="approach-table-wrap">
+      <div class="approach-label">תזכורת — גישות להקצאת עלויות שירות</div>
+      <table class="approach-table">
+        <thead>
+          <tr>
+            <th>גישה</th>
+            <th>רמת דיוק</th>
+            <th>הסבר תמציתי</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ישירה / התעלמות</strong></td>
+            <td><span class="acc-low">נמוכה</span></td>
+            <td>מתעלמת לגמרי מהשירות שמחלקות שירות מעניקות זו לזו; ההעמסה היא על הייצור בלבד</td>
+          </tr>
+          <tr>
+            <td><strong>צעדים / מדורגת</strong></td>
+            <td><span class="acc-med">בינונית</span></td>
+            <td>מחלקת השירות הדומיננטית מועמסת תחילה על כל שאר המחלקות; מחלקת השירות הנותרת (כולל מה שנוסף לה) מועמסת על הייצור בלבד</td>
+          </tr>
+          <tr>
+            <td><strong>אלגברית</strong></td>
+            <td><span class="acc-high">מדויקת לחלוטין</span></td>
+            <td>מתייחסת על בסיס מערכת משוואות לכלל השירותים ההדדיים; נדרש הסבר תיאורטי בלבד, ללא פתרון חישובי</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- ════════════════════════ EXERCISE ════════════════════════ -->
+    <div class="exercise">
+      <div class="exercise-header">
+        <span class="ex-num">תרגיל 1</span>
+        <span>העמסת עלויות שירות — גישה ישירה וגישת הצעדים</span>
+      </div>
+
+      <div class="exercise-body">
+
+        <!-- Company description -->
+        <div class="company-desc">
+          ב<span class="company-name">חברת "ארזים" בע"מ</span> פועלות חמש מחלקות: שלוש מחלקות ייצור —
+          <strong>ניפוח</strong>, <strong>ציפוי</strong> ו<strong>גימור</strong> — ושתי מחלקות שירות —
+          <strong>תחזוקה</strong> ו<strong>שמירה</strong>. נתוני העלויות ובסיסי ההעמסה לתקופה נתונים בטבלה שלהלן.
+        </div>
+
+        <!-- Main data table -->
+        <div class="table-wrap">
+          <table class="main-table">
+            <thead>
+              <tr>
+                <th class="row-header">סעיף / מחלקה</th>
+                <th class="prod-header">
+                  מחלקת<br>ניפוח
+                  <span class="col-group-label">&nbsp;(ייצור)</span>
+                </th>
+                <th class="prod-header">
+                  מחלקת<br>ציפוי
+                  <span class="col-group-label">&nbsp;(ייצור)</span>
+                </th>
+                <th class="prod-header">
+                  מחלקת<br>גימור
+                  <span class="col-group-label">&nbsp;(ייצור)</span>
+                </th>
+                <th class="svc-header">
+                  מחלקת<br>תחזוקה
+                  <span class="col-group-label">&nbsp;(שירות)</span>
+                </th>
+                <th class="svc-header">
+                  מחלקת<br>שמירה
+                  <span class="col-group-label">&nbsp;(שירות)</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="row-label">עלויות ישירות (₪)</td>
+                <td>55,000</td>
+                <td>70,000</td>
+                <td>20,000</td>
+                <td>10,000</td>
+                <td>14,000</td>
+              </tr>
+              <tr>
+                <td class="row-label">עלויות עקיפות (₪)</td>
+                <td>25,000</td>
+                <td>50,000</td>
+                <td>10,000</td>
+                <td>8,000</td>
+                <td>8,000</td>
+              </tr>
+              <tr class="total-row">
+                <td class="row-label">סך העלויות (₪)</td>
+                <td>80,000</td>
+                <td>120,000</td>
+                <td>30,000</td>
+                <td>18,000</td>
+                <td>22,000</td>
+              </tr>
+              <tr class="basis-row">
+                <td class="row-label">
+                  שעות מכונה
+                  <span class="basis-note">בסיס ← תחזוקה</span>
+                </td>
+                <td>250</td>
+                <td>200</td>
+                <td>50</td>
+                <td>30</td>
+                <td>70</td>
+              </tr>
+              <tr class="basis-row">
+                <td class="row-label">
+                  שטח (מ"ר)
+                  <span class="basis-note">בסיס ← שמירה</span>
+                </td>
+                <td>500</td>
+                <td>300</td>
+                <td>200</td>
+                <td>100</td>
+                <td>150</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Additional data -->
+        <div class="extra-data">
+          <div class="data-row"><span class="data-bullet">◆</span><span>החברה מעמיסה את עלויות <strong>מחלקת התחזוקה</strong> על שאר המחלקות לפי <strong>מספר שעות המכונה</strong>.</span></div>
+          <div class="data-row"><span class="data-bullet">◆</span><span>החברה מעמיסה את עלויות <strong>מחלקת השמירה</strong> על שאר המחלקות לפי <strong>שטח המחלקה (מ"ר)</strong>.</span></div>
+        </div>
+
+        <!-- Required -->
+        <div class="required-label">נדרש</div>
+
+        <ul class="question-list">
+
+          <li>
+            <div class="q-letter">א</div>
+            <div class="q-text">
+              <span class="method-badge badge-direct">גישה ישירה</span>
+              מהי <strong>העלות הכוללת בכל מחלקת ייצור</strong> (כולל עלויות השירות המועמסות),
+              בהנחה שהחברה מיישמת את <strong>הגישה הישירה</strong>?
+              <div class="tip-box">
+                <span class="tip-icon">💡</span>
+                <span>
+                  טיפ — בגישה הישירה מתעלמים לחלוטין מהשירות שמחלקות השירות נותנות זו לזו.
+                  ההעמסה היא מכל מחלקת שירות — ישירות לייצור בלבד,
+                  לפי בסיס ההעמסה של מחלקות הייצור בלבד (אל תכללו את מחלקות השירות בבסיס!).
+                  <br>עלות כוללת = עלויות ישירות + עקיפות + עלויות שירות מועמסות.
+                </span>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="q-letter">ב</div>
+            <div class="q-text">
+              <span class="method-badge badge-steps">גישת הצעדים</span>
+              מהי <strong>העלות הכוללת בכל מחלקת ייצור</strong> (כולל עלויות השירות המועמסות),
+              בהנחה שהחברה מיישמת את <strong>גישת הצעדים</strong>,
+              כאשר <strong>מחלקת השמירה מועמסת תחילה</strong>?
+              <div class="tip-box">
+                <span class="tip-icon">💡</span>
+                <span>
+                  <strong>שלב 1:</strong> העמיסו את עלויות השמירה (המועמסת ראשונה) על <em>כל</em> המחלקות האחרות —
+                  כולל מחלקת התחזוקה. בסיס ההעמסה: שטח (מ"ר) של כל המחלקות חוץ משמירה עצמה.<br>
+                  <strong>שלב 2:</strong> עלות תחזוקה לשלב זה = עלות מקורית + מה שהועמס עליה בשלב 1.
+                  העמיסו את הסכום הזה על <em>מחלקות הייצור בלבד</em>, לפי שעות מכונה של הייצור בלבד.
+                </span>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+      </div><!-- /exercise-body -->
+    </div><!-- /exercise -->
+
+  </div><!-- /content -->
+
+  <!-- ── Footer ── -->
+  <div class="footer">
+    <strong>חשבונאות ניהולית</strong> &nbsp;|&nbsp; תרגיל הגשה מס׳ 3 — העמסת עלויות מחלקות שירות
+    &nbsp;|&nbsp; הגשה עד <strong>28.6.2026</strong>
+    &nbsp;|&nbsp; פתרון מפורט יפורסם לאחר מועד ההגשה
+  </div>
+
+</div><!-- /page -->
+</body>
+</html>
