@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>קיר הפירגונים 💚</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root{
+    --bg-chat:#0b141a;
+    --bg-header:#202c33;
+    --bg-received:#202c33;
+    --bg-sent:#005c4b;
+    --bg-doc:#f0f0f0;
+    --accent:#00a884;
+    --text-primary:#e9edef;
+    --text-secondary:#8696a0;
+    --tick-read:#53bdeb;
+    --divider-bg:#182229;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0;padding:0;
+    background:#000;
+    font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  }
+  body{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    min-height:100vh;
+    padding:24px 0;
+  }
+  .phone{
+    width:420px;
+    max-width:100vw;
+    background:var(--bg-chat);
+    box-shadow:0 0 60px rgba(0,0,0,.6);
+    display:flex;
+    flex-direction:column;
+    min-height:844px;
+    overflow:hidden;
+    position:relative;
+  }
+
+  /* status bar */
+  .statusbar{
+    background:var(--bg-header);
+    color:var(--text-primary);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 18px 6px;
+    font-size:15px;
+    font-weight:600;
+    direction:ltr;
+  }
+  .statusbar .icons{display:flex;align-items:center;gap:5px;}
+  .bars{display:flex;align-items:flex-end;gap:2px;height:10px;}
+  .bars span{width:3px;background:var(--text-primary);border-radius:1px;}
+  .bars span:nth-child(1){height:4px;}
+  .bars span:nth-child(2){height:6px;}
+  .bars span:nth-child(3){height:8px;}
+  .bars span:nth-child(4){height:10px;}
+  .wifi{width:14px;height:10px;border:1.6px solid var(--text-primary);border-radius:0 0 8px 8px;border-top:none;position:relative;}
+  .battery{width:22px;height:11px;border:1.4px solid var(--text-primary);border-radius:2px;position:relative;padding:1px;}
+  .battery::after{content:'';position:absolute;left:-3px;top:3px;width:2px;height:4px;background:var(--text-primary);border-radius:0 1px 1px 0;}
+  .battery i{display:block;height:100%;width:78%;background:var(--text-primary);border-radius:1px;}
+
+  /* header */
+  .chat-header{
+    background:var(--bg-header);
+    color:var(--text-primary);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:8px 14px;
+    border-bottom:1px solid rgba(255,255,255,.05);
+  }
+  .chevron{font-size:22px;color:var(--accent);font-weight:400;}
+  .chevron-count{font-size:16px;color:var(--accent);margin-inline-start:-6px;}
+  .group-avatar{
+    width:38px;height:38px;border-radius:50%;
+    background:linear-gradient(135deg,#2a3942,#3a4a54);
+    display:flex;align-items:center;justify-content:center;
+    font-size:16px;color:var(--text-secondary);
+    flex-shrink:0;
+  }
+  .header-text{flex:1;min-width:0;}
+  .header-text .title{
+    font-size:15.5px;font-weight:600;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  .header-text .subtitle{font-size:12.5px;color:var(--text-secondary);margin-top:1px;}
+  .header-icon{
+    width:22px;height:22px;border-radius:50%;
+    border:1.6px solid var(--text-secondary);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--text-secondary);font-size:11px;flex-shrink:0;
+  }
+
+  /* chat body */
+  .chat-body{
+    flex:1;
+    padding:14px 10px 90px;
+    background-color:var(--bg-chat);
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,0.025) 1.5px, transparent 1.6px),
+      radial-gradient(circle at 75% 12%, rgba(255,255,255,0.025) 1.5px, transparent 1.6px),
+      radial-gradient(circle at 40% 45%, rgba(255,255,255,0.02) 1.5px, transparent 1.6px),
+      radial-gradient(circle at 85% 60%, rgba(255,255,255,0.025) 1.5px, transparent 1.6px),
+      radial-gradient(circle at 25% 75%, rgba(255,255,255,0.02) 1.5px, transparent 1.6px),
+      radial-gradient(circle at 60% 88%, rgba(255,255,255,0.025) 1.5px, transparent 1.6px);
+    background-size:140px 140px;
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    overflow-y:auto;
+  }
+
+  .day-divider{
+    align-self:center;
+    background:var(--divider-bg);
+    color:var(--text-secondary);
+    font-size:12.5px;
+    padding:5px 12px;
+    border-radius:8px;
+    margin:6px auto 10px;
+    box-shadow:0 1px 1px rgba(0,0,0,.3);
+  }
+
+  .row{display:flex;width:100%;margin-top:2px;}
+  .row.sent{justify-content:flex-end;}
+  .row.received{justify-content:flex-start;}
+
+  .bubble{
+    position:relative;
+    max-width:78%;
+    padding:6px 9px 8px 8px;
+    border-radius:8px;
+    font-size:14.3px;
+    line-height:1.45;
+    color:var(--text-primary);
+    box-shadow:0 1px 1px rgba(0,0,0,.35);
+    word-wrap:break-word;
+  }
+  .bubble.sent{background:var(--bg-sent);border-top-left-radius:8px;border-top-right-radius:2px;}
+  .bubble.received{background:var(--bg-received);border-top-right-radius:8px;border-top-left-radius:2px;}
+
+  .sender{font-size:13px;font-weight:700;margin-bottom:2px;}
+
+  .msg-text{white-space:pre-wrap;}
+  .msg-text a{color:#53bdeb;}
+
+  .meta{
+    display:flex;justify-content:flex-end;align-items:center;gap:4px;
+    font-size:11px;color:rgba(255,255,255,.55);margin-top:3px;
+  }
+  .bubble.sent .meta{color:rgba(255,255,255,.65);}
+  .ticks{color:var(--tick-read);font-size:13px;letter-spacing:-2px;}
+
+  .reaction{
+    position:absolute;bottom:-10px;
+    background:#2a3942;border:1px solid #0b141a;
+    border-radius:10px;padding:1px 5px 1px 4px;
+    font-size:12px;display:flex;align-items:center;gap:2px;
+    box-shadow:0 1px 2px rgba(0,0,0,.4);color:var(--text-primary);
+  }
+  .row.sent .reaction{left:6px;}
+  .row.received .reaction{right:6px;}
+  .reaction .count{font-size:10.5px;color:var(--text-secondary);}
+
+  .doc-bubble{
+    background:var(--bg-doc);color:#1a1a1a;
+    border-radius:8px;border-top-right-radius:2px;
+    padding:14px 14px 10px;font-size:12.8px;line-height:1.55;
+    max-width:82%;box-shadow:0 1px 1px rgba(0,0,0,.35);
+  }
+  .doc-bubble .doc-title{font-weight:700;margin-bottom:6px;}
+  .doc-bubble .doc-link{color:#0a66c2;word-break:break-all;}
+  .doc-bubble .doc-sign{margin-top:8px;font-weight:700;}
+  .doc-bubble .doc-meta{display:flex;justify-content:flex-end;color:#667781;font-size:11px;margin-top:6px;gap:4px;align-items:center;}
+  .doc-bubble .doc-meta .ticks{color:var(--tick-read);}
+
+  .sticker-bubble{
+    background:transparent;padding:0;box-shadow:none;
+    max-width:60%;
+  }
+  .sticker-card{
+    background:radial-gradient(circle at 50% 30%, #2c2f38, #15171c);
+    border:1px solid #3a3f4a;border-radius:12px;
+    padding:16px 10px 12px;text-align:center;
+    box-shadow:0 2px 6px rgba(0,0,0,.5);
+  }
+  .sticker-crown{font-size:34px;line-height:1;margin-bottom:4px;}
+  .sticker-caption{
+    font-family:'Times New Roman',serif;font-weight:700;
+    font-size:19px;color:#e7d9a8;
+    text-shadow:0 1px 2px rgba(0,0,0,.6);
+  }
+
+  /* footer input bar */
+  .input-bar{
+    position:absolute;bottom:0;left:0;right:0;
+    background:var(--bg-header);
+    display:flex;align-items:center;gap:10px;
+    padding:8px 12px 14px;
+  }
+  .plus-icon{
+    width:26px;height:26px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--text-secondary);font-size:22px;flex-shrink:0;
+  }
+  .input-pill{
+    flex:1;background:#2a3942;border-radius:22px;
+    padding:9px 14px;display:flex;align-items:center;justify-content:space-between;
+    color:var(--text-secondary);font-size:14px;
+  }
+  .cam-icon,.mic-icon{
+    color:var(--text-secondary);font-size:19px;flex-shrink:0;
+  }
+
+  .footer-note{
+    text-align:center;color:#5b6b73;font-size:11.5px;
+    padding:14px 20px 4px;max-width:420px;
+  }
+</style>
+</head>
+<body>
+
+<div>
+<div class="phone">
+
+  <div class="statusbar">
+    <span>22:16</span>
+    <div class="icons">
+      <div class="bars"><span></span><span></span><span></span><span></span></div>
+      <div class="wifi"></div>
+      <div class="battery"><i></i></div>
+    </div>
+  </div>
+
+  <div class="chat-header">
+    <span class="chevron">‹</span>
+    <span class="chevron-count">154</span>
+    <div class="group-avatar">👥</div>
+    <div class="header-text">
+      <div class="title">חשבונאות ניהולית - תואר...</div>
+      <div class="subtitle">8 online</div>
+    </div>
+    <div class="header-icon">))</div>
+  </div>
+
+  <div class="chat-body">
+
+    <div class="day-divider">Thursday</div>
+
+    <!-- 17:13 -->
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">סיכמתי לכם את כל הקורס למסמך אחד</div>
+      <div class="meta"><span>17:13</span><span class="ticks">✓✓</span></div>
+      <div class="reaction">🙏❤️<span class="count">4</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">כולי תקווה שההשקעה השתלמה</div>
+      <div class="meta"><span>17:13</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">זה נמצא באתר</div>
+      <div class="meta"><span>17:13</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">עדכונים נוספים בהמשך</div>
+      <div class="meta"><span>17:13</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text"><a href="#">https://mypac-my.sharepoint.com/:w:/g/personal/shay_tsaban_pac_org_il/...</a></div>
+      <div class="meta"><span>17:13</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#ffb703;">~ Priel Hakmon ✨💙</div>
+      <div class="msg-text">🙏👑 תודה רבה!</div>
+      <div class="meta"><span>17:13</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#b48cf2;">~ טליה כהן</div>
+      <div class="msg-text">מדהים
+תודה רבה</div>
+      <div class="meta"><span>17:14</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">חכו עוד לא קראתם</div>
+      <div class="meta"><span>17:14</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">באמת עשיתי את המקסימום, עכשיו רק נותר לקוות שזה יעזור</div>
+      <div class="meta"><span>17:14</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">וכמובן עוד עדכונים על תוכן מסייע בהמשך</div>
+      <div class="meta"><span>17:14</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">אבל זה קריטי</div>
+      <div class="meta"><span>17:15</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">מי שמבין את המסמך הזה לא צריך שום דבר אחר מהאתר (ומי שלא מבין ורוצה שאפשר משהו - אשתדל בהסבר מאד מעדכני)</div>
+      <div class="meta"><span>17:15</span><span class="ticks">✓✓</span></div>
+      <div class="reaction">👍🙏<span class="count">2</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">זה נהיה ארוך כי שמתי שם גם דוגמאות מהשיעורים, שלא תצטרכו לטייל בין מסמכים</div>
+      <div class="meta"><span>17:16</span><span class="ticks">✓✓</span></div>
+      <div class="reaction">❤️</div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">זה גם מסמך וורד פתוח לעריכה, אתם יכולים להוסיף לעצמכם עוד הסברים בתהליך ההכנה לבחינה ולגשת למבחן עם הגרסה של הקובץ שהיא הכי טובה ומועילה עבורכם</div>
+      <div class="meta"><span>17:16</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#ff6b81;">~ ד"ר</div>
+      <div class="msg-text">🏆 אלוף! תודה רבה.</div>
+      <div class="meta"><span>17:25</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#9d7bea;">Aseel Dent</div>
+      <div class="msg-text">👑 מלך</div>
+      <div class="meta"><span>17:26</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#4cc9f0;">~ שילי</div>
+      <div class="msg-text">🙏 תודה רבה</div>
+      <div class="meta"><span>17:26</span></div>
+    </div></div>
+
+    <!-- 17:32 -->
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">תודה רבה חבר'ה, לא מובן מאליו ההערכה הזו, מקווה שזה באמת יעזור</div>
+      <div class="meta"><span>17:32</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received sticker-bubble">
+      <div class="sender" style="color:#2ec4b6;">Aya Amer</div>
+      <div class="sticker-card">
+        <div class="sticker-crown">👑</div>
+        <div class="sticker-caption">אין כמוך!</div>
+      </div>
+      <div class="meta" style="justify-content:flex-start;margin-top:4px;"><span>17:32</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#f9a826;">Shahd Alayan</div>
+      <div class="msg-text">👑👑 תודה שי</div>
+      <div class="meta"><span>17:39</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#a78bfa;">~ Dr Jony</div>
+      <div class="msg-text">תודה רבה, באמת אין כמוך</div>
+      <div class="meta"><span>17:41</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#52d1a3;">~ Sharihan</div>
+      <div class="msg-text">אין כמוך
+❤️❤️ תודה שי</div>
+      <div class="meta"><span>17:42</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#ff8fab;">~ Enas 💕</div>
+      <div class="msg-text">🙏🙏 תודה רבה</div>
+      <div class="meta"><span>17:46</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#5390d9;">~ לירון וולף</div>
+      <div class="msg-text">🚀 אליפות</div>
+      <div class="meta"><span>17:48</span></div>
+    </div></div>
+
+    <!-- 21:43 -->
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">מבחן שלם לדוגמה, חדש, בסגנון של המבחן האמיתי</div>
+      <div class="meta"><span>21:43</span><span class="ticks">✓✓</span></div>
+      <div class="reaction">❤️</div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">כמובן ייתכנו שינויים לפה ולשם, אבל המסגרת תשמר</div>
+      <div class="meta"><span>21:43</span><span class="ticks">✓✓</span></div>
+      <div class="reaction">❤️</div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text"><a href="#">https://mypac-my.sharepoint.com/:w:/g/personal/shay_tsaban_pac_org_il/...</a></div>
+      <div class="meta"><span>21:43</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">המבחן כולל פתרון סופר מפורט בשפה שמתכתבת עם המיקוד</div>
+      <div class="meta"><span>21:44</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">מעלה גם לאתר</div>
+      <div class="meta"><span>21:44</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#ff9f1c;">~ נטלי פרז</div>
+      <div class="msg-text">🙏 תודה רבה שי</div>
+      <div class="meta"><span>21:44</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">וכמובן זה חלק מהחומר שאפשר לגשת איתו - המבחן בחומר פתוח</div>
+      <div class="meta"><span>21:44</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">ממש השתדלתי לעשות הגהות ולהמנע מטעויות הקלדה - אם משהו התחרבש, לא להסס לפנות ויתוקן במיידי</div>
+      <div class="meta"><span>21:44</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#ff8fab;">~ Enas 💕</div>
+      <div class="msg-text">🙏🙏 תודה רבה</div>
+      <div class="meta"><span>21:46</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">בשמחה
+לא קל כשיש מרצה חדש במוסד, ולכן למרות היעדר מאגרי תרגול אינסופיים - את מה שיש אני ממש משתדל לסדר</div>
+      <div class="meta"><span>21:46</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#ef476f;">~ ROSE R. MASRI</div>
+      <div class="msg-text">❤️ מרצה מס' 🥇 תודה רבה</div>
+      <div class="meta"><span>21:47</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">עכשיו אני אשב קצת על פתרונות מפורטים לכל תרגילי הבית, ואז לא יהיה ניתן לפנות אליי במשך יממה כי התעלפתי</div>
+      <div class="meta"><span>21:49</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">אלא אם כן יש כאן דוקטור שיכול לרשום סטימולנטים חוקיים</div>
+      <div class="meta"><span>21:49</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">ההודעה מסודרת דרך האתר כדי לא להפריע כשאסיים הכל.</div>
+      <div class="meta"><span>21:50</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#a78bfa;">~ Dr Jony</div>
+      <div class="msg-text">מרצה כל כך טוב שאם חס ושלום אני עונה משהו לא נכון במבחן - זה טעות שלי, לא יכול לשים שום דבר על הגב שלך</div>
+      <div class="meta"><span>21:51</span></div>
+      <div class="reaction">❤️</div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">בלתי אפשרי, המרצה תמיד אשם - זה כלל גדול בתורה
+אבל לפחות בפני בית דין של מעלה אצא זכאי, דוקטור</div>
+      <div class="meta"><span>21:51</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#a78bfa;">~ Dr Jony</div>
+      <div class="msg-text">אין עליך!</div>
+      <div class="meta"><span>21:52</span></div>
+      <div class="reaction">❤️</div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">אם מישהו התחיל ללמוד ויש לו קשיים בנושא ספציפי - נא לכתוב לי במהלך השבוע, כדי שאדע איפה לתת את הפוש בחיזוקים נוספים</div>
+      <div class="meta"><span>21:52</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#f3722c;">~ Ehab Gb</div>
+      <div class="msg-text">תודה רבה רבה מכל הלב דר צבאן</div>
+      <div class="meta"><span>21:52</span></div>
+      <div class="reaction">🙏❤️<span class="count">2</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">אבל כמובן גם לא לשכוח שזה 3 מארבע... אז אם רק נושא אחד קשה - החיים דבש</div>
+      <div class="meta"><span>21:54</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#ffb703;">~ Priel Hakmon ✨💙</div>
+      <div class="msg-text">👑 אין עלייך! זה כל כך לא מובן מאליו!
+🙏😳 הלוואי וכולם היו דואגים לנו כמוך!!</div>
+      <div class="meta"><span>22:09</span></div>
+      <div class="reaction">❤️</div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#43aa8b;">~ צח מקירי</div>
+      <div class="msg-text">מדויק!!
+תודה לך!!</div>
+      <div class="meta"><span>22:10</span></div>
+      <div class="reaction">🤍</div>
+    </div></div>
+
+    <div class="row sent"><div class="bubble sent">
+      <div class="msg-text">רק צריך לצלם מסך שלא תמחקו את ההודעות אחרי המבחן, סתאאאאם, יהיה בסדר נו. עברתם דברים יותר קשים בחיים מתמחיר בסיסי.</div>
+      <div class="meta"><span>22:12</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row sent"><div class="doc-bubble">
+      <div class="doc-title">הודעה זו נשלחה אליך מאת המרכז האקדמי שערי מדע ומשפט לכתובת: shay.tsaban@gmail.com</div>
+      <div>שם הקורס: חשבונאות ניהולית<br>השלמת חומרים באתר</div>
+      <br>
+      <div><b>כותרת ההודעה:</b><br>השלמת חומרים באתר</div>
+      <br>
+      <div><b>תוכן ההודעה:</b><br>
+      היי,<br><br>
+      באתר הקורס, בחומרי הלמידה, תמצאו כעת:<br>
+      1. את המיקוד המלא - לגביו עדכנתי בהודעה קודמת<br>
+      2. מבחן שלם לדוגמה הכי עדכני שיש, עם פתרונות סופר מפורטים מסודרים כולל תאוריה<br>
+      3. את כל תרגילי הבית מסודרים מרוכזים בפורמט WORD עם פתרון מלא מורחב מסודר לכולם<br><br>
+      מזכיר, המבחן בחומר פתוח. לא צריך לשנן - צריך לוודא שמבינים את התהליכים המבוצעים, ויהיה לכם בעזרת השם או הקארמה (כל אחד ואמונתו) בין טוב למצוין.<br><br>
+      שבוע טוב,</div>
+      <div class="doc-sign">ד"ר צבאן</div>
+      <div class="doc-meta"><span>22:12</span><span class="ticks">✓✓</span></div>
+    </div></div>
+
+    <div class="row received"><div class="bubble received">
+      <div class="sender" style="color:#ff9f1c;">~ נטלי פרז</div>
+      <div class="msg-text">דר שי צבאן! אין כמוך! למדנו ממך כ"כ הרבה מעבר לתמחיר הזמנה ומחלקות שירות!! למדנו מהו אדם, מהי אכפתיות אמיתית ומהי ענווה כנה!
+💪 אתה גאון מהלך ומבחינתי כבר פרופסור, ממני דר פרז 🤣</div>
+      <div class="meta"><span>22:16</span></div>
+    </div></div>
+
+  </div>
+
+  <div class="input-bar">
+    <span class="plus-icon">＋</span>
+    <div class="input-pill"><span>הודעה</span><span>😊</span></div>
+    <span class="cam-icon">📷</span>
+    <span class="mic-icon">🎙️</span>
+  </div>
+
+</div>
+<div class="footer-note">קיר הפירגונים של קורס חשבונאות ניהולית — כי דברים כאלה שוכחים למסך מסך 💚</div>
+</div>
+
+</body>
+</html>
