@@ -55,6 +55,9 @@ input{font-family:'Heebo',sans-serif}
 .howto h4{font-size:17px;color:var(--rose-dark);margin-bottom:8px}
 .howto ul{padding-right:22px}
 .howto li{margin:5px 0;font-size:16px;color:var(--ink-soft)}
+/* ---------- katex RTL-page fix: force every rendered formula to lay out LTR ---------- */
+.katex{direction:ltr;unicode-bidi:isolate;text-align:left}
+.katex-display{direction:ltr;unicode-bidi:isolate;text-align:left;margin:0}
 /* ---------- formula section ---------- */
 .formula-section{max-width:980px;margin:26px auto 0;background:#fff;border:3px solid var(--line);border-radius:28px;padding:clamp(20px,3.4vw,34px);box-shadow:var(--shadow-lg)}
 .formula-head{text-align:center;margin-bottom:20px}
@@ -64,7 +67,9 @@ input{font-family:'Heebo',sans-serif}
 .legend-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:20px 0}
 @media(max-width:900px){.legend-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:560px){.legend-grid{grid-template-columns:repeat(2,1fr)}}
-.legend-card{border-radius:16px;padding:14px 8px;text-align:center;border:2px solid var(--line)}
+.legend-card{border-radius:16px;padding:14px 8px;text-align:center;border:2px solid var(--line);cursor:pointer;transition:.15s}
+.legend-card:hover,.legend-card:focus-visible{transform:translateY(-3px);box-shadow:var(--shadow)}
+.legend-card .ltap{font-size:10px;color:var(--muted);margin-top:5px;font-weight:700}
 .legend-card .lsym{font-size:22px;font-weight:900;direction:ltr}
 .legend-card .lname{font-size:12.5px;font-weight:700;margin-top:5px}
 .legend-card .ldesc{font-size:11px;color:var(--muted);margin-top:3px;direction:ltr}
@@ -220,12 +225,12 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
     <p class="formula-sub">שישה סימונים, שלוש נוסחאות. ברגע שהם שלכם, כל תרגיל בעמוד הזה הוא בעצם רק הצבה נכונה של מספרים.</p>
   </div>
   <div class="legend-grid">
-    <div class="legend-card fixed"><div class="lsym">FC</div><div class="lname">עלות קבועה</div><div class="ldesc">Fixed Cost</div></div>
-    <div class="legend-card variable"><div class="lsym">v</div><div class="lname">עלות משתנה ליחידה</div><div class="ldesc">variable cost / unit</div></div>
-    <div class="legend-card qty"><div class="lsym">Q</div><div class="lname">כמות</div><div class="ldesc">Quantity</div></div>
-    <div class="legend-card variable"><div class="lsym">VC</div><div class="lname">סך העלות המשתנה</div><div class="ldesc">Variable Cost</div></div>
-    <div class="legend-card total"><div class="lsym">TC</div><div class="lname">עלות כוללת</div><div class="ldesc">Total Cost</div></div>
-    <div class="legend-card avg"><div class="lsym">ATC</div><div class="lname">עלות ממוצעת ליחידה</div><div class="ldesc">Average Total Cost</div></div>
+    <div class="legend-card fixed" onclick="libiExplain('FC')" role="button" tabindex="0"><div class="lsym">FC</div><div class="lname">עלות קבועה</div><div class="ldesc">Fixed Cost</div><div class="ltap">👆 לחצו להסבר מליבי</div></div>
+    <div class="legend-card variable" onclick="libiExplain('v')" role="button" tabindex="0"><div class="lsym">v</div><div class="lname">עלות משתנה ליחידה</div><div class="ldesc">variable cost / unit</div><div class="ltap">👆 לחצו להסבר מליבי</div></div>
+    <div class="legend-card qty" onclick="libiExplain('Q')" role="button" tabindex="0"><div class="lsym">Q</div><div class="lname">כמות</div><div class="ldesc">Quantity</div><div class="ltap">👆 לחצו להסבר מליבי</div></div>
+    <div class="legend-card variable" onclick="libiExplain('VC')" role="button" tabindex="0"><div class="lsym">VC</div><div class="lname">סך העלות המשתנה</div><div class="ldesc">Variable Cost</div><div class="ltap">👆 לחצו להסבר מליבי</div></div>
+    <div class="legend-card total" onclick="libiExplain('TC')" role="button" tabindex="0"><div class="lsym">TC</div><div class="lname">עלות כוללת</div><div class="ldesc">Total Cost</div><div class="ltap">👆 לחצו להסבר מליבי</div></div>
+    <div class="legend-card avg" onclick="libiExplain('ATC')" role="button" tabindex="0"><div class="lsym">ATC</div><div class="lname">עלות ממוצעת ליחידה</div><div class="ldesc">Average Total Cost</div><div class="ltap">👆 לחצו להסבר מליבי</div></div>
   </div>
   <div class="formula-cards">
     <div class="formula-card variable">
@@ -281,14 +286,14 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
   <!-- ============ SECTION B ============ -->
   <div class="sec-block reveal">
     <div class="sec-title">מדור ב׳ · <span class="g">יישום הנוסחאות: VC, TC, ATC</span><span class="sec-count">6 תרגילים</span></div>
-    <p class="sec-sub">בכל תרגיל תקבלו FC, v ו-Q, ותתבקשו לחשב לפי הסדר: <b>VC = v×Q</b>, <b>TC = FC+VC</b>, ו-<b>ATC = FC/Q + v</b>. תרגילים 5-6 הופכים את הכיוון: נותנים לכם חלק מהתוצאה, ומבקשים למצוא נעלם.</p>
+    <p class="sec-sub">בכל תרגיל תקבלו FC, v ו-Q, ותתבקשו לחשב לפי הסדר: $VC = v \times Q, \quad TC = FC+VC, \quad ATC = \dfrac{FC}{Q} + v$. תרגילים 5-6 הופכים את הכיוון: נותנים לכם חלק מהתוצאה, ומבקשים למצוא נעלם.</p>
     <div class="ex-grid" id="secB"></div>
   </div>
 
   <!-- ============ SECTION C ============ -->
   <div class="sec-block reveal">
     <div class="sec-title">מדור ג׳ · <span class="g">פירוק עלות מעורבת: שיטת גבוה-נמוך</span><span class="sec-count">4 תרגילים</span></div>
-    <p class="sec-sub">בכל תרגיל, שתי נקודות נתונים: כמות ועלות בחודש הגבוה ביותר, וכמות ועלות בחודש הנמוך ביותר. מצאו את v (העלות המשתנה ליחידה), ואז את FC (העלות הקבועה), לפי הנוסחה TC = FC + v×Q.</p>
+    <p class="sec-sub">בכל תרגיל, שתי נקודות נתונים: כמות ועלות בחודש הגבוה ביותר, וכמות ועלות בחודש הנמוך ביותר. מצאו את v (העלות המשתנה ליחידה), ואז את FC (העלות הקבועה), לפי הנוסחה $TC = FC + v \times Q$.</p>
     <div class="ex-grid" id="secC"></div>
   </div>
 
@@ -308,15 +313,18 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
 </footer>
 
 <script>
+var MATH_DELIMS=[
+  {left:"$$", right:"$$", display:true},
+  {left:"$", right:"$", display:false}
+];
 function renderMathInDocument(){
   if(window.renderMathInElement){
-    var el=document.getElementById('formulaSection');
-    if(el) renderMathInElement(el, {
-      delimiters:[
-        {left:"$$", right:"$$", display:true},
-        {left:"$", right:"$", display:false}
-      ]
-    });
+    renderMathInElement(document.body, {delimiters:MATH_DELIMS, throwOnError:false});
+  }
+}
+function renderMathIn(el){
+  if(window.renderMathInElement && el){
+    renderMathInElement(el, {delimiters:MATH_DELIMS, throwOnError:false});
   }
 }
 </script>
@@ -358,12 +366,27 @@ function renderMathInDocument(){
     for(var i=0;i<=t;i++) html+='<div class="htier"><b>רמז '+(i+1)+':</b> '+hints[i]+'</div>';
     var box=document.getElementById('hint-'+id);
     box.innerHTML=html; box.classList.add('show');
+    renderMathIn(box);
     var btn=document.getElementById('hbtn-'+id);
     if(t>=hints.length-1) btn.textContent='💡 זה כל הרמזים, נסו את הפתרון המלא';
     else btn.textContent='💡 רמז נוסף מליבי';
-    setTip(hints[t]);
+    setTip(hints[t].replace(/<br\s*\/?>/gi,' ').replace(/\$/g,''));
   };
   window.toggleSol=function(id){ document.getElementById('sol-'+id).classList.toggle('open'); };
+
+  /* ================= LEGEND CARD EXPLANATIONS ================= */
+  var SYMBOL_EXPLAIN={
+    FC:'FC היא העלות הקבועה: הסכום שהעסק משלם בכל מקרה, בכל חודש, גם ב-Q=0 (אפס פעילות). שכר דירה, ביטוח, וחוזה אחזקה הם דוגמאות טיפוסיות. שימו לב: "קבועה" זה רק בתוך טווח פעילות סביר, לא לנצח.',
+    v:'v היא העלות המשתנה ליחידה אחת בודדת: כמה עולה בדיוק פריט אחד נוסף (מנה אחת, בדיקה אחת, ק״מ אחד). זה המספר שמכפילים ב-Q כדי לקבל VC.',
+    Q:'Q היא כמות הפעילות: מספר המנות, הטיפולים, הבדיקות או הביקורים בתקופה הנתונה. זה המשתנה שקובע כמה מתוך העלות הכוללת הוא בעצם משתנה.',
+    VC:'VC היא סך העלות המשתנה: לא ליחידה בודדת, אלא הסכום הכולל של הרכיב המשתנה. מחשבים אותה ככה: VC = v × Q. אם Q=0, גם VC=0.',
+    TC:'TC היא העלות הכוללת: הסכום שבאמת יוצא מהקופה בסוף החודש. TC = FC + VC = FC + v×Q. זו הנוסחה שכל שאר הנוסחאות בעמוד הזה בנויות סביבה.',
+    ATC:'ATC היא העלות הממוצעת ליחידה: TC מחולק ל-Q. הנוסחה ATC = FC/Q + v מראה שככל ש-Q גדל, FC/Q מתכווץ, ו-ATC יורד ומתקרב ל-v בלי להגיע אליו לעולם.'
+  };
+  window.libiExplain=function(sym){ if(SYMBOL_EXPLAIN[sym]) setTip(SYMBOL_EXPLAIN[sym]); };
+  document.querySelectorAll('.legend-card').forEach(function(c){
+    c.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); c.click(); } });
+  });
 
   /* ================= GENERIC RENDERERS ================= */
   function diffTag(d){ return '<span class="diff '+(d==='קל'?'easy':d==='בינוני'?'med':'hard')+'">'+d+'</span>'; }
@@ -446,7 +469,7 @@ function renderMathInDocument(){
     {id:'a4', n:4, difficulty:'בינוני', title:'חשבון הטלפון של המרפאה', correct:'mixed',
       text:'חבילת טלפון של המרפאה כוללת דמי מנוי חודשיים קבועים של 150 ש״ח, ותוספת של 0.3 ש״ח לכל דקת שיחה שחורגת מהחבילה.',
       hints:['בדקו אם יש כאן שני רכיבים: משהו שמופיע תמיד, ומשהו שתלוי בשימוש בפועל.', 'יש דמי מנוי קבועים (150 ש״ח, תמיד), ויש תוספת לפי דקות בפועל (משתנה). שני הרכיבים ביחד יוצרים סוג עלות שלישי.'],
-      solution:'זו <b>עלות מעורבת</b>. יש בה רכיב קבוע (150 ש״ח דמי מנוי) ורכיב משתנה (0.3 ש״ח לדקה נוספת). TC = 150 + 0.3 × דקות חריגה.'},
+      solution:'זו <b>עלות מעורבת</b>. יש בה רכיב קבוע (150 ש״ח דמי מנוי) ורכיב משתנה (0.3 ש״ח לדקה נוספת), כלומר $TC = 150 + 0.3\\times Q$, כאשר Q הוא מספר דקות החריגה.'},
     {id:'a5', n:5, difficulty:'בינוני', title:'עמלת סליקת אשראי', correct:'variable',
       text:'חברת הסליקה גובה מהמרפאה 1.8% מכל תשלום שמתקבל מהמטופלים בכרטיס אשראי.',
       hints:['זו עמלה שנקבעת כאחוז. שאלו: אם לא יתקבל אף תשלום החודש, האם תהיה עמלה?', 'אחוז ממשהו שלא קרה הוא תמיד אפס. העמלה גדלה ביחס ישר לסך התשלומים שהתקבלו.'],
@@ -465,39 +488,39 @@ function renderMathInDocument(){
       subs:[{id:'b1-vc', label:'VC = v × Q (₪)', expected:1000, tol:1, unit:'₪'},
             {id:'b1-tc', label:'TC = FC + VC (₪)', expected:7000, tol:1, unit:'₪'},
             {id:'b1-atc', label:'ATC = TC ÷ Q (₪ ליחידה)', expected:28, tol:0.1, unit:'₪'}],
-      hints:['VC = v×Q = 4×250. TC = FC+VC. ATC = TC÷Q.', 'VC=1,000. TC=6,000+1,000=7,000. ATC=7,000÷250=28.'],
-      solution:'VC = v×Q = 4×250 = <b>1,000 ש״ח</b>.<br>TC = FC+VC = 6,000+1,000 = <b>7,000 ש״ח</b>.<br>ATC = TC÷Q = 7,000÷250 = <b>28 ש״ח לטיפול</b>.'},
+      hints:['חשבו לפי הסדר: $VC = v \\times Q = 4 \\times 250, \\quad TC = FC + VC, \\quad ATC = TC \\div Q$.', '$VC = 1{,}000, \\quad TC = 6{,}000+1{,}000 = 7{,}000, \\quad ATC = 7{,}000 \\div 250 = 28$.'],
+      solution:'$VC = v \\times Q = 4 \\times 250 = 1{,}000$ ש״ח.<br>$TC = FC+VC = 6{,}000+1{,}000 = 7{,}000$ ש״ח.<br>$ATC = TC \\div Q = 7{,}000 \\div 250 = 28$ ש״ח לטיפול.'},
     {id:'b2', n:2, difficulty:'קל', title:'מעבדת בדיקות',
       text:'FC = 10,000 ש״ח. v = 12 ש״ח לבדיקה. Q = 180 בדיקות. חשבו VC, TC ו-ATC (עגלו ATC לשתי ספרות עשרוניות).',
       subs:[{id:'b2-vc', label:'VC (₪)', expected:2160, tol:1, unit:'₪'},
             {id:'b2-tc', label:'TC (₪)', expected:12160, tol:1, unit:'₪'},
             {id:'b2-atc', label:'ATC (₪ ליחידה)', expected:67.56, tol:0.1, unit:'₪'}],
-      hints:['אותן שלוש נוסחאות בדיוק: VC=v×Q, TC=FC+VC, ATC=TC÷Q.', 'VC=12×180=2,160. TC=10,000+2,160=12,160. ATC=12,160÷180≈67.56.'],
-      solution:'VC = 12×180 = <b>2,160 ש״ח</b>.<br>TC = 10,000+2,160 = <b>12,160 ש״ח</b>.<br>ATC = 12,160÷180 ≈ <b>67.56 ש״ח לבדיקה</b>.'},
+      hints:['אותן שלוש נוסחאות בדיוק: $VC=v\\times Q, \\quad TC=FC+VC, \\quad ATC=TC\\div Q$.', '$VC=12\\times180=2{,}160, \\quad TC=10{,}000+2{,}160=12{,}160, \\quad ATC=12{,}160\\div180\\approx67.56$.'],
+      solution:'$VC = 12 \\times 180 = 2{,}160$ ש״ח.<br>$TC = 10{,}000+2{,}160 = 12{,}160$ ש״ח.<br>$ATC = 12{,}160 \\div 180 \\approx 67.56$ ש״ח לבדיקה.'},
     {id:'b3', n:3, difficulty:'בינוני', title:'שירות הובלות רפואיות',
       text:'FC = 3,500 ש״ח. v = 2.5 ש״ח למשלוח. Q = 640 משלוחים. חשבו VC, TC ו-ATC (עגלו ATC לשתי ספרות עשרוניות).',
       subs:[{id:'b3-vc', label:'VC (₪)', expected:1600, tol:1, unit:'₪'},
             {id:'b3-tc', label:'TC (₪)', expected:5100, tol:1, unit:'₪'},
             {id:'b3-atc', label:'ATC (₪ ליחידה)', expected:7.97, tol:0.05, unit:'₪'}],
-      hints:['שימו לב ש-v כאן הוא מספר עם נקודה עשרונית, אל תעגלו אותו לפני החישוב.', 'VC=2.5×640=1,600. TC=3,500+1,600=5,100. ATC=5,100÷640≈7.97.'],
-      solution:'VC = 2.5×640 = <b>1,600 ש״ח</b>.<br>TC = 3,500+1,600 = <b>5,100 ש״ח</b>.<br>ATC = 5,100÷640 ≈ <b>7.97 ש״ח למשלוח</b>.'},
+      hints:['שימו לב ש-v כאן הוא מספר עם נקודה עשרונית, אל תעגלו אותו לפני החישוב.', '$VC=2.5\\times640=1{,}600, \\quad TC=3{,}500+1{,}600=5{,}100, \\quad ATC=5{,}100\\div640\\approx7.97$.'],
+      solution:'$VC = 2.5 \\times 640 = 1{,}600$ ש״ח.<br>$TC = 3{,}500+1{,}600 = 5{,}100$ ש״ח.<br>$ATC = 5{,}100 \\div 640 \\approx 7.97$ ש״ח למשלוח.'},
     {id:'b4', n:4, difficulty:'בינוני', title:'יחידת הדמיה ניידת',
       text:'FC = 8,200 ש״ח. v = 7.8 ש״ח לבדיקת דימות. Q = 95 בדיקות. חשבו VC, TC ו-ATC (עגלו ATC לשתי ספרות עשרוניות).',
       subs:[{id:'b4-vc', label:'VC (₪)', expected:741, tol:1, unit:'₪'},
             {id:'b4-tc', label:'TC (₪)', expected:8941, tol:1, unit:'₪'},
             {id:'b4-atc', label:'ATC (₪ ליחידה)', expected:94.12, tol:0.1, unit:'₪'}],
-      hints:['חשבו קודם רק VC = v×Q = 7.8×95.', 'VC=741. TC=8,200+741=8,941. ATC=8,941÷95≈94.12.'],
-      solution:'VC = 7.8×95 = <b>741 ש״ח</b>.<br>TC = 8,200+741 = <b>8,941 ש״ח</b>.<br>ATC = 8,941÷95 ≈ <b>94.12 ש״ח לבדיקה</b>.'},
+      hints:['חשבו קודם רק $VC = v\\times Q = 7.8\\times95$.', '$VC=741, \\quad TC=8{,}200+741=8{,}941, \\quad ATC=8{,}941\\div95\\approx94.12$.'],
+      solution:'$VC = 7.8 \\times 95 = 741$ ש״ח.<br>$TC = 8{,}200+741 = 8{,}941$ ש״ח.<br>$ATC = 8{,}941 \\div 95 \\approx 94.12$ ש״ח לבדיקה.'},
     {id:'b5', n:5, difficulty:'מאתגר', title:'מהופך: מצאו את v',
       text:'ידוע ש-TC = 15,000 ש״ח, FC = 9,000 ש״ח, ו-Q = 500 יחידות. מהי v (העלות המשתנה ליחידה)?',
       subs:[{id:'b5-1', label:'v — עלות משתנה ליחידה (₪)', expected:12, tol:0.05, unit:'₪'}],
-      hints:['הפכו את הנוסחה: אם TC = FC + v×Q, אז v = (TC − FC) ÷ Q.', 'v = (15,000 − 9,000) ÷ 500 = 6,000 ÷ 500.'],
-      solution:'v = (TC − FC) ÷ Q = (15,000 − 9,000) ÷ 500 = 6,000 ÷ 500 = <b>12 ש״ח ליחידה</b>.'},
+      hints:['הפכו את הנוסחה: $TC = FC + v\\times Q \\Rightarrow v = (TC-FC)\\div Q$.', '$v = (15{,}000-9{,}000)\\div500 = 6{,}000\\div500$.'],
+      solution:'$v = (TC-FC)\\div Q = (15{,}000-9{,}000)\\div500 = 6{,}000\\div500 = 12$ ש״ח ליחידה.'},
     {id:'b6', n:6, difficulty:'מאתגר', title:'מהופך: מצאו את Q המינימלי לפי ATC',
       text:'מרפאה עם FC = 4,000 ש״ח ו-v = 5 ש״ח ליחידה רוצה שה-ATC ירד מתחת ל-9 ש״ח ליחידה. באמצעות הנוסחה ATC = FC/Q + v, מצאו את כמות היחידות המינימלית הנדרשת (Q שלם, עגלו כלפי מעלה).',
       subs:[{id:'b6-1', label:'Q מינימלי (יחידות)', expected:1001, tol:1, unit:'יחידות'}],
-      hints:['הציבו בנוסחה: 4,000/Q + 5 < 9. בודדו את Q בצד אחד.', '4,000/Q<4 ⇐ Q>4,000/4=1,000. כלומר צריך לפחות 1,001 יחידות כדי ש-ATC יהיה נמוך ממש מ-9 (ב-Q=1,000 בדיוק, ATC=9).'],
-      solution:'ATC = FC/Q + v < 9 ⇐ 4,000/Q + 5 < 9 ⇐ 4,000/Q < 4 ⇐ Q > 4,000/4 = 1,000.<br>ב-Q=1,000 בדיוק, ATC = 4,000/1,000+5 = 4+5 = 9 (לא פחות מ-9). לכן דרושות לפחות <b>1,001 יחידות</b> כדי ש-ATC ירד ממש מתחת ל-9 ש״ח. ככל ש-Q גדל עוד, ATC ימשיך לרדת ולהתקרב ל-v=5, אך לעולם לא יגיע אליו.'}
+      hints:['הציבו בנוסחה: $\\dfrac{4{,}000}{Q}+5<9$. בודדו את Q בצד אחד.', '$\\dfrac{4{,}000}{Q}<4 \\Rightarrow Q>\\dfrac{4{,}000}{4}=1{,}000$. כלומר צריך לפחות 1,001 יחידות כדי ש-ATC יהיה נמוך ממש מ-9 (ב-Q=1,000 בדיוק, ATC=9).'],
+      solution:'$ATC = \\dfrac{FC}{Q}+v<9 \\Rightarrow \\dfrac{4{,}000}{Q}+5<9 \\Rightarrow \\dfrac{4{,}000}{Q}<4 \\Rightarrow Q>\\dfrac{4{,}000}{4}=1{,}000$.<br>ב-Q=1,000 בדיוק, $ATC = \\dfrac{4{,}000}{1{,}000}+5 = 4+5 = 9$ (לא פחות מ-9). לכן דרושות לפחות <b>1,001 יחידות</b> כדי ש-ATC ירד ממש מתחת ל-9 ש״ח. ככל ש-Q גדל עוד, ATC ימשיך לרדת ולהתקרב ל-v=5, אך לעולם לא יגיע אליו.'}
   ];
   document.getElementById('secB').innerHTML = B.map(renderNumeric).join('');
 
@@ -507,26 +530,26 @@ function renderMathInDocument(){
       text:'חודש שיא: 900 כוסות קפה, עלות כוללת 6,200 ש״ח. חודש שפל: 300 כוסות, עלות כוללת 3,800 ש״ח. מצאו את v (העלות המשתנה לכוס), ואת FC (העלות הקבועה החודשית).',
       subs:[{id:'c1-v', label:'v — עלות משתנה לכוס (₪)', expected:4, tol:0.05, unit:'₪'},
             {id:'c1-f', label:'FC — עלות קבועה (₪)', expected:2600, tol:1, unit:'₪'}],
-      hints:['שלב 1: v = (עלות בשיא − עלות בשפל) ÷ (כמות בשיא − כמות בשפל) = (6,200−3,800) ÷ (900−300).', 'v = 2,400 ÷ 600 = 4. עכשיו הציבו בחודש השפל בנוסחה TC=FC+v×Q: FC = 3,800 − (4 × 300).'],
-      solution:'v = (6,200−3,800) ÷ (900−300) = 2,400 ÷ 600 = <b>4 ש״ח לכוס</b>.<br>FC = 3,800 − (4 × 300) = 3,800 − 1,200 = <b>2,600 ש״ח</b>.'},
+      hints:['שלב 1: $v = \\dfrac{6{,}200-3{,}800}{900-300}$ (הפרש עלות חלקי הפרש כמות).', '$v = \\dfrac{2{,}400}{600} = 4$.<br>עכשיו הציבו בחודש השפל: $TC=FC+v\\times Q \\Rightarrow FC = 3{,}800-4\\times300$.'],
+      solution:'$v = \\dfrac{6{,}200-3{,}800}{900-300} = \\dfrac{2{,}400}{600} = 4$ ש״ח לכוס.<br>$FC = 3{,}800-4\\times300 = 3{,}800-1{,}200 = 2{,}600$ ש״ח.'},
     {id:'c2', n:2, difficulty:'בינוני', title:'מעבדת בדיקות של הקופה',
       text:'חודש שיא: 1,000 בדיקות, עלות כוללת 14,000 ש״ח. חודש שפל: 400 בדיקות, עלות כוללת 9,200 ש״ח. מצאו את v ואת FC.',
       subs:[{id:'c2-v', label:'v — עלות משתנה לבדיקה (₪)', expected:8, tol:0.05, unit:'₪'},
             {id:'c2-f', label:'FC — עלות קבועה (₪)', expected:6000, tol:1, unit:'₪'}],
-      hints:['v = הפרש עלות ÷ הפרש כמות = (14,000−9,200) ÷ (1,000−400).', 'v = 4,800 ÷ 600 = 8. הציבו בחודש השפל (400 בדיקות): FC = 9,200 − (8 × 400).'],
-      solution:'v = (14,000−9,200) ÷ (1,000−400) = 4,800 ÷ 600 = <b>8 ש״ח לבדיקה</b>.<br>FC = 9,200 − (8 × 400) = 9,200 − 3,200 = <b>6,000 ש״ח</b>.'},
+      hints:['$v = \\dfrac{14{,}000-9{,}200}{1{,}000-400}$ (הפרש עלות חלקי הפרש כמות).', '$v = \\dfrac{4{,}800}{600} = 8$.<br>הציבו בחודש השפל (400 בדיקות): $FC = 9{,}200-8\\times400$.'],
+      solution:'$v = \\dfrac{14{,}000-9{,}200}{1{,}000-400} = \\dfrac{4{,}800}{600} = 8$ ש״ח לבדיקה.<br>$FC = 9{,}200-8\\times400 = 9{,}200-3{,}200 = 6{,}000$ ש״ח.'},
     {id:'c3', n:3, difficulty:'מאתגר', title:'משלוחי אשפוז ביתי',
       text:'חודש שיא: 600 משלוחי ציוד וטיפול, עלות כוללת 9,000 ש״ח. חודש שפל: 200 משלוחים, עלות כוללת 5,000 ש״ח. מצאו את v ואת FC.',
       subs:[{id:'c3-v', label:'v — עלות משתנה למשלוח (₪)', expected:10, tol:0.05, unit:'₪'},
             {id:'c3-f', label:'FC — עלות קבועה (₪)', expected:3000, tol:1, unit:'₪'}],
-      hints:['הפרש עלות: 9,000−5,000. הפרש כמות: 600−200. v = הפרש עלות ÷ הפרש כמות.', 'v = 4,000 ÷ 400 = 10. הציבו בחודש השפל: FC = 5,000 − (10 × 200).'],
-      solution:'v = (9,000−5,000) ÷ (600−200) = 4,000 ÷ 400 = <b>10 ש״ח למשלוח</b>.<br>FC = 5,000 − (10 × 200) = 5,000 − 2,000 = <b>3,000 ש״ח</b>.'},
+      hints:['v הוא הפרש עלות חלקי הפרש כמות: $v = \\dfrac{9{,}000-5{,}000}{600-200}$.', '$v = \\dfrac{4{,}000}{400} = 10$.<br>הציבו בחודש השפל: $FC = 5{,}000-10\\times200$.'],
+      solution:'$v = \\dfrac{9{,}000-5{,}000}{600-200} = \\dfrac{4{,}000}{400} = 10$ ש״ח למשלוח.<br>$FC = 5{,}000-10\\times200 = 5{,}000-2{,}000 = 3{,}000$ ש״ח.'},
     {id:'c4', n:4, difficulty:'מאתגר', title:'שעות נוספות לאחיות',
       text:'חודש שיא: 320 שעות נוספות, עלות כוללת 6,400 ש״ח. חודש שפל: 120 שעות נוספות, עלות כוללת 3,000 ש״ח. מצאו את v ואת FC.',
       subs:[{id:'c4-v', label:'v — עלות משתנה לשעה (₪)', expected:17, tol:0.05, unit:'₪'},
             {id:'c4-f', label:'FC — עלות קבועה (₪)', expected:960, tol:1, unit:'₪'}],
-      hints:['הפרש עלות: 6,400−3,000. הפרש שעות: 320−120.', 'v = 3,400 ÷ 200 = 17. הציבו בחודש השפל: FC = 3,000 − (17 × 120).'],
-      solution:'v = (6,400−3,000) ÷ (320−120) = 3,400 ÷ 200 = <b>17 ש״ח לשעה</b>.<br>FC = 3,000 − (17 × 120) = 3,000 − 2,040 = <b>960 ש״ח</b>. (זה "רכיב הבסיס" של מוקד תורנות, למשל.)'}
+      hints:['v הוא הפרש עלות חלקי הפרש שעות: $v = \\dfrac{6{,}400-3{,}000}{320-120}$.', '$v = \\dfrac{3{,}400}{200} = 17$.<br>הציבו בחודש השפל: $FC = 3{,}000-17\\times120$.'],
+      solution:'$v = \\dfrac{6{,}400-3{,}000}{320-120} = \\dfrac{3{,}400}{200} = 17$ ש״ח לשעה.<br>$FC = 3{,}000-17\\times120 = 3{,}000-2{,}040 = 960$ ש״ח. (זה "רכיב הבסיס" של מוקד תורנות, למשל.)'}
   ];
   document.getElementById('secC').innerHTML = C.map(renderNumeric).join('');
 
@@ -538,32 +561,32 @@ function renderMathInDocument(){
             {id:'d1-b', label:'(ב) TC צפוי ב-300 ביקורים (₪)', expected:25500, tol:1, unit:'₪'},
             {id:'d1-c', label:'(ג) ATC ב-220 ביקורים (₪)', expected:99.5, tol:0.3, unit:'₪'},
             {id:'d1-d2', label:'(ג) ATC ב-300 ביקורים (₪)', expected:85, tol:0.3, unit:'₪'}],
-      hints:['לסעיפים א-ב: TC = FC + v×Q = 12,000 + 45×כמות. לסעיף ג: ATC = TC ÷ Q.', '(א) 12,000+45×220=21,900. (ב) 12,000+45×300=25,500. (ג) 21,900÷220≈99.5 ו-25,500÷300=85. לסעיף ד: השוו בין שני המספרים האלה.'],
-      solution:'(א) TC = 12,000 + 45×220 = 12,000+9,900 = <b>21,900 ש״ח</b>.<br>(ב) TC = 12,000 + 45×300 = 12,000+13,500 = <b>25,500 ש״ח</b>.<br>(ג) ATC = TC÷Q: 21,900÷220 ≈ <b>99.5 ש״ח</b> לביקור; 25,500÷300 = <b>85 ש״ח</b> לביקור.<br>(ד) ה-ATC <b>יורד</b> עם הגידול בביקורים, כי אותה FC (12,000) מתחלקת על יותר ויותר ביקורים.'},
+      hints:['לסעיפים א-ב: $TC = FC + v\\times Q = 12{,}000 + 45\\times Q$.<br>לסעיף ג: $ATC = TC \\div Q$.', '(א) $12{,}000+45\\times220=21{,}900$.<br>(ב) $12{,}000+45\\times300=25{,}500$.<br>(ג) $\\dfrac{21{,}900}{220}\\approx99.5, \\quad \\dfrac{25{,}500}{300}=85$.<br>לסעיף ד: השוו בין שני המספרים האלה.'],
+      solution:'(א) $TC = 12{,}000+45\\times220 = 12{,}000+9{,}900 = 21{,}900$ ש״ח.<br>(ב) $TC = 12{,}000+45\\times300 = 12{,}000+13{,}500 = 25{,}500$ ש״ח.<br>(ג) $ATC=TC\\div Q$:<br>$\\dfrac{21{,}900}{220}\\approx99.5$ ש״ח לביקור.<br>$\\dfrac{25{,}500}{300}=85$ ש״ח לביקור.<br>(ד) ה-ATC <b>יורד</b> עם הגידול בביקורים, כי אותה FC (12,000) מתחלקת על יותר ויותר ביקורים.'},
     {id:'d2', n:2, difficulty:'בינוני', title:'חשמל בקליניקה קהילתית',
       text:'חשבון החשמל של קליניקה הוא עלות מעורבת: 800 ש״ח דמי קו קבועים, ועוד 3.2 ש״ח לכל ביקור מטופל (צריכת חשמל בפועל). (א) חשבו את עלות החשמל בחודש עם 550 ביקורים. (ב) הקליניקה רוצה שהעלות הממוצעת לביקור תרד מתחת ל-6 ש״ח. מהי כמות הביקורים המינימלית הנדרשת לכך (עגלו כלפי מעלה למספר שלם)?',
       subs:[{id:'d2-a', label:'(א) עלות חשמל ב-550 ביקורים (₪)', expected:2560, tol:1, unit:'₪'},
             {id:'d2-b', label:'(ב) כמות ביקורים מינימלית', expected:286, tol:1, unit:'ביקורים'}],
-      hints:['(א) TC = 800 + 3.2×550. (ב) רוצים ש-(800+3.2Q)/Q < 6. סדרו את אי-השוויון כך שכל האיברים עם Q יהיו בצד אחד.', '(ב) 800+3.2Q<6Q ⇐ 800<2.8Q ⇐ Q>800/2.8≈285.7, ולכן צריך לפחות 286 ביקורים.'],
-      solution:'(א) TC = 800 + 3.2×550 = 800+1,760 = <b>2,560 ש״ח</b>.<br>(ב) דורשים (800+3.2Q)/Q < 6, כלומר 800+3.2Q<6Q, כלומר 800<2.8Q, כלומר Q>285.7. מעגלים כלפי מעלה: נדרשים לפחות <b>286 ביקורים</b> בחודש.'},
+      hints:['(א) $TC = 800 + 3.2\\times550$.<br>(ב) רוצים ש-$\\dfrac{800+3.2Q}{Q}<6$. סדרו את אי-השוויון כך שכל האיברים עם Q יהיו בצד אחד.', '(ב) $800+3.2Q<6Q \\Rightarrow 800<2.8Q \\Rightarrow Q>\\dfrac{800}{2.8}\\approx285.7$, ולכן צריך לפחות 286 ביקורים.'],
+      solution:'(א) $TC = 800+3.2\\times550 = 800+1{,}760 = 2{,}560$ ש״ח.<br>(ב) דורשים $\\dfrac{800+3.2Q}{Q}<6 \\Rightarrow 800+3.2Q<6Q \\Rightarrow 800<2.8Q \\Rightarrow Q>285.7$. מעגלים כלפי מעלה: נדרשים לפחות <b>286 ביקורים</b> בחודש.'},
     {id:'d3', n:3, difficulty:'מאתגר', title:'צוות פיזיותרפיה במרפאת שיקום',
       text:'מרפאת שיקום מעסיקה 3 מטפלים בשכר קבוע כולל של 27,000 ש״ח, שיכולים לטפל יחד בעד 900 טיפולים בחודש. עלות חומרים משתנה: 15 ש״ח לטיפול. (א) מהי העלות הכוללת אם בוצעו 700 טיפולים? (ב) אם הביקוש יגדל ל-950 טיפולים, מה יקרה לעלות הקבועה, ולמה?',
       subs:[{id:'d3-a', label:'(א) TC ב-700 טיפולים (₪)', expected:37500, tol:1, unit:'₪'},
             {id:'d3-b', label:'(ב) 1=כן צריך לגדול, 0=לא', expected:1, tol:0, unit:'0/1'}],
-      hints:['(א) TC=27,000+15×700. (ב) שימו לב שהקיבולת המקסימלית היא 900 טיפולים. מה קורה כשחוצים אותה?', '(ב) 950 טיפולים חורג מהקיבולת של 900, ולכן חייבים להוסיף כוח אדם, כלומר להגדיל את העלות הקבועה. הקלידו 1.'],
-      solution:'(א) TC = 27,000 + 15×700 = 27,000+10,500 = <b>37,500 ש״ח</b>.<br>(ב) 950 טיפולים חורגים מהקיבולת של 900 טיפולים שהצוות הקיים יכול לספק. חייבים לשכור כוח אדם נוסף, כלומר <b>העלות הקבועה תעלה בקפיצה (step cost)</b>. זו התזכורת החשובה: עלות קבועה, קבועה רק בתוך "טווח רלוונטי" מוגדר.'},
+      hints:['(א) $TC=27{,}000+15\\times700$. (ב) שימו לב שהקיבולת המקסימלית היא 900 טיפולים. מה קורה כשחוצים אותה?', '(ב) 950 טיפולים חורג מהקיבולת של 900, ולכן חייבים להוסיף כוח אדם, כלומר להגדיל את העלות הקבועה. הקלידו 1.'],
+      solution:'(א) $TC = 27{,}000+15\\times700 = 27{,}000+10{,}500 = 37{,}500$ ש״ח.<br>(ב) 950 טיפולים חורגים מהקיבולת של 900 טיפולים שהצוות הקיים יכול לספק. חייבים לשכור כוח אדם נוסף, כלומר <b>העלות הקבועה תעלה בקפיצה (step cost)</b>. זו התזכורת החשובה: עלות קבועה, קבועה רק בתוך "טווח רלוונטי" מוגדר.'},
     {id:'d4', n:4, difficulty:'בינוני', title:'בדקו את המנהלת חשבונות',
       text:'מערכת סליקת תביעות של סוכנות טיפול ביתי עולה 400 ש״ח דמי מנוי קבועים, ועוד 2 ש״ח לכל תביעה שמעובדת. בחודש מרץ עובדו 1,300 תביעות. מנהלת החשבונות דיווחה שהעלות הכוללת הייתה 3,600 ש״ח. מהי העלות הכוללת הנכונה, ובכמה טעתה מנהלת החשבונות?',
       subs:[{id:'d4-a', label:'TC נכון (₪)', expected:3000, tol:1, unit:'₪'},
             {id:'d4-b', label:'בכמה ש״ח טעתה (הפרש, ₪)', expected:600, tol:1, unit:'₪'}],
-      hints:['חשבו את TC לפי הנוסחה הרגילה: 400 + 2×1,300, ואז השוו לדיווח של 3,600.', 'TC הנכון = 400+2,600=3,000. ההפרש מהדיווח (3,600) הוא 3,600−3,000.'],
-      solution:'TC הנכון = 400 + 2×1,300 = 400+2,600 = <b>3,000 ש״ח</b>. מנהלת החשבונות דיווחה 3,600 ש״ח, כלומר טעתה בהגזמה של 3,600−3,000 = <b>600 ש״ח</b>. שווה לבדוק אם היא בטעות הכפילה את דמי המנוי, או השתמשה במחיר ליחידה שגוי.'},
+      hints:['חשבו לפי הנוסחה הרגילה: $TC = 400 + 2\\times1{,}300$, ואז השוו לדיווח של 3,600.', 'ה-TC הנכון: $400+2{,}600=3{,}000$.<br>ההפרש מהדיווח (3,600): $3{,}600-3{,}000$.'],
+      solution:'$TC = 400 + 2\\times1{,}300 = 400+2{,}600 = 3{,}000$ ש״ח.<br>מנהלת החשבונות דיווחה 3,600 ש״ח, כלומר טעתה בהגזמה של $3{,}600-3{,}000 = 600$ ש״ח. שווה לבדוק אם היא בטעות הכפילה את דמי המנוי, או השתמשה במחיר ליחידה שגוי.'},
     {id:'d5', n:5, difficulty:'מאתגר', title:'אתגר סיכום: לעשות בבית או להוציא החוצה?',
       text:'מעבדה ציבורית שוקלת אם לבצע בדיקות דם בעצמה, או להוציא אותן במיקור חוץ. בבית: עלות קבועה חודשית של 5,000 ש״ח (ציוד ותחזוקה) ועלות משתנה של 8 ש״ח לבדיקה. במיקור חוץ: 14 ש״ח לבדיקה, ללא עלות קבועה כלל. (א) באיזו כמות בדיקות חודשית שתי החלופות עולות בדיוק אותו הדבר? (עגלו למספר שלם קרוב) (ב) אם צפויות 1,000 בדיקות בחודש, מהי החלופה הזולה יותר, ובכמה?',
       subs:[{id:'d5-a', label:'(א) כמות בדיקות שבה שתי החלופות שוות', expected:833, tol:2, unit:'בדיקות'},
             {id:'d5-b', label:'(ב) הפרש עלות ב-1,000 בדיקות (₪, בית פחות מיקור-חוץ, שלילי=בית זול יותר)', expected:-1000, tol:1, unit:'₪'}],
-      hints:['(א) השוו: 5,000+8Q = 14Q. פתרו עבור Q.', '(א) 5,000=14Q−8Q=6Q, אז Q=5,000/6≈833.3. (ב) חשבו כל חלופה בנפרד ב-1,000 בדיקות: בבית 5,000+8×1,000; במיקור-חוץ 14×1,000. השוו ביניהן.'],
-      solution:'(א) 5,000+8Q=14Q ⇐ 5,000=6Q ⇐ Q≈<b>833 בדיקות</b> בחודש (בסביבה זו שתי החלופות כמעט שוות).<br>(ב) ב-1,000 בדיקות: בבית = 5,000+8×1,000=13,000; במיקור-חוץ = 14×1,000=14,000. ביצוע בבית זול ב-14,000−13,000=<b>1,000 ש״ח</b> (לכן ההפרש "בית פחות מיקור-חוץ" הוא 13,000−14,000=−1,000). ככל שכמות הבדיקות עולה מעבר לנקודת השוויון, ביצוע בבית משתלם יותר ויותר, כי העלות הקבועה מתחלקת על יותר בדיקות. זה בדיוק סוג הניתוח שנרחיב בהמשך הקורס.'}
+      hints:['(א) השוו: $5{,}000+8Q = 14Q$. פתרו עבור Q.', '(א) $5{,}000=14Q-8Q=6Q \\Rightarrow Q=\\dfrac{5{,}000}{6}\\approx833.3$.<br>(ב) חשבו כל חלופה בנפרד ב-1,000 בדיקות:<br>בבית $5{,}000+8\\times1{,}000$.<br>במיקור-חוץ $14\\times1{,}000$. השוו ביניהן.'],
+      solution:'(א) $5{,}000+8Q=14Q \\Rightarrow 5{,}000=6Q \\Rightarrow Q\\approx833$ בדיקות בחודש (בסביבה זו שתי החלופות כמעט שוות).<br>(ב) בבית: $5{,}000+8\\times1{,}000=13{,}000$.<br>במיקור-חוץ: $14\\times1{,}000=14{,}000$.<br>ביצוע בבית זול ב-$14{,}000-13{,}000=1{,}000$ ש״ח. ככל שכמות הבדיקות עולה מעבר לנקודת השוויון, ביצוע בבית משתלם יותר ויותר, כי העלות הקבועה מתחלקת על יותר בדיקות. זה בדיוק סוג הניתוח שנרחיב בהמשך הקורס.'}
   ];
   document.getElementById('secD').innerHTML = D.map(renderNumeric).join('');
 })();
