@@ -336,7 +336,7 @@ function renderMathIn(el){
 
   /* ================= LIBI MASCOT ================= */
   var libi=document.getElementById('libi'), lTip=document.getElementById('lTip'), lArt=document.getElementById('lArt');
-  function setTip(txt){ lTip.textContent=txt; libi.classList.remove('pulse'); void libi.offsetWidth; libi.classList.add('pulse'); if(libi.classList.contains('min')) libiReopen(); }
+  function setTip(txt){ lTip.innerHTML=txt; renderMathIn(lTip); libi.classList.remove('pulse'); void libi.offsetWidth; libi.classList.add('pulse'); if(libi.classList.contains('min')) libiReopen(); }
   window.libiMin=function(){ libi.classList.add('min'); };
   window.libiReopen=function(){ libi.classList.remove('min'); };
   function clampX(x){ return Math.max(6, Math.min(x, window.innerWidth - libi.offsetWidth - 6)); }
@@ -370,7 +370,7 @@ function renderMathIn(el){
     var btn=document.getElementById('hbtn-'+id);
     if(t>=hints.length-1) btn.textContent='💡 זה כל הרמזים, נסו את הפתרון המלא';
     else btn.textContent='💡 רמז נוסף מליבי';
-    setTip(hints[t].replace(/<br\s*\/?>/gi,' ').replace(/\$/g,''));
+    setTip(hints[t]);
   };
   window.toggleSol=function(id){ document.getElementById('sol-'+id).classList.toggle('open'); };
 
