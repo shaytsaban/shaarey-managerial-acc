@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הרצאה 1 · מבוא לחשבונאות ניהולית · ד״ר שי צבאן</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#4f46e5; --primary-dark:#3730a3; --primary-light:#eef2ff;
+  --accent:#0d9488; --accent-dark:#0f766e; --accent-light:#ccfbf1;
+  --pink:#ec4899; --purple:#a855f7; --blue:#3b82f6; --amber:#f59e0b; --red:#ef4444; --green:#10b981;
+  --ink:#0f172a; --ink-soft:#334155; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc; --white:#fff;
+  --shadow:0 10px 30px rgba(15,23,42,.08); --shadow-lg:0 20px 50px rgba(15,23,42,.14);
+  --radius:28px;
+  --navy-950:#0e1b2e; --navy-900:#142a45; --navy-800:#1c3a5e;
+  --gold-500:#c39a3a; --gold-400:#d8b862;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:21px;line-height:1.8;direction:rtl;-webkit-font-smoothing:antialiased}
+b,strong{font-weight:800}
+a{color:var(--primary)}
+h1,h2,h3,h4{line-height:1.15}
+/* ---------- progress + lesson pill ---------- */
+.progress{position:fixed;top:0;right:0;left:0;height:5px;background:transparent;z-index:1000}
+.progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--accent));transition:width .1s linear}
+.lesson-prog{position:fixed;top:64px;left:50%;transform:translateX(-50%);z-index:850;background:rgba(15,23,42,.9);color:#fff;font-weight:800;font-size:13px;padding:6px 16px;border-radius:999px;backdrop-filter:blur(8px);box-shadow:var(--shadow);transition:opacity .3s}
+@media(max-width:600px){.lesson-prog{font-size:11px;top:60px}}
+/* ---------- top nav ---------- */
+.topnav{position:sticky;top:0;z-index:900;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);border-bottom:3px solid var(--line)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:16px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.badge-bi{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-weight:900;font-size:14px;display:grid;place-items:center;box-shadow:var(--shadow)}
+.brand .t{font-weight:800;font-size:15px;line-height:1.25}
+.brand .s{font-weight:500;font-size:11.5px;color:var(--muted)}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.nav-block{font-size:12px;font-weight:700;color:var(--ink-soft);text-decoration:none;padding:7px 11px;border-radius:999px;background:#fff;border:2px solid var(--line);white-space:nowrap;transition:.15s}
+.nav-block:hover{border-color:var(--primary);color:var(--primary)}
+.nav-block.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+@media(max-width:1240px){.nav-links{display:none}}
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;background:radial-gradient(1100px 480px at 82% -12%, #e6fbf6 0%, #f8fafc 62%)}
+.hero-inner{max-width:1240px;margin:0 auto;padding:64px 22px 56px;display:grid;grid-template-columns:1.35fr .85fr;gap:42px;align-items:center}
+@media(max-width:1000px){.hero-inner{grid-template-columns:1fr;gap:30px}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--line);color:var(--primary-dark);font-weight:800;font-size:14.5px;padding:8px 16px;border-radius:999px}
+.hero h1{font-size:clamp(36px,5vw,60px);font-weight:900;line-height:1.1;margin:20px 0 16px}
+.hero h1 .grad{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{font-size:clamp(17px,2.1vw,23px);color:var(--ink-soft);max-width:700px;line-height:1.7}
+.meta-chips{display:flex;gap:11px;flex-wrap:wrap;margin:26px 0 24px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:14px;padding:9px 15px;font-weight:700;font-size:14.5px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:inherit;font-weight:800;font-size:16.5px;padding:14px 26px;border-radius:14px;text-decoration:none;transition:.18s}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:var(--shadow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.btn-ghost{background:#fff;border:2px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--primary);color:var(--primary)}
+.hero-art{border-radius:24px;background:linear-gradient(135deg,var(--primary),var(--accent-dark));padding:16px;box-shadow:var(--shadow-lg);display:grid;grid-template-columns:1fr 1fr 1fr;grid-auto-rows:minmax(120px,1fr);gap:12px}
+.art-tile{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#fff;text-align:center;padding:8px;font-weight:700}
+.art-tile .l{font-size:13px}
+/* ---------- sections ---------- */
+main{display:block}
+.section{max-width:1080px;margin:0 auto;padding:84px 22px;scroll-margin-top:84px;border-top:1px solid var(--line)}
+.section:first-child{border-top:none}
+.block-tag{display:inline-block;background:var(--primary-light);color:var(--primary-dark);font-weight:800;font-size:13.5px;padding:7px 15px;border-radius:999px;letter-spacing:.2px}
+.section>h2{font-size:clamp(28px,4vw,46px);font-weight:900;margin:16px 0 6px;line-height:1.12}
+.section>h2 .g{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.section-sub{font-size:clamp(16px,2vw,22px);color:var(--muted);margin-bottom:14px;max-width:860px}
+.deep-card{background:#fff;border:3px solid var(--line);border-radius:var(--radius);padding:clamp(22px,3.6vw,44px);box-shadow:var(--shadow);margin:22px 0}
+.deep-card h3{font-size:clamp(21px,2.6vw,29px);font-weight:900;margin:6px 0 12px}
+.deep-card h3 .g{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+.deep-card h4{font-size:20px;font-weight:800;margin:22px 0 9px}
+.deep-card p{margin:12px 0}
+.deep-card ul,.deep-card ol{margin:12px 0;padding-right:24px}
+.deep-card li{margin:8px 0}
+.lead{font-size:clamp(18px,2.1vw,22px);color:var(--ink-soft)}
+.sub-h{font-size:clamp(21px,2.7vw,30px);font-weight:900;margin:40px 0 6px}
+.sub-h .g{background:linear-gradient(120deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent}
+/* ---------- info callouts ---------- */
+.info{border-radius:16px;padding:20px 24px;margin:20px 0;border-right:8px solid var(--primary);background:var(--primary-light)}
+.info .hd{font-weight:900;font-size:20px;margin-bottom:6px;display:flex;gap:8px;align-items:center}
+.info p{margin:9px 0;font-size:18.5px}
+.info.tip{border-right-color:var(--green);background:#ecfdf5}
+.info.warn{border-right-color:var(--amber);background:#fffbeb}
+.info.important{border-right-color:var(--red);background:#fef2f2}
+.info.insight{border-right-color:var(--purple);background:#faf5ff}
+.info.term{border-right-color:var(--blue);background:#eff6ff}
+.soft-note{background:#fff;border:3px dashed var(--line);border-radius:14px;padding:16px 20px;color:var(--ink-soft);font-size:18.5px;font-weight:600;margin:16px 0}
+/* ---------- two-col / grids ---------- */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+@media(max-width:760px){.two-col{grid-template-columns:1fr}}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:20px 0}
+.compare-card{background:#fff;border:2px solid var(--line);border-radius:18px;padding:22px;border-top:6px solid var(--primary)}
+.compare-card.a{border-top-color:var(--green)} .compare-card.b{border-top-color:var(--amber)}
+.compare-card.c{border-top-color:var(--pink)} .compare-card.d{border-top-color:var(--blue)}
+.compare-card h4{margin-top:0;font-size:19px}
+.compare-card p{margin:10px 0}
+/* ---------- flow-steps ---------- */
+.flow-steps{display:flex;flex-direction:column;gap:13px;margin:20px 0}
+.flow-step{display:grid;grid-template-columns:54px 1fr;gap:16px;background:#fff;border:2px solid var(--line);border-radius:18px;padding:17px 19px}
+.flow-step .num{width:54px;height:54px;border-radius:14px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-weight:900;font-size:23px;display:grid;place-items:center}
+.flow-step .fs-title{font-weight:800;font-size:19.5px}
+.flow-step .fs-sub{color:var(--muted);font-size:15.5px;margin-top:1px}
+.flow-step .fs-details{color:var(--ink-soft);font-size:17px;margin-top:11px}
+/* ---------- flip cards ---------- */
+.flip-grid{display:grid;gap:20px;margin:26px 0}
+.flip-grid.cols4{grid-template-columns:repeat(4,1fr)}
+.flip-grid.cols3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:980px){.flip-grid.cols3{grid-template-columns:1fr}.flip-grid.cols4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.flip-grid.cols4{grid-template-columns:1fr}}
+.flip{perspective:1600px;cursor:pointer}
+.flip-inner{position:relative;display:grid;height:100%;min-height:230px;transition:transform .6s cubic-bezier(.4,.15,.2,1);transform-style:preserve-3d}
+.flip.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:relative;grid-area:1/1;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:24px;padding:28px 24px 34px;display:flex;flex-direction:column;justify-content:center;border:3px solid var(--line);background:#fff;box-shadow:var(--shadow)}
+.flip-front{align-items:center;text-align:center}
+.flip-front .ic{font-size:58px;line-height:1;margin-bottom:12px}
+.flip-front .ttl{font-size:22px;font-weight:900;line-height:1.25}
+.flip-front .ttl .en{display:block;font-size:15px;color:var(--muted);font-weight:700;margin-top:5px}
+.flip-front .hint{position:absolute;bottom:14px;left:0;right:0;font-size:14px;color:var(--primary);font-weight:800}
+.flip-num{position:absolute;top:14px;right:16px;width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-weight:900;font-size:18px;display:grid;place-items:center;z-index:2}
+.flip-back{transform:rotateY(180deg);background:linear-gradient(155deg,#ffffff,#eef2ff);text-align:right}
+.flip-back .flip-num{display:none}
+.flip-back .bk-ttl{font-size:20px;font-weight:900;color:var(--primary-dark);margin-bottom:10px}
+.flip-back p{font-size:16.5px;margin:7px 0;line-height:1.55;color:var(--ink)}
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;margin:18px 0;font-size:16.5px;background:#fff;border-radius:14px;overflow:hidden;border:2px solid var(--line)}
+.tbl th{background:var(--primary);color:#fff;padding:13px 15px;text-align:right;font-weight:800;font-size:15.5px}
+.tbl td{padding:12px 15px;border-top:1px solid var(--line);vertical-align:top}
+.tbl tr:hover td{background:var(--primary-light)}
+.tbl td:first-child{font-weight:700}
+.tbl .num{font-variant-numeric:tabular-nums;text-align:center}
+/* ---------- takeaway ---------- */
+.takeaway{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;border-radius:24px;padding:34px 32px;margin:26px 0;box-shadow:var(--shadow-lg)}
+.takeaway .big-emoji{position:absolute;left:18px;top:-10px;font-size:120px;opacity:.16}
+.takeaway .hd{font-weight:900;font-size:16px;letter-spacing:.6px;opacity:.95;margin-bottom:8px}
+.takeaway .tx{font-weight:800;font-size:clamp(20px,2.6vw,28px);line-height:1.45;position:relative;z-index:2}
+/* ---------- takeaway-big (flow + points) ---------- */
+.takeaway-big{background:linear-gradient(160deg,#fff,#f5f3ff);border:3px solid var(--primary);border-radius:24px;padding:28px 30px;margin:26px 0;box-shadow:var(--shadow)}
+.takeaway-big>h4{font-size:23px;font-weight:900;color:var(--primary-dark);margin-bottom:16px}
+.tk-flow{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tk-node{background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 12px;text-align:center;min-width:120px;box-shadow:var(--shadow)}
+.tk-node .tk-ic{font-size:34px;display:block;line-height:1;margin-bottom:6px}
+.tk-node .tk-lbl{font-weight:800;font-size:15px}
+.tk-node.tk-start{border-color:var(--muted)}
+.tk-node.tk-ok{border-color:var(--green);background:linear-gradient(160deg,#fff,#ecfdf5)}
+.tk-arrow{font-size:30px;color:var(--accent);font-weight:900}
+.tk-points{display:flex;flex-direction:column;gap:12px}
+.tk-point{display:flex;gap:12px;align-items:flex-start;background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px 16px;font-size:17px;line-height:1.55}
+.tk-point .tk-pic{font-size:26px;flex-shrink:0;line-height:1.2}
+@media(max-width:620px){.tk-flow{flex-direction:column}.tk-arrow{transform:rotate(90deg)}}
+/* ---------- pipe tracker ---------- */
+.pipe{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 6px}
+.pipe .pst{flex:1;min-width:110px;text-align:center;background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 6px 8px;font-size:12.5px;font-weight:800;color:var(--muted);line-height:1.35}
+.pipe .pst .n{display:block;font-size:19px;margin-bottom:2px}
+.pipe .pst.done{border-color:var(--green);color:#047857;background:#ecfdf5}
+.pipe .pst.on{border-color:var(--primary);color:var(--primary-dark);background:var(--primary-light);box-shadow:var(--shadow);transform:scale(1.04)}
+.pipe-cap{font-size:14px;color:var(--muted);font-weight:700;margin-bottom:18px}
+/* ---------- checkpoint / meaning ---------- */
+.checkpoint{background:#ecfdf5;border:3px solid var(--green);border-radius:18px;padding:18px 22px;margin:18px 0}
+.checkpoint .hd{font-weight:900;color:#065f46;font-size:19.5px;margin-bottom:6px}
+.checkpoint p{margin:8px 0;font-size:18px}
+.meaning{background:linear-gradient(160deg,#eef2ff,#fff);border:3px solid var(--primary);border-radius:18px;padding:18px 22px;margin:18px 0}
+.meaning .hd{font-weight:900;color:var(--primary-dark);font-size:19.5px;margin-bottom:6px}
+.meaning p{margin:9px 0;font-size:18.5px}
+/* ---------- checklist ---------- */
+.checklist{list-style:none;padding:0!important}
+.checklist li{padding-right:34px;position:relative;margin:10px 0;font-size:18px}
+.checklist li::before{content:"✓";position:absolute;right:0;top:2px;width:24px;height:24px;background:var(--green);color:#fff;border-radius:50%;display:grid;place-items:center;font-size:14px;font-weight:900}
+/* ---------- field note ---------- */
+.field-note{background:#fff;border:2px solid var(--line);border-right:7px solid var(--blue);border-radius:16px;padding:18px 22px;margin:18px 0}
+.field-note .hd{font-weight:800;font-size:18px;margin-bottom:4px}
+.next{display:grid;grid-template-columns:60px 1fr;gap:16px;background:linear-gradient(135deg,var(--primary-light),#fff);border:2px solid var(--line);border-radius:18px;padding:20px;margin:14px 0}
+.next .n{width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:28px;display:grid;place-items:center}
+/* ---- board-question / decision block ---- */
+.decision{background:linear-gradient(160deg,#eef2ff,#ffffff);border:3px solid var(--line);border-right:9px solid var(--primary);border-radius:20px;padding:22px 26px;margin:20px 0;box-shadow:var(--shadow)}
+.d-quote{font-size:clamp(19px,2.4vw,25px);font-weight:800;color:var(--navy-900);line-height:1.5;font-style:italic;margin-bottom:6px}
+.d-role{display:inline-block;background:var(--primary);color:#fff;font-weight:800;font-size:13px;padding:5px 14px;border-radius:999px;margin-bottom:12px}
+.d-term{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px 18px;margin:12px 0;font-size:17.5px;line-height:1.6}
+.d-term b{color:var(--primary-dark)}
+.d-dilemma{background:#fffbeb;border:2px solid var(--amber);border-radius:12px;padding:13px 18px;margin:14px 0 8px;font-size:18px}
+.d-lead-to{color:var(--primary-dark);font-weight:800;font-size:16px;margin-top:8px}
+/* ---- grade report card (styled like a financial statement) ---- */
+.report{background:#fff;border:3px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin:20px 0}
+.report-head{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));color:#fff;padding:16px 22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.report-head .rh-co{font-weight:900;font-size:20px}
+.report-head .rh-t{color:var(--gold-400);font-size:13.5px;font-weight:700}
+.report-body{padding:8px 0}
+.report-row{display:grid;grid-template-columns:2fr 1fr;gap:8px;padding:11px 22px;font-size:17px;border-bottom:1px solid #eef1f6}
+.report-row .rr-label{font-weight:700}
+.report-row .rr-num{text-align:left;direction:ltr;font-variant-numeric:tabular-nums;color:var(--ink-soft);font-weight:800}
+.report-row.rr-total{border-top:2px solid var(--navy-900);border-bottom:3px double var(--navy-900);font-weight:900;background:#fbfcfe}
+.report-row.rr-total .rr-num{color:var(--ink);font-weight:900}
+.report-row.rr-flag{background:#fffbeb}
+.report-foot{padding:14px 22px;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+/* ---- hard question ---- */
+.hardq{background:linear-gradient(160deg,#0f172a,#1e293b);color:#e2e8f0;border-radius:24px;padding:28px 28px;margin:26px 0;box-shadow:var(--shadow-lg)}
+.hardq .hqt{display:inline-block;background:var(--amber);color:#0f172a;font-weight:900;font-size:14px;padding:6px 15px;border-radius:999px;margin-bottom:12px}
+.hardq .hqq{font-size:19px;line-height:1.6;font-weight:600}
+.hardq .hqq b{color:#a5b4fc}
+.hardq .acc{margin-top:16px;background:#0b1220;border-radius:14px;overflow:hidden;border:1px solid #1e293b}
+.hardq .acc-h{display:flex;align-items:center;gap:12px;padding:15px 18px;cursor:pointer}
+.hardq .acc-h .ai{font-size:22px}
+.hardq .acc-h h4{font-size:18px;color:#fff;margin:0;flex:1}
+.hardq .acc-h .chev{font-size:20px;color:#94a3b8;transition:.3s}
+.hardq .acc.open .acc-h .chev{transform:rotate(180deg)}
+.hardq .acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.hardq .acc.open .acc-body{max-height:900px}
+.hardq .acc-bin{padding:0 18px 18px;font-size:17px;line-height:1.7;color:#cbd5e1}
+.hardq .acc-bin b{color:#a5b4fc}
+/* ---- quiz ---- */
+.quiz{background:linear-gradient(160deg,#0f172a,#1e293b);color:#e2e8f0;border-radius:24px;padding:30px;margin:28px 0;box-shadow:var(--shadow-lg)}
+.quiz .q-tag{display:inline-block;background:var(--amber);color:#0f172a;font-weight:900;font-size:14px;padding:6px 15px;border-radius:999px;margin-bottom:12px}
+.quiz .q-txt{font-size:21px;font-weight:800;margin-bottom:8px;line-height:1.5}
+.quiz .q-note{font-size:15px;color:#94a3b8;margin-bottom:14px}
+.quiz-opt{display:block;width:100%;text-align:right;font-family:inherit;font-size:17.5px;font-weight:700;color:#e2e8f0;background:#0b1220;border:2px solid #334155;border-radius:14px;padding:15px 20px;margin:11px 0;cursor:pointer;transition:.15s}
+.quiz-opt:hover{border-color:var(--accent);transform:translateX(-4px)}
+.quiz-opt .k{display:inline-block;width:30px;height:30px;line-height:30px;text-align:center;background:#334155;border-radius:8px;margin-left:10px;font-weight:900}
+.quiz-opt.correct{background:#064e3b;border-color:#10b981;color:#d1fae5}
+.quiz-opt.correct .k{background:#10b981;color:#04231a}
+.quiz-opt.wrong{background:#4c0519;border-color:#ef4444;color:#fecaca}
+.quiz-opt.wrong .k{background:#ef4444;color:#3f0710}
+.quiz-opt.dim{opacity:.5}
+.quiz-opt:disabled{cursor:default}
+.quiz-fb{margin-top:16px;background:#020617;border-radius:14px;padding:18px 20px;font-size:17px;line-height:1.65;display:none}
+.quiz-fb.show{display:block}
+.quiz-fb .verdict{font-weight:900;font-size:19px;margin-bottom:6px}
+/* ---------- KEYNOTE INTRO ---------- */
+.kn{background:#000;color:#fff;font-family:'Heebo',system-ui,sans-serif;overflow:hidden}
+.kn-slide{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px;position:relative}
+.kn-slide.short{min-height:80vh}
+.kn-eyebrow{font-size:clamp(14px,2vw,19px);font-weight:800;letter-spacing:4px;color:#8b93a7;margin-bottom:20px}
+.kn-title{font-size:clamp(36px,7.5vw,90px);font-weight:900;line-height:1.06;letter-spacing:-1px}
+.kn-title .g{background:linear-gradient(110deg,#5eead4,#818cf8 55%,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kn-sub{font-size:clamp(19px,3.2vw,32px);font-weight:600;color:#cbd5e1;margin-top:26px;max-width:920px;line-height:1.45}
+.kn-small{font-size:clamp(15px,2vw,21px);color:#8b93a7;margin-top:22px;max-width:760px;line-height:1.6}
+.kn-scroll{position:absolute;bottom:28px;left:50%;color:#5b6479;font-size:14px;font-weight:700;animation:knbob 1.8s infinite;transform:translateX(-50%)}
+@keyframes knbob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,9px)}}
+.kn-feats{display:flex;flex-direction:column;gap:16px;margin-top:34px}
+.kn-feat{display:flex;gap:16px;align-items:center;justify-content:center;font-size:clamp(17px,2.8vw,28px);font-weight:800}
+.kn-feat .e{font-size:1.2em}
+.kn-cta{margin-top:36px}
+.kn-cta button{font-family:inherit;font-weight:900;font-size:clamp(18px,2.4vw,25px);padding:18px 44px;border:none;border-radius:999px;cursor:pointer;background:linear-gradient(110deg,#5eead4,#818cf8);color:#0b0b0c;box-shadow:0 16px 44px rgba(129,140,248,.5);transition:.18s}
+.kn-cta button:hover{transform:translateY(-3px) scale(1.02)}
+.kn-skip{position:fixed;top:14px;left:18px;z-index:1300;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:9px 18px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;backdrop-filter:blur(6px)}
+body:not(.pre-start) .kn-skip{display:none}
+body.pre-start .topnav,body.pre-start .progress,body.pre-start .lesson-prog{display:none}
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease, transform .7s ease}
+.reveal.show{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(24px);transition:opacity .55s ease, transform .55s ease}
+.stagger.show>*{opacity:1;transform:none}
+.stagger.show>*:nth-child(1){transition-delay:.04s}.stagger.show>*:nth-child(2){transition-delay:.16s}.stagger.show>*:nth-child(3){transition-delay:.28s}.stagger.show>*:nth-child(4){transition-delay:.40s}.stagger.show>*:nth-child(5){transition-delay:.52s}.stagger.show>*:nth-child(6){transition-delay:.64s}
+@media(prefers-reduced-motion:reduce){.reveal,.stagger>*{opacity:1!important;transform:none!important}}
+footer{background:#0f172a;color:#cbd5e1;padding:46px 22px;text-align:center;margin-top:40px}
+footer .big{font-weight:800;color:#fff;font-size:19px;margin-bottom:8px}
+footer .small{font-size:14px;color:#64748b;margin-top:14px}
+</style>
+<noscript><style>.reveal,.stagger>*{opacity:1!important;transform:none!important}body.pre-start .kn{display:none!important}</style></noscript>
+</head>
+<body class="pre-start">
+
+<!-- ============ KEYNOTE INTRO ============ -->
+<button class="kn-skip" onclick="startLesson()">דלגו לשיעור ←</button>
+<div class="kn" id="intro">
+  <section class="kn-slide">
+    <div class="kn-eyebrow reveal">חשבונאות ניהולית והתנהלות פיננסית · החוג לניהול מערכות בריאות</div>
+    <h1 class="kn-title reveal">כמה זה <span class="g">באמת עולה?</span></h1>
+    <p class="kn-sub reveal">הרצאה 1: מבוא ומטרות החשבונאות הניהולית. שאלה שכל מנהל מערכת בריאות נשאל, ורוב הדוחות הכספיים לא עונים עליה.</p>
+    <p class="kn-small reveal">מרצה: <b>ד״ר שי צבאן</b></p>
+    <div class="kn-scroll">גללו למטה ↓</div>
+  </section>
+  <section class="kn-slide">
+    <div class="kn-eyebrow reveal">שיטת העבודה של היום</div>
+    <h2 class="kn-title reveal">שלוש שאלות <span class="g">אמיתיות.</span><br>סמסטר שלם.</h2>
+    <p class="kn-sub reveal">נפגוש שלושה מנהלים במערכת הבריאות, כל אחד עם דילמה כלכלית אמיתית. משלוש הדילמות האלה ייבנה כל מבנה הקורס, שיעור אחר שיעור.</p>
+  </section>
+  <section class="kn-slide short">
+    <div class="kn-eyebrow reveal">מה תיקחו מההרצאה הזו</div>
+    <div class="kn-feats stagger">
+      <div class="kn-feat"><span class="e">🧭</span><span>למה חשבונאות פיננסית לבדה לא מספיקה למנהל</span></div>
+      <div class="kn-feat"><span class="e">⚖️</span><span>ההבדל המדויק בין חשבונאות ניהולית לפיננסית</span></div>
+      <div class="kn-feat"><span class="e">🗺️</span><span>מפת הסמסטר: שלושת גושי הנושאים של הקורס</span></div>
+      <div class="kn-feat"><span class="e">💼</span><span>איפה בדיוק זה פוגש אתכם בקריירה בניהול בריאות</span></div>
+    </div>
+    <div class="kn-cta reveal"><button onclick="startLesson()">בואו נתחיל ←</button></div>
+  </section>
+</div>
+
+<div class="progress"><span id="bar"></span></div>
+<div class="lesson-prog" id="lessonProg">מודול 0 / 7 · 0%</div>
+
+<!-- ============ TOP NAV ============ -->
+<nav class="topnav">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="badge-bi">חש״נ</div>
+      <div>
+        <div class="t">חשבונאות ניהולית והתנהלות פיננסית</div>
+        <div class="s">הרצאה 1 · מבוא ומטרות · ד״ר שי צבאן</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a class="nav-block" href="#admin">00 · פתיחה</a>
+      <a class="nav-block" href="#why">01 · למה זה חשוב</a>
+      <a class="nav-block" href="#define">02 · הגדרות</a>
+      <a class="nav-block" href="#functions">03 · שלוש פונקציות</a>
+      <a class="nav-block" href="#roadmap">04 · מפת הקורס</a>
+      <a class="nav-block" href="#career">05 · שוק העבודה</a>
+      <a class="nav-block" href="#summary">06 · סיכום</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-badge">🩺 הרצאה 1 · מבוא לחשבונאות ניהולית</span>
+      <h1>המספרים שמאחורי <span class="grad">כל החלטה במערכת הבריאות</span></h1>
+      <p class="hero-sub">הדוחות הכספיים של הארגון עונים לרשויות ולמשקיעים. אבל כשמנהל מחלקה, מנהל קופת חולים או מנהל בית אבות צריך להחליט, הם כמעט תמיד שותקים. חשבונאות ניהולית היא המידע שממלא את החלל הזה: מה עולה השירות, האם התקציב בכיוון, וכדאי לקבל החלטה מסוימת. נבנה היום את התשתית לכל מה שילמד בסמסטר.</p>
+      <div class="meta-chips">
+        <span class="chip">👤 ד״ר שי צבאן</span>
+        <span class="chip">🏥 החוג לניהול מערכות בריאות</span>
+        <span class="chip">⏱ הרצאה 1, כ-90 דקות</span>
+        <span class="chip">📖 יחידה 1, סעיפים 1.1–1.3</span>
+      </div>
+      <div class="cta">
+        <a class="btn btn-primary" href="#admin">בואו נתחיל ←</a>
+        <a class="btn btn-ghost" href="#roadmap">קפיצה למפת הקורס</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="art-tile"><span style="font-size:38px">🧭</span><span class="l">תכנון</span></div>
+      <div class="art-tile"><span style="font-size:38px">🚦</span><span class="l">בקרה</span></div>
+      <div class="art-tile"><span style="font-size:38px">⚖️</span><span class="l">קבלת החלטות</span></div>
+      <div class="art-tile"><span style="font-size:38px">🏥</span><span class="l">בית חולים</span></div>
+      <div class="art-tile"><span style="font-size:38px">💰</span><span class="l">עלות מול מחיר</span></div>
+      <div class="art-tile"><span style="font-size:38px">🗺️</span><span class="l">מפת הסמסטר</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ==================== MODULE 00 · ADMIN ==================== -->
+<section class="section" id="admin">
+  <span class="block-tag">00 · לפני שצוללים</span>
+  <h2>ברוכים הבאים, <span class="g">ואיך הקורס מתנהל</span></h2>
+  <p class="section-sub">חמש דקות של סדר לפני התוכן, כדי שכל ההמשך יהיה חלק. אחרי זה לא נחזור לזה, אז שימו לב עכשיו.</p>
+  <div class="pipe">
+    <span class="pst on"><span class="n">🚪</span>פתיחה</span>
+    <span class="pst"><span class="n">🤔</span>למה חשוב</span>
+    <span class="pst"><span class="n">⚖️</span>הגדרות</span>
+    <span class="pst"><span class="n">🎯</span>3 פונקציות</span>
+    <span class="pst"><span class="n">🗺️</span>מפת הקורס</span>
+    <span class="pst"><span class="n">💼</span>שוק העבודה</span>
+    <span class="pst"><span class="n">✅</span>סיכום</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 1 מתוך 7 · תחילה כללי המשחק, אחר כך התוכן עצמו</div>
+
+  <div class="deep-card">
+    <h3>מי מלמד, ואיך יוצרים קשר</h3>
+    <div class="two-col">
+      <div class="compare-card"><h4>👤 ד״ר שי צבאן</h4><p>מרצה הקורס. דוא״ל: <b>shay.tsaban@gmail.com</b>. שעת קבלה בתיאום מראש.</p></div>
+      <div class="compare-card a"><h4>📋 דרישות קדם ואתר הקורס</h4><p>אין דרישות קדם לקורס זה. באתר האינטרנט של הקורס יתפרסמו הודעות, קבצי הרצאות, תרגילים נוספים ועבודות בית, וכל חומר אחר שיידרש.</p></div>
+    </div>
+  </div>
+
+  <h3 class="sub-h reveal">כללי המשחק: <span class="g">איך נקבע הציון</span></h3>
+  <div class="report reveal">
+    <div class="report-head"><span class="rh-co">הרכב הציון בקורס</span><span class="rh-t">חשבונאות ניהולית והתנהלות פיננסית</span></div>
+    <div class="report-body">
+      <div class="report-row"><span class="rr-label">תרגילים במהלך הסמסטר</span><span class="rr-num">15%</span></div>
+      <div class="report-row rr-total"><span class="rr-label">בחינה סופית</span><span class="rr-num">85%</span></div>
+      <div class="report-row rr-flag"><span class="rr-label">ציון מעבר מינימלי בבחינה הסופית</span><span class="rr-num">60</span></div>
+    </div>
+    <div class="report-foot">יש לעבור את המבחן הסופי בציון 60 לפחות על מנת לקבל ציון עובר בקורס. הבחינה בחומר סגור, בכתב, ומתירה שימוש במחשבון פשוט בלבד ללא יכולת תקשורת.</div>
+  </div>
+
+  <div class="compare-grid reveal">
+    <div class="compare-card b"><h4>📲 נוכחות ואפליקציות נדרשות</h4><p>נוכחות תיבדק בחלק מהשיעורים והתרגולים באמצעות <b>Kahoot</b> ו-<b>EZCheck.me</b>. התקינו את שתי האפליקציות במכשיר החכם שלכם עוד השבוע. ציון מיטיב בבחינה הסופית ניתן <b>רק</b> למי שנכחו פיזית בשיעורים בקמפוס.</p></div>
+    <div class="compare-card c"><h4>📝 הגשת תרגילים</h4><p>הגשה אלקטרונית, ללא איחורים. חובה להגיש לפחות <b>80%</b> מהתרגילים כדי לקבל זכאות לגשת לבחינה הסופית. ציון התרגילים: ממוצע 80% התרגילים בעלי הציון הגבוה ביותר, כאשר כל ציון תרגיל מורכב מ-80% ניסיון כן ואמיתי ו-20% נכונות הפתרון.</p></div>
+    <div class="compare-card d"><h4>🎓 התנהגות בשיעורים</h4><p>הגעה בזמן, נוכחות מלאה לאורך כל השיעור, שקט ואי-הפרעה, השתתפות פעילה, ללא שימוש בטלפון אלא אם התבקשתם. מומלץ לחזור על חומר השיעור הקודם לפני ההגעה.</p></div>
+  </div>
+
+  <div class="info tip reveal">
+    <div class="hd">✅ עכשיו, לתוכן עצמו</div>
+    <p>עכשיו כשאנחנו יודעים איך המשחק עובד, בואו נבין למה בכלל שווה לשחק אותו: מה בעצם חשבונאות ניהולית נותנת למי שמנהל מערכת בריאות, שחשבונאות פיננסית לא נותנת.</p>
+  </div>
+</section>
+
+<!-- ==================== MODULE 01 · WHY ==================== -->
+<section class="section" id="why">
+  <span class="block-tag">01 · למה זה בכלל חשוב</span>
+  <h2>שלוש דילמות אמיתיות, <span class="g">שלושה מנהלים</span></h2>
+  <p class="section-sub">בואו נשב, לרגע, בכיסא של שלושה אנשים שונים שמנהלים חלק ממערכת הבריאות. לכל אחד מהם יש דוחות כספיים מסודרים על השולחן, ולכל אחד יש שאלה שהדוחות האלה לא באמת עונים עליה. שלוש השאלות האלה הן בדיוק שלושת גושי הנושאים שנלמד השנה.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🚪</span>פתיחה</span>
+    <span class="pst on"><span class="n">🤔</span>למה חשוב</span>
+    <span class="pst"><span class="n">⚖️</span>הגדרות</span>
+    <span class="pst"><span class="n">🎯</span>3 פונקציות</span>
+    <span class="pst"><span class="n">🗺️</span>מפת הקורס</span>
+    <span class="pst"><span class="n">💼</span>שוק העבודה</span>
+    <span class="pst"><span class="n">✅</span>סיכום</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 2 מתוך 7 · שלוש שאלות, שלושה גושי נושאים. זה עמוד השדרה של הקורס</div>
+
+  <h3 class="sub-h reveal">השאלה הראשונה, מ<span class="g">סמנכ״ל הכספים של בית החולים</span></h3>
+  <div class="decision reveal">
+    <span class="d-role">🏥 בית חולים כללי</span>
+    <div class="d-quote">״קופת החולים משלמת לנו סכום קבוע לכל ניתוח קיסרי. תגידו לי בכנות: כמה באמת עולה לנו ניתוח קיסרי אחד, מהרגע שהיולדת נכנסת ועד שהיא משתחררת?״</div>
+    <div class="d-term">הדוח הכספי השנתי של בית החולים מראה סך הוצאות שכר, תרופות, ואחזקה עבור <b>כל בית החולים יחד</b>. הוא לא מפרק את זה ל״עלות ניתוח קיסרי אחד״, ״עלות יום אשפוז במחלקת ילדים״ או ״עלות בדיקת דימות אחת״. כדי לענות צריך שיטה שמחלקת עלויות כלליות ליחידות שירות בודדות.</div>
+    <p class="d-dilemma"><b>הדילמה:</b> איך מחלקים עלויות משותפות (חשמל, ניקיון, מנהלה) בין מחלקות ושירותים שונים, כדי לדעת כמה עולה כל שירות בנפרד?</p>
+    <div class="d-lead-to">→ זו בדיוק קבוצת הנושאים הראשונה של הקורס: <b>שיטות להקצאת עלויות</b> (תמחיר הזמנה, תמחיר תהליך, תמחיר על בסיס פעולות).</div>
+  </div>
+
+  <h3 class="sub-h reveal">השאלה השנייה, מ<span class="g">מנהל מחלקה בקופת חולים</span></h3>
+  <div class="decision reveal">
+    <span class="d-role">🏢 קופת חולים, מחלקה אזורית</span>
+    <div class="d-quote">״קיבלתי בתחילת השנה תקציב שנתי למחלקה שלי. עברו ארבעה חודשים. איך אני יודע אם אני בכיוון הנכון, או שאני בדרך לחריגה משמעותית בסוף השנה?״</div>
+    <div class="d-term">תקציב שנקבע בתחילת השנה הוא כלי <b>תכנון</b>. אבל תכנון בלי מעקב שוטף הוא רק מסמך נחמד. צריך כלים שמשווים בין מה שתוכנן לבין מה שקורה בפועל, ומתריעים מוקדם כשמשהו סוטה.</div>
+    <p class="d-dilemma"><b>הדילמה:</b> אילו דוחות וכלי דיווח פנימיים מאפשרים למנהל לתכנן קדימה, ואז לבקר את הביצוע בפועל מול התוכנית?</p>
+    <div class="d-lead-to">→ זו קבוצת הנושאים השנייה: <b>כלי דיווח לתכנון ובקרה</b>, שמתחילה כבר בשיעור זה עם מיון והתנהגות עלויות.</div>
+  </div>
+
+  <h3 class="sub-h reveal">השאלה השלישית, מ<span class="g">מנהלת בית אבות פרטי</span></h3>
+  <div class="decision reveal">
+    <span class="d-role">🏠 בית אבות סיעודי</span>
+    <div class="d-quote">״הציעו לי לסגור אגף אחד ולהפוך אותו לשירות שיקום יומי. איך אני יודעת, במספרים, אם זה כדאי כלכלית, ומכמה מטופלים והלאה זה משתלם?״</div>
+    <div class="d-term">כאן לא מדובר בדיווח על העבר, אלא בהחלטה לגבי <b>העתיד</b>: להשקיע או לא, לפתוח שירות או לסגור אותו, כמה מטופלים נדרשים כדי לכסות את העלות. זו שאלה של יחס בין עלות קבועה, עלות משתנה, והכנסה.</div>
+    <p class="d-dilemma"><b>הדילמה:</b> איך משתמשים בנתוני עלות כדי לתמוך בהחלטה עתידית, ולא רק לדווח על מה שכבר קרה?</p>
+    <div class="d-lead-to">→ זו קבוצת הנושאים השלישית: <b>שימוש בנתוני עלות לקבלת החלטות</b> (תמחיר תרומה וניתוח נקודת האיזון).</div>
+  </div>
+
+  <div class="info insight reveal">
+    <div class="hd">💡 מה משותף לשלושתם</div>
+    <p>שלושת המנהלים האלה יושבים בבתי חולים, קופות חולים ומוסדות סיעוד אמיתיים. לאף אחד מהם הדוח הכספי השנתי, לבדו, לא סיפק תשובה. הם צריכים מידע פנימי, מהיר, מותאם להחלטה הספציפית שלהם. זו בדיוק ההגדרה של חשבונאות ניהולית, ואליה נגיע עכשיו.</p>
+  </div>
+</section>
+
+<!-- ==================== MODULE 02 · DEFINITIONS ==================== -->
+<section class="section" id="define">
+  <span class="block-tag">02 · הגדרות שחייבים לדייק</span>
+  <h2>חשבונאות ניהולית: <span class="g">לא "עוד סוג של חשבונאות"</span></h2>
+  <p class="section-sub">לפני שממשיכים, צריך הגדרה מדויקת. חשבונאות ניהולית היא לא גרסה "פנימית" של חשבונאות פיננסית. היא בנויה סביב מטרה שונה לגמרי: לא לדווח על העבר לגורמים חיצוניים, אלא לספק למנהל בפנים את המידע הדרוש לתכנון, לבקרה ולקבלת החלטות.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🚪</span>פתיחה</span>
+    <span class="pst done"><span class="n">🤔</span>למה חשוב</span>
+    <span class="pst on"><span class="n">⚖️</span>הגדרות</span>
+    <span class="pst"><span class="n">🎯</span>3 פונקציות</span>
+    <span class="pst"><span class="n">🗺️</span>מפת הקורס</span>
+    <span class="pst"><span class="n">💼</span>שוק העבודה</span>
+    <span class="pst"><span class="n">✅</span>סיכום</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 3 מתוך 7 · המונחים המדויקים שיישארו איתכם לכל הסמסטר</div>
+
+  <div class="deep-card">
+    <h3>הגדרה: <span class="g">חשבונאות ניהולית</span></h3>
+    <p class="lead">תחום העוסק באיסוף, עיבוד והצגה של מידע כספי ותפעולי <b>לשימוש פנימי של מנהלים בארגון</b>, לצורך תכנון פעילות, בקרה על ביצוע, וקבלת החלטות. בניגוד לחשבונאות הפיננסית, אין לה כללים אחידים מחייבים בחוק; המבנה שלה נקבע לפי הצרכים של הארגון עצמו.</p>
+  </div>
+
+  <h3 class="sub-h reveal">חשבונאות ניהולית מול חשבונאות פיננסית, <span class="g">שורה שורה</span></h3>
+  <div class="tbl-wrap reveal">
+    <table class="tbl">
+      <tr><th>מאפיין</th><th>חשבונאות פיננסית</th><th>חשבונאות ניהולית</th></tr>
+      <tr><td>קהל היעד</td><td>גורמים חיצוניים: משקיעים, בנקים, רשויות מס, קופות חולים</td><td>מנהלים בתוך הארגון: מנהלי מחלקות, הנהלה, דירקטוריון פנימי</td></tr>
+      <tr><td>חובה חוקית</td><td>חובה, לפי תקינה חשבונאית מחייבת (IFRS ותקנות)</td><td>וולונטרית, נבנית לפי צרכי הארגון עצמו</td></tr>
+      <tr><td>אופק הזמן</td><td>מתמקדת בעבר: מה שכבר קרה בתקופה שחלפה</td><td>מסתכלת גם קדימה: תכנון ותקציב לעתיד</td></tr>
+      <tr><td>יחידת הניתוח</td><td>הארגון כמכלול אחד</td><td>ניתן לפרק לפי מחלקה, שירות, מטופל, פרויקט</td></tr>
+      <tr><td>רמת הדיוק הנדרשת</td><td>דיוק ואימות גבוהים, מבוקר על ידי רואה חשבון</td><td>רלוונטיות ומהירות חשובות לפעמים יותר מדיוק מוחלט</td></tr>
+      <tr><td>תדירות הדיווח</td><td>קבועה: רבעונית או שנתית</td><td>גמישה: לפי הצורך, לעיתים דוח שבועי או יומי</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub-h reveal">שלוש מילים שמתבלבלים ביניהן, <span class="g">בדיוק בעולם הבריאות</span></h3>
+  <p class="lead reveal">בהמשך הקורס נדבר המון על "עלות". חשוב כבר עכשיו להבדיל בינה לבין שני מונחים קרובים. הפכו כל כרטיס:</p>
+  <div class="flip-grid cols3 stagger">
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">🧾</div><div class="ttl">עלות<span class="en">Cost</span></div><div class="hint">↻ הפכו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">🧾 עלות</div><p>שווי המשאבים שנצרכים כדי לספק שירות: שעות עבודה של אחות, חומרי חבישה, פחת על מכשיר. זהו הבסיס שכל הקורס עוסק בו.</p></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">💵</div><div class="ttl">מחיר<span class="en">Price</span></div><div class="hint">↻ הפכו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">💵 מחיר</div><p>הסכום שמתקבל תמורת השירות. בבריאות בישראל הוא לרוב לא נקבע חופשי בשוק, אלא מתומחר על ידי קופת חולים, סל הבריאות או משרד הבריאות. פער בין עלות למחיר הוא בדיוק מה שמנהל צריך לדעת.</p></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">📑</div><div class="ttl">הוצאה<span class="en">Expense</span></div><div class="hint">↻ הפכו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">📑 הוצאה</div><p>ההכרה החשבונאית-פיננסית בצריכת המשאב, בדוח רווח והפסד, לפי כללי הצבירה (accrual). זו מילה מעולם החשבונאות הפיננסית, לא הניהולית.</p></div>
+    </div></div>
+  </div>
+
+  <div class="hardq reveal">
+    <span class="hqt">שאלה מאתגרת</span>
+    <p class="hqq">אם חשבונאות ניהולית לא כפופה לחוק, איך אפשר לסמוך על המספרים שהיא מפיקה? הרי כל מנהל יכול "להמציא" שיטת חישוב לפי הנוחות שלו.</p>
+    <div class="acc">
+      <div class="acc-h"><span class="ai">🎯</span><h4>לחצו לתשובה</h4><span class="chev">⌄</span></div>
+      <div class="acc-body"><div class="acc-bin">זו בדיוק הסיבה שחשבונאות ניהולית היא <b>תחום מקצועי עם שיטות מוגדרות</b>, ולא אלתור חופשי. במהלך הסמסטר נלמד שיטות סדורות (תמחיר הזמנה, תמחיר תהליך, ABC, ניתוח נקודת איזון) שכל אחת מהן בנויה על עקרונות ברורים ועקביים. הגמישות היא בבחירת השיטה המתאימה לארגון, לא בשרירותיות של המספרים. וכן, ארגון חייב לשמור על <b>עקביות</b>: אם הוגדר פעם ש"עלות יום אשפוז" כוללת פחת על ציוד, זה צריך להישאר כך גם בחודש הבא, אחרת ההשוואות בין תקופות מאבדות משמעות.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MODULE 03 · THREE FUNCTIONS ==================== -->
+<section class="section" id="functions">
+  <span class="block-tag">03 · שלוש הפונקציות</span>
+  <h2>תכנון. <span class="g">בקרה. קבלת החלטות.</span></h2>
+  <p class="section-sub">הגדרת המטרה של הקורס, כפי שהיא מנוסחת בסילבוס, מדברת על שלושה שימושים במידע חשבונאי: <b>תכנון</b>, <b>בקרה</b>, ו<b>קבלת החלטות</b>. אלה שלוש הפונקציות שכל כלי שנלמד השנה ישרת. נעבור על כל אחת עם דוגמה ממערכת הבריאות.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🚪</span>פתיחה</span>
+    <span class="pst done"><span class="n">🤔</span>למה חשוב</span>
+    <span class="pst done"><span class="n">⚖️</span>הגדרות</span>
+    <span class="pst on"><span class="n">🎯</span>3 פונקציות</span>
+    <span class="pst"><span class="n">🗺️</span>מפת הקורס</span>
+    <span class="pst"><span class="n">💼</span>שוק העבודה</span>
+    <span class="pst"><span class="n">✅</span>סיכום</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 4 מתוך 7 · שלוש מילות מפתח שיחזרו לאורך כל הסמסטר</div>
+
+  <div class="flow-steps stagger">
+    <div class="flow-step"><div class="num">🧭</div><div><div class="fs-title">תכנון (Planning)</div><div class="fs-sub">קביעת יעדים ומשאבים קדימה</div><div class="fs-details">לדוגמה: בניית תקציב שנתי למחלקת אשפוז יום, כולל תחזית מספר מטופלים, מצבת כוח אדם נדרשת, וצריכת ציוד וחומרים מתוכננת. תכנון תמיד מסתכל <b>קדימה</b>, לפני שהפעילות התרחשה.</div></div></div>
+    <div class="flow-step"><div class="num">🚦</div><div><div class="fs-title">בקרה (Control)</div><div class="fs-sub">השוואת התוכנית לביצוע בפועל</div><div class="fs-details">לדוגמה: דוח חודשי שמראה שההוצאה על תרופות במחלקה חרגה ב-12% מהתקציב שנקבע, ומתריע לפני שהפער גדל עוד יותר. בקרה משווה בין מה שתוכנן למה ש<b>קרה בפועל</b>, בזמן אמת.</div></div></div>
+    <div class="flow-step"><div class="num">⚖️</div><div><div class="fs-title">קבלת החלטות (Decision Making)</div><div class="fs-sub">בחירה בין חלופות עתידיות</div><div class="fs-details">לדוגמה: להפעיל שירות בדיקות מעבדה עצמאי בתוך המרפאה, או להוציא אותו במיקור חוץ לספק חיצוני. כאן נדרש להשוות עלויות של חלופות שעדיין <b>לא קרו</b>, כדי לבחור ביניהן.</div></div></div>
+  </div>
+
+  <div class="takeaway-big reveal">
+    <h4>איך זה זורם, מנתונים גולמיים ועד החלטה</h4>
+    <div class="tk-flow">
+      <div class="tk-node tk-start"><span class="tk-ic">🧾</span><span class="tk-lbl">נתוני עלות גולמיים</span></div>
+      <div class="tk-arrow">←</div>
+      <div class="tk-node"><span class="tk-ic">📊</span><span class="tk-lbl">מידע חשבונאי מעובד</span></div>
+      <div class="tk-arrow">←</div>
+      <div class="tk-node tk-ok"><span class="tk-ic">🧭</span><span class="tk-lbl">תכנון · בקרה · החלטה</span></div>
+    </div>
+    <div class="tk-points">
+      <div class="tk-point"><span class="tk-pic">🎯</span><span>שימו לב לכיוון: המידע החשבונאי הוא לא המטרה, הוא <b>אמצעי</b>. המטרה תמיד היא לתכנן טוב יותר, לבקר לפני שהנזק גדול, ולהחליט על בסיס נתונים ולא על בסיס תחושת בטן.</span></div>
+      <div class="tk-point"><span class="tk-pic">🔁</span><span>שלוש הפונקציות לא נפרדות. תוכנית טובה (תכנון) מייצרת יעד לבקרה מולו, וסטייה שמתגלה בבקרה מזינה בחזרה את ההחלטה הבאה.</span></div>
+    </div>
+  </div>
+
+  <div class="quiz reveal">
+    <span class="q-tag">בדקו את עצמכם</span>
+    <p class="q-txt">מנהל קופת חולים מקבל דוח חודשי שמראה שההוצאה על תרופות במרפאות חרגה ב-12% מהתקציב שאושר בתחילת השנה. באיזה תפקיד של החשבונאות הניהולית מדובר כאן?</p>
+    <p class="q-note">בחרו תשובה אחת</p>
+    <div class="quiz-body">
+      <button class="quiz-opt" data-correct="false"><span class="k">א</span>תכנון</button>
+      <button class="quiz-opt" data-correct="true"><span class="k">ב</span>בקרה</button>
+      <button class="quiz-opt" data-correct="false"><span class="k">ג</span>קבלת החלטות</button>
+      <button class="quiz-opt" data-correct="false"><span class="k">ד</span>דיווח חיצוני לרשויות</button>
+    </div>
+    <div class="quiz-fb">
+      <div class="verdict"></div>
+      <p>הדוח הזה משווה בין מה שתוכנן (התקציב) לבין מה שקרה בפועל (ההוצאה בפועל), ומאתר סטייה. זו בדיוק הגדרת ה<b>בקרה</b>: לא לקבוע יעד חדש, ולא לבחור בין חלופות, אלא לבדוק אם היעד הקיים מושג.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MODULE 04 · ROADMAP ==================== -->
+<section class="section" id="roadmap">
+  <span class="block-tag">04 · מפת הסמסטר</span>
+  <h2>שלושה גושי נושאים, <span class="g">סמסטר אחד</span></h2>
+  <p class="section-sub">שלוש הדילמות שפגשנו במודול 01 הן בדיוק שלושת גושי הנושאים של הקורס, כפי שמופיעים בסילבוס. הנה איך זה בנוי, ולאן זה הולך משיעור זה והלאה.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🚪</span>פתיחה</span>
+    <span class="pst done"><span class="n">🤔</span>למה חשוב</span>
+    <span class="pst done"><span class="n">⚖️</span>הגדרות</span>
+    <span class="pst done"><span class="n">🎯</span>3 פונקציות</span>
+    <span class="pst on"><span class="n">🗺️</span>מפת הקורס</span>
+    <span class="pst"><span class="n">💼</span>שוק העבודה</span>
+    <span class="pst"><span class="n">✅</span>סיכום</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 5 מתוך 7 · מכאן תדעו תמיד "איפה אנחנו נמצאים" בסמסטר</div>
+
+  <div class="compare-grid reveal">
+    <div class="compare-card b"><h4>🧩 גוש א׳ · הקצאת עלויות</h4><p>איך מחלקים עלויות עקיפות ומשותפות ליחידות שירות בודדות: תמחיר מסורתי, תמחיר הזמנה, תמחיר תהליך, ותמחיר על בסיס פעולות (ABC). זה עונה על שאלת סמנכ״ל הכספים של בית החולים.</p></div>
+    <div class="compare-card d"><h4>📊 גוש ב׳ · כלי דיווח לתכנון ובקרה</h4><p>מתחיל כבר בהמשך שיעור זה: מיון והתנהגות עלויות (עלות קבועה מול משתנה), שמהווה את הבסיס לכל תקציב ולכל דוח בקרה. זה עונה על שאלת מנהל המחלקה בקופת חולים.</p></div>
+    <div class="compare-card a"><h4>⚖️ גוש ג׳ · עלויות לקבלת החלטות</h4><p>תמחיר תרומה וניתוח נקודת האיזון: כמה יחידות שירות צריך כדי לכסות עלות, ומתי כדאי לפתוח, לסגור, או למקור-חוץ שירות. זה עונה על שאלת מנהלת בית האבות.</p></div>
+  </div>
+
+  <h3 class="sub-h reveal">לוח הזמנים המלא <span class="g">של הקורס</span></h3>
+  <div class="tbl-wrap reveal">
+    <table class="tbl">
+      <tr><th>נושא</th><th class="num">שיעור משוער</th><th>חומר קריאה</th></tr>
+      <tr style="background:var(--primary-light)"><td>מבוא, מטרות החשבונאות הניהולית <b>(היום)</b></td><td class="num">1</td><td>יחידה 1, סעיפים 1.1–1.3</td></tr>
+      <tr><td>מושגי יסוד: התנהגות עלויות ומיון עלויות</td><td class="num">1</td><td>יחידה 1, סעיף 1.4 והלאה</td></tr>
+      <tr><td>העמסת עלויות עקיפות, התמחיר המסורתי</td><td class="num">2</td><td>יחידה 1, סעיף 1.4 והלאה</td></tr>
+      <tr><td>תמחיר הזמנה</td><td class="num">3–4</td><td>יחידה 2</td></tr>
+      <tr><td>תמחיר תהליך</td><td class="num">5–6</td><td>יחידה 3</td></tr>
+      <tr><td>תמחיר על בסיס פעולות (ABC)</td><td class="num">7–8</td><td>פרק 6 (קופמן)</td></tr>
+      <tr><td>תמחיר תרומה וניתוח נקודת האיזון</td><td class="num">11–13</td><td>יחידה 6</td></tr>
+    </table>
+  </div>
+  <p class="soft-note reveal">תוכנית הקורס טנטטיבית וייתכן ותשתנה במהלך הסמסטר, בהתאם לסילבוס הרשמי.</p>
+</section>
+
+<!-- ==================== MODULE 05 · CAREER ==================== -->
+<section class="section" id="career">
+  <span class="block-tag">05 · שוק העבודה</span>
+  <h2>איפה זה <span class="g">פוגש אתכם בקריירה</span></h2>
+  <p class="section-sub">חשבונאות ניהולית היא לא קורס תיאורטי בשביל בוגרי ניהול מערכות בריאות. היא שפת העבודה היומיומית של כמעט כל תפקיד ניהולי במערכת הבריאות בישראל. הפכו כל כרטיס כדי לראות איפה בדיוק.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🚪</span>פתיחה</span>
+    <span class="pst done"><span class="n">🤔</span>למה חשוב</span>
+    <span class="pst done"><span class="n">⚖️</span>הגדרות</span>
+    <span class="pst done"><span class="n">🎯</span>3 פונקציות</span>
+    <span class="pst done"><span class="n">🗺️</span>מפת הקורס</span>
+    <span class="pst on"><span class="n">💼</span>שוק העבודה</span>
+    <span class="pst"><span class="n">✅</span>סיכום</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 6 מתוך 7 · למה זה שווה לכם יותר מציון בקורס</div>
+
+  <div class="flip-grid cols4 stagger">
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">🏥</div><div class="ttl">מנהל/ת מחלקה בבית חולים</div><div class="hint">↻ מה תשתמשו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">🏥 מנהל/ת מחלקה</div><p>בונים ומנהלים תקציב מחלקתי שנתי, ומדווחים על סטיות מולו כל חודש. בדיוק הפונקציות של תכנון ובקרה שראינו היום.</p></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">📇</div><div class="ttl">רכז/ת עלויות בקופת חולים</div><div class="hint">↻ מה תשתמשו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">📇 רכז/ת עלויות</div><p>מחשבים עלות טיפול לפי שיטות הקצאה (תמחיר הזמנה, תהליך, ABC), ומשווים אותה למחיר שנקבע מול משרד הבריאות וסל הבריאות.</p></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">🏠</div><div class="ttl">מנהל/ת בית אבות או מרפאה פרטית</div><div class="hint">↻ מה תשתמשו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">🏠 מנהל/ת מוסד פרטי</div><p>מחליטים על פתיחה או סגירה של שירותים, ומחשבים כמות מטופלים מינימלית לכיסוי עלות (נקודת איזון) לפני שמשקיעים.</p></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">🩻</div><div class="ttl">מנהל/ת מוצר בחברת מכשור רפואי</div><div class="hint">↻ מה תשתמשו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">🩻 מנהל/ת מוצר</div><p>מתמחרים מכשיר או שירות חדש מול לקוחות מוסדיים, על סמך עלות ייצור ותמיכה אמיתית, לא ניחוש.</p></div>
+    </div></div>
+  </div>
+
+  <div class="info insight reveal">
+    <div class="hd">💼 למה זה מפריד ברמת הראיון והתפקיד הראשון</div>
+    <p>מערכת הבריאות בישראל מתומחרת ומתוקצבת סביב מנגנונים כמו סל הבריאות, תעריפי קופות חולים, ותקצוב לפי מחלקה. מנהל שיודע לקרוא ולבנות דוח עלות, להבין מקור לסטייה בתקציב, ולנתח כדאיות של החלטה, נתפס כמי שמדבר את השפה שההנהלה הבכירה מדברת בה, כבר מהתפקיד הראשון בקריירה.</p>
+  </div>
+</section>
+
+<!-- ==================== MODULE 06 · SUMMARY ==================== -->
+<section class="section" id="summary">
+  <span class="block-tag">06 · סיכום ולקראת הפעם הבאה</span>
+  <h2>מה לוקחים <span class="g">איתכם היום</span></h2>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🚪</span>פתיחה</span>
+    <span class="pst done"><span class="n">🤔</span>למה חשוב</span>
+    <span class="pst done"><span class="n">⚖️</span>הגדרות</span>
+    <span class="pst done"><span class="n">🎯</span>3 פונקציות</span>
+    <span class="pst done"><span class="n">🗺️</span>מפת הקורס</span>
+    <span class="pst done"><span class="n">💼</span>שוק העבודה</span>
+    <span class="pst on"><span class="n">✅</span>סיכום</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 7 מתוך 7 · האחרונה, לפני השיעור הבא</div>
+
+  <div class="takeaway reveal">
+    <span class="big-emoji">🧭</span>
+    <div class="hd">התובנה המרכזית של הרצאה 1</div>
+    <div class="tx">חשבונאות ניהולית היא לא "עוד סוג של חשבונאות". היא המידע הפנימי שהופך נתוני עלות גולמיים לתכנון, לבקרה, ולקבלת החלטות, בדיוק במקומות שהדוח הכספי השנתי שותק בהם.</div>
+  </div>
+
+  <h3 class="sub-h reveal">סיכמנו <span class="g">היום</span></h3>
+  <ul class="checklist reveal">
+    <li>למה חשבונאות פיננסית לבדה לא מספיקה לניהול מחלקה, קופת חולים או מוסד בריאות</li>
+    <li>ההבדל המדויק בין חשבונאות פיננסית לניהולית: קהל יעד, חובה חוקית, אופק זמן, יחידת ניתוח</li>
+    <li>ההבדל בין עלות, מחיר והוצאה, חשוב במיוחד בעולם המתומחר של מערכת הבריאות</li>
+    <li>שלוש הפונקציות: תכנון, בקרה, קבלת החלטות</li>
+    <li>שלושת גושי הנושאים של הקורס, ואיך כל אחד מהם עונה על דילמת ניהול אמיתית</li>
+  </ul>
+
+  <div class="meaning reveal">
+    <div class="hd">🔗 המשמעות לשיעור הבא</div>
+    <p>בפעם הבאה נעבור מהמסגרת הכללית לכלי הראשון בפועל: מיון והתנהגות עלויות. נשאל שאלה פשוטה במבט ראשון: כשמספר המטופלים משתנה, אילו עלויות משתנות איתו, ואילו נשארות קבועות? התשובה היא הבסיס לכל תקציב ולכל תמחיר שנלמד לאחר מכן.</p>
+  </div>
+
+  <div class="checkpoint reveal">
+    <div class="hd">✅ הכנה נדרשת לשיעור הבא</div>
+    <p>קראו יחידה 1, סעיף 1.4 והלאה (התנהגות עלויות ומיון עלויות).</p>
+    <p>אם עדיין לא התקנתם, התקינו את <b>Kahoot</b> ואת <b>EZCheck.me</b> לפני השיעור הבא.</p>
+    <p>הביאו מחשבון פשוט; יידרש כבר בתרגולים הראשונים.</p>
+  </div>
+
+  <div class="next reveal">
+    <div class="n">2️⃣</div>
+    <div><b style="font-size:19px;">הרצאה 2: מיון עלויות והתנהגות עלויות</b><div style="color:var(--muted);margin-top:4px;font-size:16px;">מהעיקרון הכללי של היום, אל הכלי הראשון שנחשב איתו לאורך כל הסמסטר.</div></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="big">חשבונאות ניהולית והתנהלות פיננסית · הרצאה 1</div>
+  <div>ד״ר שי צבאן · החוג לניהול מערכות בריאות</div>
+  <div class="small">מבנה השיעור טנטטיבי ומבוסס על הסילבוס הרשמי של הקורס; ייתכנו עדכונים במהלך הסמסטר.</div>
+</footer>
+
+<script>
+(function(){
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var bar=document.getElementById('bar'), lp=document.getElementById('lessonProg');
+  var sections=Array.prototype.slice.call(document.querySelectorAll('main .section'));
+  var navlinks=Array.prototype.slice.call(document.querySelectorAll('.nav-block'));
+
+  function onScroll(){
+    var h=document.documentElement, sc=h.scrollTop, max=h.scrollHeight-h.clientHeight;
+    if(bar) bar.style.width=(max>0?(sc/max*100):0)+'%';
+    var cur=sections[0], idx=0;
+    for(var i=0;i<sections.length;i++){ if(sections[i].getBoundingClientRect().top<=140){ cur=sections[i]; idx=i; } }
+    navlinks.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href')==='#'+(cur&&cur.id)); });
+    var pct = max>0 ? Math.round(sc/max*100) : 0;
+    if(lp) lp.textContent='מודול '+(idx+1)+' / '+sections.length+' · '+pct+'%';
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('load', onScroll); onScroll();
+
+  /* reveal + stagger */
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } }); }, {threshold:.12});
+  document.querySelectorAll('.reveal,.stagger').forEach(function(el){ io.observe(el); });
+
+  /* flip cards */
+  document.querySelectorAll('.flip').forEach(function(f){
+    f.setAttribute('tabindex','0'); f.setAttribute('role','button');
+    function tog(e){ if(e && e.target && e.target.closest('a,button')) return; f.classList.toggle('flipped'); }
+    f.addEventListener('click',tog);
+    f.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();f.classList.toggle('flipped');} });
+  });
+
+  /* hardq accordion */
+  document.querySelectorAll('.hardq .acc-h').forEach(function(h){
+    h.setAttribute('tabindex','0'); h.setAttribute('role','button');
+    function tog(){ h.parentElement.classList.toggle('open'); }
+    h.addEventListener('click',tog);
+    h.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();} });
+  });
+
+  /* quiz interaction */
+  document.querySelectorAll('.quiz').forEach(function(q){
+    var opts=q.querySelectorAll('.quiz-opt'), fb=q.querySelector('.quiz-fb'), verdict=fb?fb.querySelector('.verdict'):null;
+    opts.forEach(function(opt){
+      opt.addEventListener('click',function(){
+        if(q.classList.contains('answered')) return;
+        q.classList.add('answered');
+        var correctPicked = opt.getAttribute('data-correct')==='true';
+        opts.forEach(function(o){
+          o.disabled=true;
+          if(o.getAttribute('data-correct')==='true'){ o.classList.add('correct'); }
+          else if(o===opt){ o.classList.add('wrong'); }
+          else { o.classList.add('dim'); }
+        });
+        if(verdict) verdict.textContent = correctPicked ? '✅ נכון!' : '❌ לא מדויק, שימו לב לתשובה הנכונה למעלה.';
+        if(fb) fb.classList.add('show');
+      });
+    });
+  });
+
+  /* keynote start */
+  window.startLesson=function(){
+    document.body.classList.remove('pre-start');
+    var h=document.querySelector('.hero'); if(h) h.scrollIntoView({behavior:RM?'auto':'smooth'});
+  };
+  var hero=document.querySelector('.hero');
+  if(hero){ var o=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ document.body.classList.remove('pre-start'); o.disconnect(); } }); },{threshold:.08}); o.observe(hero); }
+})();
+</script>
+</body></html>
