@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 1 · חלק 2: תרגול מעשי — מבנה העלויות | ד״ר שי צבאן</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --rose:#db2777; --rose-dark:#9d174d; --rose-light:#fdf2f8;
+  --fixed:#ea580c; --fixed-light:#fff7ed;
+  --variable:#059669; --variable-light:#ecfdf5;
+  --mixed:#4f46e5; --mixed-light:#eef2ff;
+  --amber:#f59e0b; --amber-light:#fffbeb;
+  --ink:#1e293b; --ink-soft:#334155; --muted:#64748b; --line:#e7e2da; --bg:#fffaf5; --white:#fff;
+  --shadow:0 10px 30px rgba(30,23,15,.08); --shadow-lg:0 20px 50px rgba(30,23,15,.16);
+  --radius:26px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:20px;line-height:1.75;direction:rtl;-webkit-font-smoothing:antialiased}
+b,strong{font-weight:800}
+h1,h2,h3,h4{line-height:1.15}
+button{font-family:inherit}
+/* ---------- topbar ---------- */
+.topbar{position:sticky;top:0;z-index:900;background:rgba(255,250,245,.9);backdrop-filter:blur(12px);border-bottom:3px solid var(--line)}
+.topbar-inner{max-width:1100px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:11px}
+.badge{width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;font-weight:900;font-size:20px;display:grid;place-items:center;box-shadow:var(--shadow)}
+.brand .t{font-weight:800;font-size:15.5px;line-height:1.25}
+.brand .s{font-weight:600;font-size:12px;color:var(--muted)}
+.top-links{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.top-link{font-size:12.5px;font-weight:700;color:var(--ink-soft);text-decoration:none;padding:7px 13px;border-radius:999px;background:#fff;border:2px solid var(--line);white-space:nowrap}
+.top-link:hover{border-color:var(--rose);color:var(--rose)}
+.act-counter{background:var(--ink);color:#fff;font-weight:800;font-size:12.5px;padding:7px 15px;border-radius:999px;white-space:nowrap}
+/* ---------- hero ---------- */
+.hero{max-width:1000px;margin:0 auto;padding:46px 22px 20px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--line);color:var(--rose-dark);font-weight:800;font-size:14px;padding:8px 16px;border-radius:999px}
+.hero h1{font-size:clamp(30px,5vw,48px);font-weight:900;margin:18px 0 12px;line-height:1.15}
+.hero h1 .g{background:linear-gradient(120deg,var(--rose),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:clamp(16px,2vw,20px);color:var(--ink-soft);max-width:760px;margin:0 auto}
+.hero-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:999px;padding:8px 15px;font-weight:700;font-size:13.5px}
+/* ---------- recap ---------- */
+.wrap{max-width:1000px;margin:0 auto;padding:0 22px 60px}
+.recap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 10px}
+@media(max-width:760px){.recap-grid{grid-template-columns:1fr}}
+.recap-card{border-radius:20px;padding:20px;box-shadow:var(--shadow);color:#fff}
+.recap-card.fixed{background:linear-gradient(155deg,var(--fixed),#c2410c)}
+.recap-card.variable{background:linear-gradient(155deg,var(--variable),#047857)}
+.recap-card.mixed{background:linear-gradient(155deg,var(--mixed),#3730a3)}
+.recap-card .ic{font-size:32px}
+.recap-card h4{font-size:19px;margin:8px 0 6px}
+.recap-card p{font-size:15px;line-height:1.6;opacity:.96}
+/* ---------- meet libi ---------- */
+.meet-libi{background:linear-gradient(155deg,#fff,var(--rose-light));border:3px solid #fbcfe8;border-radius:var(--radius);padding:26px 28px;margin:30px 0;box-shadow:var(--shadow);display:grid;grid-template-columns:120px 1fr;gap:22px;align-items:center}
+@media(max-width:600px){.meet-libi{grid-template-columns:1fr;text-align:center}}
+.meet-libi svg{width:110px;height:110px;filter:drop-shadow(0 8px 16px rgba(219,39,119,.25))}
+.meet-libi h3{font-size:24px;color:var(--rose-dark);margin-bottom:8px}
+.meet-libi p{font-size:17.5px;color:var(--ink-soft)}
+/* ---------- section title ---------- */
+.sec-title{font-size:clamp(24px,3.4vw,32px);font-weight:900;margin:44px 0 8px}
+.sec-title .g{background:linear-gradient(120deg,var(--rose),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sec-sub{color:var(--muted);font-size:17px;margin-bottom:6px}
+/* ---------- station card ---------- */
+.station{background:#fff;border:3px solid var(--line);border-radius:var(--radius);padding:clamp(20px,3vw,32px);box-shadow:var(--shadow);margin:26px 0;scroll-margin-top:90px}
+.station-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.station-num{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;font-weight:900;font-size:19px;display:grid;place-items:center;flex-shrink:0}
+.station-head h3{font-size:clamp(20px,2.6vw,26px);font-weight:900;flex:1;min-width:200px}
+.badge-row{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:12.5px;font-weight:800;padding:5px 12px;border-radius:999px;white-space:nowrap}
+.tag.time{background:#fff7ed;color:#9a3412;border:1.5px solid #fed7aa}
+.tag.mode{background:#eff6ff;color:#1e40af;border:1.5px solid #bfdbfe}
+.station-instr{font-size:17.5px;color:var(--ink-soft);margin-bottom:16px}
+/* ---------- sort game ---------- */
+.sort-hud{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;background:var(--rose-light);border:2px solid #fbcfe8;border-radius:14px;padding:10px 16px;margin-bottom:16px;font-weight:800;font-size:14.5px;color:var(--rose-dark)}
+.sort-card{background:var(--amber-light);border:3px solid #fde68a;border-radius:18px;padding:22px;text-align:center;font-size:19px;font-weight:700;margin-bottom:16px;min-height:90px;display:flex;align-items:center;justify-content:center}
+.sort-btns{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sort-btn{border:3px solid var(--line);border-radius:16px;padding:16px 8px;font-weight:900;font-size:16px;cursor:pointer;background:#fff;transition:.15s}
+.sort-btn.fixed{color:var(--fixed)} .sort-btn.variable{color:var(--variable)} .sort-btn.mixed{color:var(--mixed)}
+.sort-btn:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.sort-btn.correct{background:var(--variable-light);border-color:var(--variable)}
+.sort-btn.wrong{background:#fef2f2;border-color:#ef4444;color:#ef4444}
+.sort-fb{margin-top:14px;font-size:16.5px;font-weight:700;min-height:26px;text-align:center}
+.sort-next{display:block;margin:14px auto 0;background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;border:none;border-radius:12px;padding:11px 26px;font-weight:800;font-size:15.5px;cursor:pointer}
+/* ---------- graph match ---------- */
+.graph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
+@media(max-width:700px){.graph-grid{grid-template-columns:1fr}}
+.graph-card{border:3px solid var(--line);border-radius:18px;padding:14px;cursor:pointer;text-align:center;background:#fff;transition:.15s}
+.graph-card:hover{border-color:var(--rose);transform:translateY(-2px)}
+.graph-card svg{width:100%;height:auto}
+.graph-card .lbl{margin-top:8px;font-weight:800;font-size:15px}
+.graph-card.picked{border-color:var(--rose);background:var(--rose-light)}
+.graph-target{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:16px}
+.graph-target button{border:3px solid var(--line);border-radius:14px;padding:10px 18px;font-weight:800;font-size:15px;background:#fff;cursor:pointer}
+.graph-target button.active{border-color:var(--rose);background:var(--rose-light);color:var(--rose-dark)}
+.graph-fb{text-align:center;font-weight:700;font-size:16.5px;min-height:26px;margin-top:6px}
+/* ---------- calc lab ---------- */
+.calc-lab{background:linear-gradient(180deg,#fff,#fffdf9);border:3px solid var(--amber);border-radius:22px;padding:clamp(18px,3vw,28px)}
+.calc-inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:16px}
+.calc-inputs label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:700;color:var(--ink-soft)}
+.calc-inputs input[type=number]{padding:11px 13px;border:2px solid var(--line);border-radius:11px;font-size:17px;font-family:'Heebo',sans-serif;direction:ltr;text-align:left}
+.calc-inputs input[type=range]{accent-color:var(--rose)}
+.rng-val{font-weight:900;color:var(--rose-dark)}
+.calc-out{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+@media(max-width:700px){.calc-out{grid-template-columns:1fr}}
+.calc-tile{background:#fff;border:2px solid var(--line);border-radius:14px;padding:14px;text-align:center}
+.calc-tile .v{font-size:24px;font-weight:900;color:var(--ink)}
+.calc-tile .l{font-size:13px;color:var(--muted);font-weight:700;margin-top:3px}
+.calc-q{background:#fff;border:2px dashed var(--line);border-radius:14px;padding:14px 18px;margin-top:14px;font-size:16.5px}
+.calc-q input{margin:0 6px;width:110px;padding:7px 10px;border:2px solid var(--line);border-radius:8px;font-family:'Heebo',sans-serif;font-size:15px;direction:ltr;text-align:center}
+.calc-check{background:var(--rose);color:#fff;border:none;border-radius:10px;padding:8px 18px;font-weight:800;font-size:14px;cursor:pointer;margin-inline-start:8px}
+.calc-verdict{font-weight:800;margin-top:8px;font-size:15px}
+/* ---------- guided steps ---------- */
+.guided-data{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.guided-data .dcard{flex:1;min-width:150px;background:var(--mixed-light);border:2px solid #c7d2fe;border-radius:14px;padding:14px;text-align:center}
+.guided-data .dcard b{display:block;font-size:20px;color:var(--mixed)}
+.gstep{border:2px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:10px;background:#fff}
+.gstep .gs-q{font-weight:700;font-size:16.5px;margin-bottom:10px}
+.gstep input{padding:8px 12px;border:2px solid var(--line);border-radius:8px;font-family:'Heebo',sans-serif;font-size:15px;direction:ltr;text-align:center;width:130px}
+.gstep .gs-check{background:var(--mixed);color:#fff;border:none;border-radius:9px;padding:8px 16px;font-weight:800;cursor:pointer;margin-inline-start:8px}
+.gstep .gs-fb{margin-top:10px;font-weight:700;display:none}
+.gstep .gs-fb.show{display:block}
+.gstep.locked{opacity:.45;pointer-events:none}
+.gstep.done{border-color:var(--variable);background:var(--variable-light)}
+/* ---------- true/false ---------- */
+.tf-card{background:#fff;border:2px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:12px}
+.tf-txt{font-size:17px;font-weight:600;margin-bottom:12px}
+.tf-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tf-btn{border:2px solid var(--line);border-radius:12px;padding:12px;font-weight:900;font-size:16px;cursor:pointer;background:#fff}
+.tf-btn.yes{color:var(--variable)} .tf-btn.no{color:#dc2626}
+.tf-btn.correct{background:var(--variable-light);border-color:var(--variable)}
+.tf-btn.wrong{background:#fef2f2;border-color:#dc2626}
+.tf-exp{font-size:15px;color:var(--ink-soft);margin-top:10px;display:none;border-top:1px dashed var(--line);padding-top:10px}
+.tf-exp.show{display:block}
+/* ---------- accordion (spot the mistake) ---------- */
+.mistake-box{background:#fef2f2;border:3px solid #fca5a5;border-radius:16px;padding:18px 20px;font-family:'Heebo',sans-serif}
+.mistake-box .mtitle{font-weight:900;color:#991b1b;margin-bottom:8px;font-size:16px}
+.mistake-box pre{white-space:pre-wrap;font-family:'Heebo',sans-serif;font-size:16.5px;line-height:1.8;color:#7f1d1d;margin:0}
+.reveal-acc{margin-top:14px;background:#fff;border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.reveal-acc .rh{display:flex;align-items:center;gap:10px;padding:13px 16px;cursor:pointer;font-weight:800}
+.reveal-acc .rh .chev{margin-inline-start:auto;transition:.3s}
+.reveal-acc.open .rh .chev{transform:rotate(180deg)}
+.reveal-acc .rb{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.reveal-acc.open .rb{max-height:500px}
+.reveal-acc .rbin{padding:0 16px 16px;font-size:16px;line-height:1.7;color:var(--ink-soft)}
+/* ---------- pair activity (physical, in-class) ---------- */
+.pair-box{background:linear-gradient(155deg,#fff,var(--mixed-light));border:3px solid #c7d2fe;border-radius:20px;padding:22px 24px}
+.pair-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}
+@media(max-width:600px){.pair-list{grid-template-columns:1fr}}
+.pair-item{background:#fff;border:2px solid var(--line);border-radius:12px;padding:12px 14px;font-size:16px}
+/* ---------- numerology bonus ---------- */
+.bonus-box{background:linear-gradient(135deg,#fdf4ff,#fdf2f8);border:3px dashed var(--rose);border-radius:20px;padding:20px 24px;text-align:center}
+.bonus-box .bt{font-weight:900;color:var(--rose-dark);font-size:18px;margin-bottom:8px}
+.bonus-box .num{font-size:44px;font-weight:900;color:var(--rose);margin:8px 0}
+/* ---------- exit ticket ---------- */
+.exit{background:linear-gradient(160deg,#0f172a,#312e2e);color:#f1f5f9;border-radius:24px;padding:28px;margin:30px 0;box-shadow:var(--shadow-lg)}
+.exit .et{display:inline-block;background:var(--amber);color:#1e293b;font-weight:900;font-size:13px;padding:6px 14px;border-radius:999px;margin-bottom:14px}
+.exit-q{background:#1e293b;border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.exit-q p{font-weight:700;font-size:16.5px;margin-bottom:10px}
+.exit-opt{display:block;width:100%;text-align:right;background:#0b1220;border:2px solid #334155;color:#e2e8f0;border-radius:10px;padding:11px 14px;margin:7px 0;cursor:pointer;font-family:inherit;font-size:15px}
+.exit-opt:hover{border-color:var(--amber)}
+.exit-opt.correct{background:#064e3b;border-color:#10b981}
+.exit-opt.wrong{background:#4c0519;border-color:#ef4444}
+.exit-score{text-align:center;font-size:20px;font-weight:900;margin-top:10px;display:none}
+.exit-score.show{display:block}
+/* ---------- libi mascot ---------- */
+.libi{position:fixed;z-index:1200;bottom:20px;left:20px;display:flex;align-items:flex-end;gap:10px;max-width:330px;user-select:none;touch-action:none}
+.l-art{width:84px;height:84px;flex-shrink:0;cursor:grab;filter:drop-shadow(0 6px 14px rgba(157,23,77,.3))}
+.l-art:active{cursor:grabbing}
+.l-bubble{background:#fff;border:3px solid var(--rose);border-radius:18px 18px 4px 18px;padding:12px 16px;box-shadow:var(--shadow-lg);position:relative}
+.l-bhd{font-weight:900;color:var(--rose-dark);font-size:14.5px;margin-bottom:3px;display:flex;gap:8px;align-items:center;justify-content:space-between}
+.l-bhd .l-min{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);font-weight:900}
+.l-tip{font-size:14.5px;line-height:1.5;color:var(--ink)}
+.libi.min .l-bubble{display:none}
+.l-reopen{display:none}
+.libi.min .l-reopen{display:grid;place-items:center;position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--rose);color:#fff;font-size:11px;font-weight:900;cursor:pointer}
+.libi.pulse .l-bubble{animation:lpulse .9s ease}
+@keyframes lpulse{0%{transform:scale(1)}18%{transform:scale(1.1) rotate(1deg);box-shadow:0 0 0 9px rgba(219,39,119,.28)}100%{transform:scale(1)}}
+.libi.pulse .l-art{animation:lnudge .85s ease}
+@keyframes lnudge{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-10px) rotate(6deg)}50%{transform:translateY(0)}72%{transform:translateY(-5px) rotate(-5deg)}}
+@media(max-width:600px){.libi{max-width:220px;bottom:12px;left:12px}.l-art{width:64px;height:64px}.l-tip{font-size:13px}}
+.hint-btn{display:inline-flex;align-items:center;gap:6px;background:var(--rose-light);border:2px solid #fbcfe8;color:var(--rose-dark);font-weight:800;font-size:13.5px;padding:7px 14px;border-radius:999px;cursor:pointer;margin-bottom:10px}
+.hint-btn:hover{background:#fbcfe8}
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.show{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important}}
+footer{background:#1e293b;color:#cbd5e1;padding:40px 22px;text-align:center;margin-top:20px}
+footer .big{font-weight:800;color:#fff;font-size:18px;margin-bottom:6px}
+footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
+</style>
+</head>
+<body>
+
+<!-- ============ SVG DEFS: Libi ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="libiFace" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="48" fill="#fdf2f8"/>
+  <path d="M14 100 Q22 72 40 68 L60 68 Q78 72 86 100 Z" fill="#db2777"/>
+  <circle cx="50" cy="46" r="27" fill="#f4c9a4"/>
+  <circle cx="24" cy="48" r="5" fill="#f4c9a4"/><circle cx="76" cy="48" r="5" fill="#f4c9a4"/>
+  <path d="M22 40 Q20 12 50 12 Q80 12 78 40 Q76 46 70 30 Q60 44 50 30 Q40 44 30 30 Q24 46 22 40 Z" fill="#7c4a2d"/>
+  <ellipse cx="50" cy="10" rx="16" ry="9" fill="#fff"/>
+  <rect x="36" y="4" width="28" height="8" rx="4" fill="#fff"/>
+  <circle cx="35" cy="54" r="5.5" fill="#f2a6a6" opacity=".5"/><circle cx="65" cy="54" r="5.5" fill="#f2a6a6" opacity=".5"/>
+  <path d="M33 39 Q38 35 44 39" stroke="#4a2e1c" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+  <path d="M56 39 Q62 35 67 39" stroke="#4a2e1c" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+  <circle cx="39" cy="46" r="3.2" fill="#3a2317"/><circle cx="61" cy="46" r="3.2" fill="#3a2317"/>
+  <circle cx="40.1" cy="45" r="1" fill="#fff"/><circle cx="62.1" cy="45" r="1" fill="#fff"/>
+  <path d="M38 58 Q50 67 62 58" fill="none" stroke="#a0522d" stroke-width="2.4" stroke-linecap="round"/>
+</symbol></svg>
+
+<!-- ============ TOPBAR ============ -->
+<nav class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="badge">₪</div>
+      <div>
+        <div class="t">חשבונאות ניהולית</div>
+        <div class="s">שיעור 1 · חלק 2 · תרגול מעשי · ד״ר שי צבאן</div>
+      </div>
+    </div>
+    <div class="top-links">
+      <a class="top-link" href="index.html">🏠 דף הבית</a>
+      <a class="top-link" href="lec1.html">1️⃣ חלק 1: מבוא</a>
+      <span class="act-counter" id="actCounter">פעילות 0 / 9</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <span class="hero-badge">🧁 שיעור 1 · חלק 2</span>
+  <h1>מבנה העלויות: <span class="g">תרגול מעשי עם ליבי</span></h1>
+  <p>קבועה, משתנה, מעורבת. הפעם לא רק מגדירים, אלא מתרגלים בכל דרך אפשרית: מיון, גרפים, מחשבון חי, שיטת גבוה-נמוך, שאלות אמת/שקר, ותפיסת טעויות. ליבי תלווה אתכם עם רמזים, ומדי פעם עם בדיחה על נומרולוגיה או על אוכל, כי אין ברירה.</p>
+  <div class="hero-chips">
+    <span class="chip">⏱ כ-60 דקות</span>
+    <span class="chip">🥐 מקרה מלווה: המאפייה של ליבי</span>
+    <span class="chip">🎯 9 תחנות פעילות</span>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ============ QUICK RECAP ============ -->
+  <div class="recap-grid reveal">
+    <div class="recap-card fixed"><div class="ic">🏠</div><h4>עלות קבועה</h4><p>לא משתנה עם כמות הייצור. שכר דירה למאפייה: 4,000 ש״ח בחודש, בין אם נאפו קרואסון אחד או 1,000.</p></div>
+    <div class="recap-card variable"><div class="ic">🥐</div><h4>עלות משתנה</h4><p>גדלה באופן ישר עם הכמות. קמח וחמאה לכל קרואסון: כ-3 ש״ח ליחידה, כפול מספר הקרואסונים.</p></div>
+    <div class="recap-card mixed"><div class="ic">💡</div><h4>עלות מעורבת</h4><p>יש בה רכיב קבוע ורכיב משתנה יחד. חשמל למאפייה: 500 ש״ח בסיס, ועוד לפי הצריכה בפועל של התנורים.</p></div>
+  </div>
+
+  <!-- ============ MEET LIBI ============ -->
+  <div class="meet-libi reveal">
+    <svg viewBox="0 0 100 100"><use href="#libiFace"/></svg>
+    <div>
+      <h3>הכירו את ליבי 👋</h3>
+      <p>ליבי היא הבוגרת השובבה של הקורס, בעלת המאפייה הדמיונית שנשתמש בה כל התרגול. היא תגלה רמזים בכל תחנה (לחצו על "רמז מליבי"), ומדי פעם תפליט בדיחה על נומרולוגיה או על אוכל. היא לא באמת מומחית נומרולוגיה. היא בקושי מומחית אפייה. אבל היא טובה בעלויות, וזה מה שחשוב.</p>
+    </div>
+  </div>
+
+  <!-- ============ LIBI FLOATING WIDGET ============ -->
+  <div class="libi" id="libi">
+    <svg class="l-art" id="lArt" viewBox="0 0 100 100"><use href="#libiFace"/></svg>
+    <div class="l-bubble">
+      <div class="l-bhd"><span>ליבי 🧁</span><button class="l-min" onclick="libiMin()" title="מזער">–</button></div>
+      <div class="l-tip" id="lTip">היי! אני ליבי. גררו אותי לאן שנוח, ולחצו על "רמז מליבי" בכל תחנה כשתתקעו. ואם תשאלו יפה, אולי אספר גם על המספר 7.</div>
+    </div>
+    <div class="l-reopen" onclick="libiReopen()" title="פתחו את ליבי">💬</div>
+  </div>
+
+  <!-- ============ STATION 1: WARM-UP SORT GAME ============ -->
+  <h2 class="sec-title">תחנה 1 · <span class="g">חימום — מיינו מהר</span></h2>
+  <p class="sec-sub">10 עלויות מהמאפייה של ליבי. לכל אחת, קבעו: קבועה, משתנה, או מעורבת. אין זמן לחשוב יותר מדי, זה חימום.</p>
+  <section class="station reveal" id="s1" data-libi="s1">
+    <div class="station-head">
+      <div class="station-num">1</div>
+      <h3>🎯 משחק מיון מהיר</h3>
+      <div class="badge-row"><span class="tag time">⏱ 5 דק׳</span><span class="tag mode">👤 עבודה עצמית</span></div>
+    </div>
+    <p class="station-instr">קראו את הפריט בכרטיס, ולחצו על הכפתור המתאים. משוב מיידי, ואפשר להמשיך לפריט הבא.</p>
+    <button class="hint-btn" onclick="showHint('s1')">💡 רמז מליבי</button>
+    <div class="sort-hud"><span id="sortProgress">פריט 1 מתוך 10</span><span id="sortScore">ניקוד: 0</span></div>
+    <div class="sort-card" id="sortCard"></div>
+    <div class="sort-btns">
+      <button class="sort-btn fixed" onclick="sortPick('fixed')">🏠 קבועה</button>
+      <button class="sort-btn variable" onclick="sortPick('variable')">🥐 משתנה</button>
+      <button class="sort-btn mixed" onclick="sortPick('mixed')">💡 מעורבת</button>
+    </div>
+    <div class="sort-fb" id="sortFb"></div>
+    <button class="sort-next" id="sortNextBtn" style="display:none" onclick="sortNext()">לפריט הבא ←</button>
+  </section>
+
+  <!-- ============ STATION 2: GRAPH MATCH ============ -->
+  <h2 class="sec-title">תחנה 2 · <span class="g">התאימו את הגרף</span></h2>
+  <p class="sec-sub">כל עלות מתנהגת אחרת כשכמות הייצור עולה. בחרו סוג עלות מהכפתורים, ואז לחצו על הגרף שמתאים לה.</p>
+  <section class="station reveal" id="s2" data-libi="s2">
+    <div class="station-head">
+      <div class="station-num">2</div>
+      <h3>📈 מי הגרף שלי?</h3>
+      <div class="badge-row"><span class="tag time">⏱ 5 דק׳</span><span class="tag mode">👥 בזוגות</span></div>
+    </div>
+    <p class="station-instr">בחרו סוג עלות, ואז לחצו על הגרף שאתם חושבים שמתאר אותה נכון. שלושת הגרפים מסודרים באקראי, אז אל תנחשו לפי המיקום.</p>
+    <button class="hint-btn" onclick="showHint('s2')">💡 רמז מליבי</button>
+    <div class="graph-target">
+      <button data-t="fixed" onclick="graphSetTarget('fixed')">🏠 עלות קבועה</button>
+      <button data-t="variable" onclick="graphSetTarget('variable')">🥐 עלות משתנה</button>
+      <button data-t="mixed" onclick="graphSetTarget('mixed')">💡 עלות מעורבת</button>
+    </div>
+    <div class="graph-grid" id="graphGrid"></div>
+    <div class="graph-fb" id="graphFb"></div>
+  </section>
+
+  <!-- ============ STATION 3: LIVE CALCULATOR ============ -->
+  <h2 class="sec-title">תחנה 3 · <span class="g">מחשבון המאפייה החי</span></h2>
+  <p class="sec-sub">שחקו עם המספרים וראו איך העלות הכוללת מגיבה. ואז ענו על שתי אתגרי החישוב.</p>
+  <section class="station reveal" id="s3" data-libi="s3">
+    <div class="station-head">
+      <div class="station-num">3</div>
+      <h3>🧮 כמה עולה לנו לאפות היום?</h3>
+      <div class="badge-row"><span class="tag time">⏱ 8 דק׳</span><span class="tag mode">👤 עבודה עצמית</span></div>
+    </div>
+    <button class="hint-btn" onclick="showHint('s3')">💡 רמז מליבי</button>
+    <div class="calc-lab">
+      <div class="calc-inputs">
+        <label>עלות קבועה חודשית (שכ״ד, ש״ח)<input type="number" id="c-fixed" value="4000" min="0"></label>
+        <label>עלות משתנה לקרואסון (ש״ח)<input type="number" id="c-var" value="3" min="0" step="0.5"></label>
+        <label>כמות קרואסונים החודש: <span class="rng-val" id="c-qty-v">300</span><input type="range" id="c-qty" min="0" max="1000" value="300"></label>
+      </div>
+      <div class="calc-out">
+        <div class="calc-tile"><div class="v" id="c-out-fixed">4,000</div><div class="l">סה״כ עלות קבועה</div></div>
+        <div class="calc-tile"><div class="v" id="c-out-var">900</div><div class="l">סה״כ עלות משתנה</div></div>
+        <div class="calc-tile"><div class="v" id="c-out-total">4,900</div><div class="l">סה״כ עלות כוללת (TC)</div></div>
+      </div>
+      <div class="calc-q">
+        <b>אתגר 1:</b> אם ליבי אפתה 500 קרואסונים החודש (עם הפרמטרים שבתיבות למעלה), מהי העלות הכוללת?
+        <input type="number" id="cq1-ans" placeholder="₪">
+        <button class="calc-check" onclick="checkCalcQ(1, 500)">בדקו</button>
+        <div class="calc-verdict" id="cq1-v"></div>
+      </div>
+      <div class="calc-q">
+        <b>אתגר 2:</b> ליבי רוצה שהעלות הממוצעת לקרואסון תרד. מה יקרה לעלות הממוצעת ליחידה ככל שכמות הייצור עולה, כשיש רכיב עלות קבוע? (ענו: עולה / יורדת / נשארת קבועה)
+        <input type="text" id="cq2-ans" placeholder="עולה / יורדת / קבועה" style="width:170px">
+        <button class="calc-check" onclick="checkCalcQ(2)">בדקו</button>
+        <div class="calc-verdict" id="cq2-v"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATION 4: HIGH-LOW GUIDED ============ -->
+  <h2 class="sec-title">תחנה 4 · <span class="g">שיטת גבוה-נמוך, שלב אחר שלב</span></h2>
+  <p class="sec-sub">חשבון החשמל של המאפייה הוא עלות מעורבת. יש לנו שני חודשים: חודש עם הכי הרבה תנורים פועלים, וחודש עם הכי מעט. נפרק את החשבון לרכיב הקבוע והמשתנה שלו.</p>
+  <section class="station reveal" id="s4" data-libi="s4">
+    <div class="station-head">
+      <div class="station-num">4</div>
+      <h3>🔌 חשבון החשמל של המאפייה</h3>
+      <div class="badge-row"><span class="tag time">⏱ 12 דק׳</span><span class="tag mode">👥 בזוגות, מודרך</span></div>
+    </div>
+    <button class="hint-btn" onclick="showHint('s4')">💡 רמז מליבי</button>
+    <div class="guided-data">
+      <div class="dcard"><b>אוגוסט (שיא)</b>1,200 קרואסונים · חשבון 8,600 ש״ח</div>
+      <div class="dcard"><b>ינואר (שפל)</b>400 קרואסונים · חשבון 5,000 ש״ח</div>
+    </div>
+    <div class="gstep" id="g1">
+      <div class="gs-q">שלב 1: מהו ההפרש בכמות הקרואסונים בין החודש הגבוה לחודש הנמוך?</div>
+      <input type="number" id="g1-ans" placeholder="יחידות">
+      <button class="gs-check" onclick="checkGStep(1, 800, 'g2')">בדקו</button>
+      <div class="gs-fb" id="g1-fb"></div>
+    </div>
+    <div class="gstep locked" id="g2">
+      <div class="gs-q">שלב 2: מהו ההפרש בעלות הכוללת (₪) בין החודש הגבוה לחודש הנמוך?</div>
+      <input type="number" id="g2-ans" placeholder="ש״ח">
+      <button class="gs-check" onclick="checkGStep(2, 3600, 'g3')">בדקו</button>
+      <div class="gs-fb" id="g2-fb"></div>
+    </div>
+    <div class="gstep locked" id="g3">
+      <div class="gs-q">שלב 3: העלות המשתנה ליחידה = הפרש עלות ÷ הפרש כמות. כמה זה?</div>
+      <input type="number" id="g3-ans" placeholder="ש״ח ליחידה" step="0.01">
+      <button class="gs-check" onclick="checkGStep(3, 4.5, 'g4')">בדקו</button>
+      <div class="gs-fb" id="g3-fb"></div>
+    </div>
+    <div class="gstep locked" id="g4">
+      <div class="gs-q">שלב 4: הציבו בחודש הנמוך (400 יחידות): עלות קבועה = עלות כוללת − (עלות משתנה ליחידה × כמות). כמה העלות הקבועה?</div>
+      <input type="number" id="g4-ans" placeholder="ש״ח">
+      <button class="gs-check" onclick="checkGStep(4, 3200, null)">בדקו</button>
+      <div class="gs-fb" id="g4-fb"></div>
+    </div>
+  </section>
+
+  <!-- ============ STATION 5: TRUE/FALSE RAPID ROUND ============ -->
+  <h2 class="sec-title">תחנה 5 · <span class="g">סיבוב מהיר: נכון או לא נכון</span></h2>
+  <p class="sec-sub">חמש טענות. החליטו מהר, ובדקו את עצמכם מיד.</p>
+  <section class="station reveal" id="s5" data-libi="s5">
+    <div class="station-head">
+      <div class="station-num">5</div>
+      <h3>⚡ אמת או שקר</h3>
+      <div class="badge-row"><span class="tag time">⏱ 6 דק׳</span><span class="tag mode">👤 עבודה עצמית</span></div>
+    </div>
+    <button class="hint-btn" onclick="showHint('s5')">💡 רמז מליבי</button>
+    <div id="tfContainer"></div>
+  </section>
+
+  <!-- ============ STATION 6: SPOT THE MISTAKE ============ -->
+  <h2 class="sec-title">תחנה 6 · <span class="g">תפסו את הטעות</span></h2>
+  <p class="sec-sub">תלמיד פתר את התרגיל הבא, אבל טעה. מצאו את הטעות לפני שאתם חושפים את התשובה.</p>
+  <section class="station reveal" id="s6" data-libi="s6">
+    <div class="station-head">
+      <div class="station-num">6</div>
+      <h3>🕵️ איפה הטעות?</h3>
+      <div class="badge-row"><span class="tag time">⏱ 6 דק׳</span><span class="tag mode">👥 בזוגות</span></div>
+    </div>
+    <button class="hint-btn" onclick="showHint('s6')">💡 רמז מליבי</button>
+    <div class="mistake-box">
+      <div class="mtitle">פתרון (שגוי) של דניאל</div>
+      <pre>נתון: שכר דירה 4,000 ש״ח בחודש, עלות קמח וחמאה 3 ש״ח לקרואסון.
+השאלה: מה העלות הכוללת אם ייאפו 0 קרואסונים החודש (המאפייה בשיפוצים)?
+פתרון של דניאל: TC = 4,000 + (3 × 0) = 0 ש״ח, כי בלי לאפות אין עלות.</pre>
+      <div class="reveal-acc" id="mistakeAcc">
+        <div class="rh" onclick="toggleAcc('mistakeAcc')"><span>🎯 לחצו לתשובה</span><span class="chev">⌄</span></div>
+        <div class="rb"><div class="rbin">דניאל טעה בחישוב עצמו, לא רק בהיגיון. הוא בעצם קלט נכון: <b>3,000+(3×0)=4,000</b>, ולא אפס. הטעות המושגית שלו חמורה יותר מטעות אריתמטית: הוא "שכח" את העלות הקבועה. שכר הדירה משולם <b>גם אם לא נאפה אף קרואסון</b>. זו בדיוק ההגדרה של עלות קבועה: TC בכמות אפס עדיין שווה לעלות הקבועה, 4,000 ש״ח, לא אפס.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATION 7: PAIR CLASSROOM ACTIVITY ============ -->
+  <h2 class="sec-title">תחנה 7 · <span class="g">עבודה בזוגות: מרפאה קטנה</span></h2>
+  <p class="sec-sub">עכשיו יוצאים מהמאפייה, לרגע, אל מרפאה קהילתית קטנה. עבדו בזוגות: לכל פריט קבעו יחד קבועה, משתנה או מעורבת, ונמקו בקצרה.</p>
+  <section class="station reveal" id="s7" data-libi="s7">
+    <div class="station-head">
+      <div class="station-num">7</div>
+      <h3>🏥 חמישה פריטי עלות במרפאה</h3>
+      <div class="badge-row"><span class="tag time">⏱ 8 דק׳</span><span class="tag mode">👥 בזוגות, דיון במליאה</span></div>
+    </div>
+    <button class="hint-btn" onclick="showHint('s7')">💡 רמז מליבי</button>
+    <div class="pair-box">
+      <p style="margin-bottom:6px;font-weight:700;">קבעו לכל פריט את סוג העלות, ורשמו נימוק אחד קצר. אחרי 5 דקות נעבור יחד במליאה.</p>
+      <div class="pair-list">
+        <div class="pair-item">1. שכר רופא המרפאה, מועסק במשכורת חודשית קבועה</div>
+        <div class="pair-item">2. עלות בדיקות דם, לפי מספר הבדיקות בפועל</div>
+        <div class="pair-item">3. ביטוח מבנה המרפאה, פרמיה שנתית קבועה</div>
+        <div class="pair-item">4. חשבון מים, תעריף מינימום חודשי ועוד תוספת לפי צריכה בפועל</div>
+        <div class="pair-item">5. חומרי חיטוי וכפפות חד-פעמיות, לפי מספר המטופלים</div>
+      </div>
+      <p style="font-size:15px;color:var(--muted);">רמז לדיון: פריט מספר 1 מסתיר שאלה מעניינת. שכר קבוע נשאר קבוע, אבל מה קורה אם מכניסים רופא נוסף כי מספר המטופלים גדל? זה עדיין "עלות קבועה" בטווח הקצר, אבל היא <b>מדרגתית (step cost)</b> בטווח הארוך יותר.</p>
+    </div>
+  </section>
+
+  <!-- ============ BONUS: NUMEROLOGY CORNER ============ -->
+  <div class="bonus-box reveal">
+    <div class="bt">🔮 פינת הנומרולוגיה של ליבי (לא מדעי, לא רציני, רק כיף)</div>
+    <p>סכמו את הספרות של העלות הקבועה שלנו: 4,000 ← 4+0+0+0 = <span class="num">4</span></p>
+    <p style="font-size:15.5px;color:var(--ink-soft)">לפי הנומרולוגיה שליבי המציאה הרגע: המספר 4 מסמל "יציבות, ארבע רגלי שולחן, וקרואסון שלא נופל מהצלחת". אין לזה שום בסיס, אבל זה בדיוק מה שעלות קבועה עושה: היא נשארת יציבה, לא משנה כמה קרואסונים אופים.</p>
+  </div>
+
+  <!-- ============ STATION 8/9: EXIT TICKET ============ -->
+  <h2 class="sec-title">תחנה 8 · <span class="g">כרטיס יציאה</span></h2>
+  <p class="sec-sub">שלוש שאלות אחרונות לפני שיוצאים. אם עניתם נכון על כולן, ליבי מבטיחה קרואסון דמיוני בדרך החוצה.</p>
+  <section class="station reveal" id="s8" data-libi="s8">
+    <div class="station-head">
+      <div class="station-num">8</div>
+      <h3>🎫 בדקו את עצמכם</h3>
+      <div class="badge-row"><span class="tag time">⏱ 5 דק׳</span><span class="tag mode">👤 עבודה עצמית</span></div>
+    </div>
+    <div class="exit">
+      <span class="et">כרטיס יציאה</span>
+      <div id="exitContainer"></div>
+      <div class="exit-score" id="exitScore"></div>
+    </div>
+  </section>
+
+  <!-- ============ CLOSING ============ -->
+  <h2 class="sec-title">תחנה 9 · <span class="g">סיכום קצר</span></h2>
+  <section class="station reveal" id="s9" data-libi="s9">
+    <div class="station-head">
+      <div class="station-num">9</div>
+      <h3>✅ מה עשינו הרגע</h3>
+      <div class="badge-row"><span class="tag time">⏱ 2 דק׳</span><span class="tag mode">🗣️ מליאה</span></div>
+    </div>
+    <button class="hint-btn" onclick="showHint('s9')">💡 רמז מליבי</button>
+    <p class="station-instr">מיינו עלויות, קראנו גרפים, חישבנו TC בזמן אמת, פירקנו עלות מעורבת בשיטת גבוה-נמוך, ותפסנו טעות נפוצה: לשכוח שעלות קבועה נשארת גם בכמות ייצור אפס. בשיעור הבא נמשיך אל העמסת עלויות עקיפות, השלב הראשון לקראת תמחיר אמיתי.</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="big">חשבונאות ניהולית · שיעור 1, חלק 2: תרגול מעשי</div>
+  <div>ד״ר שי צבאן · מבנה העלויות: קבועה, משתנה, מעורבת</div>
+  <div class="small">מקרה "המאפייה של ליבי" הוא מקרה לימודי דמיוני, לצורכי הוראה בלבד.</div>
+</footer>
+
+<script>
+(function(){
+  /* ---------- reveal on scroll ---------- */
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } }); }, {threshold:.1});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* ---------- activity counter ---------- */
+  var stations=Array.prototype.slice.call(document.querySelectorAll('.station'));
+  var counterEl=document.getElementById('actCounter');
+  var stIO=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        var idx=stations.indexOf(e.target)+1;
+        counterEl.textContent='פעילות '+idx+' / '+stations.length;
+      }
+    });
+  },{threshold:.4});
+  stations.forEach(function(s){ stIO.observe(s); });
+
+  /* ---------- accordion ---------- */
+  window.toggleAcc=function(id){ document.getElementById(id).classList.toggle('open'); };
+
+  /* ================= LIBI MASCOT ================= */
+  var libi=document.getElementById('libi'), lTip=document.getElementById('lTip'), lArt=document.getElementById('lArt');
+  var HINTS={
+    s1:"רמז: תשאלו את עצמכם קודם 'האם זה תלוי בכמה קרואסונים אפינו החודש?'. אם התשובה היא לא בכלל, זו קבועה. אם כן, ותמיד באותו יחס, זו משתנה. ואם קצת משתי הקטגוריות, ובכן, ברוכים הבאים למעורבת.",
+    s2:"רמז: קו ישר שיוצא מהאפס בזווית, זו עלות משתנה טהורה. קו ישר אופקי, שלא זז בכלל, זו עלות קבועה. וקו ישר שמתחיל למעלה מהאפס ואז עולה, זו עלות מעורבת. אגב, המספר 3 בנומרולוגיה הדמיונית שלי מסמל 'שלושה סוגי עלויות, לא פחות ולא יותר'.",
+    s3:"רמז: TC = עלות קבועה + (עלות משתנה ליחידה × כמות). שימו לב שהעלות הקבועה בתיבה הראשונה לא זזה אף פעם, ממש כמו כמות הבצק שנשארת לי דבוקה לידיים אחרי כל אפייה.",
+    s4:"רמז: שיטת גבוה-נמוך היא בעצם 'שיפוע' בין שתי נקודות: (הפרש עלות) חלקי (הפרש כמות). ברגע שיש לכם את זה, תשעה מהעשרה שלבים כבר מאחוריכם. אני ממש לא מומחית לחשמל, אבל אני כן מומחית לחשבוניות שמגיעות בסוף החודש.",
+    s5:"רמז: אם משהו נשמע כמו 'תמיד', 'לעולם', או 'בכל מקרה', בדקו אותו פעמיים. בעולם העלויות, כמעט כל כלל אמיתי תלוי בטווח הזמן ובהיקף הפעילות.",
+    s6:"רמז: הציבו כמות אפס בנוסחה של TC. מה שנשאר, זה בדיוק העלות הקבועה. אם התוצאה שלכם יוצאת אפס, מישהו שכח משהו שקוראים לו שכר דירה.",
+    s7:"רמז: שאלו על כל פריט 'האם זה תלוי במספר המטופלים החודש?'. אם לא, זה קבוע. אם כן וביחס ישר, זה משתנה. אם שילוב, זה מעורב. ופריט מספר 1 הוא המלכודת, כי לטווח קצר הוא קבוע לגמרי.",
+    s9:"רמז אחרון: אם משהו לא היה ברור, זה בסדר גמור. זה בדיוק מה ששיעור 2 בא לתקן. ותודה שבאתם לתרגל, גם בלי קרואסון אמיתי."
+  };
+  function setTip(txt){ lTip.textContent=txt; libi.classList.remove('pulse'); void libi.offsetWidth; libi.classList.add('pulse'); }
+  window.showHint=function(id){ if(HINTS[id]){ setTip(HINTS[id]); if(libi.classList.contains('min')) libiReopen(); } };
+  window.libiMin=function(){ libi.classList.add('min'); };
+  window.libiReopen=function(){ libi.classList.remove('min'); };
+
+  /* drag both axes */
+  function clampX(x){ return Math.max(6, Math.min(x, window.innerWidth - libi.offsetWidth - 6)); }
+  function clampY(y){ return Math.max(6, Math.min(y, window.innerHeight - libi.offsetHeight - 6)); }
+  var dragging=false, dx=0, dy=0;
+  function down(e){ dragging=true;
+    var r=libi.getBoundingClientRect();
+    var cx=(e.touches?e.touches[0].clientX:e.clientX), cy=(e.touches?e.touches[0].clientY:e.clientY);
+    dx=cx-r.left; dy=cy-r.top; libi.style.bottom='auto'; e.preventDefault();
+  }
+  function move(e){ if(!dragging) return;
+    var cx=(e.touches?e.touches[0].clientX:e.clientX), cy=(e.touches?e.touches[0].clientY:e.clientY);
+    libi.style.left=clampX(cx-dx)+'px'; libi.style.top=clampY(cy-dy)+'px'; libi.style.right='auto';
+  }
+  function up(){ dragging=false; }
+  lArt.addEventListener('mousedown',down); lArt.addEventListener('touchstart',down,{passive:false});
+  window.addEventListener('mousemove',move); window.addEventListener('touchmove',move,{passive:false});
+  window.addEventListener('mouseup',up); window.addEventListener('touchend',up);
+
+  var libiIO=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting && e.intersectionRatio>0.5){ var id=e.target.getAttribute('data-libi'); if(id&&HINTS[id]) setTip(HINTS[id]); } });
+  },{threshold:[0.5]});
+  document.querySelectorAll('[data-libi]').forEach(function(s){ libiIO.observe(s); });
+
+  /* ================= STATION 1: SORT GAME ================= */
+  var SORT_ITEMS=[
+    {t:"שכר הדירה החודשי של המאפייה, 4,000 ש״ח קבוע", a:"fixed"},
+    {t:"קמח וחמאה, כ-3 ש״ח לכל קרואסון שנאפה", a:"variable"},
+    {t:"חשבון החשמל: 500 ש״ח בסיס קבוע + תוספת לפי שעות תפעול התנור", a:"mixed"},
+    {t:"ביטוח למבנה המאפייה, פרמיה שנתית קבועה", a:"fixed"},
+    {t:"שקיות אריזה, יחידה אחת לכל קרואסון שנמכר", a:"variable"},
+    {t:"משכורת אופה בכיר, קבועה, ללא קשר לכמות שנאפתה", a:"fixed"},
+    {t:"עמלת סליקת אשראי, אחוז קבוע ממחיר כל קרואסון שנמכר בכרטיס", a:"variable"},
+    {t:"חבילת אינטרנט וקופה רושמת, 200 ש״ח לחודש + תוספת לפי נפח עסקאות", a:"mixed"},
+    {t:"שכר ניקיון שבועי קבוע של המאפייה", a:"fixed"},
+    {t:"מים לניקוי, תעריף מינימום חודשי + תוספת לפי צריכה בפועל", a:"mixed"}
+  ];
+  var sortIdx=0, sortScore=0, sortLocked=false;
+  var LBL={fixed:'קבועה',variable:'משתנה',mixed:'מעורבת'};
+  function sortRender(){
+    document.getElementById('sortProgress').textContent='פריט '+(sortIdx+1)+' מתוך '+SORT_ITEMS.length;
+    document.getElementById('sortCard').textContent=SORT_ITEMS[sortIdx].t;
+    document.getElementById('sortFb').textContent='';
+    document.getElementById('sortNextBtn').style.display='none';
+    document.querySelectorAll('.sort-btn').forEach(function(b){ b.classList.remove('correct','wrong'); b.disabled=false; });
+    sortLocked=false;
+  }
+  window.sortPick=function(choice){
+    if(sortLocked) return; sortLocked=true;
+    var correct=SORT_ITEMS[sortIdx].a;
+    var ok=choice===correct;
+    if(ok) sortScore++;
+    document.querySelectorAll('.sort-btn').forEach(function(b){ b.disabled=true; });
+    document.querySelector('.sort-btn.'+correct).classList.add('correct');
+    if(!ok) document.querySelector('.sort-btn.'+choice).classList.add('wrong');
+    document.getElementById('sortFb').textContent = ok ? '✅ נכון! זו עלות '+LBL[correct]+'.' : '❌ לא בדיוק. זו עלות '+LBL[correct]+'.';
+    document.getElementById('sortScore').textContent='ניקוד: '+sortScore;
+    if(sortIdx<SORT_ITEMS.length-1) document.getElementById('sortNextBtn').style.display='block';
+    else document.getElementById('sortFb').textContent += ' סיימתם את כל 10 הפריטים, ציון סופי: '+sortScore+'/10.';
+  };
+  window.sortNext=function(){ sortIdx++; sortRender(); };
+  sortRender();
+
+  /* ================= STATION 2: GRAPH MATCH ================= */
+  function mkGraph(kind){
+    var W=200,H=120,pad=20;
+    var line='';
+    if(kind==='fixed') line='M'+pad+' '+(H-pad)+' L'+pad+' 40 L'+(W-pad)+' 40';
+    else if(kind==='variable') line='M'+pad+' '+(H-pad)+' L'+(W-pad)+' 30';
+    else line='M'+pad+' 70 L'+(W-pad)+' 30';
+    return '<svg viewBox="0 0 '+W+' '+H+'"><line x1="'+pad+'" y1="10" x2="'+pad+'" y2="'+(H-pad)+'" stroke="#94a3b8" stroke-width="2"/>'
+      +'<line x1="'+pad+'" y1="'+(H-pad)+'" x2="'+(W-pad)+'" y2="'+(H-pad)+'" stroke="#94a3b8" stroke-width="2"/>'
+      +'<path d="'+line+'" fill="none" stroke="#db2777" stroke-width="4" stroke-linecap="round"/>'
+      +'<text x="'+(pad-6)+'" y="12" font-size="10" fill="#64748b">₪</text><text x="'+(W-pad+2)+'" y="'+(H-pad+14)+'" font-size="10" fill="#64748b">כמות</text></svg>';
+  }
+  var GRAPHS=[{k:'fixed'},{k:'mixed'},{k:'variable'}]; // fixed shuffle order (still non-trivial, not aligned to button order)
+  var graphTarget=null, graphSolved={fixed:false,variable:false,mixed:false};
+  function renderGraphs(){
+    var html='';
+    GRAPHS.forEach(function(g,i){
+      html+='<div class="graph-card" data-k="'+g.k+'" onclick="graphPick(\''+g.k+'\')">'+mkGraph(g.k)+'<div class="lbl">גרף '+(i+1)+'</div></div>';
+    });
+    document.getElementById('graphGrid').innerHTML=html;
+  }
+  window.graphSetTarget=function(t){
+    graphTarget=t;
+    document.querySelectorAll('.graph-target button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-t')===t); });
+    document.getElementById('graphFb').textContent='עכשיו לחצו על הגרף שמתאים ל'+LBL[t]+'.';
+  };
+  window.graphPick=function(k){
+    if(!graphTarget){ document.getElementById('graphFb').textContent='קודם בחרו סוג עלות מהכפתורים למעלה.'; return; }
+    var ok = k===graphTarget;
+    document.getElementById('graphFb').textContent = ok ? '✅ בדיוק! זה הגרף של עלות '+LBL[graphTarget]+'.' : '❌ לא זה. נסו שוב, או בקשו רמז מליבי.';
+    if(ok){ graphSolved[graphTarget]=true; document.querySelectorAll('.graph-card').forEach(function(c){c.classList.remove('picked');}); event.currentTarget.classList.add('picked'); }
+  };
+  renderGraphs();
+
+  /* ================= STATION 3: LIVE CALCULATOR ================= */
+  var cFixed=document.getElementById('c-fixed'), cVar=document.getElementById('c-var'), cQty=document.getElementById('c-qty'), cQtyV=document.getElementById('c-qty-v');
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+  function calcRender(){
+    var f=+cFixed.value||0, v=+cVar.value||0, q=+cQty.value||0;
+    cQtyV.textContent=q;
+    document.getElementById('c-out-fixed').textContent='₪'+fmt(f);
+    document.getElementById('c-out-var').textContent='₪'+fmt(v*q);
+    document.getElementById('c-out-total').textContent='₪'+fmt(f+v*q);
+  }
+  [cFixed,cVar,cQty].forEach(function(el){ el.addEventListener('input',calcRender); });
+  calcRender();
+  window.checkCalcQ=function(n, qty){
+    if(n===1){
+      var f=+cFixed.value||0, v=+cVar.value||0;
+      var expected=f+v*qty;
+      var given=+document.getElementById('cq1-ans').value;
+      var ok=Math.abs(given-expected)<1;
+      document.getElementById('cq1-v').textContent = ok ? '✅ נכון! '+f+' + ('+v+' × '+qty+') = ₪'+fmt(expected) : '❌ לא בדיוק. התשובה הנכונה: ₪'+fmt(expected)+' (עלות קבועה + עלות משתנה ליחידה × כמות).';
+      document.getElementById('cq1-v').style.color = ok ? '#059669' : '#dc2626';
+    } else {
+      var given2=(document.getElementById('cq2-ans').value||'').trim();
+      var ok2 = given2.indexOf('יורד')>=0;
+      document.getElementById('cq2-v').textContent = ok2 ? '✅ נכון! ככל שמייצרים יותר, אותה עלות קבועה מתחלקת על יותר יחידות, אז העלות הממוצעת ליחידה יורדת.' : '❌ התשובה הנכונה: יורדת. חשבו על שכר הדירה מתחלק על יותר ויותר קרואסונים.';
+      document.getElementById('cq2-v').style.color = ok2 ? '#059669' : '#dc2626';
+    }
+  };
+
+  /* ================= STATION 4: GUIDED HIGH-LOW ================= */
+  window.checkGStep=function(n, expected, nextId){
+    var input=document.getElementById('g'+n+'-ans'), fb=document.getElementById('g'+n+'-fb'), box=document.getElementById('g'+n);
+    var given=+input.value;
+    var ok=Math.abs(given-expected)<0.05;
+    fb.classList.add('show');
+    if(ok){
+      fb.textContent='✅ נכון! '+expected+(n===3?' ש״ח ליחידה':' ש״ח');
+      fb.style.color='#059669';
+      box.classList.add('done'); box.querySelector('input').disabled=true; box.querySelector('button').disabled=true;
+      if(nextId) document.getElementById(nextId).classList.remove('locked');
+    } else {
+      fb.textContent='❌ לא בדיוק. נסו שוב, או בקשו רמז מליבי. (התשובה הנכונה תוצג אחרי 3 ניסיונות)';
+      fb.style.color='#dc2626';
+      box.dataset.tries=(+box.dataset.tries||0)+1;
+      if(box.dataset.tries>=3){ fb.textContent='התשובה הנכונה: '+expected+(n===3?' ש״ח ליחידה':' ש״ח')+'.'; fb.style.color='#dc2626'; }
+    }
+  };
+
+  /* ================= STATION 5: TRUE/FALSE ================= */
+  var TF=[
+    {q:'עלות קבועה נשארת זהה לחלוטין, בכל טווח כמויות ייצור אפשרי, לנצח.', a:false, exp:'לא נכון: עלות קבועה קבועה רק בתוך "טווח רלוונטי" של כמויות. אם המאפייה תגדל פי 10, יהיה צריך תנור נוסף ושכירות נוספת.'},
+    {q:'עלות משתנה כוללת היא ליניארית: כל יחידה נוספת מוסיפה בדיוק אותו סכום.', a:true, exp:'נכון, זו ההנחה הבסיסית בעלות משתנה: עלות ליחידה קבועה, כך שהעלות הכוללת המשתנה עולה בקו ישר.'},
+    {q:'עלות מעורבת שווה לעלות משתנה חלקי עלות קבועה.', a:false, exp:'לא נכון: עלות מעורבת היא סכום של השתיים (קבוע + משתנה), לא מנה ביניהן.'},
+    {q:'שיטת גבוה-נמוך משתמשת רק בשתי נקודות נתונים: הכמות הגבוהה ביותר והכמות הנמוכה ביותר.', a:true, exp:'נכון. זה גם היתרון שלה (פשוטה) וגם החיסרון שלה (מתעלמת מכל שאר הנתונים).'},
+    {q:'בכמות ייצור אפס, העלות הכוללת של עסק עם עלויות קבועות היא תמיד אפס.', a:false, exp:'לא נכון, וזו בדיוק הטעות שראינו בתחנה 6: בכמות אפס, TC עדיין שווה לעלות הקבועה בלבד.'}
+  ];
+  var tfHtml='';
+  TF.forEach(function(item,i){
+    tfHtml+='<div class="tf-card" data-i="'+i+'"><div class="tf-txt">'+(i+1)+'. '+item.q+'</div>'
+      +'<div class="tf-btns"><button class="tf-btn yes" onclick="tfPick('+i+',true)">✔️ נכון</button><button class="tf-btn no" onclick="tfPick('+i+',false)">❌ לא נכון</button></div>'
+      +'<div class="tf-exp" id="tf-exp-'+i+'">'+item.exp+'</div></div>';
+  });
+  document.getElementById('tfContainer').innerHTML=tfHtml;
+  window.tfPick=function(i, val){
+    var card=document.querySelector('.tf-card[data-i="'+i+'"]');
+    if(card.classList.contains('answered')) return;
+    card.classList.add('answered');
+    var ok=val===TF[i].a;
+    var yesBtn=card.querySelector('.yes'), noBtn=card.querySelector('.no');
+    (val?yesBtn:noBtn).classList.add(ok?'correct':'wrong');
+    (TF[i].a?yesBtn:noBtn).classList.add('correct');
+    document.getElementById('tf-exp-'+i).classList.add('show');
+  };
+
+  /* ================= STATION 8: EXIT TICKET ================= */
+  var EXIT=[
+    {q:'ליבי מוסיפה תנור נוסף שדורש חשמל קבוע נוסף כשהמאפייה עוברת 2,000 קרואסונים בחודש. ה"קבועה" הזו היא בעצם:', opts:['עלות משתנה טהורה','עלות מדרגתית (step cost), קבועה בטווח מסוים אבל קופצת מעליו','עלות שאינה שייכת לאף קטגוריה'], correct:1},
+    {q:'עלות מעורבת בכמות ייצור אפס שווה ל:', opts:['אפס תמיד','הרכיב הקבוע שלה בלבד','הרכיב המשתנה שלה בלבד'], correct:1},
+    {q:'שיטת גבוה-נמוך מחשבת את העלות המשתנה ליחידה כ:', opts:['עלות כוללת חלקי כמות כוללת','הפרש עלות בין נקודת השיא לשפל, חלקי הפרש כמות ביניהן','ממוצע כל העלויות בכל החודשים'], correct:1}
+  ];
+  var exitScore=0, exitDone=0;
+  var exitHtml='';
+  EXIT.forEach(function(item,i){
+    exitHtml+='<div class="exit-q" data-i="'+i+'"><p>'+(i+1)+'. '+item.q+'</p>';
+    item.opts.forEach(function(o,j){ exitHtml+='<button class="exit-opt" onclick="exitPick('+i+','+j+')">'+String.fromCharCode(1488+j)+'. '+o+'</button>'; });
+    exitHtml+='</div>';
+  });
+  document.getElementById('exitContainer').innerHTML=exitHtml;
+  window.exitPick=function(i,j){
+    var q=document.querySelector('.exit-q[data-i="'+i+'"]');
+    if(q.classList.contains('answered')) return;
+    q.classList.add('answered'); exitDone++;
+    var opts=q.querySelectorAll('.exit-opt');
+    var ok = j===EXIT[i].correct;
+    if(ok) exitScore++;
+    opts[j].classList.add(ok?'correct':'wrong');
+    opts[EXIT[i].correct].classList.add('correct');
+    if(exitDone===EXIT.length){
+      var el=document.getElementById('exitScore'); el.classList.add('show');
+      el.textContent = exitScore===EXIT.length ? '🥐 מושלם! '+exitScore+'/'+EXIT.length+'. הקרואסון הדמיוני שלכם מוכן.' : 'ציון: '+exitScore+'/'+EXIT.length+'. שווה לחזור על החומר הרלוונטי לפני שיעור 2.';
+    }
+  };
+})();
+</script>
+</body></html>
