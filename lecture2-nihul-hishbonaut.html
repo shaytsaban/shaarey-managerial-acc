@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 2: העמסת עלויות עקיפות - התמחיר המסורתי | ד״ר שי צבאן</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInDocument()"></script>
+<style>
+:root{
+  --rose:#db2777; --rose-dark:#9d174d; --rose-light:#fdf2f8;
+  --amber:#f59e0b; --amber-light:#fffbeb;
+  --fixed:#ea580c; --fixed-light:#fff7ed;
+  --variable:#059669; --variable-light:#ecfdf5;
+  --mixed:#4f46e5; --mixed-light:#eef2ff;
+  --direct:#0891b2; --direct-light:#ecfeff;
+  --indirect:#7c3aed; --indirect-light:#f5f3ff;
+  --easy:#059669; --easy-light:#ecfdf5;
+  --med:#d97706; --med-light:#fffbeb;
+  --hard:#dc2626; --hard-light:#fef2f2;
+  --ink:#1e293b; --ink-soft:#334155; --muted:#64748b; --line:#e7e2da; --bg:#fffaf5; --white:#fff;
+  --shadow:0 10px 30px rgba(30,23,15,.08); --shadow-lg:0 20px 50px rgba(30,23,15,.16);
+  --radius:26px;
+  --navy-900:#142a45; --navy-800:#1c3a5e; --gold-400:#d8b862;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:20px;line-height:1.75;direction:rtl;-webkit-font-smoothing:antialiased}
+b,strong{font-weight:800}
+h1,h2,h3,h4{line-height:1.15}
+button{font-family:inherit}
+input{font-family:'Heebo',sans-serif}
+/* ---------- katex RTL-page fix ---------- */
+.katex{direction:ltr;unicode-bidi:isolate;text-align:left}
+.katex-display{direction:ltr;unicode-bidi:isolate;text-align:left;margin:0}
+/* ---------- progress + lesson pill ---------- */
+.progress{position:fixed;top:0;right:0;left:0;height:5px;background:transparent;z-index:1000}
+.progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--amber));transition:width .1s linear}
+.lesson-prog{position:fixed;top:64px;left:50%;transform:translateX(-50%);z-index:850;background:rgba(30,23,15,.9);color:#fff;font-weight:800;font-size:13px;padding:6px 16px;border-radius:999px;backdrop-filter:blur(8px);box-shadow:var(--shadow);transition:opacity .3s}
+@media(max-width:600px){.lesson-prog{font-size:11px;top:60px}}
+/* ---------- topbar ---------- */
+.topbar{position:sticky;top:0;z-index:900;background:rgba(255,250,245,.9);backdrop-filter:blur(12px);border-bottom:3px solid var(--line)}
+.nav-inner{max-width:1240px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:16px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.badge-bi{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;font-weight:900;font-size:18px;display:grid;place-items:center;box-shadow:var(--shadow)}
+.brand .t{font-weight:800;font-size:15px;line-height:1.25}
+.brand .s{font-weight:500;font-size:11.5px;color:var(--muted)}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.nav-block{font-size:12px;font-weight:700;color:var(--ink-soft);text-decoration:none;padding:7px 11px;border-radius:999px;background:#fff;border:2px solid var(--line);white-space:nowrap;transition:.15s}
+.nav-block:hover{border-color:var(--rose);color:var(--rose)}
+.nav-block.active{background:var(--rose);color:#fff;border-color:var(--rose)}
+@media(max-width:1240px){.nav-links{display:none}}
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;background:radial-gradient(1100px 480px at 82% -12%, #fdf2f8 0%, #fffaf5 62%)}
+.hero-inner{max-width:1240px;margin:0 auto;padding:60px 22px 50px;display:grid;grid-template-columns:1.35fr .85fr;gap:42px;align-items:center}
+@media(max-width:1000px){.hero-inner{grid-template-columns:1fr;gap:30px}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--line);color:var(--rose-dark);font-weight:800;font-size:14px;padding:8px 16px;border-radius:999px}
+.hero h1{font-size:clamp(32px,4.6vw,54px);font-weight:900;line-height:1.14;margin:18px 0 14px}
+.hero h1 .grad{background:linear-gradient(120deg,var(--rose),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{font-size:clamp(16px,2vw,21px);color:var(--ink-soft);max-width:700px;line-height:1.7}
+.meta-chips{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 20px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 14px;font-weight:700;font-size:13.5px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:inherit;font-weight:800;font-size:16px;padding:13px 24px;border-radius:14px;text-decoration:none;transition:.18s}
+.btn-primary{background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;box-shadow:var(--shadow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.btn-ghost{background:#fff;border:2px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--rose);color:var(--rose)}
+.hero-art{border-radius:24px;background:linear-gradient(135deg,var(--rose),#9333ea);padding:16px;box-shadow:var(--shadow-lg);display:grid;grid-template-columns:1fr 1fr 1fr;grid-auto-rows:minmax(110px,1fr);gap:12px}
+.art-tile{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#fff;text-align:center;padding:8px;font-weight:700}
+.art-tile .l{font-size:12.5px}
+/* ---------- sections ---------- */
+main{display:block}
+.section{max-width:1060px;margin:0 auto;padding:70px 22px;scroll-margin-top:84px;border-top:1px solid var(--line)}
+.section:first-child{border-top:none}
+.block-tag{display:inline-block;background:var(--rose-light);color:var(--rose-dark);font-weight:800;font-size:13.5px;padding:7px 15px;border-radius:999px}
+.section>h2{font-size:clamp(26px,3.6vw,42px);font-weight:900;margin:16px 0 6px;line-height:1.14}
+.section>h2 .g{background:linear-gradient(120deg,var(--rose),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.section-sub{font-size:clamp(15.5px,1.9vw,20px);color:var(--muted);margin-bottom:14px;max-width:840px}
+.deep-card{background:#fff;border:3px solid var(--line);border-radius:var(--radius);padding:clamp(20px,3.4vw,40px);box-shadow:var(--shadow);margin:22px 0}
+.deep-card h3{font-size:clamp(20px,2.4vw,27px);font-weight:900;margin:6px 0 12px}
+.deep-card h3 .g{background:linear-gradient(120deg,var(--rose),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.deep-card h4{font-size:19px;font-weight:800;margin:20px 0 8px}
+.deep-card p{margin:11px 0}
+.lead{font-size:clamp(17px,2vw,21px);color:var(--ink-soft)}
+.sub-h{font-size:clamp(20px,2.5vw,28px);font-weight:900;margin:36px 0 6px}
+.sub-h .g{background:linear-gradient(120deg,var(--rose),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+/* ---------- info callouts ---------- */
+.info{border-radius:16px;padding:19px 22px;margin:18px 0;border-right:8px solid var(--rose);background:var(--rose-light)}
+.info .hd{font-weight:900;font-size:19px;margin-bottom:6px;display:flex;gap:8px;align-items:center}
+.info p{margin:8px 0;font-size:17.5px}
+.info.tip{border-right-color:var(--variable);background:var(--variable-light)}
+.info.warn{border-right-color:var(--amber);background:var(--amber-light)}
+.info.important{border-right-color:var(--hard);background:var(--hard-light)}
+.info.insight{border-right-color:var(--indirect);background:var(--indirect-light)}
+.info.term{border-right-color:var(--direct);background:var(--direct-light)}
+.soft-note{background:#fff;border:3px dashed var(--line);border-radius:14px;padding:15px 19px;color:var(--ink-soft);font-size:17.5px;font-weight:600;margin:16px 0}
+/* ---------- reminder card (warm recap) ---------- */
+.remind-card{background:linear-gradient(160deg,#fff,var(--rose-light));border:3px solid #fbcfe8;border-radius:20px;padding:20px 24px;margin:18px 0}
+.remind-card .rc-hd{font-weight:900;color:var(--rose-dark);font-size:18.5px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.remind-card p{font-size:17px;color:var(--ink-soft);margin:6px 0}
+/* ---------- two-col / grids ---------- */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+@media(max-width:760px){.two-col{grid-template-columns:1fr}}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px;margin:18px 0}
+.compare-card{background:#fff;border:2px solid var(--line);border-radius:18px;padding:20px;border-top:6px solid var(--rose)}
+.compare-card.a{border-top-color:var(--variable)} .compare-card.b{border-top-color:var(--amber)}
+.compare-card.c{border-top-color:var(--direct)} .compare-card.d{border-top-color:var(--indirect)}
+.compare-card h4{margin-top:0;font-size:18.5px}
+.compare-card p{margin:9px 0;font-size:16.5px}
+/* ---------- flow-steps ---------- */
+.flow-steps{display:flex;flex-direction:column;gap:12px;margin:18px 0}
+.flow-step{display:grid;grid-template-columns:52px 1fr;gap:15px;background:#fff;border:2px solid var(--line);border-radius:18px;padding:16px 18px}
+.flow-step .num{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;font-weight:900;font-size:21px;display:grid;place-items:center}
+.flow-step .fs-title{font-weight:800;font-size:18.5px}
+.flow-step .fs-sub{color:var(--muted);font-size:15px;margin-top:1px}
+.flow-step .fs-details{color:var(--ink-soft);font-size:16.5px;margin-top:10px}
+/* ---------- flip cards ---------- */
+.flip-grid{display:grid;gap:18px;margin:24px 0}
+.flip-grid.cols4{grid-template-columns:repeat(4,1fr)}
+.flip-grid.cols3{grid-template-columns:repeat(3,1fr)}
+.flip-grid.cols2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:980px){.flip-grid.cols3,.flip-grid.cols4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.flip-grid.cols2,.flip-grid.cols3,.flip-grid.cols4{grid-template-columns:1fr}}
+.flip{perspective:1600px;cursor:pointer}
+.flip-inner{position:relative;display:grid;height:100%;min-height:210px;transition:transform .6s cubic-bezier(.4,.15,.2,1);transform-style:preserve-3d}
+.flip.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:relative;grid-area:1/1;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:22px;padding:26px 22px 30px;display:flex;flex-direction:column;justify-content:center;border:3px solid var(--line);background:#fff;box-shadow:var(--shadow)}
+.flip-front{align-items:center;text-align:center}
+.flip-front .ic{font-size:52px;line-height:1;margin-bottom:10px}
+.flip-front .ttl{font-size:20px;font-weight:900;line-height:1.25}
+.flip-front .ttl .en{display:block;font-size:14px;color:var(--muted);font-weight:700;margin-top:4px}
+.flip-front .hint{position:absolute;bottom:12px;left:0;right:0;font-size:13px;color:var(--rose);font-weight:800}
+.flip-back{transform:rotateY(180deg);background:linear-gradient(155deg,#ffffff,var(--rose-light));text-align:right}
+.flip-back .bk-ttl{font-size:19px;font-weight:900;color:var(--rose-dark);margin-bottom:9px}
+.flip-back p{font-size:15.5px;margin:6px 0;line-height:1.55;color:var(--ink)}
+/* ---------- matrix table ---------- */
+.matrix-wrap{overflow-x:auto}
+.matrix{width:100%;border-collapse:collapse;margin:18px 0;font-size:15.5px;background:#fff;border-radius:14px;overflow:hidden;border:2px solid var(--line)}
+.matrix th{padding:12px 10px;text-align:center;font-weight:800;font-size:14.5px;color:#fff}
+.matrix th.corner{background:var(--ink);color:#fff}
+.matrix th.fx{background:var(--fixed)} .matrix th.vr{background:var(--variable)} .matrix th.mx{background:var(--mixed)}
+.matrix td{padding:12px 10px;border:1px solid var(--line);vertical-align:top;text-align:center}
+.matrix td.axis{background:#f8fafc;font-weight:800;color:#fff;writing-mode:horizontal-tb}
+.matrix td.axis.direct{background:var(--direct)} .matrix td.axis.indirect{background:var(--indirect)}
+.matrix td.cell{font-size:14px;line-height:1.5;color:var(--ink-soft)}
+/* ---------- takeaway ---------- */
+.takeaway{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--rose),#9333ea);color:#fff;border-radius:24px;padding:32px 30px;margin:24px 0;box-shadow:var(--shadow-lg)}
+.takeaway .big-emoji{position:absolute;left:16px;top:-10px;font-size:110px;opacity:.16}
+.takeaway .hd{font-weight:900;font-size:15.5px;letter-spacing:.6px;opacity:.95;margin-bottom:8px}
+.takeaway .tx{font-weight:800;font-size:clamp(19px,2.4vw,26px);line-height:1.45;position:relative;z-index:2}
+/* ---------- pipe tracker ---------- */
+.pipe{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 6px}
+.pipe .pst{flex:1;min-width:96px;text-align:center;background:#fff;border:2px solid var(--line);border-radius:13px;padding:9px 5px 7px;font-size:11.5px;font-weight:800;color:var(--muted);line-height:1.3}
+.pipe .pst .n{display:block;font-size:17px;margin-bottom:2px}
+.pipe .pst.done{border-color:var(--variable);color:#047857;background:var(--variable-light)}
+.pipe .pst.on{border-color:var(--rose);color:var(--rose-dark);background:var(--rose-light);box-shadow:var(--shadow);transform:scale(1.04)}
+.pipe-cap{font-size:13.5px;color:var(--muted);font-weight:700;margin-bottom:16px}
+/* ---------- checkpoint ---------- */
+.checkpoint{background:var(--variable-light);border:3px solid var(--variable);border-radius:18px;padding:17px 21px;margin:17px 0}
+.checkpoint .hd{font-weight:900;color:#065f46;font-size:19px;margin-bottom:6px}
+.checkpoint p{margin:7px 0;font-size:17.5px}
+/* ---------- checklist ---------- */
+.checklist{list-style:none;padding:0!important}
+.checklist li{padding-right:32px;position:relative;margin:9px 0;font-size:17.5px}
+.checklist li::before{content:"✓";position:absolute;right:0;top:2px;width:23px;height:23px;background:var(--variable);color:#fff;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:900}
+/* ---------- decision block ---------- */
+.decision{background:linear-gradient(160deg,var(--rose-light),#ffffff);border:3px solid var(--line);border-right:9px solid var(--rose);border-radius:20px;padding:21px 25px;margin:18px 0;box-shadow:var(--shadow)}
+.d-quote{font-size:clamp(18px,2.2vw,24px);font-weight:800;color:var(--navy-900);line-height:1.5;font-style:italic;margin-bottom:6px}
+.d-role{display:inline-block;background:var(--rose);color:#fff;font-weight:800;font-size:13px;padding:5px 14px;border-radius:999px;margin-bottom:11px}
+.d-term{background:#fff;border:2px solid var(--line);border-radius:14px;padding:13px 17px;margin:11px 0;font-size:17px;line-height:1.6}
+.d-term b{color:var(--rose-dark)}
+.d-dilemma{background:var(--amber-light);border:2px solid var(--amber);border-radius:12px;padding:12px 17px;margin:13px 0 8px;font-size:17.5px}
+.d-lead-to{color:var(--rose-dark);font-weight:800;font-size:15.5px;margin-top:8px}
+/* ---- report card ---- */
+.report{background:#fff;border:3px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin:18px 0}
+.report-head{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));color:#fff;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.report-head .rh-co{font-weight:900;font-size:19px}
+.report-head .rh-t{color:var(--gold-400);font-size:13px;font-weight:700}
+.report-body{padding:8px 0}
+.report-row{display:grid;grid-template-columns:2fr 1fr;gap:8px;padding:10px 20px;font-size:16.5px;border-bottom:1px solid #eef1f6}
+.report-row .rr-label{font-weight:700}
+.report-row .rr-num{text-align:left;direction:ltr;font-variant-numeric:tabular-nums;color:var(--ink-soft);font-weight:800}
+.report-row.rr-total{border-top:2px solid var(--navy-900);border-bottom:3px double var(--navy-900);font-weight:900;background:#fbfcfe}
+.report-row.rr-total .rr-num{color:var(--ink);font-weight:900}
+.report-row.rr-flag{background:var(--amber-light)}
+.report-foot{padding:13px 20px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line)}
+/* ---- hard question ---- */
+.hardq{background:linear-gradient(160deg,#0f172a,#1e293b);color:#e2e8f0;border-radius:24px;padding:26px 26px;margin:24px 0;box-shadow:var(--shadow-lg)}
+.hardq .hqt{display:inline-block;background:var(--amber);color:#0f172a;font-weight:900;font-size:13.5px;padding:6px 14px;border-radius:999px;margin-bottom:11px}
+.hardq .hqq{font-size:18px;line-height:1.6;font-weight:600}
+.hardq .hqq b{color:#a5b4fc}
+.hardq .acc{margin-top:15px;background:#0b1220;border-radius:14px;overflow:hidden;border:1px solid #1e293b}
+.hardq .acc-h{display:flex;align-items:center;gap:11px;padding:14px 17px;cursor:pointer}
+.hardq .acc-h h4{font-size:17px;color:#fff;margin:0;flex:1}
+.hardq .acc-h .chev{font-size:19px;color:#94a3b8;transition:.3s}
+.hardq .acc.open .acc-h .chev{transform:rotate(180deg)}
+.hardq .acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.hardq .acc.open .acc-body{max-height:900px}
+.hardq .acc-bin{padding:0 17px 17px;font-size:16.5px;line-height:1.7;color:#cbd5e1}
+.hardq .acc-bin b{color:#a5b4fc}
+/* ---------- exercise card engine (recap + homework) ---------- */
+.ex-grid{display:grid;gap:16px}
+.ex-grid.two-col{grid-template-columns:1fr 1fr}
+@media(max-width:760px){.ex-grid.two-col{grid-template-columns:1fr}}
+.ex-card{background:#fff;border:3px solid var(--line);border-radius:20px;padding:20px 22px;box-shadow:var(--shadow);scroll-margin-top:80px}
+.ex-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.ex-num{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;font-weight:900;font-size:15px;display:grid;place-items:center;flex-shrink:0}
+.ex-head h4{font-size:16.5px;font-weight:800;flex:1;min-width:120px}
+.diff{font-size:11.5px;font-weight:800;padding:4px 11px;border-radius:999px}
+.diff.easy{background:var(--easy-light);color:var(--easy)}
+.diff.med{background:var(--med-light);color:var(--med)}
+.diff.hard{background:var(--hard-light);color:var(--hard)}
+.ex-text{font-size:17px;color:var(--ink-soft);margin-bottom:12px;line-height:1.7}
+.ex-text b{color:var(--ink)}
+.classify-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.classify-row.cols2{grid-template-columns:repeat(2,1fr)}
+.classify-btn{border:2.5px solid var(--line);border-radius:12px;padding:11px 6px;font-weight:800;font-size:14.5px;cursor:pointer;background:#fff}
+.classify-btn.fixed{color:var(--fixed)} .classify-btn.variable{color:var(--variable)} .classify-btn.mixed{color:var(--mixed)}
+.classify-btn.direct{color:var(--direct)} .classify-btn.indirect{color:var(--indirect)}
+.classify-btn.plan{color:var(--direct)} .classify-btn.control{color:var(--variable)} .classify-btn.decide{color:var(--indirect)}
+.classify-btn.yes{color:var(--variable)} .classify-btn.no{color:var(--hard)}
+.classify-btn.correct{background:var(--variable-light);border-color:var(--variable)}
+.classify-btn.wrong{background:var(--hard-light);border-color:var(--hard);color:var(--hard)}
+.classify-fb{font-size:15px;font-weight:700;min-height:22px;margin-top:6px}
+.axis-label{font-size:13px;font-weight:800;color:var(--muted);margin:10px 0 2px}
+.subrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--amber-light);border:2px dashed #fde68a;border-radius:12px;padding:10px 14px;margin:8px 0}
+.subrow label{font-size:15px;font-weight:700;color:var(--ink-soft);flex:1;min-width:180px}
+.subrow input{width:120px;padding:8px 10px;border:2px solid var(--line);border-radius:9px;font-size:15px;direction:ltr;text-align:center}
+.subrow button{background:var(--rose);color:#fff;border:none;border-radius:9px;padding:8px 16px;font-weight:800;font-size:13.5px;cursor:pointer}
+.subrow .verdict{width:100%;font-weight:700;font-size:14.5px;margin-top:2px}
+.ex-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.hint-btn{display:inline-flex;align-items:center;gap:6px;background:var(--rose-light);border:2px solid #fbcfe8;color:var(--rose-dark);font-weight:800;font-size:13px;padding:7px 14px;border-radius:999px;cursor:pointer}
+.hint-btn:hover{background:#fbcfe8}
+.hint-box{display:none;margin-top:10px;background:#fdf2f8;border:2px solid #fbcfe8;border-radius:12px;padding:12px 14px;font-size:14.5px;line-height:1.6;color:var(--rose-dark)}
+.hint-box.show{display:block}
+.hint-box .htier{margin:4px 0}
+.sol-acc{margin-top:10px;border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.sol-acc .sh{display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;font-weight:800;font-size:14px;background:#f8fafc}
+.sol-acc .sh .chev{margin-inline-start:auto;transition:.3s}
+.sol-acc.open .sh .chev{transform:rotate(180deg)}
+.sol-acc .sb{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.sol-acc.open .sb{max-height:900px}
+.sol-acc .sbin{padding:0 14px 14px;font-size:15.5px;line-height:1.75;color:var(--ink-soft)}
+.sol-acc .sbin b{color:var(--ink)}
+.trap{display:inline-flex;align-items:center;gap:6px;background:var(--hard-light);border:2px solid #fca5a5;color:#991b1b;font-weight:800;font-size:12px;padding:4px 10px;border-radius:999px;margin-inline-start:6px}
+/* ---------- formula cards ---------- */
+.formula-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+@media(max-width:800px){.formula-cards{grid-template-columns:1fr}}
+.formula-card{border-radius:20px;padding:20px 18px;text-align:center;border:2.5px solid var(--line)}
+.formula-card.a{background:linear-gradient(160deg,#fff,var(--direct-light));border-color:#a5e8f0}
+.formula-card.b{background:linear-gradient(160deg,#fff,var(--rose-light));border-color:#fbcfe8}
+.formula-card.c{background:linear-gradient(160deg,#fff,var(--indirect-light));border-color:#ddd6fe}
+.fc-tag{font-size:11.5px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:9px}
+.fc-eq{font-size:clamp(15px,1.9vw,19px);margin:6px 0;direction:ltr;overflow-x:auto}
+.fc-note{font-size:13.5px;color:var(--ink-soft);margin-top:9px;line-height:1.5}
+/* ---------- legend clickable ---------- */
+.legend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+@media(max-width:700px){.legend-grid{grid-template-columns:repeat(2,1fr)}}
+.legend-card{border-radius:16px;padding:14px 8px;text-align:center;border:2px solid var(--line);cursor:pointer;transition:.15s}
+.legend-card:hover,.legend-card:focus-visible{transform:translateY(-3px);box-shadow:var(--shadow)}
+.legend-card .lsym{font-size:19px;font-weight:900}
+.legend-card .lname{font-size:12.5px;font-weight:700;margin-top:5px}
+.legend-card .ltap{font-size:10px;color:var(--muted);margin-top:5px;font-weight:700}
+.legend-card.direct{background:var(--direct-light);border-color:#a5e8f0}.legend-card.direct .lsym{color:var(--direct)}
+.legend-card.indirect{background:var(--indirect-light);border-color:#ddd6fe}.legend-card.indirect .lsym{color:var(--indirect)}
+/* ---------- libi ---------- */
+.libi{position:fixed;z-index:1200;bottom:20px;left:20px;display:flex;align-items:flex-end;gap:10px;max-width:330px;user-select:none;touch-action:none}
+.l-art{width:80px;height:80px;flex-shrink:0;cursor:grab;filter:drop-shadow(0 6px 14px rgba(157,23,77,.3))}
+.l-art:active{cursor:grabbing}
+.l-bubble{background:#fff;border:3px solid var(--rose);border-radius:18px 18px 4px 18px;padding:12px 16px;box-shadow:var(--shadow-lg);position:relative}
+.l-bhd{font-weight:900;color:var(--rose-dark);font-size:14px;margin-bottom:3px;display:flex;gap:8px;align-items:center;justify-content:space-between}
+.l-bhd .l-min{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);font-weight:900}
+.l-tip{font-size:14px;line-height:1.5;color:var(--ink)}
+.libi.min .l-bubble{display:none}
+.l-reopen{display:none}
+.libi.min .l-reopen{display:grid;place-items:center;position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--rose);color:#fff;font-size:11px;font-weight:900;cursor:pointer}
+.libi.pulse .l-bubble{animation:lpulse .9s ease}
+@keyframes lpulse{0%{transform:scale(1)}18%{transform:scale(1.1) rotate(1deg);box-shadow:0 0 0 9px rgba(219,39,119,.28)}100%{transform:scale(1)}}
+.libi.pulse .l-art{animation:lnudge .85s ease}
+@keyframes lnudge{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-10px) rotate(6deg)}50%{transform:translateY(0)}72%{transform:translateY(-5px) rotate(-5deg)}}
+@media(max-width:600px){.libi{max-width:210px;bottom:12px;left:12px}.l-art{width:60px;height:60px}.l-tip{font-size:12.5px}}
+/* ---------- KEYNOTE INTRO ---------- */
+.kn{background:#000;color:#fff;font-family:'Heebo',system-ui,sans-serif;overflow:hidden}
+.kn-slide{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px;position:relative}
+.kn-slide.short{min-height:70vh}
+.kn-eyebrow{font-size:clamp(14px,2vw,19px);font-weight:800;letter-spacing:4px;color:#8b93a7;margin-bottom:20px}
+.kn-title{font-size:clamp(34px,7vw,84px);font-weight:900;line-height:1.08;letter-spacing:-1px}
+.kn-title .g{background:linear-gradient(110deg,#f9a8d4,#f472b6 55%,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kn-sub{font-size:clamp(18px,3vw,30px);font-weight:600;color:#cbd5e1;margin-top:24px;max-width:900px;line-height:1.45}
+.kn-small{font-size:clamp(15px,2vw,20px);color:#8b93a7;margin-top:20px;max-width:740px;line-height:1.6}
+.kn-scroll{position:absolute;bottom:26px;left:50%;color:#5b6479;font-size:14px;font-weight:700;animation:knbob 1.8s infinite;transform:translateX(-50%)}
+@keyframes knbob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,9px)}}
+.kn-cta{margin-top:32px}
+.kn-cta button{font-family:inherit;font-weight:900;font-size:clamp(17px,2.2vw,23px);padding:16px 40px;border:none;border-radius:999px;cursor:pointer;background:linear-gradient(110deg,#f9a8d4,#c084fc);color:#1e1024;box-shadow:0 16px 44px rgba(192,132,252,.5);transition:.18s}
+.kn-cta button:hover{transform:translateY(-3px) scale(1.02)}
+.kn-skip{position:fixed;top:14px;left:18px;z-index:1300;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:9px 18px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;backdrop-filter:blur(6px)}
+body:not(.pre-start) .kn-skip{display:none}
+body.pre-start .topbar,body.pre-start .progress,body.pre-start .lesson-prog{display:none}
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease}
+.reveal.show{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(22px);transition:opacity .55s ease, transform .55s ease}
+.stagger.show>*{opacity:1;transform:none}
+.stagger.show>*:nth-child(1){transition-delay:.04s}.stagger.show>*:nth-child(2){transition-delay:.16s}.stagger.show>*:nth-child(3){transition-delay:.28s}.stagger.show>*:nth-child(4){transition-delay:.40s}
+@media(prefers-reduced-motion:reduce){.reveal,.stagger>*{opacity:1!important;transform:none!important}}
+footer{background:#1e293b;color:#cbd5e1;padding:44px 22px;text-align:center;margin-top:30px}
+footer .big{font-weight:800;color:#fff;font-size:18px;margin-bottom:6px}
+footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
+</style>
+</head>
+<body class="pre-start">
+
+<!-- ============ SVG DEFS: Libi ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="libiFace" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="48" fill="#fdf2f8"/>
+  <path d="M14 100 Q22 72 40 68 L60 68 Q78 72 86 100 Z" fill="#db2777"/>
+  <circle cx="50" cy="46" r="27" fill="#f4c9a4"/>
+  <circle cx="24" cy="48" r="5" fill="#f4c9a4"/><circle cx="76" cy="48" r="5" fill="#f4c9a4"/>
+  <path d="M22 40 Q20 12 50 12 Q80 12 78 40 Q76 46 70 30 Q60 44 50 30 Q40 44 30 30 Q24 46 22 40 Z" fill="#7c4a2d"/>
+  <ellipse cx="50" cy="10" rx="16" ry="9" fill="#fff"/>
+  <rect x="36" y="4" width="28" height="8" rx="4" fill="#fff"/>
+  <circle cx="35" cy="54" r="5.5" fill="#f2a6a6" opacity=".5"/><circle cx="65" cy="54" r="5.5" fill="#f2a6a6" opacity=".5"/>
+  <path d="M33 39 Q38 35 44 39" stroke="#4a2e1c" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+  <path d="M56 39 Q62 35 67 39" stroke="#4a2e1c" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+  <circle cx="39" cy="46" r="3.2" fill="#3a2317"/><circle cx="61" cy="46" r="3.2" fill="#3a2317"/>
+  <circle cx="40.1" cy="45" r="1" fill="#fff"/><circle cx="62.1" cy="45" r="1" fill="#fff"/>
+  <path d="M38 58 Q50 67 62 58" fill="none" stroke="#a0522d" stroke-width="2.4" stroke-linecap="round"/>
+</symbol></svg>
+
+<!-- ============ KEYNOTE INTRO ============ -->
+<button class="kn-skip" onclick="startLesson()">דלגו לשיעור ←</button>
+<div class="kn" id="intro">
+  <section class="kn-slide">
+    <div class="kn-eyebrow reveal">חשבונאות ניהולית · שיעור 2</div>
+    <h1 class="kn-title reveal">כמה עולה <span class="g">שירות אחד?</span></h1>
+    <p class="kn-sub reveal">בשיעור הקודם למדנו איך מתנהגת העלות הכוללת של כל הארגון. היום נשאל שאלה חדה יותר: כמה עולה בדיוק ביצוע של CT אחד, ניתוח אחד, טיפול אחד?</p>
+    <p class="kn-small reveal">ד״ר שי צבאן</p>
+    <div class="kn-scroll">גללו למטה ↓</div>
+  </section>
+  <section class="kn-slide short">
+    <div class="kn-eyebrow reveal">לפני שממשיכים</div>
+    <h2 class="kn-title reveal">קודם, <span class="g">חימום לבבי.</span></h2>
+    <p class="kn-sub reveal">ליבי מחכה עם כמה שאלות נחמדות שמזכירות הכל משיעור 1: עלות קבועה, משתנה, מעורבת, הנוסחאות, ושיטת גבוה-נמוך. בלי לחץ, עם רמזים לכל שאלה.</p>
+    <div class="kn-cta reveal"><button onclick="startLesson()">בואו נתחיל ←</button></div>
+  </section>
+</div>
+
+<div class="progress"><span id="bar"></span></div>
+<div class="lesson-prog" id="lessonProg">מודול 0 / 9 · 0%</div>
+
+<!-- ============ TOPBAR ============ -->
+<nav class="topbar">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="badge-bi">2</div>
+      <div>
+        <div class="t">חשבונאות ניהולית</div>
+        <div class="s">שיעור 2 · העמסת עלויות עקיפות · ד״ר שי צבאן</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a class="nav-block" href="index.html">🏠 דף הבית</a>
+      <a class="nav-block" href="lec1.html">1️⃣ מבוא</a>
+      <a class="nav-block" href="lecture1part3.html">📐 נוסחאות</a>
+      <a class="nav-block" href="#recap">🔁 חימום</a>
+      <a class="nav-block" href="#homework">📝 שיעורי בית</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-badge">🧾 שיעור 2 · המשך טבעי לשיעור 1</span>
+      <h1>מהעלות הכוללת <span class="grad">לעלות של שירות בודד</span></h1>
+      <p class="hero-sub">שיעור 1 לימד אותנו איך מתנהגת העלות הכוללת (TC) של ארגון שלם. היום אנחנו פותרים שאלה שונה: איך לוקחים עלויות משותפות (עקיפות) ומחלקים אותן בצורה הוגנת בין השירותים השונים שהארגון מספק. זו שיטת התמחיר המסורתי, אבן היסוד של תמחיר בכל ארגון.</p>
+      <div class="meta-chips">
+        <span class="chip">👤 ד״ר שי צבאן</span>
+        <span class="chip">⏱ כ-90 דקות + שיעורי בית</span>
+        <span class="chip">🏥 מקרה: מכון הדמיה רפואית</span>
+        <span class="chip">🔁 פותח בחימום מקיף על שיעור 1</span>
+      </div>
+      <div class="cta">
+        <a class="btn btn-primary" href="#recap">חימום על שיעור 1 ←</a>
+        <a class="btn btn-ghost" href="#method">קפיצה לשיטת ההעמסה</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="art-tile"><span style="font-size:36px">📍</span><span class="l">עלות ישירה</span></div>
+      <div class="art-tile"><span style="font-size:36px">🌐</span><span class="l">עלות עקיפה</span></div>
+      <div class="art-tile"><span style="font-size:36px">⚙️</span><span class="l">שיעור העמסה</span></div>
+      <div class="art-tile"><span style="font-size:36px">🩻</span><span class="l">מכון הדמיה</span></div>
+      <div class="art-tile"><span style="font-size:36px">🧮</span><span class="l">עלות מלאה</span></div>
+      <div class="art-tile"><span style="font-size:36px">🔮</span><span class="l">קריצה ל-ABC</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ LIBI FLOATING WIDGET ============ -->
+<div class="libi" id="libi">
+  <svg class="l-art" id="lArt" viewBox="0 0 100 100"><use href="#libiFace"/></svg>
+  <div class="l-bubble">
+    <div class="l-bhd"><span>ליבי 🧁</span><button class="l-min" onclick="libiMin()" title="מזער">–</button></div>
+    <div class="l-tip" id="lTip">היי! שוב אני. היום נלמד איך "מחלקים" עלויות משותפות בין שירותים. ובכן, גם חלוקת קרואסונים בין חברים היא בעצם בעיית הקצאה, אז אני בהחלט מבינה בזה.</div>
+  </div>
+  <div class="l-reopen" onclick="libiReopen()" title="פתחו את ליבי">💬</div>
+</div>
+
+<main>
+<!-- ==================== MODULE 00 · BRIDGE ==================== -->
+<section class="section" id="bridge">
+  <span class="block-tag">00 · מאיפה המשכנו</span>
+  <h2>ברוכים הבאים <span class="g">לשיעור 2</span></h2>
+  <p class="section-sub">בשיעור 1 בנינו את השפה הבסיסית של חשבונאות ניהולית: מה ההבדל בינה לבין חשבונאות פיננסית, שלוש הפונקציות שלה, ואיך מתנהגת העלות הכוללת של הארגון כשהיא קבועה, משתנה או מעורבת. היום אנחנו לוקחים את הידע הזה צעד קדימה: לא עוד "כמה עולה לארגון בסך הכול", אלא "כמה עולה בדיוק שירות אחד ספציפי". לפני שנצלול לזה, נעצור לרגע חימום לבבי, כי הכלים החדשים של היום נשענים לגמרי על מה שכבר יודעים.</p>
+  <div class="pipe">
+    <span class="pst on"><span class="n">🔁</span>חימום</span>
+    <span class="pst"><span class="n">❓</span>למה צריך</span>
+    <span class="pst"><span class="n">📍</span>ישיר/עקיף</span>
+    <span class="pst"><span class="n">⚙️</span>השיטה</span>
+    <span class="pst"><span class="n">🩻</span>תרגול מודרך</span>
+    <span class="pst"><span class="n">⚠️</span>מגבלה</span>
+    <span class="pst"><span class="n">✅</span>סיכום</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 1 מתוך 8 · קודם חוזרים, אחר כך ממשיכים</div>
+</section>
+
+<!-- ==================== MODULE 01 · WARM RECAP ==================== -->
+<section class="section" id="recap">
+  <span class="block-tag">01 · חימום לבבי על שיעור 1</span>
+  <h2>לפני שממשיכים, <span class="g">בואו נזכר יחד</span></h2>
+  <p class="section-sub">שמונה תרגילים קצרים, אחד לכל נושא מרכזי משיעור 1. אין כאן לחץ, ואין ציון שנרשם באיזה מקום. המטרה היחידה היא לוודא שכולנו על אותו הדף לפני שממשיכים לשיטת ההעמסה. ליבי כאן עם רמז לכל שאלה, ותשובה מלאה תמיד גלויה מתחת.</p>
+
+  <div class="remind-card reveal">
+    <div class="rc-hd">💛 תזכורת 1 · חשבונאות ניהולית מול פיננסית</div>
+    <p>חשבונאות ניהולית משרתת מנהלים <b>בתוך</b> הארגון, אינה כפופה לחוק, ומסתכלת גם קדימה (תכנון). היא משרתת שלוש פונקציות: <b>תכנון</b>, <b>בקרה</b>, ו<b>קבלת החלטות</b>. וזכרו את שלושת המונחים שהיו קרובים מדי: <b>עלות</b> (המשאב שנצרך), <b>מחיר</b> (מה שמתקבל/משולם), ו<b>הוצאה</b> (ההכרה החשבונאית-פיננסית לפי כללי הצבירה).</p>
+  </div>
+  <div class="ex-grid two-col" id="rA"></div>
+
+  <div class="remind-card reveal">
+    <div class="rc-hd">💛 תזכורת 2 · מבנה העלויות: קבועה, משתנה, מעורבת</div>
+    <p>עלות <b>קבועה</b> אינה תלויה בכמות (בטווח פעילות רלוונטי בלבד, לא לנצח, וזה מוביל לפעמים ל<b>עלות מדרגתית</b> כשחוצים את הטווח). עלות <b>משתנה</b> משתנה ביחס ישר לכמות, ובכמות אפס שווה לאפס. עלות <b>מעורבת</b> משלבת את שתיהן. זכרו את המלכודת: TC בכמות אפס <b>שווה לעלות הקבועה</b>, לא לאפס!</p>
+  </div>
+  <div class="ex-grid two-col" id="rB"></div>
+
+  <div class="remind-card reveal">
+    <div class="rc-hd">💛 תזכורת 3 · הנוסחאות: FC, v, Q, VC, TC, ATC</div>
+    <p>$VC = v \times Q$ (סך העלות המשתנה).<br>$TC = FC + VC = FC + v \times Q$ (העלות הכוללת, הנוסחה המרכזית).<br>$ATC = \dfrac{FC}{Q} + v$ (העלות הממוצעת ליחידה, שיורדת לכיוון v ככל ש-Q גדל).<br>כל אחת מהנוסחאות ניתנת גם להפוך ולפתור עבור נעלם אחר.</p>
+  </div>
+  <div class="ex-grid" id="rC"></div>
+
+  <div class="remind-card reveal">
+    <div class="rc-hd">💛 תזכורת 4 · שיטת גבוה-נמוך</div>
+    <p>כדי לפרק עלות מעורבת: $v = \dfrac{TC_{\text{high}}-TC_{\text{low}}}{Q_{\text{high}}-Q_{\text{low}}}$, ואז מציבים כדי למצוא FC. הזהירו: בוחרים את חודשי הקיצון <b>לפי כמות הפעילות</b>, לא לפי גובה העלות. חודש עם עלות חריגה (למשל תקלה חד-פעמית) אינו בהכרח חודש הקיצון!</p>
+  </div>
+  <div class="ex-grid" id="rD"></div>
+
+  <div class="remind-card reveal">
+    <div class="rc-hd">💛 תזכורת 5 · החלטות: קבוע מול משתנה</div>
+    <p>כשמשווים חלופה בעלות קבועה (למשל שכר עובד קבוע) לחלופה בעלות משתנה (למשל מיקור-חוץ לפי יחידה), יש <b>נקודת שוויון</b>: כמות שבה שתי החלופות עולות אותו דבר. מתחת לה, החלופה המשתנה זולה יותר; מעליה, החלופה הקבועה זולה יותר.</p>
+  </div>
+  <div class="ex-grid" id="rE"></div>
+
+  <div class="checkpoint reveal">
+    <div class="hd">✅ סיימתם את החימום</div>
+    <p>אם כל זה הרגיש מוכר, מעולה, אתם מוכנים בדיוק לשיעור היום. אם משהו לא היה ברור, זה בסדר גמור, אפשר לחזור רגע ל<a href="lecture1part3.html">חלק 3</a> או <a href="lecture1part4.html">חלק 4</a> של שיעור 1. עכשיו, לנושא החדש.</p>
+  </div>
+</section>
+
+<!-- ==================== MODULE 02 · MOTIVATION ==================== -->
+<section class="section" id="why">
+  <span class="block-tag">02 · למה בכלל צריך שיטת הקצאה</span>
+  <h2>השאלה שה-TC <span class="g">לא עונה עליה</span></h2>
+  <p class="section-sub">ה-TC של שיעור 1 היה תמיד על הארגון כולו, או על מחלקה שלמה. אבל מנהלים כמעט תמיד צריכים לדעת משהו מדויק יותר: כמה עולה שירות אחד ספציפי. כאן ה-TC הכללי לא מספיק.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst on"><span class="n">❓</span>למה צריך</span>
+    <span class="pst"><span class="n">📍</span>ישיר/עקיף</span>
+    <span class="pst"><span class="n">⚙️</span>השיטה</span>
+    <span class="pst"><span class="n">🩻</span>תרגול מודרך</span>
+    <span class="pst"><span class="n">⚠️</span>מגבלה</span>
+    <span class="pst"><span class="n">✅</span>סיכום</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 2 מתוך 8</div>
+
+  <div class="decision reveal">
+    <span class="d-role">🩻 מנהל/ת מכון הדמיה רפואית</span>
+    <div class="d-quote">״קופת החולים משלמת לנו סכום קבוע לכל CT. תגידו לי בכנות: כמה באמת עולה לנו CT אחד? כי אם המחיר שאנחנו מקבלים נמוך מהעלות, אנחנו מפסידים על כל בדיקה.״</div>
+    <div class="d-term">הדוח הכספי השנתי של המכון מראה סך הוצאות שכר, תרופות, ציוד ואחזקה עבור <b>כל המכון יחד</b>. הוא לא אומר "כמה עולה CT אחד" לעומת "כמה עולה אולטרסאונד אחד". אלה שירותים שונים לגמרי, עם צריכת משאבים שונה לגמרי.</div>
+    <p class="d-dilemma"><b>הדילמה:</b> חלק מהעלויות (חומרים, זמן טכנאי) קל לשייך ישירות לבדיקה מסוימת. אבל חלק גדול (שכר דירה, פחת על מכשיר ה-CT עצמו, ניהול) משותף לכל השירותים. איך מחלקים את זה בהוגנות?</p>
+    <div class="d-lead-to">→ זו בדיוק השאלה שהתמחיר המסורתי בא לענות עליה.</div>
+  </div>
+
+  <div class="info insight reveal">
+    <div class="hd">💡 חיבור לשיעור 1</div>
+    <p>שימו לב: זו לא שאלה על <b>התנהגות</b> העלות (קבועה/משתנה/מעורבת), אלא על <b>יכולת השיוך</b> שלה לשירות מסוים. זהו ציר סיווג חדש לגמרי, שמצטרף לציר שכבר הכרתם. בעוד רגע נראה שהם בלתי תלויים זה בזה.</p>
+  </div>
+</section>
+
+<!-- ==================== MODULE 03 · DIRECT VS INDIRECT ==================== -->
+<section class="section" id="direct-indirect">
+  <span class="block-tag">03 · עלות ישירה מול עלות עקיפה</span>
+  <h2>ציר סיווג <span class="g">חדש: יכולת שיוך</span></h2>
+  <p class="section-sub">בשיעור 1 סיווגנו עלויות לפי <b>איך הן מתנהגות</b> מול כמות. עכשיו נסווג אותן לפי שאלה שונה לגמרי: <b>האם אפשר לשייך אותן ישירות לשירות מסוים, בכלכליות סבירה?</b></p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">❓</span>למה צריך</span>
+    <span class="pst on"><span class="n">📍</span>ישיר/עקיף</span>
+    <span class="pst"><span class="n">⚙️</span>השיטה</span>
+    <span class="pst"><span class="n">🩻</span>תרגול מודרך</span>
+    <span class="pst"><span class="n">⚠️</span>מגבלה</span>
+    <span class="pst"><span class="n">✅</span>סיכום</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 3 מתוך 8</div>
+
+  <p class="lead reveal">הפכו כל כרטיס כדי לראות את ההגדרה המלאה:</p>
+  <div class="flip-grid cols2 stagger">
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">📍</div><div class="ttl">עלות ישירה<span class="en">Direct Cost</span></div><div class="hint">↻ הפכו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">📍 עלות ישירה</div><p>עלות שניתן לשייך <b>ישירות ובכלכליות סבירה</b> לשירות/מוצר מסוים. דוגמאות: חומר ניגוד לבדיקת CT ספציפית, זמן טכנאי שהוקדש לאותה בדיקה בלבד.</p></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">🌐</div><div class="ttl">עלות עקיפה<span class="en">Indirect Cost</span></div><div class="hint">↻ הפכו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">🌐 עלות עקיפה</div><p>עלות משותפת למספר שירותים, שלא ניתן (או לא כדאי כלכלית) לשייך ישירות. דוגמאות: שכר דירה, פחת על ציוד משותף, שכר מנהל המכון. חייבים <b>להקצות</b> אותה.</p></div>
+    </div></div>
+  </div>
+
+  <div class="deep-card">
+    <h3>שני צירים, <span class="g">בלתי תלויים</span></h3>
+    <p class="lead">זו הנקודה החשובה ביותר במודול הזה: הציר של שיעור 1 (התנהגות: קבועה/משתנה/מעורבת) והציר של היום (שיוך: ישירה/עקיפה) הם <b>שני ממדים שונים לגמרי</b>. עלות יכולה להיות כל שילוב ביניהם. הנה מטריצה עם דוגמה לכל תא:</p>
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <tr><th class="corner"></th><th class="fx">קבועה</th><th class="vr">משתנה</th><th class="mx">מעורבת</th></tr>
+        <tr><td class="axis direct">ישירה 📍</td><td class="cell">ליסינג ייעודי למכשיר המוקדש לשירות אחד בלבד</td><td class="cell">חומר ניגוד לכל בדיקת CT, לפי כמות הבדיקות</td><td class="cell">תחזוקת מכשיר ייעודי: בסיס קבוע + תוספת לפי שעות שימוש באותו מכשיר</td></tr>
+        <tr><td class="axis indirect">עקיפה 🌐</td><td class="cell">שכר מנהל המכון, שכר דירה, ביטוח המבנה</td><td class="cell">חומרי ניקיון לפי היקף פעילות כלל המכון</td><td class="cell">חשבון חשמל של המכון כולו: בסיס קבוע + תוספת לפי צריכה</td></tr>
+      </table>
+    </div>
+    <div class="info term">
+      <div class="hd">🎯 המסקנה</div>
+      <p>אל תניחו ש"קבוע" אומר "עקיף", או ש"משתנה" אומר "ישיר". הם עצמאיים. עלות יכולה להיות ישירה וגם קבועה (ליסינג ייעודי), או עקיפה וגם משתנה (חומרי ניקיון משותפים). כל תרגיל מהיום יבדוק את שני הצירים בנפרד.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MODULE 04 · TRADITIONAL COSTING METHOD ==================== -->
+<section class="section" id="method">
+  <span class="block-tag">04 · שיטת התמחיר המסורתי</span>
+  <h2>שיעור העמסה <span class="g">מוגדר מראש (POHR)</span></h2>
+  <p class="section-sub">עכשיו לפתרון: איך מקצים בהוגנות את העלויות העקיפות לכל שירות. השיטה המסורתית משתמשת ב<b>בסיס הקצאה אחד</b> (מנוע עלות) לכל הארגון, ומחשבת ממנו שיעור העמסה קבוע.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">❓</span>למה צריך</span>
+    <span class="pst done"><span class="n">📍</span>ישיר/עקיף</span>
+    <span class="pst on"><span class="n">⚙️</span>השיטה</span>
+    <span class="pst"><span class="n">🩻</span>תרגול מודרך</span>
+    <span class="pst"><span class="n">⚠️</span>מגבלה</span>
+    <span class="pst"><span class="n">✅</span>סיכום</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 4 מתוך 8</div>
+
+  <div class="flow-steps stagger">
+    <div class="flow-step"><div class="num">1</div><div><div class="fs-title">אמדו את סך העלות העקיפה המתוקצבת</div><div class="fs-sub">Budgeted Overhead</div><div class="fs-details">בתחילת השנה, מעריכים את סך העלויות העקיפות הצפויות (שכר דירה, פחת, ניהול וכו') לכל התקופה.</div></div></div>
+    <div class="flow-step"><div class="num">2</div><div><div class="fs-title">בחרו בסיס הקצאה (מנוע עלות)</div><div class="fs-sub">Allocation Base / Cost Driver</div><div class="fs-details">מדד שמניחים שקשור לצריכת המשאבים העקיפים: שעות מכונה, שעות עבודה ישירה, או עלות חומרים ישירים. במכון הדמיה, שעות מכונה הגיוני מאוד.</div></div></div>
+    <div class="flow-step"><div class="num">3</div><div><div class="fs-title">אמדו את כמות בסיס ההקצאה המתוקצבת</div><div class="fs-sub">Budgeted Allocation Base</div><div class="fs-details">כמה שעות מכונה, בסך הכול, צפויות להיות מנוצלות באותה תקופה על ידי כל השירותים יחד.</div></div></div>
+    <div class="flow-step"><div class="num">4</div><div><div class="fs-title">חשבו שיעור העמסה מוגדר מראש (POHR)</div><div class="fs-sub">Predetermined Overhead Rate</div><div class="fs-details">POHR = עלות עקיפה מתוקצבת ÷ כמות בסיס ההקצאה המתוקצבת. זהו "מחיר" קבוע ליחידת בסיס הקצאה, שנקבע מראש לכל התקופה.</div></div></div>
+    <div class="flow-step"><div class="num">5</div><div><div class="fs-title">העמיסו על כל שירות לפי השימוש בפועל</div><div class="fs-sub">Applied Overhead</div><div class="fs-details">עלות עקיפה שהועמסה = POHR × כמות בסיס ההקצאה שהשירות צרך בפועל. כך כל שירות "מקבל" חלק יחסי מהעלויות המשותפות.</div></div></div>
+  </div>
+
+  <h3 class="sub-h reveal">שלוש הנוסחאות <span class="g">שילוו את התרגול</span></h3>
+  <div class="formula-cards reveal">
+    <div class="formula-card a">
+      <div class="fc-tag">נוסחה 1</div>
+      <div class="fc-eq">$$POHR = \dfrac{OH_{\text{budget}}}{Base_{\text{budget}}}$$</div>
+      <div class="fc-note">שיעור העמסה קבוע ליחידת בסיס, נקבע פעם אחת בתחילת התקופה, לפי עלות עקיפה מתוקצבת חלקי בסיס הקצאה מתוקצב.</div>
+    </div>
+    <div class="formula-card b">
+      <div class="fc-tag">נוסחה 2</div>
+      <div class="fc-eq">$$OH_{\text{applied}} = POHR \times Base_{\text{actual}}$$</div>
+      <div class="fc-note">כמה מהעלות המשותפת "מקבל" כל שירות: שיעור ההעמסה כפול השימוש בפועל של אותו שירות בבסיס ההקצאה.</div>
+    </div>
+    <div class="formula-card c">
+      <div class="fc-tag">נוסחה 3 · המרכזית</div>
+      <div class="fc-eq">$$\text{Full Cost} = DM + DL + OH_{\text{applied}}$$</div>
+      <div class="fc-note">העלות המלאה של שירות בודד: חומרים ישירים (DM), ועוד עבודה ישירה (DL), ועוד העלות העקיפה שהועמסה.</div>
+    </div>
+  </div>
+
+  <div class="legend-grid reveal">
+    <div class="legend-card direct" onclick="libiExplain('direct')" role="button" tabindex="0"><div class="lsym">📍 ישיר</div><div class="lname">ניתן לשייך ישירות</div><div class="ltap">👆 הסבר מליבי</div></div>
+    <div class="legend-card indirect" onclick="libiExplain('indirect')" role="button" tabindex="0"><div class="lsym">🌐 עקיף</div><div class="lname">משותף, מוקצה</div><div class="ltap">👆 הסבר מליבי</div></div>
+    <div class="legend-card direct" onclick="libiExplain('pohr')" role="button" tabindex="0"><div class="lsym">⚙️ POHR</div><div class="lname">שיעור העמסה</div><div class="ltap">👆 הסבר מליבי</div></div>
+    <div class="legend-card indirect" onclick="libiExplain('applied')" role="button" tabindex="0"><div class="lsym">➕ העמסה</div><div class="lname">עלות שהוקצתה</div><div class="ltap">👆 הסבר מליבי</div></div>
+  </div>
+</section>
+
+<!-- ==================== MODULE 05 · GUIDED EXAMPLE ==================== -->
+<section class="section" id="guided">
+  <span class="block-tag">05 · תרגול מודרך: מכון ההדמיה</span>
+  <h2>בואו <span class="g">נחשב את זה ביחד</span></h2>
+  <p class="section-sub">חוזרים למקרה הפתיחה. הנה נתוני התקציב של מכון ההדמיה. עברו שלב-שלב, ובקשו רמז מליבי בכל שלב שנתקעים בו.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">❓</span>למה צריך</span>
+    <span class="pst done"><span class="n">📍</span>ישיר/עקיף</span>
+    <span class="pst done"><span class="n">⚙️</span>השיטה</span>
+    <span class="pst on"><span class="n">🩻</span>תרגול מודרך</span>
+    <span class="pst"><span class="n">⚠️</span>מגבלה</span>
+    <span class="pst"><span class="n">✅</span>סיכום</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 5 מתוך 8</div>
+
+  <div class="report reveal">
+    <div class="report-head"><span class="rh-co">מכון הדמיה רפואית</span><span class="rh-t">נתוני תקציב שנתי</span></div>
+    <div class="report-body">
+      <div class="report-row"><span class="rr-label">עלות עקיפה (תקורה) מתוקצבת לשנה</span><span class="rr-num">900,000 ₪</span></div>
+      <div class="report-row"><span class="rr-label">בסיס הקצאה</span><span class="rr-num">שעות מכונה</span></div>
+      <div class="report-row rr-flag"><span class="rr-label">כמות שעות מכונה מתוקצבת לשנה</span><span class="rr-num">6,000 שעות</span></div>
+      <div class="report-row"><span class="rr-label">שעות מכונה ל-CT אחד</span><span class="rr-num">2.00</span></div>
+      <div class="report-row"><span class="rr-label">שעות מכונה לאולטרסאונד אחד</span><span class="rr-num">0.50</span></div>
+      <div class="report-row"><span class="rr-label">שעות מכונה לצילום רנטגן אחד</span><span class="rr-num">0.25</span></div>
+      <div class="report-row rr-total"><span class="rr-label">CT: חומרים ישירים 120 ₪, עבודה ישירה 180 ₪</span><span class="rr-num">—</span></div>
+    </div>
+    <div class="report-foot">נתונים לימודיים בלבד, מעוגלים לצורך התרגול.</div>
+  </div>
+
+  <div class="ex-grid" id="guidedEx"></div>
+</section>
+
+<!-- ==================== MODULE 06 · LIMITATION ==================== -->
+<section class="section" id="limitation">
+  <span class="block-tag">06 · המגבלה של השיטה המסורתית</span>
+  <h2>שיעור אחד <span class="g">לכל השירותים, באמת?</span></h2>
+  <p class="section-sub">השיטה שלמדנו היום פשוטה ושימושית, אבל היא נשענת על הנחה חשובה: שכל השירותים "צורכים" עלויות עקיפות ביחס ישר לבסיס ההקצאה שנבחר. מה קורה כשזה לא נכון?</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">❓</span>למה צריך</span>
+    <span class="pst done"><span class="n">📍</span>ישיר/עקיף</span>
+    <span class="pst done"><span class="n">⚙️</span>השיטה</span>
+    <span class="pst done"><span class="n">🩻</span>תרגול מודרך</span>
+    <span class="pst on"><span class="n">⚠️</span>מגבלה</span>
+    <span class="pst"><span class="n">✅</span>סיכום</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 6 מתוך 8</div>
+
+  <div class="hardq reveal">
+    <span class="hqt">שאלה מאתגרת</span>
+    <p class="hqq">דמיינו שירות חדש במכון: ייעוץ טרום-בדיקה מורכב, שדורש המון זמן מנהלי ותיאום (קביעת תורים, בדיקת היסטוריה רפואית), אבל כמעט לא משתמש במכונה עצמה (0.05 שעות מכונה בלבד). לפי השיטה שלמדנו היום, כמה עלות עקיפה יוטל על שירות כזה? ומה הבעיה בזה?</p>
+    <div class="acc">
+      <div class="acc-h" onclick="toggleHardq(this)"><span>🎯 לחצו לתשובה</span><span class="chev">⌄</span></div>
+      <div class="acc-body"><div class="acc-bin">לפי POHR של 150 ₪ לשעת מכונה, שירות עם 0.05 שעות בלבד "יקבל" רק 7.5 ₪ עלות עקיפה מוקצית. אבל בפועל, השירות הזה צורך המון זמן מנהלי, טלפונים, ותיאום, שהם בדיוק חלק מהעלות העקיפה שהמכון משלם. <b>השירות הזה מקבל תת-הקצאה חמורה</b> (undercosted), כי בסיס ההקצאה שנבחר (שעות מכונה) לא משקף את הצריכה האמיתית שלו של משאבים מנהליים. במקביל, שירותים "כבדי מכונה" אך פשוטים מנהלית (כמו CT) עלולים לקבל <b>הקצאת יתר</b> (overcosted). זו בדיוק המגבלה של שיעור העמסה יחיד: הוא מדויק רק כאשר כל השירותים צורכים משאבים עקיפים ביחס דומה לבסיס שנבחר. כשזה לא המצב, יש עיוות. זו בדיוק הסיבה שבהמשך הקורס נלמד שיטה מתקדמת יותר: <b>תמחיר על בסיס פעולות (ABC)</b>, שמשתמשת בכמה "מנועי עלות" שונים במקום אחד, ומדייקת את התמונה.</div></div>
+    </div>
+  </div>
+
+  <div class="info insight reveal">
+    <div class="hd">🔮 קריצה קדימה</div>
+    <p>אל תדאגו, לא נצטרך לפתור את זה עכשיו. זו רק תזכורת חשובה: שיטת התמחיר המסורתי היא כלי מצוין וסטנדרטי, אבל היא <b>מודל מפושט</b>. בשבועות 7-8 של הקורס נכיר את ABC, שנבנה בדיוק כדי לתקן את המגבלה הזו.</p>
+  </div>
+</section>
+
+<!-- ==================== MODULE 07 · SUMMARY ==================== -->
+<section class="section" id="summary">
+  <span class="block-tag">07 · סיכום</span>
+  <h2>מה לוקחים <span class="g">מהיום</span></h2>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">❓</span>למה צריך</span>
+    <span class="pst done"><span class="n">📍</span>ישיר/עקיף</span>
+    <span class="pst done"><span class="n">⚙️</span>השיטה</span>
+    <span class="pst done"><span class="n">🩻</span>תרגול מודרך</span>
+    <span class="pst done"><span class="n">⚠️</span>מגבלה</span>
+    <span class="pst on"><span class="n">✅</span>סיכום</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 7 מתוך 8</div>
+
+  <div class="takeaway reveal">
+    <span class="big-emoji">⚙️</span>
+    <div class="hd">התובנה המרכזית של שיעור 2</div>
+    <div class="tx">כדי לדעת כמה עולה שירות בודד, לא מספיק לדעת את ה-TC של הארגון (שיעור 1). צריך לסווג עלויות כישירות או עקיפות, ולהקצות את העקיפות לפי שיעור העמסה מוגדר מראש: POHR = עלות עקיפה מתוקצבת ÷ בסיס הקצאה מתוקצב.</div>
+  </div>
+
+  <ul class="checklist reveal">
+    <li>עלות ישירה ניתנת לשיוך ישיר לשירות; עלות עקיפה משותפת וטעונה הקצאה</li>
+    <li>ציר הישיר/עקיף בלתי תלוי בציר הקבוע/משתנה/מעורב משיעור 1</li>
+    <li>POHR = עלות עקיפה מתוקצבת ÷ בסיס הקצאה מתוקצב</li>
+    <li>עלות עקיפה שהועמסה = POHR × שימוש בפועל</li>
+    <li>עלות מלאה = חומרים ישירים + עבודה ישירה + עלות עקיפה שהועמסה</li>
+    <li>שיעור העמסה יחיד מדויק רק כשכל השירותים צורכים משאבים עקיפים ביחס דומה לבסיס שנבחר</li>
+  </ul>
+
+  <div style="display:grid;grid-template-columns:56px 1fr;gap:16px;background:linear-gradient(135deg,var(--rose-light),#fff);border:2px solid var(--line);border-radius:18px;padding:19px;margin:14px 0" class="reveal">
+    <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;font-size:26px;display:grid;place-items:center">3️⃣</div>
+    <div><b style="font-size:18.5px;">שיעור 3-4: תמחיר הזמנה</b><div style="color:var(--muted);margin-top:4px;font-size:15.5px;">ניקח את שיעור העמסה מוגדר מראש שלמדנו היום, ונשתמש בו כדי לתמחר "הזמנה" (Job) ספציפית: מטופל בודד, ניתוח בודד, פרויקט בודד.</div></div>
+  </div>
+</section>
+
+<!-- ==================== MODULE 08 · HOMEWORK ==================== -->
+<section class="section" id="homework">
+  <span class="block-tag">08 · שיעורי בית</span>
+  <h2>תרגול מקיף <span class="g">לבית</span></h2>
+  <p class="section-sub">21 תרגילים, מהבסיס ועד אתגר משולב עם שיעור 1. כל תרגיל: רמז ראשון מליבי, רמז שני מפורש יותר, ופתרון מלא שמוצג בהדרגה כשתפתחו אותו. אין צורך לסיים הכול בישיבה אחת.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">❓</span>למה צריך</span>
+    <span class="pst done"><span class="n">📍</span>ישיר/עקיף</span>
+    <span class="pst done"><span class="n">⚙️</span>השיטה</span>
+    <span class="pst done"><span class="n">🩻</span>תרגול מודרך</span>
+    <span class="pst done"><span class="n">⚠️</span>מגבלה</span>
+    <span class="pst done"><span class="n">✅</span>סיכום</span>
+    <span class="pst on"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 8 מתוך 8 · הישר האחרון</div>
+  <div style="text-align:left;margin:10px 0"><span class="chip" id="scoreCounter">נפתרו נכון: 0 / 21</span></div>
+
+  <div class="sub-h">מדור א׳ · <span class="g">סיווג ישיר/עקיף</span></div>
+  <p class="section-sub">קבעו לכל פריט אם מדובר בעלות ישירה או עקיפה.</p>
+  <div class="ex-grid two-col" id="hwA"></div>
+
+  <div class="sub-h">מדור ב׳ · <span class="g">חישוב שיעור העמסה (POHR)</span></div>
+  <p class="section-sub">בכל תרגיל: עלות עקיפה מתוקצבת ובסיס הקצאה מתוקצב. חשבו POHR = עלות עקיפה ÷ בסיס הקצאה.</p>
+  <div class="ex-grid" id="hwB"></div>
+
+  <div class="sub-h">מדור ג׳ · <span class="g">העמסה בפועל ובניית עלות מלאה</span></div>
+  <p class="section-sub">חשבו את העלות העקיפה שהועמסה, ואז את העלות המלאה של השירות.</p>
+  <div class="ex-grid" id="hwC"></div>
+
+  <div class="sub-h">מדור ד׳ · <span class="g">שילוב עם שיעור 1</span></div>
+  <p class="section-sub">כאן שני השיעורים נפגשים: סיווג דו-ממדי (התנהגות + שיוך), ובעיות מילוליות שמשלבות את שתי השיטות.</p>
+  <div class="ex-grid" id="hwD"></div>
+</section>
+
+</main>
+
+<footer>
+  <div class="big">חשבונאות ניהולית · שיעור 2: העמסת עלויות עקיפות</div>
+  <div>ד״ר שי צבאן · שיטת התמחיר המסורתי</div>
+  <div class="small">כל התרחישים במסמך זה הם דוגמאות לימודיות בלבד.</div>
+</footer>
+
+<script>
+var MATH_DELIMS=[
+  {left:"$$", right:"$$", display:true},
+  {left:"$", right:"$", display:false}
+];
+function renderMathInDocument(){
+  if(window.renderMathInElement){
+    renderMathInElement(document.body, {delimiters:MATH_DELIMS, throwOnError:false});
+  }
+}
+function renderMathIn(el){
+  if(window.renderMathInElement && el){
+    renderMathInElement(el, {delimiters:MATH_DELIMS, throwOnError:false});
+  }
+}
+</script>
+<script>
+(function(){
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- keynote start ---------- */
+  window.startLesson=function(){
+    document.body.classList.remove('pre-start');
+    var h=document.querySelector('.hero'); if(h) h.scrollIntoView({behavior:RM?'auto':'smooth'});
+  };
+  var hero=document.querySelector('.hero');
+  if(hero){ var startO=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ document.body.classList.remove('pre-start'); startO.disconnect(); } }); },{threshold:.08}); startO.observe(hero); }
+
+  /* ---------- reveal + stagger ---------- */
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } }); }, {threshold:.1});
+  document.querySelectorAll('.reveal,.stagger').forEach(function(el){ io.observe(el); });
+
+  /* ---------- flip cards ---------- */
+  document.querySelectorAll('.flip').forEach(function(f){
+    f.setAttribute('tabindex','0'); f.setAttribute('role','button');
+    function tog(e){ if(e && e.target && e.target.closest('a,button')) return; f.classList.toggle('flipped'); }
+    f.addEventListener('click',tog);
+    f.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();f.classList.toggle('flipped');} });
+  });
+
+  /* ---------- hardq accordion ---------- */
+  window.toggleHardq=function(h){ h.parentElement.classList.toggle('open'); };
+
+  /* ---------- module progress (scroll) ---------- */
+  var sections=Array.prototype.slice.call(document.querySelectorAll('main .section'));
+  var bar=document.getElementById('bar'), lp=document.getElementById('lessonProg');
+  function onScroll(){
+    var h=document.documentElement, sc=h.scrollTop, max=h.scrollHeight-h.clientHeight;
+    if(bar) bar.style.width=(max>0?(sc/max*100):0)+'%';
+    var idx=0;
+    for(var i=0;i<sections.length;i++){ if(sections[i].getBoundingClientRect().top<=140){ idx=i; } }
+    var pct = max>0 ? Math.round(sc/max*100) : 0;
+    if(lp) lp.textContent='מודול '+(idx+1)+' / '+sections.length+' · '+pct+'%';
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('load', onScroll); onScroll();
+
+  /* ================= LIBI MASCOT ================= */
+  var libi=document.getElementById('libi'), lTip=document.getElementById('lTip'), lArt=document.getElementById('lArt');
+  function setTip(txt){ lTip.innerHTML=txt; renderMathIn(lTip); libi.classList.remove('pulse'); void libi.offsetWidth; libi.classList.add('pulse'); if(libi.classList.contains('min')) libiReopen(); }
+  window.libiMin=function(){ libi.classList.add('min'); };
+  window.libiReopen=function(){ libi.classList.remove('min'); };
+  function clampX(x){ return Math.max(6, Math.min(x, window.innerWidth - libi.offsetWidth - 6)); }
+  function clampY(y){ return Math.max(6, Math.min(y, window.innerHeight - libi.offsetHeight - 6)); }
+  var dragging=false, dx=0, dy=0;
+  function down(e){ dragging=true; var r=libi.getBoundingClientRect();
+    var cx=(e.touches?e.touches[0].clientX:e.clientX), cy=(e.touches?e.touches[0].clientY:e.clientY);
+    dx=cx-r.left; dy=cy-r.top; libi.style.bottom='auto'; e.preventDefault(); }
+  function move(e){ if(!dragging) return;
+    var cx=(e.touches?e.touches[0].clientX:e.clientX), cy=(e.touches?e.touches[0].clientY:e.clientY);
+    libi.style.left=clampX(cx-dx)+'px'; libi.style.top=clampY(cy-dy)+'px'; libi.style.right='auto'; }
+  function up(){ dragging=false; }
+  lArt.addEventListener('mousedown',down); lArt.addEventListener('touchstart',down,{passive:false});
+  window.addEventListener('mousemove',move); window.addEventListener('touchmove',move,{passive:false});
+  window.addEventListener('mouseup',up); window.addEventListener('touchend',up);
+
+  var SYMBOL_EXPLAIN={
+    direct:'עלות ישירה: אפשר לשייך אותה לשירות מסוים בלי מאמץ או ניחוש, בעלות מעקב זולה. אם אתם יכולים להצביע על בדיקה ספציפית ולומר "זה בשבילה", זו עלות ישירה.',
+    indirect:'עלות עקיפה: משותפת לכמה שירותים בבת אחת. אי אפשר (או לא כדאי) לעקוב אחריה לשירות בודד, ולכן צריך שיטת הקצאה, בדיוק כמו שאי אפשר לדעת בדיוק כמה מהחשמל במאפייה שייך לכל רוגלית בנפרד.',
+    pohr:'POHR הוא שיעור העמסה מוגדר מראש: עלות עקיפה מתוקצבת חלקי בסיס הקצאה מתוקצב. הוא נקבע פעם אחת, בתחילת התקופה, ונשאר קבוע לאורכה.',
+    applied:'עלות עקיפה שהועמסה היא ה"מנה" שכל שירות מקבל מהעלויות המשותפות: POHR כפול השימוש בפועל שלו בבסיס ההקצאה. סכום כל ההעמסות אמור להתקרב לסך העלות העקיפה בפועל.'
+  };
+  window.libiExplain=function(sym){ if(SYMBOL_EXPLAIN[sym]) setTip(SYMBOL_EXPLAIN[sym]); };
+
+  /* ================= SCORE TRACKER ================= */
+  var TOTAL_EX=21, solved={};
+  function markSolved(id){ if(!solved[id]){ solved[id]=true; var el=document.getElementById('scoreCounter'); if(el) el.textContent='נפתרו נכון: '+Object.keys(solved).length+' / '+TOTAL_EX; } }
+
+  /* ================= HINT ENGINE ================= */
+  var hintTier={};
+  window.showHint=function(id, hints){
+    var t = hintTier[id]===undefined ? 0 : Math.min(hintTier[id]+1, hints.length-1);
+    hintTier[id]=t;
+    var html='';
+    for(var i=0;i<=t;i++) html+='<div class="htier"><b>רמז '+(i+1)+':</b> '+hints[i]+'</div>';
+    var box=document.getElementById('hint-'+id);
+    box.innerHTML=html; box.classList.add('show');
+    renderMathIn(box);
+    var btn=document.getElementById('hbtn-'+id);
+    if(t>=hints.length-1) btn.textContent='💡 זה כל הרמזים, נסו את הפתרון המלא';
+    else btn.textContent='💡 רמז נוסף מליבי';
+    setTip(hints[t]);
+  };
+  window.toggleSol=function(id){ document.getElementById('sol-'+id).classList.toggle('open'); };
+
+  /* ================= GENERIC RENDERERS ================= */
+  function diffTag(d){ return '<span class="diff '+(d==='קל'?'easy':d==='בינוני'?'med':'hard')+'">'+d+'</span>'; }
+  function hintTools(ex){
+    return '<div class="ex-tools">'
+      +'<button class="hint-btn" id="hbtn-'+ex.id+'" onclick=\'showHint("'+ex.id+'", '+JSON.stringify(ex.hints)+')\'>💡 רמז מליבי</button>'
+      +'</div><div class="hint-box" id="hint-'+ex.id+'"></div>'
+      +'<div class="sol-acc" id="sol-'+ex.id+'"><div class="sh" onclick="toggleSol(\''+ex.id+'\')"><span>📖 הצג פתרון מלא</span><span class="chev">⌄</span></div><div class="sb"><div class="sbin">'+ex.solution+'</div></div></div>';
+  }
+
+  /* classify: supports 1 or 2 axes via ex.axes = [{key,label,options:[{v,label,icon}],correct}, ...] */
+  function renderClassify(ex){
+    var axesHtml = ex.axes.map(function(axis, ai){
+      var cols = axis.options.length===2 ? ' cols2' : '';
+      var label = axis.label ? '<div class="axis-label">'+axis.label+'</div>' : '';
+      var btns = axis.options.map(function(o){
+        return '<button class="classify-btn '+o.v+'" onclick="classifyPick(\''+ex.id+'\','+ai+',\''+o.v+'\',\''+axis.correct+'\','+ex.axes.length+')">'+o.icon+' '+o.label+'</button>';
+      }).join('');
+      return label+'<div class="classify-row'+cols+'" data-axis="'+ai+'">'+btns+'</div>';
+    }).join('');
+    return '<div class="ex-card" id="'+ex.id+'" data-correct-axes="0" data-total-axes="'+ex.axes.length+'"><div class="ex-head"><div class="ex-num">'+ex.n+'</div><h4>'+ex.title+'</h4>'+diffTag(ex.difficulty)+'</div>'
+      +'<div class="ex-text">'+ex.text+'</div>'
+      +axesHtml
+      +'<div class="classify-fb" id="fb-'+ex.id+'"></div>'
+      +hintTools(ex)+'</div>';
+  }
+  var LBL={fixed:'קבועה',variable:'משתנה',mixed:'מעורבת',direct:'ישירה',indirect:'עקיפה',plan:'תכנון',control:'בקרה',decide:'קבלת החלטות',yes:'נכון',no:'לא נכון'};
+  window.classifyPick=function(id, axisIdx, choice, correct, totalAxes){
+    var card=document.getElementById(id);
+    var row=card.querySelector('.classify-row[data-axis="'+axisIdx+'"]');
+    if(row.dataset.answered) return; row.dataset.answered='1';
+    row.querySelectorAll('.classify-btn').forEach(function(b){ b.disabled=true; });
+    row.querySelector('.classify-btn.'+correct).classList.add('correct');
+    var ok = choice===correct;
+    if(!ok) row.querySelector('.classify-btn.'+choice).classList.add('wrong');
+    var fb=document.getElementById('fb-'+id);
+    var msg = ok ? '✅ נכון! זו '+LBL[correct]+'.' : '❌ לא בדיוק, זו '+LBL[correct]+'.';
+    fb.textContent = fb.textContent ? fb.textContent+' '+msg : msg;
+    fb.style.color = ok ? '#059669' : '#dc2626';
+    if(ok) card.dataset.correctAxes = (+card.dataset.correctAxes||0)+1;
+    var answeredCount = card.querySelectorAll('.classify-row[data-answered]').length;
+    if(answeredCount>=totalAxes){
+      if(+card.dataset.correctAxes>=totalAxes) markSolved(id);
+      else fb.textContent += ' פתחו את הפתרון המלא כדי לראות למה.';
+    }
+  };
+
+  function renderNumeric(ex){
+    var subsHtml='';
+    ex.subs.forEach(function(s){
+      subsHtml+='<div class="subrow" id="row-'+s.id+'">'
+        +'<label>'+s.label+'</label>'
+        +'<input type="text" inputmode="decimal" id="in-'+s.id+'" placeholder="'+ (s.unit||'') +'">'
+        +'<button onclick="checkSub(\''+ex.id+'\',\''+s.id+'\','+s.expected+','+(s.tol!==undefined?s.tol:1)+')">בדקו</button>'
+        +'<div class="verdict" id="v-'+s.id+'"></div></div>';
+    });
+    return '<div class="ex-card" id="'+ex.id+'"><div class="ex-head"><div class="ex-num">'+ex.n+'</div><h4>'+ex.title+'</h4>'+diffTag(ex.difficulty)+(ex.trap?'<span class="trap">⚠️ מלכודת</span>':'')+'</div>'
+      +'<div class="ex-text">'+ex.text+'</div>'
+      +subsHtml
+      +hintTools(ex)+'</div>';
+  }
+  window.checkSub=function(exId, subId, expected, tol){
+    var input=document.getElementById('in-'+subId);
+    var given=parseFloat((input.value||'').replace(',',''));
+    var v=document.getElementById('v-'+subId);
+    if(isNaN(given)){ v.textContent='הקלידו מספר קודם.'; v.style.color='#dc2626'; return; }
+    var ok=Math.abs(given-expected)<=tol;
+    v.textContent = ok ? '✅ נכון!' : '❌ לא מדויק. נסו שוב, או בקשו רמז.';
+    v.style.color = ok ? '#059669' : '#dc2626';
+    document.getElementById('row-'+subId).style.borderColor = ok ? 'var(--variable)' : '#fca5a5';
+    if(ok){
+      var card=input.closest('.ex-card');
+      var allOk=true;
+      card.querySelectorAll('.subrow').forEach(function(r){ if(!r.style.borderColor || r.style.borderColor==='rgb(252, 165, 165)') allOk=false; });
+      if(allOk) markSolved(card.id);
+    }
+  };
+
+  /* ================= RECAP: SECTION rA (planning/control/decision + cost/price/expense) ================= */
+  var rA=[
+    {id:'ra1', n:1, difficulty:'קל', title:'תכנון, בקרה, או החלטה?',
+      axes:[{options:[{v:'plan',label:'תכנון',icon:'🧭'},{v:'control',label:'בקרה',icon:'🚦'},{v:'decide',label:'קבלת החלטות',icon:'⚖️'}], correct:'control'}],
+      text:'מנהל קופת חולים מקבל דוח חודשי שמראה שההוצאה על תרופות חרגה ב-8% מהתקציב. איזו פונקציה זו?',
+      hints:['שאלו: האם זה קובע יעד חדש, בוחר בין חלופות, או משווה בין תוכנית לביצוע בפועל?', 'זו השוואה בין מה שתוכנן למה שקרה בפועל, בדיוק הגדרת הבקרה.'],
+      solution:'זו <b>בקרה</b>. הדוח משווה תקציב מתוכנן לביצוע בפועל ומאתר סטייה, לא קובע יעד חדש ולא בוחר בין חלופות.'},
+    {id:'ra2', n:2, difficulty:'קל', title:'עלות זה בדיוק כמו מחיר?',
+      axes:[{options:[{v:'yes',label:'נכון',icon:'✔️'},{v:'no',label:'לא נכון',icon:'❌'}], correct:'no'}],
+      text:'עלות (Cost) ומחיר (Price) הם אותו דבר. נכון או לא נכון?',
+      hints:['עלות היא המשאב שנצרך. מחיר הוא הסכום שמתקבל או משולם תמורת שירות.', 'בבריאות בישראל, המחיר נקבע לרוב על ידי קופת חולים או משרד הבריאות, ולא תמיד שווה לעלות בפועל.'],
+      solution:'<b>לא נכון</b>. עלות היא שווי המשאבים שנצרכו לייצור שירות. מחיר הוא הסכום שמתקבל תמורתו. הפער בין השניים הוא בדיוק מה שמנהל צריך לדעת.'}
+  ];
+  document.getElementById('rA').innerHTML = rA.map(renderClassify).join('');
+
+  /* ================= RECAP: SECTION rB (F/V/M classify + zero-quantity misconception) ================= */
+  var rB=[
+    {id:'rb1', n:3, difficulty:'קל', title:'ביטוח שנתי למרפאה',
+      axes:[{options:[{v:'fixed',label:'קבועה',icon:'🏠'},{v:'variable',label:'משתנה',icon:'📈'},{v:'mixed',label:'מעורבת',icon:'🧩'}], correct:'fixed'}],
+      text:'פרמיית ביטוח שנתית קבועה למרפאה, ללא קשר למספר המטופלים.',
+      hints:['שאלו: האם הפרמיה משתנה אם יגיע יותר או פחות מטופלים החודש?', 'זהו הסדר חוזי קבוע מראש מול חברת הביטוח.'],
+      solution:'זו <b>עלות קבועה</b>. הפרמיה זהה ללא קשר לכמות הפעילות, בתוך הטווח הרלוונטי.'},
+    {id:'rb2', n:4, difficulty:'קל', title:'חומרי חבישה',
+      axes:[{options:[{v:'fixed',label:'קבועה',icon:'🏠'},{v:'variable',label:'משתנה',icon:'📈'},{v:'mixed',label:'מעורבת',icon:'🧩'}], correct:'variable'}],
+      text:'חומרי חבישה, לפי מספר הטיפולים שבוצעו החודש.',
+      hints:['אם לא בוצע אף טיפול, האם תהיה עלות חומרי חבישה?', 'בלי טיפולים אין צריכה, אין עלות. זה יחס ישר לכמות.'],
+      solution:'זו <b>עלות משתנה</b>. סך העלות משתנה בקו ישר עם כמות הטיפולים, ובכמות אפס העלות היא אפס.'},
+    {id:'rb3', n:5, difficulty:'בינוני', title:'מלכודת: TC בכמות אפס',
+      axes:[{options:[{v:'yes',label:'נכון',icon:'✔️'},{v:'no',label:'לא נכון',icon:'❌'}], correct:'no'}],
+      text:'בכמות ייצור אפס, העלות הכוללת (TC) של עסק עם עלות קבועה היא אפס. נכון או לא נכון?',
+      hints:['הציבו Q=0 בנוסחה TC = FC + v×Q ותראו מה נשאר.', 'v×0 שווה אפס, אז TC = FC. העלות הקבועה עדיין שם.'],
+      solution:'<b>לא נכון</b>, וזו בדיוק המלכודת מחלק 3-4 של שיעור 1. ב-Q=0, TC = FC + v×0 = FC. העלות הקבועה משולמת גם בלי אף יחידת פעילות.'}
+  ];
+  document.getElementById('rB').innerHTML = rB.map(renderClassify).join('');
+
+  /* ================= RECAP: SECTION rC (VC/TC/ATC) ================= */
+  var rC=[
+    {id:'rc1', n:6, difficulty:'בינוני', title:'VC, TC, ATC: תרגיל אחד, שלוש נוסחאות',
+      text:'FC = 5,000 ש״ח. v = 8 ש״ח ליחידה. Q = 200 יחידות. חשבו VC, TC ו-ATC.',
+      subs:[{id:'rc1-vc', label:'VC (₪)', expected:1600, tol:1, unit:'₪'},
+            {id:'rc1-tc', label:'TC (₪)', expected:6600, tol:1, unit:'₪'},
+            {id:'rc1-atc', label:'ATC (₪ ליחידה)', expected:33, tol:0.2, unit:'₪'}],
+      hints:['$VC = v \\times Q, \\quad TC = FC + VC, \\quad ATC = TC \\div Q$.', '$VC = 8\\times200 = 1{,}600, \\quad TC = 5{,}000+1{,}600 = 6{,}600, \\quad ATC = 6{,}600\\div200 = 33$.'],
+      solution:'$VC = 8\\times200 = 1{,}600$ ש״ח.<br>$TC = 5{,}000+1{,}600 = 6{,}600$ ש״ח.<br>$ATC = 6{,}600\\div200 = 33$ ש״ח ליחידה.'}
+  ];
+  document.getElementById('rC').innerHTML = rC.map(renderNumeric).join('');
+
+  /* ================= RECAP: SECTION rD (high-low) ================= */
+  var rD=[
+    {id:'rd1', n:7, difficulty:'בינוני', title:'שיטת גבוה-נמוך, תזכורת',
+      text:'חודש שיא: 500 יחידות, עלות כוללת 9,000 ש״ח. חודש שפל: 200 יחידות, עלות כוללת 6,000 ש״ח. מצאו את v ואת FC.',
+      subs:[{id:'rd1-v', label:'v (₪ ליחידה)', expected:10, tol:0.1, unit:'₪'},
+            {id:'rd1-f', label:'FC (₪)', expected:4000, tol:1, unit:'₪'}],
+      hints:['$v = \\dfrac{9{,}000-6{,}000}{500-200}$.', '$v = \\dfrac{3{,}000}{300} = 10$.<br>הציבו בחודש השפל: $FC = 6{,}000-10\\times200$.'],
+      solution:'$v = \\dfrac{9{,}000-6{,}000}{500-200} = \\dfrac{3{,}000}{300} = 10$ ש״ח ליחידה.<br>$FC = 6{,}000-10\\times200 = 6{,}000-2{,}000 = 4{,}000$ ש״ח.'}
+  ];
+  document.getElementById('rD').innerHTML = rD.map(renderNumeric).join('');
+
+  /* ================= RECAP: SECTION rE (break-even fixed vs variable) ================= */
+  var rE=[
+    {id:'re1', n:8, difficulty:'מאתגר', title:'שליח קבוע מול שירות חיצוני, תזכורת',
+      text:'חלופה א׳: שליח בשכר קבוע 3,000 ש״ח לחודש. חלופה ב׳: שירות חיצוני ב-15 ש״ח למשלוח, ללא עלות קבועה. באיזו כמות משלוחים חודשית שתי החלופות שוות?',
+      subs:[{id:'re1-1', label:'כמות משלוחים בנקודת השוויון', expected:200, tol:1, unit:'משלוחים'}],
+      hints:['השוו: $3{,}000 = 15\\times Q$. פתרו עבור Q.', '$Q = 3{,}000\\div15$.'],
+      solution:'$3{,}000 = 15\\times Q \\Rightarrow Q = 3{,}000\\div15 = 200$ <b>משלוחים</b>. מתחת לכמות זו, השירות החיצוני זול יותר; מעליה, השליח הקבוע זול יותר.'}
+  ];
+  document.getElementById('rE').innerHTML = rE.map(renderNumeric).join('');
+
+  /* ================= GUIDED WORKED EXAMPLE ================= */
+  var guided=[
+    {id:'g1', n:1, difficulty:'בינוני', title:'שלב 1-2: שיעור העמסה ועלות מוקצית',
+      text:'לפי נתוני התקציב של מכון ההדמיה: עלות עקיפה מתוקצבת 900,000 ש״ח, בסיס הקצאה 6,000 שעות מכונה. (א) חשבו את POHR. (ב) חשבו את העלות העקיפה שהועמסה על CT אחד (2 שעות מכונה). (ג) חשבו את העלות העקיפה שהועמסה על אולטרסאונד אחד (0.5 שעות). (ד) חשבו את העלות העקיפה שהועמסה על צילום רנטגן אחד (0.25 שעות).',
+      subs:[{id:'g1-pohr', label:'(א) POHR (₪ לשעת מכונה)', expected:150, tol:1, unit:'₪'},
+            {id:'g1-ct', label:'(ב) עלות עקיפה שהועמסה על CT (₪)', expected:300, tol:1, unit:'₪'},
+            {id:'g1-us', label:'(ג) עלות עקיפה שהועמסה על אולטרסאונד (₪)', expected:75, tol:1, unit:'₪'},
+            {id:'g1-xr', label:'(ד) עלות עקיפה שהועמסה על רנטגן (₪)', expected:37.5, tol:1, unit:'₪'}],
+      hints:['$POHR = \\dfrac{900{,}000}{6{,}000}$. לכל שירות, עלות עקיפה שהועמסה שווה ל-POHR כפול שעות המכונה שהשירות צרך.', '$POHR = 150$.<br>CT: $150\\times2=300$.<br>אולטרסאונד: $150\\times0.5=75$.<br>רנטגן: $150\\times0.25=37.5$.'],
+      solution:'$POHR = \\dfrac{900{,}000}{6{,}000} = 150$ ש״ח לשעת מכונה.<br>CT: $150\\times2 = 300$ ש״ח.<br>אולטרסאונד: $150\\times0.5 = 75$ ש״ח.<br>רנטגן: $150\\times0.25 = 37.5$ ש״ח.<br>שימו לב: ככל שהשירות צורך יותר שעות מכונה, כך הוא "מקבל" יותר מהעלות המשותפת.'},
+    {id:'g2', n:2, difficulty:'מאתגר', title:'שלב 3: העלות המלאה של CT אחד',
+      text:'ל-CT בודד: חומרים ישירים (חומר ניגוד) = 120 ש״ח. עבודה ישירה (זמן טכנאי) = 180 ש״ח. עלות עקיפה שהועמסה (מהתרגיל הקודם) = 300 ש״ח. מהי העלות המלאה של CT אחד?',
+      subs:[{id:'g2-full', label:'עלות מלאה של CT (₪)', expected:600, tol:1, unit:'₪'}],
+      hints:['עלות מלאה = חומרים ישירים + עבודה ישירה + עלות עקיפה שהועמסה.', '$120+180+300$.'],
+      solution:'עלות מלאה $= 120+180+300 = 600$ ש״ח. זו העלות המלאה שכדאי להשוות למחיר שהמכון מקבל מקופת החולים על אותו CT.'}
+  ];
+  document.getElementById('guidedEx').innerHTML = guided.map(renderNumeric).join('');
+
+  /* ================= HOMEWORK SECTION A: DIRECT/INDIRECT ================= */
+  var A=[
+    {id:'a1', n:1, difficulty:'קל', title:'תפרים לניתוח ספציפי',
+      axes:[{options:[{v:'direct',label:'ישירה',icon:'📍'},{v:'indirect',label:'עקיפה',icon:'🌐'}], correct:'direct'}],
+      text:'עלות תפרים וחוט כירורגי המשמשים בניתוח ספציפי אחד.',
+      hints:['שאלו: אפשר להצביע בדיוק על הניתוח שצרך אותם?', 'התפרים נצרכו בניתוח אחד מוגדר, זו שיוך ישיר וזול.'],
+      solution:'זו <b>עלות ישירה</b>. אפשר לשייך אותה בקלות ובוודאות לניתוח הספציפי שבו נעשה בו שימוש.'},
+    {id:'a2', n:2, difficulty:'קל', title:'שכר מנהל בית החולים',
+      axes:[{options:[{v:'direct',label:'ישירה',icon:'📍'},{v:'indirect',label:'עקיפה',icon:'🌐'}], correct:'indirect'}],
+      text:'משכורת מנהל בית החולים, האחראי על כלל המחלקות.',
+      hints:['האם אפשר לשייך את זה לניתוח או לבדיקה מסוימת?', 'המנהל משרת את כל בית החולים בו-זמנית, אין דרך סבירה לשייך לפעילות אחת.'],
+      solution:'זו <b>עלות עקיפה</b>. שכר המנהל משותף לכל הפעילות של בית החולים, ולא ניתן לשייכו לשירות בודד.'},
+    {id:'a3', n:3, difficulty:'בינוני', title:'פחת ציוד CT משותף',
+      axes:[{options:[{v:'direct',label:'ישירה',icon:'📍'},{v:'indirect',label:'עקיפה',icon:'🌐'}], correct:'indirect'}],
+      text:'פחת שנתי על מכשיר CT המשמש את כל מחלקות ההדמיה.',
+      hints:['גם אם המכשיר "שייך" להדמיה, האם ניתן לשייך את הפחת שלו לבדיקה בודדת בלי הקצאה?', 'הפחת מתייחס לכל השימושים במכשיר לאורך השנה, ומחייב הקצאה (בדיוק כמו שנלמד היום).'],
+      solution:'זו <b>עלות עקיפה</b>. הפחת חל על המכשיר כולו לאורך השנה, ומשותף לכל הבדיקות שבוצעו בו, ולכן טעון הקצאה.'},
+    {id:'a4', n:4, difficulty:'בינוני', title:'שכר רופא מנתח, ניתוח יחיד',
+      axes:[{options:[{v:'direct',label:'ישירה',icon:'📍'},{v:'indirect',label:'עקיפה',icon:'🌐'}], correct:'direct'}],
+      text:'רופא מנתח מקבל תשלום עבור זמנו על ניתוח ספציפי אחד בלבד, ואינו מטפל בשום מקרה אחר באותו יום.',
+      hints:['שימו לב: השאלה כאן היא שיוך, לא התנהגות. גם תשלום קבוע יכול להיות ישיר אם הוא מוקדש כולו למקרה אחד.', 'זמן הרופא כולו הוקדש לניתוח הזה בלבד, אין צורך בהקצאה.'],
+      solution:'זו <b>עלות ישירה</b>, גם אם היא במבנה עלות קבועה. הזמן כולו מוקדש לניתוח אחד ספציפי, כך שאפשר לשייך את מלוא העלות אליו ישירות. זכרו: ישיר/עקיף עצמאי מקבוע/משתנה!'},
+    {id:'a5', n:5, difficulty:'קל', title:'ביטוח מבנה בית החולים',
+      axes:[{options:[{v:'direct',label:'ישירה',icon:'📍'},{v:'indirect',label:'עקיפה',icon:'🌐'}], correct:'indirect'}],
+      text:'פרמיית ביטוח כללית על מבנה בית החולים כולו.',
+      hints:['הביטוח מכסה את כל המבנה, לא מחלקה או שירות בודד.', 'אין דרך לשייך חלק מהפרמיה לניתוח או לבדיקה ספציפית בלי הקצאה.'],
+      solution:'זו <b>עלות עקיפה</b>. הביטוח משותף לכל בית החולים, ומחייב הקצאה בין המחלקות והשירותים.'},
+    {id:'a6', n:6, difficulty:'קל', title:'מנת תרופה למטופל ספציפי',
+      axes:[{options:[{v:'direct',label:'ישירה',icon:'📍'},{v:'indirect',label:'עקיפה',icon:'🌐'}], correct:'direct'}],
+      text:'מנת תרופה שניתנה למטופל מסוים במהלך אשפוזו.',
+      hints:['אפשר לרשום בתיק הרפואי בדיוק לאיזה מטופל ניתנה המנה?', 'כן, וזה בדיוק מה שהופך אותה לעלות ישירה.'],
+      solution:'זו <b>עלות ישירה</b>. ניתן לשייך את מנת התרופה במדויק למטופל שקיבל אותה.'}
+  ];
+  document.getElementById('hwA').innerHTML = A.map(renderClassify).join('');
+
+  /* ================= HOMEWORK SECTION B: POHR ================= */
+  var B=[
+    {id:'b1', n:1, difficulty:'קל', title:'מעבדת בדיקות',
+      text:'עלות עקיפה מתוקצבת: 480,000 ש״ח. בסיס הקצאה: 4,000 שעות מכונה מתוקצבות. חשבו את POHR.',
+      subs:[{id:'b1-1', label:'POHR (₪ לשעה)', expected:120, tol:1, unit:'₪'}],
+      hints:['$POHR = $ עלות עקיפה מתוקצבת חלקי בסיס הקצאה מתוקצב.', '$480{,}000 \\div 4{,}000$.'],
+      solution:'$POHR = 480{,}000 \\div 4{,}000 = 120$ ש״ח לשעת מכונה.'},
+    {id:'b2', n:2, difficulty:'קל', title:'יחידת אשפוז ביתי',
+      text:'עלות עקיפה מתוקצבת: 750,000 ש״ח. בסיס הקצאה: 25,000 שעות סיעוד מתוקצבות. חשבו את POHR.',
+      subs:[{id:'b2-1', label:'POHR (₪ לשעה)', expected:30, tol:1, unit:'₪'}],
+      hints:['אותה נוסחה: עלות עקיפה מתוקצבת חלקי בסיס הקצאה מתוקצב.', '$750{,}000 \\div 25{,}000$.'],
+      solution:'$POHR = 750{,}000 \\div 25{,}000 = 30$ ש״ח לשעת סיעוד.'},
+    {id:'b3', n:3, difficulty:'בינוני', title:'מרפאת שיקום',
+      text:'עלות עקיפה מתוקצבת: 360,000 ש״ח. בסיס הקצאה: 2,400 שעות עבודה ישירה מתוקצבות. חשבו את POHR.',
+      subs:[{id:'b3-1', label:'POHR (₪ לשעה)', expected:150, tol:1, unit:'₪'}],
+      hints:['שימו לב שהבסיס הפעם הוא שעות עבודה ישירה, לא שעות מכונה. הנוסחה זהה.', '$360{,}000 \\div 2{,}400$.'],
+      solution:'$POHR = 360{,}000 \\div 2{,}400 = 150$ ש״ח לשעת עבודה ישירה.'},
+    {id:'b4', n:4, difficulty:'בינוני', title:'מעבדת הדמיה גדולה',
+      text:'עלות עקיפה מתוקצבת: 1,000,000 ש״ח. בסיס הקצאה: 8,000 שעות מכונה מתוקצבות. חשבו את POHR.',
+      subs:[{id:'b4-1', label:'POHR (₪ לשעה)', expected:125, tol:1, unit:'₪'}],
+      hints:['$POHR = 1{,}000{,}000 \\div 8{,}000$.', 'חשבו את החישוב במלואו לפני עיגול.'],
+      solution:'$POHR = 1{,}000{,}000 \\div 8{,}000 = 125$ ש״ח לשעת מכונה.'},
+    {id:'b5', n:5, difficulty:'מאתגר', title:'מהופך: מצאו את העלות העקיפה המתוקצבת',
+      text:'ידוע ש-POHR = 80 ש״ח לשעה, ובסיס ההקצאה המתוקצב הוא 5,000 שעות. מהי העלות העקיפה המתוקצבת?',
+      subs:[{id:'b5-1', label:'עלות עקיפה מתוקצבת (₪)', expected:400000, tol:100, unit:'₪'}],
+      hints:['הפכו את הנוסחה: עלות עקיפה מתוקצבת שווה ל-POHR כפול בסיס הקצאה מתוקצב.', '$80\\times5{,}000$.'],
+      solution:'עלות עקיפה מתוקצבת $= 80\\times5{,}000 = 400{,}000$ ש״ח.'}
+  ];
+  document.getElementById('hwB').innerHTML = B.map(renderNumeric).join('');
+
+  /* ================= HOMEWORK SECTION C: APPLIED OVERHEAD + FULL COST ================= */
+  var C=[
+    {id:'c1', n:1, difficulty:'קל', title:'אולטרסאונד',
+      text:'POHR = 150 ש״ח לשעת מכונה. אולטרסאונד בודד דורש 0.5 שעות. חומרים ישירים = 40 ש״ח, עבודה ישירה = 60 ש״ח. (א) מהי העלות העקיפה שהועמסה? (ב) מהי העלות המלאה?',
+      subs:[{id:'c1-a', label:'(א) עלות עקיפה שהועמסה (₪)', expected:75, tol:1, unit:'₪'},
+            {id:'c1-b', label:'(ב) עלות מלאה (₪)', expected:175, tol:1, unit:'₪'}],
+      hints:['(א) $150\\times0.5$.<br>(ב) עלות מלאה = חומרים + עבודה + עקיפה שהועמסה.', '(א) $75$.<br>(ב) $40+60+75$.'],
+      solution:'(א) עלות עקיפה שהועמסה $= 150\\times0.5 = 75$ ש״ח.<br>(ב) עלות מלאה $= 40+60+75 = 175$ ש״ח.'},
+    {id:'c2', n:2, difficulty:'קל', title:'טיפול פיזיותרפיה',
+      text:'POHR = 120 ש״ח לשעה. טיפול בודד דורש 1.5 שעות עבודה ישירה. חומרים ישירים = 20 ש״ח, עבודה ישירה = 150 ש״ח. (א) מהי העלות העקיפה שהועמסה? (ב) מהי העלות המלאה?',
+      subs:[{id:'c2-a', label:'(א) עלות עקיפה שהועמסה (₪)', expected:180, tol:1, unit:'₪'},
+            {id:'c2-b', label:'(ב) עלות מלאה (₪)', expected:350, tol:1, unit:'₪'}],
+      hints:['(א) $120\\times1.5$.<br>(ב) חברו את כל שלושת המקורות.', '(א) $180$.<br>(ב) $20+150+180$.'],
+      solution:'(א) עלות עקיפה שהועמסה $= 120\\times1.5 = 180$ ש״ח.<br>(ב) עלות מלאה $= 20+150+180 = 350$ ש״ח.'},
+    {id:'c3', n:3, difficulty:'בינוני', title:'בדיקת דם במעבדה',
+      text:'POHR = 200 ש״ח לשעת מכונה. בדיקה בודדת דורשת 0.2 שעות. חומרים ישירים = 35 ש״ח, עבודה ישירה = 25 ש״ח. (א) מהי העלות העקיפה שהועמסה? (ב) מהי העלות המלאה?',
+      subs:[{id:'c3-a', label:'(א) עלות עקיפה שהועמסה (₪)', expected:40, tol:1, unit:'₪'},
+            {id:'c3-b', label:'(ב) עלות מלאה (₪)', expected:100, tol:1, unit:'₪'}],
+      hints:['(א) $200\\times0.2$.', '(א) $40$.<br>(ב) $35+25+40$.'],
+      solution:'(א) עלות עקיפה שהועמסה $= 200\\times0.2 = 40$ ש״ח.<br>(ב) עלות מלאה $= 35+25+40 = 100$ ש״ח.'},
+    {id:'c4', n:4, difficulty:'מאתגר', title:'מהופך: מצאו את העלות העקיפה שהועמסה',
+      text:'ידוע שהעלות המלאה של שירות הייתה 500 ש״ח, חומרים ישירים 150 ש״ח, ועבודה ישירה 200 ש״ח. מהי העלות העקיפה שהועמסה?',
+      subs:[{id:'c4-1', label:'עלות עקיפה שהועמסה (₪)', expected:150, tol:1, unit:'₪'}],
+      hints:['הפכו את הנוסחה: עקיפה שהועמסה שווה לעלות מלאה פחות חומרים ישירים פחות עבודה ישירה.', '$500-150-200$.'],
+      solution:'עלות עקיפה שהועמסה $= 500-150-200 = 150$ ש״ח.'},
+    {id:'c5', n:5, difficulty:'מאתגר', title:'אתגר סיכום: מ-POHR ועד עלות מלאה',
+      text:'עלות עקיפה מתוקצבת: 560,000 ש״ח. בסיס הקצאה: 7,000 שעות מכונה מתוקצבות. שירות CT דורש 3 שעות מכונה בפועל. חומרים ישירים = 100 ש״ח, עבודה ישירה = 160 ש״ח. (א) חשבו POHR. (ב) חשבו את העלות העקיפה שהועמסה. (ג) חשבו את העלות המלאה.',
+      subs:[{id:'c5-a', label:'(א) POHR (₪ לשעה)', expected:80, tol:1, unit:'₪'},
+            {id:'c5-b', label:'(ב) עלות עקיפה שהועמסה (₪)', expected:240, tol:1, unit:'₪'},
+            {id:'c5-c', label:'(ג) עלות מלאה (₪)', expected:500, tol:1, unit:'₪'}],
+      hints:['(א) $560{,}000\\div7{,}000$.<br>(ב) POHR כפול 3.<br>(ג) חומרים + עבודה + עקיפה שהועמסה.', '(א) $80$.<br>(ב) $80\\times3=240$.<br>(ג) $100+160+240$.'],
+      solution:'(א) $POHR = 560{,}000\\div7{,}000 = 80$ ש״ח לשעה.<br>(ב) עלות עקיפה שהועמסה $= 80\\times3 = 240$ ש״ח.<br>(ג) עלות מלאה $= 100+160+240 = 500$ ש״ח.'}
+  ];
+  document.getElementById('hwC').innerHTML = C.map(renderNumeric).join('');
+
+  /* ================= HOMEWORK SECTION D: INTEGRATIVE ================= */
+  var D=[
+    {id:'d1', n:1, difficulty:'בינוני', title:'סיווג דו-ממדי: תרופה למטופל',
+      axes:[{label:'ציר 1 · התנהגות (שיעור 1)', options:[{v:'fixed',label:'קבועה',icon:'🏠'},{v:'variable',label:'משתנה',icon:'📈'},{v:'mixed',label:'מעורבת',icon:'🧩'}], correct:'variable'},
+            {label:'ציר 2 · שיוך (שיעור 2)', options:[{v:'direct',label:'ישירה',icon:'📍'},{v:'indirect',label:'עקיפה',icon:'🌐'}], correct:'direct'}],
+      text:'תרופה שניתנת למטופל ספציפי, לפי מספר המנות שקיבל בפועל.',
+      hints:['ציר 1: האם העלות תלויה בכמות המנות? ציר 2: האם ניתן לשייך אותה למטופל ספציפי?', 'ציר 1: כן, תלויה במספר המנות, אז משתנה. ציר 2: כן, ניתן לשייך למטופל, אז ישירה.'],
+      solution:'ציר 1 (התנהגות): <b>משתנה</b>, כי העלות עולה ביחס ישר למספר המנות.<br>ציר 2 (שיוך): <b>ישירה</b>, כי ניתן לשייך כל מנה למטופל שקיבל אותה. שילוב: משתנה וגם ישירה בו-זמנית.'},
+    {id:'d2', n:2, difficulty:'בינוני', title:'סיווג דו-ממדי: פחת ציוד משותף',
+      axes:[{label:'ציר 1 · התנהגות (שיעור 1)', options:[{v:'fixed',label:'קבועה',icon:'🏠'},{v:'variable',label:'משתנה',icon:'📈'},{v:'mixed',label:'מעורבת',icon:'🧩'}], correct:'fixed'},
+            {label:'ציר 2 · שיוך (שיעור 2)', options:[{v:'direct',label:'ישירה',icon:'📍'},{v:'indirect',label:'עקיפה',icon:'🌐'}], correct:'indirect'}],
+      text:'פחת חודשי, סכום קבוע, על ציוד הדמיה המשותף לכל מחלקות בית החולים.',
+      hints:['ציר 1: הסכום קבוע מדי חודש, לא תלוי בכמות השימוש. ציר 2: הציוד משמש כמה מחלקות בו-זמנית.', 'ציר 1: קבועה. ציר 2: עקיפה, כי משותפת לכמה מחלקות ודורשת הקצאה.'],
+      solution:'ציר 1 (התנהגות): <b>קבועה</b>, סכום פחת חודשי זהה ללא קשר לכמות השימוש.<br>ציר 2 (שיוך): <b>עקיפה</b>, כי הציוד משותף למספר מחלקות ולא ניתן לשייכו לשירות בודד בלי הקצאה.'},
+    {id:'d3', n:3, difficulty:'מאתגר', title:'סיווג דו-ממדי: חשמל לחדר ניתוח ייעודי',
+      axes:[{label:'ציר 1 · התנהגות (שיעור 1)', options:[{v:'fixed',label:'קבועה',icon:'🏠'},{v:'variable',label:'משתנה',icon:'📈'},{v:'mixed',label:'מעורבת',icon:'🧩'}], correct:'mixed'},
+            {label:'ציר 2 · שיוך (שיעור 2)', options:[{v:'direct',label:'ישירה',icon:'📍'},{v:'indirect',label:'עקיפה',icon:'🌐'}], correct:'direct'}],
+      text:'חשבון חשמל של חדר ניתוח ייעודי אחד: 500 ש״ח תעריף מינימום קבוע, ועוד תוספת לפי שעות שימוש בפועל. החדר משמש אך ורק למחלקה אחת.',
+      hints:['ציר 1: יש כאן רכיב קבוע (500) ורכיב משתנה (תוספת לפי שעות). ציר 2: החדר הזה משויך למחלקה אחת בלבד, אז אין צורך לחלק בין כמה שירותים.', 'ציר 1: מעורבת (יש שני רכיבים). ציר 2: ישירה, כי כל החשבון שייך לחדר אחד, וניתן לשייך אותו במלואו.'],
+      solution:'ציר 1 (התנהגות): <b>מעורבת</b>, יש רכיב קבוע (500 ש״ח) ורכיב משתנה (לפי שעות שימוש).<br>ציר 2 (שיוך): <b>ישירה</b>, למרות היותה מעורבת! כל העלות הזו שייכת לחדר ניתוח אחד בלבד, ולכן ניתנת לשיוך ישיר. זו הדוגמה המושלמת לכך ששני הצירים עצמאיים.'},
+    {id:'d4', n:4, difficulty:'בינוני', title:'שילוב: יחידת שיקום',
+      text:'יחידת שיקום בבית חולים: עלות עקיפה מתוקצבת 240,000 ש״ח, בסיס הקצאה 4,000 שעות טיפול מתוקצבות. טיפול שיקומי בודד דורש 1.5 שעות, עולה בחומרים ישירים 30 ש״ח ובעבודה ישירה 90 ש״ח. (א) מהו POHR? (ב) מהי העלות המלאה של טיפול בודד?',
+      subs:[{id:'d4-a', label:'(א) POHR (₪ לשעה)', expected:60, tol:1, unit:'₪'},
+            {id:'d4-b', label:'(ב) עלות מלאה לטיפול (₪)', expected:210, tol:1, unit:'₪'}],
+      hints:['(א) $240{,}000\\div4{,}000$.<br>(ב) קודם עלות עקיפה שהועמסה שווה ל-POHR כפול 1.5, ואז חברו לחומרים ולעבודה.', '(א) $60$.<br>(ב) עקיפה שהועמסה $=60\\times1.5=90$.<br>עלות מלאה $=30+90+90$.'],
+      solution:'(א) $POHR = 240{,}000\\div4{,}000 = 60$ ש״ח לשעה.<br>(ב) עלות עקיפה שהועמסה $= 60\\times1.5 = 90$ ש״ח.<br>עלות מלאה $= 30+90+90 = 210$ ש״ח.'},
+    {id:'d5', n:5, difficulty:'מאתגר', title:'אתגר סיכום: שירות לייזר עיני חדש, רווחי?',
+      text:'מרפאת עיניים שוקלת הקמת שירות לייזר עיני. עלות תקורה מתוקצבת לשירות: 150,000 ש״ח בשנה (קבועה, כולל ציוד ותחזוקה). בסיס הקצאה: מספר טיפולים, מתוקצבים 500 טיפולים בשנה. עלות חומרים ישירה לטיפול: 200 ש״ח. עלות עבודה ישירה: 300 ש״ח. המרפאה גובה 900 ש״ח לטיפול. (א) חשבו את POHR לטיפול. (ב) חשבו את העלות המלאה של טיפול בודד. (ג) מהו הרווח לטיפול בהיקף המתוכנן (500 טיפולים)?',
+      subs:[{id:'d5-a', label:'(א) POHR (₪ לטיפול)', expected:300, tol:1, unit:'₪'},
+            {id:'d5-b', label:'(ב) עלות מלאה לטיפול (₪)', expected:800, tol:1, unit:'₪'},
+            {id:'d5-c', label:'(ג) רווח לטיפול (₪)', expected:100, tol:1, unit:'₪'}],
+      hints:['(א) כאן בסיס ההקצאה הוא "מספר טיפולים" עצמו: $150{,}000\\div500$.<br>(ב) עלות עקיפה שהועמסה לטיפול אחד שווה ל-POHR עצמו.<br>(ג) רווח שווה למחיר פחות עלות מלאה.', '(א) $300$.<br>(ב) $200+300+300=800$.<br>(ג) $900-800=100$.'],
+      solution:'(א) $POHR = 150{,}000\\div500 = 300$ ש״ח לטיפול (כאן בסיס ההקצאה הוא הטיפול עצמו, לא שעות).<br>(ב) עלות מלאה $= 200+300+300 = 800$ ש״ח.<br>(ג) רווח לטיפול $= 900-800 = 100$ ש״ח. בהיקף המתוכנן של 500 טיפולים, השירות <b>רווחי</b>. שימו לב שאם היקף הטיפולים בפועל יהיה נמוך יותר, ה-POHR בפועל היה שונה מהמתוכנן, וזה בדיוק הסיכון שבהתבססות על אומדן מתוקצב.'}
+  ];
+  document.getElementById('hwD').innerHTML = D.map(function(ex){ return ex.axes ? renderClassify(ex) : renderNumeric(ex); }).join('');
+})();
+</script>
+</body></html>
