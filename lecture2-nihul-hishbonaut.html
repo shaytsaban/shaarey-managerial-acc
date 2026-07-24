@@ -176,6 +176,13 @@ main{display:block}
 .d-term b{color:var(--rose-dark)}
 .d-dilemma{background:var(--amber-light);border:2px solid var(--amber);border-radius:12px;padding:12px 17px;margin:13px 0 8px;font-size:17.5px}
 .d-lead-to{color:var(--rose-dark);font-weight:800;font-size:15.5px;margin-top:8px}
+/* ---- clean multi-column data table ---- */
+.datatbl-wrap{overflow-x:auto}
+.datatbl{width:100%;border-collapse:collapse;margin:18px 0;font-size:16px;background:#fff;border-radius:14px;overflow:hidden;border:2px solid var(--line)}
+.datatbl th{background:var(--navy-900);color:#fff;padding:12px 14px;text-align:center;font-weight:800;font-size:15px}
+.datatbl td{padding:11px 14px;border-top:1px solid var(--line);text-align:center;font-variant-numeric:tabular-nums}
+.datatbl td:first-child{text-align:right;font-weight:800}
+.datatbl tr:hover td{background:var(--rose-light)}
 /* ---- report card ---- */
 .report{background:#fff;border:3px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin:18px auto;max-width:620px}
 .report.wide{max-width:820px}
@@ -231,17 +238,27 @@ main{display:block}
 .classify-btn.wrong{background:var(--hard-light);border-color:var(--hard);color:var(--hard)}
 .classify-fb{font-size:15px;font-weight:700;min-height:22px;margin-top:6px}
 .axis-label{font-size:13px;font-weight:800;color:var(--muted);margin:10px 0 2px}
-.subrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--amber-light);border:2px dashed #fde68a;border-radius:12px;padding:10px 14px;margin:8px 0}
-.subrow label{font-size:15px;font-weight:700;color:var(--ink-soft);flex:1;min-width:180px}
+.subrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--amber-light);border:2px dashed #fde68a;border-radius:12px;padding:10px 14px;margin:8px 0}
+.subrow label{font-size:15px;font-weight:700;color:var(--ink-soft)}
+.subrow .sr-hint{margin-inline-start:auto}
 .subrow input{width:120px;padding:8px 10px;border:2px solid var(--line);border-radius:9px;font-size:15px;direction:ltr;text-align:center}
 .subrow button{background:var(--rose);color:#fff;border:none;border-radius:9px;padding:8px 16px;font-weight:800;font-size:13.5px;cursor:pointer}
 .subrow .verdict{width:100%;font-weight:700;font-size:14.5px;margin-top:2px}
+.subrow .sub-hint-box{width:100%;display:none;margin-top:8px;background:#fff;border:2px solid #fbcfe8;border-radius:10px;padding:10px 12px;font-size:14px;line-height:1.6;color:var(--rose-dark)}
+.subrow .sub-hint-box.show{display:block}
+.sub-hint-btn{display:inline-flex;align-items:center;gap:5px;background:#fff;border:2px solid #fbcfe8;color:var(--rose-dark);font-weight:800;font-size:12px;padding:5px 11px;border-radius:999px;cursor:pointer}
+.sub-hint-btn:hover{background:var(--rose-light)}
+.fe-desc{font-weight:800;color:var(--ink);font-size:14.5px;margin-bottom:4px}
+.fe-formula{margin:4px 0}
+.fe-params{font-size:13.5px;color:var(--ink-soft);line-height:1.7}
+.fe-tip{font-size:13.5px;color:var(--rose-dark);margin-top:6px;padding-top:6px;border-top:1px dashed #fbcfe8}
 .ex-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .hint-btn{display:inline-flex;align-items:center;gap:6px;background:var(--rose-light);border:2px solid #fbcfe8;color:var(--rose-dark);font-weight:800;font-size:13px;padding:7px 14px;border-radius:999px;cursor:pointer}
 .hint-btn:hover{background:#fbcfe8}
 .hint-box{display:none;margin-top:10px;background:#fdf2f8;border:2px solid #fbcfe8;border-radius:12px;padding:12px 14px;font-size:14.5px;line-height:1.6;color:var(--rose-dark)}
 .hint-box.show{display:block}
-.hint-box .htier{margin:4px 0}
+.hint-box .htier{margin:4px 0;padding-top:6px}
+.hint-box .htier:not(:first-child){border-top:1px dashed #fbcfe8;margin-top:8px}
 .sol-acc{margin-top:10px;border:2px solid var(--line);border-radius:12px;overflow:hidden}
 .sol-acc .sh{display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;font-weight:800;font-size:14px;background:#f8fafc}
 .sol-acc .sh .chev{margin-inline-start:auto;transition:.3s}
@@ -371,7 +388,7 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
   <section class="kn-slide short">
     <div class="kn-eyebrow reveal">לפני שממשיכים</div>
     <h2 class="kn-title reveal">קודם, <span class="g">חימום לבבי.</span></h2>
-    <p class="kn-sub reveal">ליבי מחכה עם כמה שאלות נחמדות שמזכירות הכל משיעור 1: עלות קבועה, משתנה, מעורבת, הנוסחאות, ושיטת גבוה-נמוך. בלי לחץ, עם רמזים לכל שאלה.</p>
+    <p class="kn-sub reveal">ליבי מחכה עם כמה שאלות נחמדות שמזכירות הכל משיעור 1: עלות קבועה, משתנה, מעורבת, הנוסחאות, ושיטת גבוה-נמוך. בלי לחץ, עם רמזים לכל שאלה. היא כבר התחממה, בעיקר כי מישהו שוב שכח לכבות לה את התנור.</p>
     <div class="kn-cta reveal"><button onclick="startLesson()">בואו נתחיל ←</button></div>
   </section>
 </div>
@@ -433,7 +450,7 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
   <svg class="l-art" id="lArt" viewBox="0 0 100 100"><use href="#libiFace"/></svg>
   <div class="l-bubble">
     <div class="l-bhd"><span>ליבי 🧁</span><button class="l-min" onclick="libiMin()" title="מזער">–</button></div>
-    <div class="l-tip" id="lTip">היי! שוב אני. היום נלמד איך "מחלקים" עלויות משותפות בין שירותים. ובכן, גם חלוקת קרואסונים בין חברים היא בעצם בעיית הקצאה, אז אני בהחלט מבינה בזה.</div>
+    <div class="l-tip" id="lTip">היי! שוב אני. היום נלמד איך "מחלקים" עלויות משותפות בין שירותים. ובכן, גם חלוקת קרואסונים בין חברים היא בעצם בעיית הקצאה, אז אני בהחלט מבינה בזה. ספוילר: מי שלוקח את החתיכה הכי גדולה תמיד טוען שהוא "עבד הכי קשה". גם בארגונים זה קורה, פשוט קוראים לזה POHR.</div>
   </div>
   <div class="l-reopen" onclick="libiReopen()" title="פתחו את ליבי">💬</div>
 </div>
@@ -461,7 +478,7 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
 <section class="section" id="recap">
   <span class="block-tag">01 · חימום לבבי על שיעור 1</span>
   <h2>לפני שממשיכים, <span class="g">בואו נזכר יחד</span></h2>
-  <p class="section-sub">שמונה תרגילים קצרים, אחד לכל נושא מרכזי משיעור 1. אין כאן לחץ, ואין ציון שנרשם באיזה מקום. המטרה היחידה היא לוודא שכולנו על אותו הדף לפני שממשיכים לשיטת ההעמסה. ליבי כאן עם רמז לכל שאלה, ותשובה מלאה תמיד גלויה מתחת.</p>
+  <p class="section-sub">שמונה תרגילים קצרים, אחד לכל נושא מרכזי משיעור 1. אין כאן לחץ, ואין ציון שנרשם באיזה מקום. המטרה היחידה היא לוודא שכולנו על אותו הדף לפני שממשיכים לשיטת ההעמסה. ליבי כאן עם רמז לכל שאלה, ותשובה מלאה תמיד גלויה מתחת. היא הבטיחה לא לשפוט אף אחד ששכח, רק אולי לגלגל עיניים קצת בפנים.</p>
 
   <div class="remind-card reveal">
     <div class="rc-hd">💛 תזכורת 1 · חשבונאות ניהולית מול פיננסית</div>
@@ -476,14 +493,28 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
   <div class="ex-grid two-col" id="rB"></div>
 
   <div class="remind-card reveal">
-    <div class="rc-hd">💛 תזכורת 3 · הנוסחאות: FC, v, Q, VC, TC, ATC</div>
-    <p>$VC = v \times Q$ (סך העלות המשתנה).<br>$TC = FC + VC = FC + v \times Q$ (העלות הכוללת, הנוסחה המרכזית).<br>$ATC = \dfrac{FC}{Q} + v$ (העלות הממוצעת ליחידה, שיורדת לכיוון v ככל ש-Q גדל).<br>כל אחת מהנוסחאות ניתנת גם להפוך ולפתור עבור נעלם אחר.</p>
+    <div class="rc-hd">💛 תזכורת 3, הנוסחאות: FC, v, Q, VC, TC, ATC</div>
+    <p><b>סך העלות המשתנה</b></p>
+    <p>$VC = v \times Q$</p>
+    <p>v, עלות משתנה ליחידה אחת.<br>Q, כמות היחידות.</p>
+    <p>במילים: VC הוא כל העלות המשתנה ביחד, לא של יחידה בודדת, אלא הסכום הכולל של כל היחידות שיוצרו.</p>
+    <p><b>העלות הכוללת, הנוסחה המרכזית</b></p>
+    <p>$TC = FC + VC$</p>
+    <p>FC, העלות הקבועה.<br>VC, סך העלות המשתנה (בדיוק מה שחישבנו רגע קודם).</p>
+    <p>במילים: TC הוא כל מה שהארגון בפועל משלם באותה תקופה, העלות הקבועה ועוד סך העלות המשתנה, יחד.</p>
+    <p><b>העלות הממוצעת ליחידה</b></p>
+    <p>$ATC = \dfrac{FC}{Q} + v$</p>
+    <p>FC, העלות הקבועה.<br>Q, כמות היחידות.<br>v, עלות משתנה ליחידה אחת.</p>
+    <p>במילים: ATC יורד ומתקרב ל-v ככל ש-Q גדל, כי אותה עלות קבועה מתחלקת על יותר ויותר יחידות. כל אחת משלוש הנוסחאות האלה ניתנת גם להפוך ולפתור עבור נעלם אחר.</p>
   </div>
   <div class="ex-grid" id="rC"></div>
 
   <div class="remind-card reveal">
-    <div class="rc-hd">💛 תזכורת 4 · שיטת גבוה-נמוך</div>
-    <p>כדי לפרק עלות מעורבת: $v = \dfrac{TC_{\text{high}}-TC_{\text{low}}}{Q_{\text{high}}-Q_{\text{low}}}$, ואז מציבים כדי למצוא FC. הזהירו: בוחרים את חודשי הקיצון <b>לפי כמות הפעילות</b>, לא לפי גובה העלות. חודש עם עלות חריגה (למשל תקלה חד-פעמית) אינו בהכרח חודש הקיצון!</p>
+    <div class="rc-hd">💛 תזכורת 4, שיטת גבוה-נמוך</div>
+    <p>$v = \dfrac{TC_{\text{high}}-TC_{\text{low}}}{Q_{\text{high}}-Q_{\text{low}}}$</p>
+    <p>$TC_{\text{high}}$, העלות הכוללת בחודש עם כמות הפעילות הגבוהה ביותר.<br>$TC_{\text{low}}$, העלות הכוללת בחודש עם כמות הפעילות הנמוכה ביותר.<br>$Q_{\text{high}}$, כמות הפעילות באותו חודש גבוה.<br>$Q_{\text{low}}$, כמות הפעילות באותו חודש נמוך.</p>
+    <p>במילים: קודם מוצאים את v, ואז מציבים אותו בנוסחת TC = FC + v×Q בכל אחת משתי הנקודות, כדי לבודד ולמצוא את FC.</p>
+    <p>הזהירו: בוחרים את חודשי הקיצון <b>לפי כמות הפעילות</b>, לא לפי גובה העלות. חודש עם עלות חריגה (למשל תקלה חד פעמית) אינו בהכרח חודש הקיצון!</p>
   </div>
   <div class="ex-grid" id="rD"></div>
 
@@ -601,8 +632,7 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
 
   <div class="remind-card reveal">
     <div class="rc-hd">🎈 רגע, מה זה בעצם POHR? (לפני שצוללים לפורמלי)</div>
-    <p>תארו לעצמכם שאתם וכמה שותפים לדירה מזמינים פיצה גדולה, ומחליטים מראש: "בואו נחשב כמה עולה כל פרוסה בממוצע, לפי מחיר הפיצה חלקי מספר הפרוסות, ואז כל אחד ישלם לפי כמה פרוסות הוא בעצם אכל." זה בדיוק מה ש-POHR עושה, רק במקום פיצה יש עלויות משותפות של ארגון, ובמקום "פרוסות" יש שעות מכונה, שעות עבודה, או כל מדד אחר שמעיד על כמה כל שירות "אכל" מהעלות המשותפת.</p>
-    <p><b>עכשיו ראשי התיבות:</b> POHR = Predetermined Overhead Rate. שימו לב שזה בעצם שלושה חלקים, לא ארבע אותיות סתמיות: <b>P</b> (Predetermined) = מוגדר <b>מראש</b>, עוד לפני שיודעים מה יקרה בפועל באותה שנה. <b>OH</b> (Overhead) = <b>עלות עקיפה</b>, בדיוק המונח שהכרנו במודול הקודם. <b>R</b> (Rate) = <b>שיעור</b>, כלומר סכום קבוע ליחידה אחת של בסיס ההקצאה. שימו לב ש-OH, קיצור נפוץ ל"עלות עקיפה", מסתתר בתוך המילה עצמה: P-OH-R.</p>
+    <p>תארו לעצמכם שאתם וכמה שותפים לדירה מזמינים פיצה גדולה, ומחליטים מראש: "בואו נחשב כמה עולה כל פרוסה בממוצע, לפי מחיר הפיצה חלקי מספר הפרוסות, ואז כל אחד ישלם לפי כמה פרוסות הוא בעצם אכל." זה בדיוק מה ש-POHR עושה, רק במקום פיצה יש עלויות משותפות של ארגון, ובמקום "פרוסות" יש שעות מכונה, שעות עבודה, או כל מדד אחר שמעיד על כמה כל שירות "אכל" מהעלות המשותפת. (ליבי כאן, ומבטיחה: אף פיצה לא נפגעה בהכנת ההסבר הזה.)</p>
   </div>
 
   <div class="flow-steps stagger">
@@ -613,13 +643,14 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
     <div class="flow-step"><div class="num">5</div><div><div class="fs-title">העמיסו על כל שירות לפי השימוש בפועל</div><div class="fs-sub">Applied Overhead</div><div class="fs-details">עלות עקיפה שהועמסה = שיעור ההעמסה מוגדר מראש (POHR) × כמות בסיס ההקצאה שהשירות צרך בפועל. כך כל שירות "מקבל" חלק יחסי מהעלויות המשותפות.</div></div></div>
   </div>
 
-  <h3 class="sub-h reveal">בואו נכיר את ראשי התיבות, <span class="g">אחד אחד</span></h3>
+  <h3 class="sub-h reveal">בואו נכיר את ראשי התיבות</h3>
   <p class="lead reveal">בנוסחאות שנראה עוד רגע יופיעו כמה קיצורים. במקום לזרוק את כולם עליכם ביחד, נגדיר כל אחד בנפרד, בדיוק ברגע שבו הוא נכנס לתמונה.</p>
 
-  <div class="d-term reveal">🏢 <b>OH — Overhead</b> (עלות עקיפה / תקורה): כל אותן עלויות משותפות שהכרנו במודול הקודם — שכר דירה, פחת, שכר ניהול — שאי אפשר לשייך ישירות לשירות בודד, ולכן צריך להעמיס אותן לפי שיטה.</div>
-  <div class="d-term reveal">📏 <b>Base — בסיס הקצאה</b> (Allocation Base): המדד שדרכו "מחלקים" את העלות העקיפה בין השירותים. הוא אמור לשקף כמה כל שירות באמת צורך מהמשאבים המשותפים. במכון הדמיה, למשל, שעות מכונה.</div>
-  <div class="d-term reveal">🧪 <b>DM — Direct Materials</b> (חומרים ישירים): החומרים שנצרכו ישירות עבור שירות מסוים ואפשר לשייך אליו במדויק — למשל חומר ניגוד לבדיקת CT ספציפית.</div>
-  <div class="d-term reveal">👩‍⚕️ <b>DL — Direct Labor</b> (עבודה ישירה): זמן העבודה שהוקדש ישירות לאותו שירות ואפשר לשייך אליו במדויק — למשל זמן הטכנאי שביצע את הבדיקה.</div>
+  <div class="d-term reveal">🍕 <b>POHR (Predetermined Overhead Rate)</b>, בעברית שיעור העמסה מוגדר מראש: שימו לב שזה בעצם שלושה חלקים, לא ארבע אותיות סתמיות. <b>P</b> (Predetermined) הוא <b>מוגדר מראש</b>, עוד לפני שיודעים מה יקרה בפועל באותה שנה. <b>OH</b> (Overhead) הוא <b>עלות עקיפה</b>, בדיוק המונח הבא שנגדיר. <b>R</b> (Rate) הוא <b>שיעור</b>, סכום קבוע ליחידה אחת של בסיס ההקצאה. שימו לב ש-OH מסתתר בתוך המילה עצמה: P-OH-R.</div>
+  <div class="d-term reveal">🏢 <b>OH (Overhead)</b>, בעברית עלות עקיפה או תקורה: כל אותן עלויות משותפות שהכרנו במודול הקודם (שכר דירה, פחת, שכר ניהול), שאי אפשר לשייך ישירות לשירות בודד, ולכן צריך להעמיס אותן לפי שיטה.</div>
+  <div class="d-term reveal">📏 <b>Base</b>, בעברית בסיס הקצאה: המדד שדרכו "מחלקים" את העלות העקיפה בין השירותים. הוא אמור לשקף כמה כל שירות באמת צורך מהמשאבים המשותפים. במכון הדמיה, למשל, שעות מכונה.</div>
+  <div class="d-term reveal">🧪 <b>DM (Direct Materials)</b>, בעברית חומרים ישירים: החומרים שנצרכו ישירות עבור שירות מסוים ואפשר לשייך אליו במדויק, למשל חומר ניגוד לבדיקת CT ספציפית.</div>
+  <div class="d-term reveal">👩‍⚕️ <b>DL (Direct Labor)</b>, בעברית עבודה ישירה: זמן העבודה שהוקדש ישירות לאותו שירות ואפשר לשייך אליו במדויק, למשל זמן הטכנאי שביצע את הבדיקה.</div>
 
   <h3 class="sub-h reveal">שלוש הנוסחאות <span class="g">שילוו את התרגול</span></h3>
   <div class="formula-cards reveal">
@@ -653,7 +684,7 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
 <section class="section" id="guided">
   <span class="block-tag">05 · תרגול מודרך: שלושה אירועים מלאים</span>
   <h2>בואו <span class="g">נחשב את זה ביחד</span></h2>
-  <p class="section-sub">שלושה אירועים אמיתיים, מלאים, לא רצף נתונים מנותק. בכל אחד: רקע, נתוני בסיס מלאים, ואז שאלות. עברו שלב-שלב, ובקשו רמז מליבי בכל שלב שנתקעים בו.</p>
+  <p class="section-sub">שלושה אירועים אמיתיים, מלאים, לא רצף נתונים מנותק. בכל אחד: רקע, נתוני בסיס מלאים, ואז שאלות. עברו שלב-שלב, ובקשו רמז מליבי בכל שלב שנתקעים בו. אין בושה בזה, גם רופאים מתמחים מתייעצים עם מישהו לפני שהם חותכים.</p>
   <div class="pipe">
     <span class="pst done"><span class="n">🔁</span>חימום</span>
     <span class="pst done"><span class="n">❓</span>למה צריך</span>
@@ -678,20 +709,26 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
       <div class="report-row rr-sub"><span class="rr-label">ביטוח וחשמל כללי</span><span class="rr-num">50,000</span></div>
       <div class="report-row rr-total"><span class="rr-label">סך העלות העקיפה המתוקצבת (₪)</span><span class="rr-num">900,000</span></div>
     </div>
-    <div class="report-foot">נתונים לימודיים בלבד, מעוגלים לצורך התרגול.</div>
   </div>
 
-  <p class="lead reveal">הבדיקה מעלה עוד ממצא חשוב: שעות הפעלת מכונת ההדמיה הן הבסיס הנכון להקצאת העלות העקיפה הזו, מפני ששלוש הפעילויות העיקריות משתמשות בציוד לפרקי זמן שונים מאוד. הנה נתוני הבסיס המלאים:</p>
+  <p class="lead reveal">הבדיקה מעלה עוד ממצא חשוב: שעות הפעלת מכונת ההדמיה הן הבסיס הנכון להקצאת העלות העקיפה הזו, מפני ששלוש הפעילויות העיקריות משתמשות בציוד לפרקי זמן שונים מאוד. תחילה, כמות בסיס ההקצאה הכוללת:</p>
 
-  <div class="report reveal wide">
-    <div class="report-head"><span class="rh-co">קרן אור · נתוני בסיס להקצאה ולעלות מלאה</span><span class="rh-t">שנה קרובה</span></div>
+  <div class="report reveal">
+    <div class="report-head"><span class="rh-co">קרן אור · בסיס ההקצאה</span><span class="rh-t">שנה קרובה</span></div>
     <div class="report-body">
-      <div class="report-row rr-flag"><span class="rr-label">כמות שעות מכונה מתוקצבת לשנה, לכלל הפעילות</span><span class="rr-num">6,000</span></div>
-      <div class="report-row"><span class="rr-label">CT: שעות מכונה ליחידה / חומרים ישירים / עבודה ישירה (₪)</span><span class="rr-num">2.00 / 120 / 180</span></div>
-      <div class="report-row"><span class="rr-label">אולטרסאונד: שעות מכונה ליחידה / חומרים ישירים / עבודה ישירה (₪)</span><span class="rr-num">0.50 / 40 / 60</span></div>
-      <div class="report-row"><span class="rr-label">רנטגן: שעות מכונה ליחידה / חומרים ישירים / עבודה ישירה (₪)</span><span class="rr-num">0.25 / 25 / 35</span></div>
+      <div class="report-row rr-flag"><span class="rr-label">כמות שעות מכונה מתוקצבת לשנה, לכלל הפעילות (שעות)</span><span class="rr-num">6,000</span></div>
     </div>
-    <div class="report-foot">נתונים לימודיים בלבד, מעוגלים לצורך התרגול.</div>
+  </div>
+
+  <p class="lead reveal">ועכשיו, בטבלה אחת נוחה לקריאה, כל הנתונים הדרושים לשלושת השירותים:</p>
+
+  <div class="datatbl-wrap reveal">
+    <table class="datatbl">
+      <tr><th>שירות</th><th>שעות מכונה ליחידה</th><th>חומרים ישירים (₪)</th><th>עבודה ישירה (₪)</th></tr>
+      <tr><td>CT</td><td>2.00</td><td>120</td><td>180</td></tr>
+      <tr><td>אולטרסאונד</td><td>0.50</td><td>40</td><td>60</td></tr>
+      <tr><td>רנטגן</td><td>0.25</td><td>25</td><td>35</td></tr>
+    </table>
   </div>
 
   <div class="ex-grid" id="guidedEx"></div>
@@ -733,7 +770,7 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
 
   <div class="info insight reveal">
     <div class="hd">🔮 קריצה קדימה</div>
-    <p>אל תדאגו, לא נצטרך לפתור את זה עכשיו. זו רק תזכורת חשובה: שיטת התמחיר המסורתי היא כלי מצוין וסטנדרטי, אבל היא <b>מודל מפושט</b>. בשבועות 7-8 של הקורס נכיר את ABC, שנבנה בדיוק כדי לתקן את המגבלה הזו.</p>
+    <p>אל תדאגו, לא נצטרך לפתור את זה עכשיו. זו רק תזכורת חשובה: שיטת התמחיר המסורתי היא כלי מצוין וסטנדרטי, אבל היא <b>מודל מפושט</b>. בשבועות 7-8 של הקורס נכיר את ABC, שנבנה בדיוק כדי לתקן את המגבלה הזו. ליבי כבר מתרגשת, ABC זו בשבילה כמו עונה חדשה של הסדרה האהובה עליה, רק עם יותר טבלאות ופחות דרמה רומנטית.</p>
   </div>
 </section>
 
@@ -778,7 +815,7 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
 <section class="section" id="homework">
   <span class="block-tag">08 · שיעורי בית</span>
   <h2>תרגול מקיף <span class="g">לבית</span></h2>
-  <p class="section-sub">21 תרגילים, מהבסיס ועד אתגר משולב עם שיעור 1. כל תרגיל: רמז ראשון מליבי, רמז שני מפורש יותר, ופתרון מלא שמוצג בהדרגה כשתפתחו אותו. אין צורך לסיים הכול בישיבה אחת.</p>
+  <p class="section-sub">22 תרגילים, מהבסיס ועד אתגר משולב עם שיעור 1, כולל שאלה ארוכה אחת עם המון נדרשים. כל תרגיל: רמז ראשון מליבי, רמז שני מפורש יותר, ופתרון מלא שמוצג בהדרגה כשתפתחו אותו. אין צורך לסיים הכול בישיבה אחת, וליבי לא תספור כמה הפסקות קפה לקחתם באמצע (היא תספור, אבל היא לא תגיד).</p>
   <div class="pipe">
     <span class="pst done"><span class="n">🔁</span>חימום</span>
     <span class="pst done"><span class="n">❓</span>למה צריך</span>
@@ -790,7 +827,7 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
     <span class="pst on"><span class="n">📝</span>ש. בית</span>
   </div>
   <div class="pipe-cap">אתם בתחנה 8 מתוך 8 · הישר האחרון</div>
-  <div style="text-align:left;margin:10px 0"><span class="chip" id="scoreCounter">התקדמות בתרגול (מודרך + בית): 0 / 25</span></div>
+  <div style="text-align:left;margin:10px 0"><span class="chip" id="scoreCounter">התקדמות בתרגול (מודרך + בית): 0 / 26</span></div>
 
   <div class="sub-h">מדור א׳ · <span class="g">סיווג ישיר/עקיף</span></div>
   <p class="section-sub">קבעו לכל פריט אם מדובר בעלות ישירה או עקיפה.</p>
@@ -902,7 +939,7 @@ function renderMathIn(el){
   window.libiExplain=function(sym){ if(SYMBOL_EXPLAIN[sym]) setTip(SYMBOL_EXPLAIN[sym]); };
 
   /* ================= SCORE TRACKER ================= */
-  var TOTAL_EX=25, solved={};
+  var TOTAL_EX=26, solved={};
   function markSolved(id){ if(!solved[id]){ solved[id]=true; var el=document.getElementById('scoreCounter'); if(el) el.textContent='התקדמות בתרגול (מודרך + בית): '+Object.keys(solved).length+' / '+TOTAL_EX; } }
 
   /* ================= HINT ENGINE ================= */
@@ -911,13 +948,13 @@ function renderMathIn(el){
     var t = hintTier[id]===undefined ? 0 : Math.min(hintTier[id]+1, hints.length-1);
     hintTier[id]=t;
     var html='';
-    for(var i=0;i<=t;i++) html+='<div class="htier"><b>רמז '+(i+1)+':</b> '+hints[i]+'</div>';
+    for(var i=0;i<=t;i++) html+='<div class="htier">'+hints[i]+'</div>';
     var box=document.getElementById('hint-'+id);
     box.innerHTML=html; box.classList.add('show');
     renderMathIn(box);
     var btn=document.getElementById('hbtn-'+id);
-    if(t>=hints.length-1) btn.textContent='💡 זה כל הרמזים, נסו את הפתרון המלא';
-    else btn.textContent='💡 רמז נוסף מליבי';
+    if(t>=hints.length-1) btn.textContent='💡 זה הכל, נסו את הפתרון המלא';
+    else btn.textContent='💡 עוד מליבי';
     setTip(hints[t]);
   };
   window.toggleSol=function(id){ document.getElementById('sol-'+id).classList.toggle('open'); };
@@ -968,14 +1005,28 @@ function renderMathIn(el){
     }
   };
 
+  /* build a self-contained "formula explanation" block: description, bare formula, per-symbol reminder, applied tip */
+  function feBlock(desc, tex, params, tip){
+    var html = desc ? '<div class="fe-desc">'+desc+'</div>' : '';
+    if(tex) html += '<div class="fe-formula">$'+tex+'$</div>';
+    if(params && params.length) html += '<div class="fe-params">'+params.join('<br>')+'</div>';
+    if(tip) html += '<div class="fe-tip">'+tip+'</div>';
+    return html;
+  }
+  window.toggleClass=function(id){ document.getElementById(id).classList.toggle('show'); };
+
   function renderNumeric(ex){
     var subsHtml='';
     ex.subs.forEach(function(s){
+      var hintBtn = s.subhint ? '<button class="sub-hint-btn sr-hint" onclick="toggleClass(\'subhint-'+s.id+'\')">💡 '+(s.hintBtnLabel||'רמז מליבי')+'</button>' : '';
+      var hintBox = s.subhint ? '<div class="sub-hint-box" id="subhint-'+s.id+'">'+s.subhint+'</div>' : '';
       subsHtml+='<div class="subrow" id="row-'+s.id+'">'
         +'<label>'+s.label+'</label>'
         +'<input type="text" inputmode="decimal" id="in-'+s.id+'" placeholder="'+ (s.unit||'') +'">'
         +'<button onclick="checkSub(\''+ex.id+'\',\''+s.id+'\','+s.expected+','+(s.tol!==undefined?s.tol:1)+')">בדקו</button>'
-        +'<div class="verdict" id="v-'+s.id+'"></div></div>';
+        +hintBtn
+        +'<div class="verdict" id="v-'+s.id+'"></div>'
+        +hintBox+'</div>';
     });
     return '<div class="ex-card" id="'+ex.id+'"><div class="ex-head"><div class="ex-num">'+ex.n+'</div><h4>'+ex.title+'</h4>'+diffTag(ex.difficulty)+(ex.trap?'<span class="trap">⚠️ מלכודת</span>':'')+'</div>'
       +'<div class="ex-text">'+ex.text+'</div>'
@@ -1037,23 +1088,28 @@ function renderMathIn(el){
   /* ================= RECAP: SECTION rC (VC/TC/ATC) ================= */
   var rC=[
     {id:'rc1', n:6, difficulty:'בינוני', title:'יחידת הדיאליזה הניידת: VC, TC, ATC',
-      text:'ביחידת דיאליזה ניידת עלה הצורך להציג בפני הנהלת בית החולים את העלות החודשית הצפויה של היחידה, לקראת דיון בתקציב הרבעוני. בבדיקה שנערכה נמצא כי היחידה משלמת שכר קבוע לצוות הרפואי בסך FC = 5,000 ש״ח לחודש, ללא קשר למספר הטיפולים שיבוצעו. בנוסף, עלות חומרים מתכלים (מסננים, תמיסות) עומדת על v = 8 ש״ח לכל טיפול דיאליזה בודד. בחודש הקרוב מתוכננים Q = 200 טיפולים. (א) חשבו את VC (סך העלות המשתנה). (ב) חשבו את TC (העלות הכוללת). (ג) חשבו את ATC (העלות הממוצעת לטיפול).',
-      subs:[{id:'rc1-vc', label:'(א) VC (₪)', expected:1600, tol:1, unit:'₪'},
-            {id:'rc1-tc', label:'(ב) TC (₪)', expected:6600, tol:1, unit:'₪'},
-            {id:'rc1-atc', label:'(ג) ATC (₪ לטיפול)', expected:33, tol:0.2, unit:'₪'}],
-      hints:['$VC = v \\times Q, \\quad TC = FC + VC, \\quad ATC = TC \\div Q$.', '$VC = 8\\times200 = 1{,}600, \\quad TC = 5{,}000+1{,}600 = 6{,}600, \\quad ATC = 6{,}600\\div200 = 33$.'],
-      solution:'$VC = 8\\times200 = 1{,}600$ ש״ח.<br>$TC = 5{,}000+1{,}600 = 6{,}600$ ש״ח.<br>$ATC = 6{,}600\\div200 = 33$ ש״ח ליחידה.'}
+      text:'ביחידת דיאליזה ניידת עלה הצורך להציג בפני הנהלת בית החולים את העלות החודשית הצפויה של היחידה, לקראת דיון בתקציב הרבעוני. בבדיקה שנערכה נמצא כי היחידה משלמת שכר קבוע לצוות הרפואי בסך FC = 5,000 ש״ח לחודש, ללא קשר למספר הטיפולים שיבוצעו. בנוסף, עלות חומרים מתכלים (מסננים, תמיסות) עומדת על v = 8 ש״ח לכל טיפול דיאליזה בודד. בחודש הקרוב מתוכננים Q = 200 טיפולים.<br>(א) חשבו את VC, סך העלות המשתנה.<br>(ב) חשבו את TC, העלות הכוללת.<br>(ג) חשבו את ATC, העלות הממוצעת לטיפול.',
+      subs:[{id:'rc1-vc', label:'(א) VC (₪)', expected:1600, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+             subhint:feBlock('נוסחת VC, סך העלות המשתנה', 'VC = v \\times Q', ['v, עלות משתנה ליחידה אחת. כאן v=8 ש״ח לטיפול.','Q, כמות היחידות. כאן Q=200 טיפולים.'], 'הציבו את שני המספרים מהתרגיל ישירות בנוסחה.')},
+            {id:'rc1-tc', label:'(ב) TC (₪)', expected:6600, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+             subhint:feBlock('נוסחת TC, העלות הכוללת', 'TC = FC + VC', ['FC, העלות הקבועה. כאן FC=5,000 ש״ח.','VC, סך העלות המשתנה, בדיוק מה שחישבתם בסעיף (א).'], 'אם עדיין לא חישבתם VC, חזרו לסעיף (א) קודם.')},
+            {id:'rc1-atc', label:'(ג) ATC (₪ לטיפול)', expected:33, tol:0.2, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+             subhint:feBlock('נוסחת ATC, העלות הממוצעת לטיפול', 'ATC = \\dfrac{TC}{Q}', ['TC, העלות הכוללת מסעיף (ב).','Q, כמות הטיפולים, כאן 200.'], 'חלקו את התוצאה של סעיף (ב) ב-200.')}],
+      hints:['נוסחת VC: $VC=v\\times Q$.<br>נוסחת TC: $TC=FC+VC$.<br>נוסחת ATC: $ATC=TC\\div Q$.', '$VC=8\\times200=1{,}600$.<br>$TC=5{,}000+1{,}600=6{,}600$.<br>$ATC=6{,}600\\div200=33$.'],
+      solution:'<p>נפתור את שלושת הסעיפים בזה אחר זה, כל אחד מהנוסחה הכללית שלו ועד להצבה.</p><p><b>(א) VC</b></p><p>$VC = v \\times Q$</p><p>הנוסחה אומרת: סך העלות המשתנה שווה לעלות המשתנה של יחידה אחת, כפול כמות היחידות.</p><p>הצבה: $VC = 8\\times200 = 1{,}600$ ש״ח.</p><p><b>(ב) TC</b></p><p>$TC = FC + VC$</p><p>הנוסחה אומרת: העלות הכוללת שווה לעלות הקבועה, ועוד סך העלות המשתנה שחישבנו זה עתה.</p><p>הצבה: $TC = 5{,}000+1{,}600 = 6{,}600$ ש״ח.</p><p><b>(ג) ATC</b></p><p>$ATC = \\dfrac{TC}{Q}$</p><p>הנוסחה אומרת: העלות הממוצעת ליחידה שווה לעלות הכוללת, חלקי כמות היחידות.</p><p>הצבה: $ATC = 6{,}600\\div200 = 33$ ש״ח לטיפול.</p>'}
   ];
   document.getElementById('rC').innerHTML = rC.map(renderNumeric).join('');
 
   /* ================= RECAP: SECTION rD (high-low) ================= */
   var rD=[
     {id:'rd1', n:7, difficulty:'בינוני', title:'שיטת גבוה-נמוך, תזכורת',
-      text:'חודש שיא: 500 יחידות, עלות כוללת 9,000 ש״ח. חודש שפל: 200 יחידות, עלות כוללת 6,000 ש״ח. מצאו את v ואת FC.',
-      subs:[{id:'rd1-v', label:'v (₪ ליחידה)', expected:10, tol:0.1, unit:'₪'},
-            {id:'rd1-f', label:'FC (₪)', expected:4000, tol:1, unit:'₪'}],
-      hints:['$v = \\dfrac{9{,}000-6{,}000}{500-200}$.', '$v = \\dfrac{3{,}000}{300} = 10$.<br>הציבו בחודש השפל: $FC = 6{,}000-10\\times200$.'],
-      solution:'$v = \\dfrac{9{,}000-6{,}000}{500-200} = \\dfrac{3{,}000}{300} = 10$ ש״ח ליחידה.<br>$FC = 6{,}000-10\\times200 = 6{,}000-2{,}000 = 4{,}000$ ש״ח.'}
+      text:'חודש שיא: 500 יחידות, עלות כוללת 9,000 ש״ח. חודש שפל: 200 יחידות, עלות כוללת 6,000 ש״ח.<br>(א) מצאו את v, העלות המשתנה ליחידה.<br>(ב) מצאו את FC, העלות הקבועה.',
+      subs:[{id:'rd1-v', label:'(א) v (₪ ליחידה)', expected:10, tol:0.1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+             subhint:feBlock('נוסחת v בשיטת גבוה-נמוך', 'v = \\dfrac{TC_{\\text{high}}-TC_{\\text{low}}}{Q_{\\text{high}}-Q_{\\text{low}}}', ['TC_high, העלות הכוללת בחודש השיא. כאן 9,000 ש״ח.','TC_low, העלות הכוללת בחודש השפל. כאן 6,000 ש״ח.','Q_high, הכמות בחודש השיא. כאן 500.','Q_low, הכמות בחודש השפל. כאן 200.'], 'הציבו את ארבעת המספרים בנוסחה, שימו לב שהם באים בזוגות (עלות ואז כמות).')},
+            {id:'rd1-f', label:'(ב) FC (₪)', expected:4000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+             subhint:feBlock('נוסחת FC, אחרי שכבר יש לכם v', 'FC = TC_{\\text{low}} - v\\times Q_{\\text{low}}', ['TC_low, העלות הכוללת בחודש השפל. כאן 6,000 ש״ח.','v, מה שחישבתם בסעיף (א).','Q_low, הכמות בחודש השפל. כאן 200.'], 'אפשר גם להציב בחודש השיא במקום השפל, התוצאה זהה.')}],
+      hints:['נוסחת v: $v=\\dfrac{TC_{\\text{high}}-TC_{\\text{low}}}{Q_{\\text{high}}-Q_{\\text{low}}}$.<br>נוסחת FC: $FC=TC_{\\text{low}}-v\\times Q_{\\text{low}}$.', '$v = \\dfrac{9{,}000-6{,}000}{500-200}=10$.<br>$FC = 6{,}000-10\\times200$.'],
+      solution:'<p><b>(א) v</b></p><p>$v = \\dfrac{TC_{\\text{high}}-TC_{\\text{low}}}{Q_{\\text{high}}-Q_{\\text{low}}}$</p><p>הנוסחה אומרת: העלות המשתנה ליחידה שווה להפרש בין העלות הכוללת בשני החודשים, חלקי ההפרש בין הכמויות באותם חודשים.</p><p>הצבה: $v = \\dfrac{9{,}000-6{,}000}{500-200} = \\dfrac{3{,}000}{300} = 10$ ש״ח ליחידה.</p><p><b>(ב) FC</b></p><p>$FC = TC_{\\text{low}} - v\\times Q_{\\text{low}}$</p><p>הנוסחה אומרת: העלות הקבועה שווה לעלות הכוללת בחודש השפל, פחות הרכיב המשתנה של אותו חודש.</p><p>הצבה: $FC = 6{,}000-10\\times200 = 6{,}000-2{,}000 = 4{,}000$ ש״ח.</p>'}
   ];
   document.getElementById('rD').innerHTML = rD.map(renderNumeric).join('');
 
@@ -1070,32 +1126,42 @@ function renderMathIn(el){
   /* ================= RECAP: SECTION rF (retention check, high-low + break-even combined) ================= */
   var rF=[
     {id:'rf1', n:9, difficulty:'מאתגר', title:'יחידת ההסעות הרפואיות: תרגיל משולב',
-      text:'יחידת הסעות רפואיות בבית חולים בוחנת את מבנה העלות שלה. חודש השיא של היחידה כלל 400 הסעות בעלות כוללת של 10,000 ש״ח. חודש השפל כלל 150 הסעות בעלות כוללת של 5,500 ש״ח. (א) בשיטת גבוה-נמוך, מצאו את v (העלות המשתנה להסעה). (ב) מצאו את FC (העלות הקבועה החודשית). היחידה שוקלת מעבר לחברת הסעות חיצונית, שגובה 20 ש״ח קבועים לכל הסעה בודדת, ללא כל עלות קבועה. (ג) באיזו כמות הסעות חודשית שני דגמי ההתקשרות (המצב הקיים מול החברה החיצונית) עולים בדיוק אותו הדבר?',
-      subs:[{id:'rf1-v', label:'(א) v — עלות משתנה להסעה (₪)', expected:18, tol:0.2, unit:'₪'},
-            {id:'rf1-f', label:'(ב) FC — עלות קבועה חודשית (₪)', expected:2800, tol:5, unit:'₪'},
-            {id:'rf1-q', label:'(ג) כמות הסעות בנקודת השוויון', expected:1400, tol:5, unit:'הסעות'}],
-      hints:['(א)-(ב) אותה שיטת גבוה-נמוך מהתזכורת: $v=\\dfrac{10{,}000-5{,}500}{400-150}$, ואז הציבו בחודש השפל למציאת FC.<br>(ג) נקודת השוויון: $FC+v\\times Q = 20\\times Q$.', '(א) $v=\\dfrac{4{,}500}{250}=18$.<br>(ב) $FC=5{,}500-18\\times150=2{,}800$.<br>(ג) $2{,}800+18Q=20Q \\Rightarrow 2{,}800=2Q \\Rightarrow Q=1{,}400$.'],
-      solution:'(א) $v=\\dfrac{10{,}000-5{,}500}{400-150}=\\dfrac{4{,}500}{250}=18$ ש״ח להסעה.<br>(ב) $FC=5{,}500-18\\times150=5{,}500-2{,}700=2{,}800$ ש״ח.<br>(ג) נקודת השוויון: $2{,}800+18\\times Q = 20\\times Q \\Rightarrow 2{,}800=2Q \\Rightarrow Q=1{,}400$ הסעות. מתחת ל-1,400 הסעות בחודש, המצב הקיים (המעורב) זול יותר; מעליו, החברה החיצונית זולה יותר.'}
+      text:'יחידת הסעות רפואיות בבית חולים בוחנת את מבנה העלות שלה.<br>חודש השיא של היחידה כלל 400 הסעות בעלות כוללת של 10,000 ש״ח.<br>חודש השפל כלל 150 הסעות בעלות כוללת של 5,500 ש״ח.<br>(א) בשיטת גבוה-נמוך, מצאו את v, העלות המשתנה להסעה.<br>(ב) מצאו את FC, העלות הקבועה החודשית.<br>בנוסף, היחידה שוקלת מעבר לחברת הסעות חיצונית, שגובה 20 ש״ח קבועים לכל הסעה בודדת, ללא כל עלות קבועה נוספת.<br>(ג) באיזו כמות הסעות חודשית שני דגמי ההתקשרות, המצב הקיים מול החברה החיצונית, עולים בדיוק אותו הדבר?',
+      subs:[{id:'rf1-v', label:'(א) v, עלות משתנה להסעה (₪)', expected:18, tol:0.2, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+             subhint:feBlock('נוסחת v בשיטת גבוה-נמוך', 'v = \\dfrac{TC_{\\text{high}}-TC_{\\text{low}}}{Q_{\\text{high}}-Q_{\\text{low}}}', ['TC_high, העלות הכוללת בחודש השיא. כאן 10,000 ש״ח.','TC_low, העלות הכוללת בחודש השפל. כאן 5,500 ש״ח.','Q_high, כמות ההסעות בחודש השיא. כאן 400.','Q_low, כמות ההסעות בחודש השפל. כאן 150.'], 'הציבו את ארבעת המספרים בנוסחה, בדיוק כמו בתזכורת.')},
+            {id:'rf1-f', label:'(ב) FC, עלות קבועה חודשית (₪)', expected:2800, tol:5, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+             subhint:feBlock('נוסחת FC, אחרי שכבר יש לכם v', 'FC = TC_{\\text{low}} - v\\times Q_{\\text{low}}', ['TC_low, העלות הכוללת בחודש השפל. כאן 5,500 ש״ח.','v, מה שחישבתם בסעיף (א).','Q_low, כמות ההסעות בחודש השפל. כאן 150.'], 'אפשר גם להציב בחודש השיא במקום השפל, התוצאה זהה.')},
+            {id:'rf1-q', label:'(ג) כמות הסעות בנקודת השוויון', expected:1400, tol:5, unit:'הסעות', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+             subhint:'<div class="fe-desc">למה בכלל משווים בין שתי חלופות?</div><div class="fe-params">המצב הקיים הוא מבנה עלות מעורב: יש רכיב קבוע (FC) שמשולם גם אם היחידה לא מבצעת אף הסעה, ורכיב משתנה (v) שנוסף על כל הסעה. החברה החיצונית היא מבנה עלות משתנה טהור: אין שום תשלום קבוע, רק תעריף אחיד להסעה. אנחנו מחפשים את כמות ההסעות שבה שתי החלופות עולות בדיוק אותו הדבר.</div><div class="fe-formula">$TC_{\\text{existing}} = FC + v\\times Q$</div><div class="fe-formula">$TC_{\\text{external}} = 20\\times Q$</div><div class="fe-params">FC, העלות הקבועה החודשית שחישבתם בסעיף (ב).<br>v, העלות המשתנה להסעה שחישבתם בסעיף (א).<br>Q, כמות ההסעות החודשית, זהו הנעלם שמחפשים.<br>20, התעריף הקבוע להסעה בודדת אצל החברה החיצונית.</div><div class="fe-desc" style="margin-top:8px">השלב הבא: השוואת שתי המשוואות</div><div class="fe-formula">$FC + v\\times Q = 20\\times Q$</div><div class="fe-params">מציבים את FC ו-v שחישבתם, מעבירים את כל איברי ה-Q לצד אחד ואת המספר הקבוע לצד השני, ומחלקים כדי לבודד את Q.</div><div class="fe-tip">הציבו את המספרים שחישבתם ופתרו את המשוואה עבור Q. זו נקודת האדישות בין שתי החלופות, לא "התשובה הנכונה" הקבועה לכל כמות.</div>'}],
+      hints:['נוסחת v: $v=\\dfrac{TC_{\\text{high}}-TC_{\\text{low}}}{Q_{\\text{high}}-Q_{\\text{low}}}$.<br>נוסחת FC: $FC=TC_{\\text{low}}-v\\times Q_{\\text{low}}$.<br>לנדרש (ג): השוו בין שתי חלופות עלות, $FC+v\\times Q = 20\\times Q$, ופתרו עבור Q.', '(א) $v=\\dfrac{4{,}500}{250}=18$.<br>(ב) $FC=5{,}500-18\\times150=2{,}800$.<br>(ג) $2{,}800+18Q=20Q \\Rightarrow 2{,}800=2Q \\Rightarrow Q=1{,}400$.'],
+      solution:'<p><b>(א) v</b></p><p>$v = \\dfrac{TC_{\\text{high}}-TC_{\\text{low}}}{Q_{\\text{high}}-Q_{\\text{low}}}$</p><p>הנוסחה אומרת: העלות המשתנה להסעה שווה להפרש בין העלות הכוללת בשני החודשים, חלקי ההפרש בין כמויות ההסעות באותם חודשים.</p><p>הצבה: $v = \\dfrac{10{,}000-5{,}500}{400-150} = \\dfrac{4{,}500}{250} = 18$ ש״ח להסעה.</p><p><b>(ב) FC</b></p><p>$FC = TC_{\\text{low}} - v\\times Q_{\\text{low}}$</p><p>הנוסחה אומרת: העלות הקבועה שווה לעלות הכוללת בחודש השפל, פחות הרכיב המשתנה של אותו חודש.</p><p>הצבה: $FC = 5{,}500-18\\times150 = 5{,}500-2{,}700 = 2{,}800$ ש״ח.</p><p><b>(ג) נקודת השוויון בין שתי החלופות</b></p><p>המצב הקיים הוא מבנה עלות מעורב (קבוע ומשתנה יחד), והחברה החיצונית היא מבנה עלות משתנה טהור. מחפשים את כמות ההסעות Q שבה שתי החלופות עולות אותו הדבר.</p><p>$TC_{\\text{existing}} = TC_{\\text{external}}$</p><p>$FC + v\\times Q = 20\\times Q$</p><p>הנוסחה אומרת: העלות הכוללת של המצב הקיים (הקבוע ועוד המשתנה כפול הכמות) שווה לעלות הכוללת של החברה החיצונית (התעריף האחיד כפול אותה כמות).</p><p>הצבה: $2{,}800 + 18\\times Q = 20\\times Q \\Rightarrow 2{,}800 = 2Q \\Rightarrow Q = 1{,}400$ הסעות.</p><p>מתחת ל-1,400 הסעות בחודש, המצב הקיים (המעורב) זול יותר. מעליו, החברה החיצונית זולה יותר.</p>'}
   ];
   document.getElementById('rF').innerHTML = rF.map(renderNumeric).join('');
 
   /* ================= GUIDED EVENT 1: KEREN OR IMAGING INSTITUTE ================= */
   var guided=[
     {id:'g1', n:1, difficulty:'בינוני', title:'שיעור ההעמסה ועלות ההעמסה לכל שירות',
-      text:'לפי נתוני קרן אור שלמעלה: (א) חשבו את שיעור ההעמסה מוגדר מראש (Predetermined Overhead Rate, POHR). (ב) חשבו את העלות העקיפה שיש להעמיס על בדיקת CT אחת. (ג) חשבו את העלות העקיפה שיש להעמיס על בדיקת אולטרסאונד אחת. (ד) חשבו את העלות העקיפה שיש להעמיס על בדיקת רנטגן אחת.',
-      subs:[{id:'g1-pohr', label:'(א) POHR (₪ לשעת מכונה)', expected:150, tol:1, unit:'₪'},
-            {id:'g1-ct', label:'(ב) עלות עקיפה על CT (₪)', expected:300, tol:1, unit:'₪'},
-            {id:'g1-us', label:'(ג) עלות עקיפה על אולטרסאונד (₪)', expected:75, tol:1, unit:'₪'},
-            {id:'g1-xr', label:'(ד) עלות עקיפה על רנטגן (₪)', expected:37.5, tol:1, unit:'₪'}],
-      hints:['שיעור ההעמסה מוגדר מראש (POHR) שווה לעלות העקיפה המתוקצבת חלקי בסיס ההקצאה המתוקצב: $POHR = \\dfrac{900{,}000}{6{,}000}$. לכל שירות, העלות העקיפה שיש להעמיס שווה ל-POHR כפול שעות המכונה שהשירות צורך (מהטבלה השנייה).', '$POHR = 150$.<br>CT: $150\\times2=300$.<br>אולטרסאונד: $150\\times0.5=75$.<br>רנטגן: $150\\times0.25=37.5$.'],
-      solution:'$POHR = \\dfrac{900{,}000}{6{,}000} = 150$ ש״ח לשעת מכונה.<br>CT: $150\\times2 = 300$ ש״ח.<br>אולטרסאונד: $150\\times0.5 = 75$ ש״ח.<br>רנטגן: $150\\times0.25 = 37.5$ ש״ח.<br>שימו לב: ככל שהשירות צורך יותר שעות מכונה, כך הוא "מקבל" יותר מהעלות המשותפת.'},
+      text:'לפי נתוני קרן אור שלמעלה:<br>(א) חשבו את שיעור ההעמסה מוגדר מראש (Predetermined Overhead Rate, POHR).<br>(ב) חשבו את העלות העקיפה שיש להעמיס על בדיקת CT אחת.<br>(ג) חשבו את העלות העקיפה שיש להעמיס על בדיקת אולטרסאונד אחת.<br>(ד) חשבו את העלות העקיפה שיש להעמיס על בדיקת רנטגן אחת.',
+      subs:[{id:'g1-pohr', label:'(א) POHR (₪ לשעת מכונה)', expected:150, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+             subhint:feBlock('נוסחת POHR, שיעור ההעמסה מוגדר מראש', 'POHR = \\dfrac{\\text{עלות עקיפה מתוקצבת}}{\\text{בסיס הקצאה מתוקצב}}', ['עלות עקיפה מתוקצבת, סך העלויות העקיפות המתוכננות לכל השנה. כאן 900,000 ש״ח.','בסיס הקצאה מתוקצב, כמות הבסיס המתוכננת לכל השנה. כאן 6,000 שעות מכונה.'], 'הציבו את שני המספרים מטבלת הנתונים למעלה. התוצאה היא "מחיר" קבוע לכל שעת מכונה.')},
+            {id:'g1-ct', label:'(ב) עלות עקיפה על CT (₪)', expected:300, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+             subhint:feBlock('נוסחת העלות העקיפה שמועמסת על בדיקה בודדת', '\\text{עלות עקיפה} = POHR \\times \\text{שעות מכונה ליחידה}', ['POHR, מה שחישבתם בסעיף (א).','שעות מכונה ליחידה, לוקחים מהטבלה השנייה עבור השירות הרלוונטי (כאן CT, 2.00 שעות).'], 'הכפילו את POHR בכמות שעות המכונה של CT בלבד.')},
+            {id:'g1-us', label:'(ג) עלות עקיפה על אולטרסאונד (₪)', expected:75, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+             subhint:feBlock('אותה נוסחה, הפעם עבור אולטרסאונד', '\\text{עלות עקיפה} = POHR \\times \\text{שעות מכונה ליחידה}', ['POHR, מה שחישבתם בסעיף (א).','שעות מכונה ליחידה, מהטבלה השנייה עבור אולטרסאונד: 0.50 שעות.'], 'הכפילו את POHR ב-0.5.')},
+            {id:'g1-xr', label:'(ד) עלות עקיפה על רנטגן (₪)', expected:37.5, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ד)',
+             subhint:feBlock('אותה נוסחה, הפעם עבור רנטגן', '\\text{עלות עקיפה} = POHR \\times \\text{שעות מכונה ליחידה}', ['POHR, מה שחישבתם בסעיף (א).','שעות מכונה ליחידה, מהטבלה השנייה עבור רנטגן: 0.25 שעות.'], 'הכפילו את POHR ב-0.25.')}],
+      hints:['נוסחת POHR: $POHR = \\dfrac{900{,}000}{6{,}000}$.<br>לכל שירות: עלות עקיפה $= POHR \\times$ שעות מכונה ליחידה (מהטבלה השנייה).', '$POHR = 150$.<br>CT: $150\\times2=300$.<br>אולטרסאונד: $150\\times0.5=75$.<br>רנטגן: $150\\times0.25=37.5$.'],
+      solution:'<p><b>(א) POHR</b></p><p>$POHR = \\dfrac{\\text{עלות עקיפה מתוקצבת}}{\\text{בסיס הקצאה מתוקצב}}$</p><p>הנוסחה אומרת: מחלקים את סך העלות העקיפה המתוכננת לכל השנה בכמות הבסיס המתוכננת לאותה שנה, וכך מקבלים "מחיר" קבוע לכל יחידת בסיס.</p><p>הצבה: $POHR = \\dfrac{900{,}000}{6{,}000} = 150$ ש״ח לשעת מכונה.</p><p><b>(ב)-(ד) עלות עקיפה לכל שירות</b></p><p>$\\text{עלות עקיפה} = POHR \\times \\text{שעות מכונה ליחידה}$</p><p>הנוסחה אומרת: כל שירות "מקבל" חלק מהעלות המשותפת לפי כמות שעות המכונה שהוא צורך.</p><p>הצבה, CT: $150\\times2 = 300$ ש״ח.<br>הצבה, אולטרסאונד: $150\\times0.5 = 75$ ש״ח.<br>הצבה, רנטגן: $150\\times0.25 = 37.5$ ש״ח.</p><p>שימו לב: ככל שהשירות צורך יותר שעות מכונה, כך הוא "מקבל" יותר מהעלות המשותפת.</p>'},
     {id:'g2', n:2, difficulty:'מאתגר', title:'העלות המלאה של כל אחד משלושת השירותים',
-      text:'כעת נשלים את התמונה. בעזרת החומרים הישירים ועבודה הישירה מהטבלה השנייה, ותוצאות התרגיל הקודם, חשבו את העלות המלאה (חומרים ישירים + עבודה ישירה + עלות עקיפה שהועמסה) של כל אחד משלושת השירותים.',
-      subs:[{id:'g2-ct', label:'עלות מלאה של CT (₪)', expected:600, tol:1, unit:'₪'},
-            {id:'g2-us', label:'עלות מלאה של אולטרסאונד (₪)', expected:175, tol:1, unit:'₪'},
-            {id:'g2-xr', label:'עלות מלאה של רנטגן (₪)', expected:97.5, tol:1, unit:'₪'}],
+      text:'כעת נשלים את התמונה.<br>בעזרת החומרים הישירים ועבודה הישירה מהטבלה השנייה, ותוצאות התרגיל הקודם:<br>(א) חשבו את העלות המלאה של בדיקת CT.<br>(ב) חשבו את העלות המלאה של בדיקת אולטרסאונד.<br>(ג) חשבו את העלות המלאה של בדיקת רנטגן.<br>העלות המלאה = חומרים ישירים + עבודה ישירה + עלות עקיפה שהועמסה.',
+      subs:[{id:'g2-ct', label:'(א) עלות מלאה של CT (₪)', expected:600, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+             subhint:feBlock('נוסחת העלות המלאה', '\\text{עלות מלאה} = DM + DL + \\text{עלות עקיפה שהועמסה}', ['DM, חומרים ישירים. עבור CT מהטבלה: 120 ש״ח.','DL, עבודה ישירה. עבור CT מהטבלה: 180 ש״ח.','עלות עקיפה שהועמסה, מה שחישבתם עבור CT בתרגיל הקודם: 300 ש״ח.'], 'חברו את שלושת המספרים: 120 ועוד 180 ועוד 300.')},
+            {id:'g2-us', label:'(ב) עלות מלאה של אולטרסאונד (₪)', expected:175, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+             subhint:feBlock('אותה נוסחה, הפעם עבור אולטרסאונד', '\\text{עלות מלאה} = DM + DL + \\text{עלות עקיפה שהועמסה}', ['DM, חומרים ישירים. עבור אולטרסאונד מהטבלה: 40 ש״ח.','DL, עבודה ישירה. עבור אולטרסאונד מהטבלה: 60 ש״ח.','עלות עקיפה שהועמסה, מה שחישבתם עבור אולטרסאונד בתרגיל הקודם: 75 ש״ח.'], 'חברו את שלושת המספרים: 40 ועוד 60 ועוד 75.')},
+            {id:'g2-xr', label:'(ג) עלות מלאה של רנטגן (₪)', expected:97.5, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+             subhint:feBlock('אותה נוסחה, הפעם עבור רנטגן', '\\text{עלות מלאה} = DM + DL + \\text{עלות עקיפה שהועמסה}', ['DM, חומרים ישירים. עבור רנטגן מהטבלה: 25 ש״ח.','DL, עבודה ישירה. עבור רנטגן מהטבלה: 35 ש״ח.','עלות עקיפה שהועמסה, מה שחישבתם עבור רנטגן בתרגיל הקודם: 37.5 ש״ח.'], 'חברו את שלושת המספרים: 25 ועוד 35 ועוד 37.5.')}],
       hints:['עלות מלאה = חומרים ישירים + עבודה ישירה + עלות עקיפה שהועמסה, לכל שירות בנפרד.', 'CT: $120+180+300$.<br>אולטרסאונד: $40+60+75$.<br>רנטגן: $25+35+37.5$.'],
-      solution:'CT: עלות מלאה $= 120+180+300 = 600$ ש״ח.<br>אולטרסאונד: עלות מלאה $= 40+60+75 = 175$ ש״ח.<br>רנטגן: עלות מלאה $= 25+35+37.5 = 97.5$ ש״ח.<br>אלו העלויות המלאות שכדאי להשוות למחירים שקרן אור מקבל מקופות החולים על כל שירות.'}
+      solution:'<p>העלות המלאה של כל שירות מורכבת משלושה רכיבים: חומרים ישירים (DM), עבודה ישירה (DL), ועלות עקיפה שהועמסה מהתרגיל הקודם.</p><p>$\\text{עלות מלאה} = DM + DL + \\text{עלות עקיפה שהועמסה}$</p><p>הנוסחה אומרת: מחברים את כל העלויות הישירות שאפשר לשייך לשירות באופן ישיר, יחד עם החלק שהוקצה לו מהעלות המשותפת.</p><p>הצבה, CT: $120+180+300 = 600$ ש״ח.<br>הצבה, אולטרסאונד: $40+60+75 = 175$ ש״ח.<br>הצבה, רנטגן: $25+35+37.5 = 97.5$ ש״ח.</p><p>אלו העלויות המלאות שכדאי להשוות למחירים שקרן אור מקבל מקופות החולים על כל שירות.</p>'}
   ];
   document.getElementById('guidedEx').innerHTML = guided.map(renderNumeric).join('');
 
@@ -1105,7 +1171,9 @@ function renderMathIn(el){
       var opts = q.opts.map(function(o,oi){
         return '<button class="mc-opt" onclick="mcPick(\''+ex.id+'\','+qi+','+oi+','+q.correct+')"><span class="k">'+String.fromCharCode(1488+oi)+'</span><span>'+o+'</span></button>';
       }).join('');
-      return '<div class="mc-block" data-q="'+qi+'"><div class="mc-q">'+(qi+1)+'. '+q.q+'</div>'+opts+'<div class="mc-fb" id="mcfb-'+ex.id+'-'+qi+'"></div></div>';
+      var hintBtn = q.hint ? '<button class="sub-hint-btn" onclick="toggleClass(\'mchint-'+ex.id+'-'+qi+'\')">💡 '+(q.hintBtnLabel||'רמז מליבי')+'</button>' : '';
+      var hintBox = q.hint ? '<div class="sub-hint-box" id="mchint-'+ex.id+'-'+qi+'">'+q.hint+'</div>' : '';
+      return '<div class="mc-block" data-q="'+qi+'"><div class="mc-q">'+(qi+1)+'. '+q.q+' '+hintBtn+'</div>'+hintBox+opts+'<div class="mc-fb" id="mcfb-'+ex.id+'-'+qi+'"></div></div>';
     }).join('');
     return '<div class="ex-card" id="'+ex.id+'" data-total-q="'+ex.questions.length+'" data-correct-q="0"><div class="ex-head"><div class="ex-num">'+ex.n+'</div><h4>'+ex.title+'</h4>'+diffTag(ex.difficulty)+'</div>'
       +'<div class="ex-text">'+ex.text+'</div>'
@@ -1133,7 +1201,9 @@ function renderMathIn(el){
   /* ================= GENERIC RENDERER: TRUE/FALSE SET ================= */
   function renderTF(ex){
     var stHtml = ex.statements.map(function(s, si){
-      return '<div class="tf-block" data-s="'+si+'"><div class="tf-s">'+(si+1)+'. '+s.s+'</div>'
+      var hintBtn = s.hint ? '<button class="sub-hint-btn" onclick="toggleClass(\'tfhint-'+ex.id+'-'+si+'\')">💡 '+(s.hintBtnLabel||'רמז מליבי')+'</button>' : '';
+      var hintBox = s.hint ? '<div class="sub-hint-box" id="tfhint-'+ex.id+'-'+si+'">'+s.hint+'</div>' : '';
+      return '<div class="tf-block" data-s="'+si+'"><div class="tf-s">'+(si+1)+'. '+s.s+' '+hintBtn+'</div>'+hintBox
         +'<div class="tf-btnrow"><button class="tf-btn t" onclick="tfPick(\''+ex.id+'\','+si+',true,'+s.correct+')">✔️ נכון</button><button class="tf-btn f" onclick="tfPick(\''+ex.id+'\','+si+',false,'+s.correct+')">❌ לא נכון</button></div>'
         +'<div class="tf-explain" id="tfx-'+ex.id+'-'+si+'">'+s.explain+'</div></div>';
     }).join('');
@@ -1165,13 +1235,16 @@ function renderMathIn(el){
       questions:[
         {q:'מהו שיעור ההעמסה מוגדר מראש (POHR) של מרכז השיקום?',
          opts:['150 ש״ח לשעת עבודה ישירה','2,400 ש״ח לשעת עבודה ישירה','0.0067 ש״ח לשעת עבודה ישירה','216 ש״ח לשעת עבודה ישירה','360,000 ש״ח לשעת עבודה ישירה'],
-         correct:0},
+         correct:0, hintBtnLabel:'רמז מליבי לשאלה זו',
+         hint:feBlock('נוסחת POHR', 'POHR = \\dfrac{\\text{עלות עקיפה מתוקצבת}}{\\text{בסיס הקצאה מתוקצב}}', ['עלות עקיפה מתוקצבת: 360,000 ש״ח.','בסיס הקצאה מתוקצב: 2,400 שעות עבודה ישירה.'], 'הציבו את שני המספרים. שימו לב ליחידת המידה של התוצאה: ש״ח לשעת עבודה ישירה, לא ש״ח סתם.')},
         {q:'מהי העלות העקיפה שיש להעמיס על טיפול בודד (1.5 שעות עבודה ישירה)?',
          opts:['225 ש״ח','150 ש״ח','360 ש״ח','45 ש״ח','82.5 ש״ח'],
-         correct:0},
+         correct:0, hintBtnLabel:'רמז מליבי לשאלה זו',
+         hint:feBlock('נוסחת העלות העקיפה על טיפול בודד', '\\text{עלות עקיפה} = POHR \\times \\text{שעות לטיפול}', ['POHR, מהשאלה הקודמת: 150 ש״ח לשעת עבודה ישירה.','שעות לטיפול, כאן 1.5 שעות.'], 'הכפילו 150 ב-1.5. אל תתבלבלו בין 1.5 שעות לבין 0.0067 (זהו ההופכי של POHR, לא רלוונטי כאן).')},
         {q:'מהי העלות המלאה (ישיר + עקיף) של טיפול פיזיותרפי בודד?',
          opts:['390 ש״ח','345 ש״ח','270 ש״ח','165 ש״ח','225 ש״ח'],
-         correct:0}
+         correct:0, hintBtnLabel:'רמז מליבי לשאלה זו',
+         hint:feBlock('נוסחת העלות המלאה', '\\text{עלות מלאה} = DM + DL + \\text{עלות עקיפה שהועמסה}', ['DM, חומרים ישירים: 45 ש״ח.','DL, עבודה ישירה בש״ח: 80 ש״ח לשעה כפול 1.5 שעות.','עלות עקיפה שהועמסה, מהשאלה הקודמת: 225 ש״ח.'], 'חשבו קודם DL בש״ח (80 כפול 1.5), ורק אז חברו את שלושת הרכיבים יחד.')}
       ],
       hints:['שלב 1: $POHR=\\dfrac{360{,}000}{2{,}400}$.<br>שלב 2: עלות עקיפה על טיפול = POHR כפול 1.5 שעות.<br>שלב 3: עבודה ישירה בש״ח = 80 כפול 1.5, ואז עלות מלאה = חומרים ישירים ועוד עבודה ישירה ועוד עקיפה שהועמסה.', 'POHR: $360{,}000\\div2{,}400=150$.<br>עקיפה על טיפול: $150\\times1.5=225$.<br>עבודה ישירה בש״ח: $80\\times1.5=120$.<br>עלות מלאה: $45+120+225=390$.'],
       solution:'$POHR = 360{,}000\\div2{,}400 = 150$ ש״ח לשעת עבודה ישירה.<br>עלות עקיפה על טיפול $= 150\\times1.5 = 225$ ש״ח.<br>עבודה ישירה בש״ח $= 80\\times1.5 = 120$ ש״ח.<br>עלות מלאה $= 45+120+225 = 390$ ש״ח.<br>שימו לב לתשובות המסיחות: חלקן "שכחו" רכיב אחד לגמרי (פשוטות לזהות), וחלקן נראות סבירות אך מבוססות על טעות חישוב עדינה, בדיוק כדי לתרגל תשומת לב לפרטים.'}
@@ -1183,11 +1256,21 @@ function renderMathIn(el){
     {id:'tfex1', n:4, difficulty:'בינוני', title:'"בדיקה מדויקת": נכון או לא נכון',
       text:'על סמך התיאור למעלה: עלות עקיפה מתוקצבת 600,000 ש״ח, בסיס הקצאה 3,000 שעות הפעלת ציוד, בדיקה בודדת דורשת 0.2 שעות, חומרים ישירים 15 ש״ח, עבודה ישירה 20 ש״ח.',
       statements:[
-        {s:'שיעור ההעמסה מוגדר מראש (POHR) של המעבדה הוא 200 ש״ח לשעת הפעלת ציוד.', correct:true, explain:'נכון: $600{,}000\\div3{,}000=200$.'},
-        {s:'אילו הבסיס שנבחר היה שונה (למשל, מספר הבדיקות במקום שעות הפעלת ציוד), ה-POHR היה בהכרח זהה.', correct:false, explain:'לא נכון: POHR תלוי ישירות בבסיס שנבחר. בסיס שונה כמעט תמיד ייתן שיעור העמסה שונה במספרים, גם אם שניהם מייצגים "הקצאה הוגנת" בעיני הארגון.'},
-        {s:'העלות העקיפה שיש להעמיס על בדיקת דם בודדת היא 40 ש״ח.', correct:true, explain:'נכון: $200\\times0.2=40$.'},
-        {s:'העלות המלאה של בדיקת דם בודדת (ישיר + עקיף) היא 55 ש״ח.', correct:false, explain:'לא נכון: העלות המלאה היא $15+20+40=75$ ש״ח, לא 55. שווה לוודא שלא דילגתם על אחד משלושת הרכיבים.'},
-        {s:'אם כמות הבדיקות בפועל תחרוג משמעותית מהתקציב, ה-POHR יתעדכן אוטומטית באמצע השנה כדי לשקף זאת.', correct:false, explain:'לא נכון: POHR נקבע פעם אחת, מראש, ונשאר קבוע לאורך כל התקופה. פערים בין המתוכנן לבפועל מטופלים בסוף התקופה (כעלות עקיפה שהועמסה ביתר או בחסר), לא באמצעות עדכון אוטומטי של השיעור עצמו.'}
+        {s:'שיעור ההעמסה מוגדר מראש (POHR) של המעבדה הוא 200 ש״ח לשעת הפעלת ציוד.', correct:true, explain:'נכון: $600{,}000\\div3{,}000=200$.',
+         hintBtnLabel:'רמז מליבי לקביעה זו',
+         hint:feBlock('נוסחת POHR', 'POHR = \\dfrac{\\text{עלות עקיפה מתוקצבת}}{\\text{בסיס הקצאה מתוקצב}}', ['עלות עקיפה מתוקצבת: 600,000 ש״ח.','בסיס הקצאה מתוקצב: 3,000 שעות הפעלת ציוד.'], 'הציבו את שני המספרים ובדקו אם התוצאה תואמת את הקביעה.')},
+        {s:'אילו הבסיס שנבחר היה שונה (למשל, מספר הבדיקות במקום שעות הפעלת ציוד), ה-POHR היה בהכרח זהה.', correct:false, explain:'לא נכון: POHR תלוי ישירות בבסיס שנבחר. בסיס שונה כמעט תמיד ייתן שיעור העמסה שונה במספרים, גם אם שניהם מייצגים "הקצאה הוגנת" בעיני הארגון.',
+         hintBtnLabel:'רמז מליבי לקביעה זו',
+         hint:feBlock('הגדרה: POHR תלוי בבחירת הבסיס', 'POHR = \\dfrac{\\text{עלות עקיפה מתוקצבת}}{\\text{בסיס הקצאה מתוקצב}}', ['המונה (עלות עקיפה מתוקצבת) לא משתנה כשמחליפים בסיס.','המכנה (בסיס הקצאה מתוקצב) כן משתנה, כי מדובר במדד שונה לגמרי (שעות מול כמות בדיקות).'], 'שנו רק את המכנה בראש: אם המכנה משתנה והמונה נשאר קבוע, האם המנה יכולה להישאר זהה?')},
+        {s:'העלות העקיפה שיש להעמיס על בדיקת דם בודדת היא 40 ש״ח.', correct:true, explain:'נכון: $200\\times0.2=40$.',
+         hintBtnLabel:'רמז מליבי לקביעה זו',
+         hint:feBlock('נוסחת העלות העקיפה על בדיקה בודדת', '\\text{עלות עקיפה} = POHR \\times \\text{שעות לבדיקה}', ['POHR, מהקביעה הראשונה: 200 ש״ח לשעת הפעלת ציוד.','שעות לבדיקה, כאן 0.2 שעות.'], 'הכפילו 200 ב-0.2 ובדקו אם זה תואם את הקביעה.')},
+        {s:'העלות המלאה של בדיקת דם בודדת (ישיר + עקיף) היא 55 ש״ח.', correct:false, explain:'לא נכון: העלות המלאה היא $15+20+40=75$ ש״ח, לא 55. שווה לוודא שלא דילגתם על אחד משלושת הרכיבים.',
+         hintBtnLabel:'רמז מליבי לקביעה זו',
+         hint:feBlock('נוסחת העלות המלאה', '\\text{עלות מלאה} = DM + DL + \\text{עלות עקיפה שהועמסה}', ['DM, חומרים ישירים: 15 ש״ח.','DL, עבודה ישירה: 20 ש״ח.','עלות עקיפה שהועמסה, מהקביעה השלישית: 40 ש״ח.'], 'חברו את שלושת המספרים ובדקו אם התוצאה היא 55 כמו שהקביעה טוענת.')},
+        {s:'אם כמות הבדיקות בפועל תחרוג משמעותית מהתקציב, ה-POHR יתעדכן אוטומטית באמצע השנה כדי לשקף זאת.', correct:false, explain:'לא נכון: POHR נקבע פעם אחת, מראש, ונשאר קבוע לאורך כל התקופה. פערים בין המתוכנן לבפועל מטופלים בסוף התקופה (כעלות עקיפה שהועמסה ביתר או בחסר), לא באמצעות עדכון אוטומטי של השיעור עצמו.',
+         hintBtnLabel:'רמז מליבי לקביעה זו',
+         hint:feBlock('מה המשמעות של ה-P במילה POHR', 'POHR = \\dfrac{\\text{עלות עקיפה מתוקצבת}}{\\text{בסיס הקצאה מתוקצב}}', ['שני חלקי הנוסחה הם ערכים מתוקצבים, כלומר נקבעים מראש לפני תחילת התקופה.','אין כאן שום איבר "בפועל" שיכול לעדכן את השיעור תוך כדי התקופה.'], 'שאלו את עצמכם: המילה Predetermined (מוגדר מראש) מרמזת על שיעור שקבוע כל התקופה, או שיעור שזז כל הזמן?')}
       ],
       hints:['חשבו קודם את שני המספרים הבסיסיים: POHR והעלות המלאה לבדיקה, ואז בדקו כל קביעה מולם. זכרו גם: POHR נקבע "מראש" (P ב-POHR), ולא מתעדכן תוך כדי התקופה.', 'POHR: $600{,}000\\div3{,}000=200$.<br>עלות עקיפה על בדיקה: $200\\times0.2=40$.<br>עלות מלאה: $15+20+40=75$.'],
       solution:'$POHR = 600{,}000\\div3{,}000 = 200$ ש״ח לשעת הפעלת ציוד.<br>עלות עקיפה על בדיקה בודדת $= 200\\times0.2 = 40$ ש״ח.<br>עלות מלאה לבדיקה $= 15+20+40 = 75$ ש״ח.<br>קביעה 2 שגויה כי הבסיס קובע את השיעור, לא רק "מדיניות ההקצאה". קביעה 5 שגויה כי המשמעות של "מוגדר מראש" (Predetermined) היא בדיוק שהשיעור לא זז במהלך התקופה, גם אם המציאות בפועל שונה מהתחזית.'}
@@ -1326,7 +1409,34 @@ function renderMathIn(el){
             {id:'d5-b', label:'(ב) עלות מלאה לטיפול (₪)', expected:800, tol:1, unit:'₪'},
             {id:'d5-c', label:'(ג) רווח לטיפול (₪)', expected:100, tol:1, unit:'₪'}],
       hints:['(א) כאן בסיס ההקצאה הוא "מספר טיפולים" עצמו: $150{,}000\\div500$.<br>(ב) עלות עקיפה שהועמסה לטיפול אחד שווה ל-POHR עצמו.<br>(ג) רווח שווה למחיר פחות עלות מלאה.', '(א) $300$.<br>(ב) $200+300+300=800$.<br>(ג) $900-800=100$.'],
-      solution:'(א) $POHR = 150{,}000\\div500 = 300$ ש״ח לטיפול (כאן בסיס ההקצאה הוא הטיפול עצמו, לא שעות).<br>(ב) עלות מלאה $= 200+300+300 = 800$ ש״ח.<br>(ג) רווח לטיפול $= 900-800 = 100$ ש״ח. בהיקף המתוכנן של 500 טיפולים, השירות <b>רווחי</b>. שימו לב שאם היקף הטיפולים בפועל יהיה נמוך יותר, ה-POHR בפועל היה שונה מהמתוכנן, וזה בדיוק הסיכון שבהתבססות על אומדן מתוקצב.'}
+      solution:'(א) $POHR = 150{,}000\\div500 = 300$ ש״ח לטיפול (כאן בסיס ההקצאה הוא הטיפול עצמו, לא שעות).<br>(ב) עלות מלאה $= 200+300+300 = 800$ ש״ח.<br>(ג) רווח לטיפול $= 900-800 = 100$ ש״ח. בהיקף המתוכנן של 500 טיפולים, השירות <b>רווחי</b>. שימו לב שאם היקף הטיפולים בפועל יהיה נמוך יותר, ה-POHR בפועל היה שונה מהמתוכנן, וזה בדיוק הסיכון שבהתבססות על אומדן מתוקצב.'},
+    {id:'d6', n:6, difficulty:'מאתגר', title:'שאלה משולבת ארוכה: מרכז "צעד נוסף" לפיזיותרפיה וריפוי בעיסוק',
+      text:'<p>מרכז "צעד נוסף" מציע שלושה סוגי טיפולים: פיזיותרפיה רגילה, פיזיותרפיה ספורטיבית, וריפוי בעיסוק. לקראת השנה הבאה, הנהלת המרכז עורכת תקצוב מפורט כדי לתמחר את שלושת הטיפולים בצורה מדויקת ולבדוק את רווחיותם.</p><p>העלות העקיפה השנתית המתוקצבת של המרכז היא 480,000 ש״ח, ובסיס ההקצאה שנבחר הוא שעות טיפול בפועל, בהיקף מתוקצב של 8,000 שעות טיפול בשנה.</p><div class="datatbl-wrap"><table class="datatbl"><tr><th>סוג טיפול</th><th>שעות טיפול ליחידה</th><th>חומרים ישירים (₪)</th><th>עבודה ישירה (₪)</th><th>מחיר לטיפול (₪)</th></tr><tr><td>פיזיותרפיה רגילה</td><td>1.00</td><td>20</td><td>60</td><td>180</td></tr><tr><td>פיזיותרפיה ספורטיבית</td><td>1.50</td><td>35</td><td>90</td><td>270</td></tr><tr><td>ריפוי בעיסוק</td><td>0.75</td><td>15</td><td>45</td><td>130</td></tr></table></div><p>ענו על עשרת הנדרשים הבאים, כל נדרש בשורה נפרדת:</p><p>(א) חשבו את שיעור ההעמסה מוגדר מראש (POHR) של המרכז.<br>(ב) חשבו את העלות העקיפה שיש להעמיס על טיפול פיזיותרפיה רגילה אחד.<br>(ג) חשבו את העלות העקיפה שיש להעמיס על טיפול פיזיותרפיה ספורטיבית אחד.<br>(ד) חשבו את העלות העקיפה שיש להעמיס על טיפול ריפוי בעיסוק אחד.<br>(ה) חשבו את העלות המלאה של טיפול פיזיותרפיה רגילה.<br>(ו) חשבו את העלות המלאה של טיפול פיזיותרפיה ספורטיבית.<br>(ז) חשבו את העלות המלאה של טיפול ריפוי בעיסוק.<br>(ח) חשבו את הרווח (מחיר פחות עלות מלאה) לטיפול פיזיותרפיה רגילה.<br>(ט) חשבו את הרווח לטיפול פיזיותרפיה ספורטיבית.<br>(י) חשבו את הרווח לטיפול ריפוי בעיסוק.</p>',
+      subs:[
+        {id:'d6-a', label:'(א) POHR (₪ לשעת טיפול)', expected:60, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+         subhint:feBlock('נוסחת POHR', 'POHR = \\dfrac{\\text{עלות עקיפה מתוקצבת}}{\\text{בסיס הקצאה מתוקצב}}', ['עלות עקיפה מתוקצבת: 480,000 ש״ח.','בסיס הקצאה מתוקצב: 8,000 שעות טיפול.'], 'הציבו את שני המספרים מהטקסט. שימו לב: זה חל על כל המרכז, לא על טיפול בודד.')},
+        {id:'d6-b', label:'(ב) עלות עקיפה על פיזיותרפיה רגילה (₪)', expected:60, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+         subhint:feBlock('נוסחת העלות העקיפה לטיפול בודד', '\\text{עלות עקיפה} = POHR \\times \\text{שעות טיפול ליחידה}', ['POHR, מה שחישבתם בסעיף (א): 60 ש״ח לשעה.','שעות טיפול ליחידה, מהטבלה עבור פיזיותרפיה רגילה: 1.00 שעות.'], 'הכפילו 60 ב-1.00.')},
+        {id:'d6-c', label:'(ג) עלות עקיפה על פיזיותרפיה ספורטיבית (₪)', expected:90, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+         subhint:feBlock('אותה נוסחה, הפעם עבור פיזיותרפיה ספורטיבית', '\\text{עלות עקיפה} = POHR \\times \\text{שעות טיפול ליחידה}', ['POHR, מה שחישבתם בסעיף (א): 60 ש״ח לשעה.','שעות טיפול ליחידה, מהטבלה עבור פיזיותרפיה ספורטיבית: 1.50 שעות.'], 'הכפילו 60 ב-1.50.')},
+        {id:'d6-d', label:'(ד) עלות עקיפה על ריפוי בעיסוק (₪)', expected:45, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ד)',
+         subhint:feBlock('אותה נוסחה, הפעם עבור ריפוי בעיסוק', '\\text{עלות עקיפה} = POHR \\times \\text{שעות טיפול ליחידה}', ['POHR, מה שחישבתם בסעיף (א): 60 ש״ח לשעה.','שעות טיפול ליחידה, מהטבלה עבור ריפוי בעיסוק: 0.75 שעות.'], 'הכפילו 60 ב-0.75.')},
+        {id:'d6-e', label:'(ה) עלות מלאה, פיזיותרפיה רגילה (₪)', expected:140, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ה)',
+         subhint:feBlock('נוסחת העלות המלאה', '\\text{עלות מלאה} = DM + DL + \\text{עלות עקיפה שהועמסה}', ['DM, חומרים ישירים לפיזיותרפיה רגילה: 20 ש״ח.','DL, עבודה ישירה לפיזיותרפיה רגילה: 60 ש״ח.','עלות עקיפה שהועמסה, מה שחישבתם בסעיף (ב): 60 ש״ח.'], 'חברו 20 ועוד 60 ועוד 60.')},
+        {id:'d6-f', label:'(ו) עלות מלאה, פיזיותרפיה ספורטיבית (₪)', expected:215, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ו)',
+         subhint:feBlock('אותה נוסחה, הפעם עבור פיזיותרפיה ספורטיבית', '\\text{עלות מלאה} = DM + DL + \\text{עלות עקיפה שהועמסה}', ['DM, חומרים ישירים לפיזיותרפיה ספורטיבית: 35 ש״ח.','DL, עבודה ישירה לפיזיותרפיה ספורטיבית: 90 ש״ח.','עלות עקיפה שהועמסה, מה שחישבתם בסעיף (ג): 90 ש״ח.'], 'חברו 35 ועוד 90 ועוד 90.')},
+        {id:'d6-g', label:'(ז) עלות מלאה, ריפוי בעיסוק (₪)', expected:105, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ז)',
+         subhint:feBlock('אותה נוסחה, הפעם עבור ריפוי בעיסוק', '\\text{עלות מלאה} = DM + DL + \\text{עלות עקיפה שהועמסה}', ['DM, חומרים ישירים לריפוי בעיסוק: 15 ש״ח.','DL, עבודה ישירה לריפוי בעיסוק: 45 ש״ח.','עלות עקיפה שהועמסה, מה שחישבתם בסעיף (ד): 45 ש״ח.'], 'חברו 15 ועוד 45 ועוד 45.')},
+        {id:'d6-h', label:'(ח) רווח, פיזיותרפיה רגילה (₪)', expected:40, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ח)',
+         subhint:feBlock('נוסחת הרווח לטיפול בודד', '\\text{רווח} = \\text{מחיר} - \\text{עלות מלאה}', ['מחיר, מהטבלה עבור פיזיותרפיה רגילה: 180 ש״ח.','עלות מלאה, מה שחישבתם בסעיף (ה): 140 ש״ח.'], 'הפחיתו: 180 פחות 140.')},
+        {id:'d6-i', label:'(ט) רווח, פיזיותרפיה ספורטיבית (₪)', expected:55, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ט)',
+         subhint:feBlock('אותה נוסחה, הפעם עבור פיזיותרפיה ספורטיבית', '\\text{רווח} = \\text{מחיר} - \\text{עלות מלאה}', ['מחיר, מהטבלה עבור פיזיותרפיה ספורטיבית: 270 ש״ח.','עלות מלאה, מה שחישבתם בסעיף (ו): 215 ש״ח.'], 'הפחיתו: 270 פחות 215.')},
+        {id:'d6-j', label:'(י) רווח, ריפוי בעיסוק (₪)', expected:25, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (י)',
+         subhint:feBlock('אותה נוסחה, הפעם עבור ריפוי בעיסוק', '\\text{רווח} = \\text{מחיר} - \\text{עלות מלאה}', ['מחיר, מהטבלה עבור ריפוי בעיסוק: 130 ש״ח.','עלות מלאה, מה שחישבתם בסעיף (ז): 105 ש״ח.'], 'הפחיתו: 130 פחות 105.')}
+      ],
+      hints:['שלב 1 (א): $POHR=\\dfrac{480{,}000}{8{,}000}$.<br>שלב 2 (ב-ד): לכל טיפול, עלות עקיפה $= POHR \\times$ שעות טיפול ליחידה שלו (מהטבלה).<br>שלב 3 (ה-ז): עלות מלאה $= DM+DL+$ עלות עקיפה שהועמסה, לכל טיפול בנפרד.<br>שלב 4 (ח-י): רווח $=$ מחיר פחות עלות מלאה, לכל טיפול בנפרד.',
+             '$POHR=60$.<br>עקיפה, רגילה: $60\\times1=60$.<br>עקיפה, ספורטיבית: $60\\times1.5=90$.<br>עקיפה, ריפוי בעיסוק: $60\\times0.75=45$.<br>עלות מלאה, רגילה: $20+60+60=140$.<br>עלות מלאה, ספורטיבית: $35+90+90=215$.<br>עלות מלאה, ריפוי בעיסוק: $15+45+45=105$.<br>רווח, רגילה: $180-140=40$.<br>רווח, ספורטיבית: $270-215=55$.<br>רווח, ריפוי בעיסוק: $130-105=25$.'],
+      solution:'<p>נפתור בארבעה שלבים, כל שלב חוזר על עצמו לשלושת סוגי הטיפול.</p><p><b>שלב 1, נדרש (א): POHR</b></p><p>$POHR = \\dfrac{\\text{עלות עקיפה מתוקצבת}}{\\text{בסיס הקצאה מתוקצב}}$</p><p>הנוסחה אומרת: מחלקים את סך העלות העקיפה השנתית המתוכננת בכמות שעות הטיפול המתוכננות לאותה שנה.</p><p>הצבה: $POHR = \\dfrac{480{,}000}{8{,}000} = 60$ ש״ח לשעת טיפול.</p><p><b>שלב 2, נדרשים (ב)-(ד): עלות עקיפה לכל טיפול</b></p><p>$\\text{עלות עקיפה} = POHR \\times \\text{שעות טיפול ליחידה}$</p><p>הנוסחה אומרת: כל סוג טיפול "מקבל" חלק מהעלות המשותפת לפי כמות שעות הטיפול שהוא צורך.</p><p>הצבה, (ב) פיזיותרפיה רגילה: $60\\times1.00 = 60$ ש״ח.<br>הצבה, (ג) פיזיותרפיה ספורטיבית: $60\\times1.50 = 90$ ש״ח.<br>הצבה, (ד) ריפוי בעיסוק: $60\\times0.75 = 45$ ש״ח.</p><p><b>שלב 3, נדרשים (ה)-(ז): עלות מלאה לכל טיפול</b></p><p>$\\text{עלות מלאה} = DM + DL + \\text{עלות עקיפה שהועמסה}$</p><p>הנוסחה אומרת: מחברים את שני הרכיבים הישירים (חומרים ועבודה) יחד עם החלק שהוקצה מהעלות העקיפה המשותפת.</p><p>הצבה, (ה) פיזיותרפיה רגילה: $20+60+60 = 140$ ש״ח.<br>הצבה, (ו) פיזיותרפיה ספורטיבית: $35+90+90 = 215$ ש״ח.<br>הצבה, (ז) ריפוי בעיסוק: $15+45+45 = 105$ ש״ח.</p><p><b>שלב 4, נדרשים (ח)-(י): רווח לכל טיפול</b></p><p>$\\text{רווח} = \\text{מחיר} - \\text{עלות מלאה}$</p><p>הנוסחה אומרת: מפחיתים מהמחיר שהמרכז גובה את מלוא העלות (הישירה והעקיפה) של אספקת הטיפול.</p><p>הצבה, (ח) פיזיותרפיה רגילה: $180-140 = 40$ ש״ח.<br>הצבה, (ט) פיזיותרפיה ספורטיבית: $270-215 = 55$ ש״ח.<br>הצבה, (י) ריפוי בעיסוק: $130-105 = 25$ ש״ח.</p><p>נקודה למחשבה: פיזיותרפיה ספורטיבית מניבה את הרווח הגבוה ביותר לטיפול בודד (55 ש״ח), אבל היא גם צורכת הכי הרבה זמן (1.5 שעות). אם נחשב רווח לשעת טיפול במקום רווח לטיפול, התמונה משתנה:</p><p>רווח לשעת טיפול, רגילה: $40\\div1.00=40$.<br>רווח לשעת טיפול, ספורטיבית: $55\\div1.5\\approx36.7$.<br>רווח לשעת טיפול, ריפוי בעיסוק: $25\\div0.75\\approx33.3$.</p><p>פיזיותרפיה רגילה מובילה דווקא לפי המדד הזה. כלומר, "הכי רווחי לטיפול" ו"הכי רווחי לשעת עבודה" הן שתי שאלות שונות, וההנהלה צריכה להחליט לפי איזו מהן לתכנן את סל הטיפולים.</p>'}
   ];
   document.getElementById('hwD').innerHTML = D.map(function(ex){ return ex.axes ? renderClassify(ex) : renderNumeric(ex); }).join('');
 })();
