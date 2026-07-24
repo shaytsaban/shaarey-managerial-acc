@@ -177,17 +177,20 @@ main{display:block}
 .d-dilemma{background:var(--amber-light);border:2px solid var(--amber);border-radius:12px;padding:12px 17px;margin:13px 0 8px;font-size:17.5px}
 .d-lead-to{color:var(--rose-dark);font-weight:800;font-size:15.5px;margin-top:8px}
 /* ---- report card ---- */
-.report{background:#fff;border:3px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin:18px 0}
+.report{background:#fff;border:3px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin:18px auto;max-width:620px}
+.report.wide{max-width:820px}
 .report-head{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));color:#fff;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
 .report-head .rh-co{font-weight:900;font-size:19px}
 .report-head .rh-t{color:var(--gold-400);font-size:13px;font-weight:700}
 .report-body{padding:8px 0}
-.report-row{display:grid;grid-template-columns:2fr 1fr;gap:8px;padding:10px 20px;font-size:16.5px;border-bottom:1px solid #eef1f6}
+.report-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:10px 20px;font-size:16.5px;border-bottom:1px solid #eef1f6}
 .report-row .rr-label{font-weight:700}
-.report-row .rr-num{text-align:left;direction:ltr;font-variant-numeric:tabular-nums;color:var(--ink-soft);font-weight:800}
+.report-row .rr-label small{display:block;font-weight:600;color:var(--muted);font-size:13px;margin-top:2px}
+.report-row .rr-num{text-align:left;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;color:var(--ink-soft);font-weight:800;white-space:nowrap}
 .report-row.rr-total{border-top:2px solid var(--navy-900);border-bottom:3px double var(--navy-900);font-weight:900;background:#fbfcfe}
 .report-row.rr-total .rr-num{color:var(--ink);font-weight:900}
 .report-row.rr-flag{background:var(--amber-light)}
+.report-row.rr-sub .rr-label{color:var(--muted);font-weight:600;font-size:15.5px;padding-right:14px}
 .report-foot{padding:13px 20px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line)}
 /* ---- hard question ---- */
 .hardq{background:linear-gradient(160deg,#0f172a,#1e293b);color:#e2e8f0;border-radius:24px;padding:26px 26px;margin:24px 0;box-shadow:var(--shadow-lg)}
@@ -248,6 +251,29 @@ main{display:block}
 .sol-acc .sbin{padding:0 14px 14px;font-size:15.5px;line-height:1.75;color:var(--ink-soft)}
 .sol-acc .sbin b{color:var(--ink)}
 .trap{display:inline-flex;align-items:center;gap:6px;background:var(--hard-light);border:2px solid #fca5a5;color:#991b1b;font-weight:800;font-size:12px;padding:4px 10px;border-radius:999px;margin-inline-start:6px}
+/* ---------- multiple-choice (5-option) ---------- */
+.mc-block{background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0}
+.mc-block .mc-q{font-weight:700;font-size:17px;margin-bottom:10px;color:var(--ink)}
+.mc-opt{display:flex;align-items:center;gap:10px;width:100%;text-align:right;font-family:inherit;font-size:15.5px;font-weight:600;color:var(--ink);background:#f8fafc;border:2px solid var(--line);border-radius:11px;padding:11px 14px;margin:7px 0;cursor:pointer}
+.mc-opt:hover{border-color:var(--rose)}
+.mc-opt .k{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;flex-shrink:0;background:var(--line);border-radius:7px;font-weight:900;font-size:13px}
+.mc-opt.correct{background:var(--variable-light);border-color:var(--variable)}
+.mc-opt.wrong{background:var(--hard-light);border-color:var(--hard)}
+.mc-opt.correct .k{background:var(--variable);color:#fff}
+.mc-opt.wrong .k{background:var(--hard);color:#fff}
+.mc-opt:disabled{cursor:default}
+.mc-fb{font-size:14.5px;font-weight:700;margin-top:6px;min-height:20px}
+/* ---------- true/false set ---------- */
+.tf-block{background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 18px;margin:10px 0}
+.tf-block .tf-s{font-size:16px;font-weight:600;margin-bottom:10px;color:var(--ink-soft)}
+.tf-btnrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tf-btn{border:2px solid var(--line);border-radius:10px;padding:9px;font-weight:900;font-size:14.5px;cursor:pointer;background:#fff}
+.tf-btn.t{color:var(--variable)} .tf-btn.f{color:var(--hard)}
+.tf-btn.correct{background:var(--variable-light);border-color:var(--variable)}
+.tf-btn.wrong{background:var(--hard-light);border-color:var(--hard)}
+.tf-btn:disabled{cursor:default}
+.tf-explain{font-size:14px;color:var(--ink-soft);margin-top:9px;line-height:1.6;display:none;border-top:1px dashed var(--line);padding-top:9px}
+.tf-explain.show{display:block}
 /* ---------- formula cards ---------- */
 .formula-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
 @media(max-width:800px){.formula-cards{grid-template-columns:1fr}}
@@ -382,7 +408,7 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
       <p class="hero-sub">שיעור 1 לימד אותנו איך מתנהגת העלות הכוללת (TC) של ארגון שלם. היום אנחנו פותרים שאלה שונה: איך לוקחים עלויות משותפות (עקיפות) ומחלקים אותן בצורה הוגנת בין השירותים השונים שהארגון מספק. זו שיטת התמחיר המסורתי, אבן היסוד של תמחיר בכל ארגון.</p>
       <div class="meta-chips">
         <span class="chip">👤 ד״ר שי צבאן</span>
-        <span class="chip">⏱ כ-90 דקות + שיעורי בית</span>
+        <span class="chip">⏱ כ-180 דקות (הרצאה מלאה) + שיעורי בית</span>
         <span class="chip">🏥 מקרה: מכון הדמיה רפואית</span>
         <span class="chip">🔁 פותח בחימום מקיף על שיעור 1</span>
       </div>
@@ -466,6 +492,12 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
     <p>כשמשווים חלופה בעלות קבועה (למשל שכר עובד קבוע) לחלופה בעלות משתנה (למשל מיקור-חוץ לפי יחידה), יש <b>נקודת שוויון</b>: כמות שבה שתי החלופות עולות אותו דבר. מתחת לה, החלופה המשתנה זולה יותר; מעליה, החלופה הקבועה זולה יותר.</p>
   </div>
   <div class="ex-grid" id="rE"></div>
+
+  <div class="remind-card reveal">
+    <div class="rc-hd">🎯 בדיקת מוכנות אחרונה, לפני שממשיכים</div>
+    <p>תרגיל משולב אחד אחרון, שמחזיר אתכם לשתי הטכניקות המתקדמות ביותר מהחימום: שיטת גבוה-נמוך והשוואת חלופות. אם תרגיל כזה מרגיש בהישג יד, אתם באמת מוכנים לשיעור החדש.</p>
+  </div>
+  <div class="ex-grid" id="rF"></div>
 
   <div class="checkpoint reveal">
     <div class="hd">✅ סיימתם את החימום</div>
@@ -567,33 +599,48 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
   </div>
   <div class="pipe-cap">אתם בתחנה 4 מתוך 8</div>
 
+  <div class="remind-card reveal">
+    <div class="rc-hd">🎈 רגע, מה זה בעצם POHR? (לפני שצוללים לפורמלי)</div>
+    <p>תארו לעצמכם שאתם וכמה שותפים לדירה מזמינים פיצה גדולה, ומחליטים מראש: "בואו נחשב כמה עולה כל פרוסה בממוצע, לפי מחיר הפיצה חלקי מספר הפרוסות, ואז כל אחד ישלם לפי כמה פרוסות הוא בעצם אכל." זה בדיוק מה ש-POHR עושה, רק במקום פיצה יש עלויות משותפות של ארגון, ובמקום "פרוסות" יש שעות מכונה, שעות עבודה, או כל מדד אחר שמעיד על כמה כל שירות "אכל" מהעלות המשותפת.</p>
+    <p><b>עכשיו ראשי התיבות:</b> POHR = Predetermined Overhead Rate. שימו לב שזה בעצם שלושה חלקים, לא ארבע אותיות סתמיות: <b>P</b> (Predetermined) = מוגדר <b>מראש</b>, עוד לפני שיודעים מה יקרה בפועל באותה שנה. <b>OH</b> (Overhead) = <b>עלות עקיפה</b>, בדיוק המונח שהכרנו במודול הקודם. <b>R</b> (Rate) = <b>שיעור</b>, כלומר סכום קבוע ליחידה אחת של בסיס ההקצאה. שימו לב ש-OH, קיצור נפוץ ל"עלות עקיפה", מסתתר בתוך המילה עצמה: P-OH-R.</p>
+  </div>
+
   <div class="flow-steps stagger">
     <div class="flow-step"><div class="num">1</div><div><div class="fs-title">אמדו את סך העלות העקיפה המתוקצבת</div><div class="fs-sub">Budgeted Overhead</div><div class="fs-details">בתחילת השנה, מעריכים את סך העלויות העקיפות הצפויות (שכר דירה, פחת, ניהול וכו') לכל התקופה.</div></div></div>
     <div class="flow-step"><div class="num">2</div><div><div class="fs-title">בחרו בסיס הקצאה (מנוע עלות)</div><div class="fs-sub">Allocation Base / Cost Driver</div><div class="fs-details">מדד שמניחים שקשור לצריכת המשאבים העקיפים: שעות מכונה, שעות עבודה ישירה, או עלות חומרים ישירים. במכון הדמיה, שעות מכונה הגיוני מאוד.</div></div></div>
     <div class="flow-step"><div class="num">3</div><div><div class="fs-title">אמדו את כמות בסיס ההקצאה המתוקצבת</div><div class="fs-sub">Budgeted Allocation Base</div><div class="fs-details">כמה שעות מכונה, בסך הכול, צפויות להיות מנוצלות באותה תקופה על ידי כל השירותים יחד.</div></div></div>
-    <div class="flow-step"><div class="num">4</div><div><div class="fs-title">חשבו שיעור העמסה מוגדר מראש (POHR)</div><div class="fs-sub">Predetermined Overhead Rate</div><div class="fs-details">POHR = עלות עקיפה מתוקצבת ÷ כמות בסיס ההקצאה המתוקצבת. זהו "מחיר" קבוע ליחידת בסיס הקצאה, שנקבע מראש לכל התקופה.</div></div></div>
-    <div class="flow-step"><div class="num">5</div><div><div class="fs-title">העמיסו על כל שירות לפי השימוש בפועל</div><div class="fs-sub">Applied Overhead</div><div class="fs-details">עלות עקיפה שהועמסה = POHR × כמות בסיס ההקצאה שהשירות צרך בפועל. כך כל שירות "מקבל" חלק יחסי מהעלויות המשותפות.</div></div></div>
+    <div class="flow-step"><div class="num">4</div><div><div class="fs-title">חשבו שיעור העמסה מוגדר מראש (POHR)</div><div class="fs-sub">Predetermined Overhead Rate</div><div class="fs-details">שיעור העמסה מוגדר מראש (POHR) = עלות עקיפה מתוקצבת ÷ כמות בסיס ההקצאה המתוקצבת. זהו "מחיר" קבוע ליחידת בסיס הקצאה, שנקבע מראש לכל התקופה.</div></div></div>
+    <div class="flow-step"><div class="num">5</div><div><div class="fs-title">העמיסו על כל שירות לפי השימוש בפועל</div><div class="fs-sub">Applied Overhead</div><div class="fs-details">עלות עקיפה שהועמסה = שיעור ההעמסה מוגדר מראש (POHR) × כמות בסיס ההקצאה שהשירות צרך בפועל. כך כל שירות "מקבל" חלק יחסי מהעלויות המשותפות.</div></div></div>
   </div>
+
+  <h3 class="sub-h reveal">בואו נכיר את ראשי התיבות, <span class="g">אחד אחד</span></h3>
+  <p class="lead reveal">בנוסחאות שנראה עוד רגע יופיעו כמה קיצורים. במקום לזרוק את כולם עליכם ביחד, נגדיר כל אחד בנפרד, בדיוק ברגע שבו הוא נכנס לתמונה.</p>
+
+  <div class="d-term reveal">🏢 <b>OH — Overhead</b> (עלות עקיפה / תקורה): כל אותן עלויות משותפות שהכרנו במודול הקודם — שכר דירה, פחת, שכר ניהול — שאי אפשר לשייך ישירות לשירות בודד, ולכן צריך להעמיס אותן לפי שיטה.</div>
+  <div class="d-term reveal">📏 <b>Base — בסיס הקצאה</b> (Allocation Base): המדד שדרכו "מחלקים" את העלות העקיפה בין השירותים. הוא אמור לשקף כמה כל שירות באמת צורך מהמשאבים המשותפים. במכון הדמיה, למשל, שעות מכונה.</div>
+  <div class="d-term reveal">🧪 <b>DM — Direct Materials</b> (חומרים ישירים): החומרים שנצרכו ישירות עבור שירות מסוים ואפשר לשייך אליו במדויק — למשל חומר ניגוד לבדיקת CT ספציפית.</div>
+  <div class="d-term reveal">👩‍⚕️ <b>DL — Direct Labor</b> (עבודה ישירה): זמן העבודה שהוקדש ישירות לאותו שירות ואפשר לשייך אליו במדויק — למשל זמן הטכנאי שביצע את הבדיקה.</div>
 
   <h3 class="sub-h reveal">שלוש הנוסחאות <span class="g">שילוו את התרגול</span></h3>
   <div class="formula-cards reveal">
     <div class="formula-card a">
       <div class="fc-tag">נוסחה 1</div>
       <div class="fc-eq">$$POHR = \dfrac{OH_{\text{budget}}}{Base_{\text{budget}}}$$</div>
-      <div class="fc-note">שיעור העמסה קבוע ליחידת בסיס, נקבע פעם אחת בתחילת התקופה, לפי עלות עקיפה מתוקצבת חלקי בסיס הקצאה מתוקצב.</div>
+      <div class="fc-note">שיעור העמסה קבוע ליחידת בסיס, נקבע פעם אחת בתחילת התקופה: עלות עקיפה (OH) מתוקצבת חלקי בסיס הקצאה מתוקצב.</div>
     </div>
     <div class="formula-card b">
       <div class="fc-tag">נוסחה 2</div>
       <div class="fc-eq">$$OH_{\text{applied}} = POHR \times Base_{\text{actual}}$$</div>
-      <div class="fc-note">כמה מהעלות המשותפת "מקבל" כל שירות: שיעור ההעמסה כפול השימוש בפועל של אותו שירות בבסיס ההקצאה.</div>
+      <div class="fc-note">כמה מהעלות העקיפה (OH) המשותפת "מקבל" כל שירות: שיעור ההעמסה כפול השימוש בפועל של אותו שירות בבסיס ההקצאה.</div>
     </div>
     <div class="formula-card c">
       <div class="fc-tag">נוסחה 3 · המרכזית</div>
       <div class="fc-eq">$$\text{Full Cost} = DM + DL + OH_{\text{applied}}$$</div>
-      <div class="fc-note">העלות המלאה של שירות בודד: חומרים ישירים (DM), ועוד עבודה ישירה (DL), ועוד העלות העקיפה שהועמסה.</div>
+      <div class="fc-note">העלות המלאה של שירות בודד: חומרים ישירים (DM), ועוד עבודה ישירה (DL), ועוד העלות העקיפה שהועמסה (OH Applied).</div>
     </div>
   </div>
 
+  <p class="lead reveal">רוצים לשמוע את ליבי מסבירה כל מונח שוב, בקולה שלה? לחצו על אחד הכרטיסים:</p>
   <div class="legend-grid reveal">
     <div class="legend-card direct" onclick="libiExplain('direct')" role="button" tabindex="0"><div class="lsym">📍 ישיר</div><div class="lname">ניתן לשייך ישירות</div><div class="ltap">👆 הסבר מליבי</div></div>
     <div class="legend-card indirect" onclick="libiExplain('indirect')" role="button" tabindex="0"><div class="lsym">🌐 עקיף</div><div class="lname">משותף, מוקצה</div><div class="ltap">👆 הסבר מליבי</div></div>
@@ -604,9 +651,9 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
 
 <!-- ==================== MODULE 05 · GUIDED EXAMPLE ==================== -->
 <section class="section" id="guided">
-  <span class="block-tag">05 · תרגול מודרך: מכון ההדמיה</span>
+  <span class="block-tag">05 · תרגול מודרך: שלושה אירועים מלאים</span>
   <h2>בואו <span class="g">נחשב את זה ביחד</span></h2>
-  <p class="section-sub">חוזרים למקרה הפתיחה. הנה נתוני התקציב של מכון ההדמיה. עברו שלב-שלב, ובקשו רמז מליבי בכל שלב שנתקעים בו.</p>
+  <p class="section-sub">שלושה אירועים אמיתיים, מלאים, לא רצף נתונים מנותק. בכל אחד: רקע, נתוני בסיס מלאים, ואז שאלות. עברו שלב-שלב, ובקשו רמז מליבי בכל שלב שנתקעים בו.</p>
   <div class="pipe">
     <span class="pst done"><span class="n">🔁</span>חימום</span>
     <span class="pst done"><span class="n">❓</span>למה צריך</span>
@@ -619,21 +666,43 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
   </div>
   <div class="pipe-cap">אתם בתחנה 5 מתוך 8</div>
 
+  <h3 class="sub-h reveal">אירוע 1 · <span class="g">מכון ההדמיה "קרן אור"</span></h3>
+  <p class="lead reveal">במכון ההדמיה הרפואית "קרן אור" עלה הצורך לבצע חישוב מדויק של העלות על שלוש הפעילויות המרכזיות של המכון: בדיקות CT, אולטרסאונד ורנטגן. לשם כך נערכה בדיקה מקיפה של העלויות המתוכננות לשנה הקרובה, ונמצא כי העלות העקיפה המתוקצבת, על בסיס אומדן עלויות עקיפות של שנים קודמות ביחס לנפח הפעילות, מורכבת כך:</p>
+
   <div class="report reveal">
-    <div class="report-head"><span class="rh-co">מכון הדמיה רפואית</span><span class="rh-t">נתוני תקציב שנתי</span></div>
+    <div class="report-head"><span class="rh-co">קרן אור · הרכב העלות העקיפה המתוקצבת</span><span class="rh-t">לשנה הקרובה</span></div>
     <div class="report-body">
-      <div class="report-row"><span class="rr-label">עלות עקיפה (תקורה) מתוקצבת לשנה</span><span class="rr-num">900,000 ₪</span></div>
-      <div class="report-row"><span class="rr-label">בסיס הקצאה</span><span class="rr-num">שעות מכונה</span></div>
-      <div class="report-row rr-flag"><span class="rr-label">כמות שעות מכונה מתוקצבת לשנה</span><span class="rr-num">6,000 שעות</span></div>
-      <div class="report-row"><span class="rr-label">שעות מכונה ל-CT אחד</span><span class="rr-num">2.00</span></div>
-      <div class="report-row"><span class="rr-label">שעות מכונה לאולטרסאונד אחד</span><span class="rr-num">0.50</span></div>
-      <div class="report-row"><span class="rr-label">שעות מכונה לצילום רנטגן אחד</span><span class="rr-num">0.25</span></div>
-      <div class="report-row rr-total"><span class="rr-label">CT: חומרים ישירים 120 ₪, עבודה ישירה 180 ₪</span><span class="rr-num">—</span></div>
+      <div class="report-row rr-sub"><span class="rr-label">שכר דירה ואחזקת המבנה</span><span class="rr-num">300,000</span></div>
+      <div class="report-row rr-sub"><span class="rr-label">פחת על ציוד הדמיה משותף</span><span class="rr-num">350,000</span></div>
+      <div class="report-row rr-sub"><span class="rr-label">שכר צוות ניהולי ותמיכה</span><span class="rr-num">200,000</span></div>
+      <div class="report-row rr-sub"><span class="rr-label">ביטוח וחשמל כללי</span><span class="rr-num">50,000</span></div>
+      <div class="report-row rr-total"><span class="rr-label">סך העלות העקיפה המתוקצבת (₪)</span><span class="rr-num">900,000</span></div>
+    </div>
+    <div class="report-foot">נתונים לימודיים בלבד, מעוגלים לצורך התרגול.</div>
+  </div>
+
+  <p class="lead reveal">הבדיקה מעלה עוד ממצא חשוב: שעות הפעלת מכונת ההדמיה הן הבסיס הנכון להקצאת העלות העקיפה הזו, מפני ששלוש הפעילויות העיקריות משתמשות בציוד לפרקי זמן שונים מאוד. הנה נתוני הבסיס המלאים:</p>
+
+  <div class="report reveal wide">
+    <div class="report-head"><span class="rh-co">קרן אור · נתוני בסיס להקצאה ולעלות מלאה</span><span class="rh-t">שנה קרובה</span></div>
+    <div class="report-body">
+      <div class="report-row rr-flag"><span class="rr-label">כמות שעות מכונה מתוקצבת לשנה, לכלל הפעילות</span><span class="rr-num">6,000</span></div>
+      <div class="report-row"><span class="rr-label">CT: שעות מכונה ליחידה / חומרים ישירים / עבודה ישירה (₪)</span><span class="rr-num">2.00 / 120 / 180</span></div>
+      <div class="report-row"><span class="rr-label">אולטרסאונד: שעות מכונה ליחידה / חומרים ישירים / עבודה ישירה (₪)</span><span class="rr-num">0.50 / 40 / 60</span></div>
+      <div class="report-row"><span class="rr-label">רנטגן: שעות מכונה ליחידה / חומרים ישירים / עבודה ישירה (₪)</span><span class="rr-num">0.25 / 25 / 35</span></div>
     </div>
     <div class="report-foot">נתונים לימודיים בלבד, מעוגלים לצורך התרגול.</div>
   </div>
 
   <div class="ex-grid" id="guidedEx"></div>
+
+  <h3 class="sub-h reveal">אירוע 2 · <span class="g">מרכז השיקום "צעד קדימה"</span></h3>
+  <p class="lead reveal">מרכז השיקום "צעד קדימה" נערך למשא ומתן מול קופת חולים על תעריף חדש לטיפול פיזיותרפי, ולשם כך נדרש לדעת בדיוק כמה עולה למרכז טיפול בודד. הבדיקה שנערכה העלתה כי העלות העקיפה המתוקצבת לשנה, המורכבת משכר דירה ואחזקת המרכז (180,000 ₪), פחת על ציוד פיזיותרפיה משותף (120,000 ₪), ושכר צוות מנהלי (60,000 ₪), מסתכמת ב-360,000 ₪. הבסיס שנקבע להקצאה הוא שעות עבודה ישירה, מתוקצבות ב-2,400 שעות לשנה. טיפול פיזיותרפי בודד דורש 1.5 שעות עבודה ישירה, שעלות השעה שלהן היא 80 ₪, ובנוסף חומרים ישירים בעלות 45 ₪.</p>
+  <div class="ex-grid" id="guidedMC"></div>
+
+  <h3 class="sub-h reveal">אירוע 3 · <span class="g">המעבדה המרכזית "בדיקה מדויקת"</span></h3>
+  <p class="lead reveal">לקראת ביקורת פנימית, במעבדה המרכזית "בדיקה מדויקת" נאספו הנתונים הבאים: העלות העקיפה המתוקצבת לשנה היא 600,000 ₪ (פחת על ציוד מעבדה משותף 250,000 ₪, שכר צוות תמיכה 200,000 ₪, שכר דירה ואחזקה 150,000 ₪). הבסיס שנקבע להקצאה הוא שעות הפעלת ציוד המעבדה, מתוקצבות ב-3,000 שעות לשנה. בדיקת דם בודדת (פאנל בסיסי) דורשת 0.2 שעות הפעלת ציוד, עולה ב-15 ₪ חומרים ישירים, ו-20 ₪ עבודה ישירה. קבעו האם כל אחת מהקביעות הבאות נכונה או לא נכונה:</p>
+  <div class="ex-grid" id="guidedTF"></div>
 </section>
 
 <!-- ==================== MODULE 06 · LIMITATION ==================== -->
@@ -721,18 +790,18 @@ footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
     <span class="pst on"><span class="n">📝</span>ש. בית</span>
   </div>
   <div class="pipe-cap">אתם בתחנה 8 מתוך 8 · הישר האחרון</div>
-  <div style="text-align:left;margin:10px 0"><span class="chip" id="scoreCounter">נפתרו נכון: 0 / 21</span></div>
+  <div style="text-align:left;margin:10px 0"><span class="chip" id="scoreCounter">התקדמות בתרגול (מודרך + בית): 0 / 25</span></div>
 
   <div class="sub-h">מדור א׳ · <span class="g">סיווג ישיר/עקיף</span></div>
   <p class="section-sub">קבעו לכל פריט אם מדובר בעלות ישירה או עקיפה.</p>
   <div class="ex-grid two-col" id="hwA"></div>
 
-  <div class="sub-h">מדור ב׳ · <span class="g">חישוב שיעור העמסה (POHR)</span></div>
-  <p class="section-sub">בכל תרגיל: עלות עקיפה מתוקצבת ובסיס הקצאה מתוקצב. חשבו POHR = עלות עקיפה ÷ בסיס הקצאה.</p>
+  <div class="sub-h">מדור ב׳ · <span class="g">חישוב שיעור ההעמסה מוגדר מראש (POHR)</span></div>
+  <p class="section-sub">בכל תרגיל, ארגון אחר בדק את העלות העקיפה המתוקצבת שלו ואת בסיס ההקצאה המתוקצב שלו. חשבו את שיעור ההעמסה מוגדר מראש: POHR = עלות עקיפה (OH) מתוקצבת ÷ בסיס הקצאה מתוקצב.</p>
   <div class="ex-grid" id="hwB"></div>
 
   <div class="sub-h">מדור ג׳ · <span class="g">העמסה בפועל ובניית עלות מלאה</span></div>
-  <p class="section-sub">חשבו את העלות העקיפה שהועמסה, ואז את העלות המלאה של השירות.</p>
+  <p class="section-sub">בכל תרגיל נתון שיעור ההעמסה מוגדר מראש (POHR). חשבו את העלות העקיפה שיש להעמיס בפועל, ואז את העלות המלאה של השירות: חומרים ישירים (DM) + עבודה ישירה (DL) + עלות עקיפה שהועמסה.</p>
   <div class="ex-grid" id="hwC"></div>
 
   <div class="sub-h">מדור ד׳ · <span class="g">שילוב עם שיעור 1</span></div>
@@ -833,8 +902,8 @@ function renderMathIn(el){
   window.libiExplain=function(sym){ if(SYMBOL_EXPLAIN[sym]) setTip(SYMBOL_EXPLAIN[sym]); };
 
   /* ================= SCORE TRACKER ================= */
-  var TOTAL_EX=21, solved={};
-  function markSolved(id){ if(!solved[id]){ solved[id]=true; var el=document.getElementById('scoreCounter'); if(el) el.textContent='נפתרו נכון: '+Object.keys(solved).length+' / '+TOTAL_EX; } }
+  var TOTAL_EX=25, solved={};
+  function markSolved(id){ if(!solved[id]){ solved[id]=true; var el=document.getElementById('scoreCounter'); if(el) el.textContent='התקדמות בתרגול (מודרך + בית): '+Object.keys(solved).length+' / '+TOTAL_EX; } }
 
   /* ================= HINT ENGINE ================= */
   var hintTier={};
@@ -967,11 +1036,11 @@ function renderMathIn(el){
 
   /* ================= RECAP: SECTION rC (VC/TC/ATC) ================= */
   var rC=[
-    {id:'rc1', n:6, difficulty:'בינוני', title:'VC, TC, ATC: תרגיל אחד, שלוש נוסחאות',
-      text:'FC = 5,000 ש״ח. v = 8 ש״ח ליחידה. Q = 200 יחידות. חשבו VC, TC ו-ATC.',
-      subs:[{id:'rc1-vc', label:'VC (₪)', expected:1600, tol:1, unit:'₪'},
-            {id:'rc1-tc', label:'TC (₪)', expected:6600, tol:1, unit:'₪'},
-            {id:'rc1-atc', label:'ATC (₪ ליחידה)', expected:33, tol:0.2, unit:'₪'}],
+    {id:'rc1', n:6, difficulty:'בינוני', title:'יחידת הדיאליזה הניידת: VC, TC, ATC',
+      text:'ביחידת דיאליזה ניידת עלה הצורך להציג בפני הנהלת בית החולים את העלות החודשית הצפויה של היחידה, לקראת דיון בתקציב הרבעוני. בבדיקה שנערכה נמצא כי היחידה משלמת שכר קבוע לצוות הרפואי בסך FC = 5,000 ש״ח לחודש, ללא קשר למספר הטיפולים שיבוצעו. בנוסף, עלות חומרים מתכלים (מסננים, תמיסות) עומדת על v = 8 ש״ח לכל טיפול דיאליזה בודד. בחודש הקרוב מתוכננים Q = 200 טיפולים. (א) חשבו את VC (סך העלות המשתנה). (ב) חשבו את TC (העלות הכוללת). (ג) חשבו את ATC (העלות הממוצעת לטיפול).',
+      subs:[{id:'rc1-vc', label:'(א) VC (₪)', expected:1600, tol:1, unit:'₪'},
+            {id:'rc1-tc', label:'(ב) TC (₪)', expected:6600, tol:1, unit:'₪'},
+            {id:'rc1-atc', label:'(ג) ATC (₪ לטיפול)', expected:33, tol:0.2, unit:'₪'}],
       hints:['$VC = v \\times Q, \\quad TC = FC + VC, \\quad ATC = TC \\div Q$.', '$VC = 8\\times200 = 1{,}600, \\quad TC = 5{,}000+1{,}600 = 6{,}600, \\quad ATC = 6{,}600\\div200 = 33$.'],
       solution:'$VC = 8\\times200 = 1{,}600$ ש״ח.<br>$TC = 5{,}000+1{,}600 = 6{,}600$ ש״ח.<br>$ATC = 6{,}600\\div200 = 33$ ש״ח ליחידה.'}
   ];
@@ -998,23 +1067,132 @@ function renderMathIn(el){
   ];
   document.getElementById('rE').innerHTML = rE.map(renderNumeric).join('');
 
-  /* ================= GUIDED WORKED EXAMPLE ================= */
+  /* ================= RECAP: SECTION rF (retention check, high-low + break-even combined) ================= */
+  var rF=[
+    {id:'rf1', n:9, difficulty:'מאתגר', title:'יחידת ההסעות הרפואיות: תרגיל משולב',
+      text:'יחידת הסעות רפואיות בבית חולים בוחנת את מבנה העלות שלה. חודש השיא של היחידה כלל 400 הסעות בעלות כוללת של 10,000 ש״ח. חודש השפל כלל 150 הסעות בעלות כוללת של 5,500 ש״ח. (א) בשיטת גבוה-נמוך, מצאו את v (העלות המשתנה להסעה). (ב) מצאו את FC (העלות הקבועה החודשית). היחידה שוקלת מעבר לחברת הסעות חיצונית, שגובה 20 ש״ח קבועים לכל הסעה בודדת, ללא כל עלות קבועה. (ג) באיזו כמות הסעות חודשית שני דגמי ההתקשרות (המצב הקיים מול החברה החיצונית) עולים בדיוק אותו הדבר?',
+      subs:[{id:'rf1-v', label:'(א) v — עלות משתנה להסעה (₪)', expected:18, tol:0.2, unit:'₪'},
+            {id:'rf1-f', label:'(ב) FC — עלות קבועה חודשית (₪)', expected:2800, tol:5, unit:'₪'},
+            {id:'rf1-q', label:'(ג) כמות הסעות בנקודת השוויון', expected:1400, tol:5, unit:'הסעות'}],
+      hints:['(א)-(ב) אותה שיטת גבוה-נמוך מהתזכורת: $v=\\dfrac{10{,}000-5{,}500}{400-150}$, ואז הציבו בחודש השפל למציאת FC.<br>(ג) נקודת השוויון: $FC+v\\times Q = 20\\times Q$.', '(א) $v=\\dfrac{4{,}500}{250}=18$.<br>(ב) $FC=5{,}500-18\\times150=2{,}800$.<br>(ג) $2{,}800+18Q=20Q \\Rightarrow 2{,}800=2Q \\Rightarrow Q=1{,}400$.'],
+      solution:'(א) $v=\\dfrac{10{,}000-5{,}500}{400-150}=\\dfrac{4{,}500}{250}=18$ ש״ח להסעה.<br>(ב) $FC=5{,}500-18\\times150=5{,}500-2{,}700=2{,}800$ ש״ח.<br>(ג) נקודת השוויון: $2{,}800+18\\times Q = 20\\times Q \\Rightarrow 2{,}800=2Q \\Rightarrow Q=1{,}400$ הסעות. מתחת ל-1,400 הסעות בחודש, המצב הקיים (המעורב) זול יותר; מעליו, החברה החיצונית זולה יותר.'}
+  ];
+  document.getElementById('rF').innerHTML = rF.map(renderNumeric).join('');
+
+  /* ================= GUIDED EVENT 1: KEREN OR IMAGING INSTITUTE ================= */
   var guided=[
-    {id:'g1', n:1, difficulty:'בינוני', title:'שלב 1-2: שיעור העמסה ועלות מוקצית',
-      text:'לפי נתוני התקציב של מכון ההדמיה: עלות עקיפה מתוקצבת 900,000 ש״ח, בסיס הקצאה 6,000 שעות מכונה. (א) חשבו את POHR. (ב) חשבו את העלות העקיפה שהועמסה על CT אחד (2 שעות מכונה). (ג) חשבו את העלות העקיפה שהועמסה על אולטרסאונד אחד (0.5 שעות). (ד) חשבו את העלות העקיפה שהועמסה על צילום רנטגן אחד (0.25 שעות).',
+    {id:'g1', n:1, difficulty:'בינוני', title:'שיעור ההעמסה ועלות ההעמסה לכל שירות',
+      text:'לפי נתוני קרן אור שלמעלה: (א) חשבו את שיעור ההעמסה מוגדר מראש (Predetermined Overhead Rate, POHR). (ב) חשבו את העלות העקיפה שיש להעמיס על בדיקת CT אחת. (ג) חשבו את העלות העקיפה שיש להעמיס על בדיקת אולטרסאונד אחת. (ד) חשבו את העלות העקיפה שיש להעמיס על בדיקת רנטגן אחת.',
       subs:[{id:'g1-pohr', label:'(א) POHR (₪ לשעת מכונה)', expected:150, tol:1, unit:'₪'},
-            {id:'g1-ct', label:'(ב) עלות עקיפה שהועמסה על CT (₪)', expected:300, tol:1, unit:'₪'},
-            {id:'g1-us', label:'(ג) עלות עקיפה שהועמסה על אולטרסאונד (₪)', expected:75, tol:1, unit:'₪'},
-            {id:'g1-xr', label:'(ד) עלות עקיפה שהועמסה על רנטגן (₪)', expected:37.5, tol:1, unit:'₪'}],
-      hints:['$POHR = \\dfrac{900{,}000}{6{,}000}$. לכל שירות, עלות עקיפה שהועמסה שווה ל-POHR כפול שעות המכונה שהשירות צרך.', '$POHR = 150$.<br>CT: $150\\times2=300$.<br>אולטרסאונד: $150\\times0.5=75$.<br>רנטגן: $150\\times0.25=37.5$.'],
+            {id:'g1-ct', label:'(ב) עלות עקיפה על CT (₪)', expected:300, tol:1, unit:'₪'},
+            {id:'g1-us', label:'(ג) עלות עקיפה על אולטרסאונד (₪)', expected:75, tol:1, unit:'₪'},
+            {id:'g1-xr', label:'(ד) עלות עקיפה על רנטגן (₪)', expected:37.5, tol:1, unit:'₪'}],
+      hints:['שיעור ההעמסה מוגדר מראש (POHR) שווה לעלות העקיפה המתוקצבת חלקי בסיס ההקצאה המתוקצב: $POHR = \\dfrac{900{,}000}{6{,}000}$. לכל שירות, העלות העקיפה שיש להעמיס שווה ל-POHR כפול שעות המכונה שהשירות צורך (מהטבלה השנייה).', '$POHR = 150$.<br>CT: $150\\times2=300$.<br>אולטרסאונד: $150\\times0.5=75$.<br>רנטגן: $150\\times0.25=37.5$.'],
       solution:'$POHR = \\dfrac{900{,}000}{6{,}000} = 150$ ש״ח לשעת מכונה.<br>CT: $150\\times2 = 300$ ש״ח.<br>אולטרסאונד: $150\\times0.5 = 75$ ש״ח.<br>רנטגן: $150\\times0.25 = 37.5$ ש״ח.<br>שימו לב: ככל שהשירות צורך יותר שעות מכונה, כך הוא "מקבל" יותר מהעלות המשותפת.'},
-    {id:'g2', n:2, difficulty:'מאתגר', title:'שלב 3: העלות המלאה של CT אחד',
-      text:'ל-CT בודד: חומרים ישירים (חומר ניגוד) = 120 ש״ח. עבודה ישירה (זמן טכנאי) = 180 ש״ח. עלות עקיפה שהועמסה (מהתרגיל הקודם) = 300 ש״ח. מהי העלות המלאה של CT אחד?',
-      subs:[{id:'g2-full', label:'עלות מלאה של CT (₪)', expected:600, tol:1, unit:'₪'}],
-      hints:['עלות מלאה = חומרים ישירים + עבודה ישירה + עלות עקיפה שהועמסה.', '$120+180+300$.'],
-      solution:'עלות מלאה $= 120+180+300 = 600$ ש״ח. זו העלות המלאה שכדאי להשוות למחיר שהמכון מקבל מקופת החולים על אותו CT.'}
+    {id:'g2', n:2, difficulty:'מאתגר', title:'העלות המלאה של כל אחד משלושת השירותים',
+      text:'כעת נשלים את התמונה. בעזרת החומרים הישירים ועבודה הישירה מהטבלה השנייה, ותוצאות התרגיל הקודם, חשבו את העלות המלאה (חומרים ישירים + עבודה ישירה + עלות עקיפה שהועמסה) של כל אחד משלושת השירותים.',
+      subs:[{id:'g2-ct', label:'עלות מלאה של CT (₪)', expected:600, tol:1, unit:'₪'},
+            {id:'g2-us', label:'עלות מלאה של אולטרסאונד (₪)', expected:175, tol:1, unit:'₪'},
+            {id:'g2-xr', label:'עלות מלאה של רנטגן (₪)', expected:97.5, tol:1, unit:'₪'}],
+      hints:['עלות מלאה = חומרים ישירים + עבודה ישירה + עלות עקיפה שהועמסה, לכל שירות בנפרד.', 'CT: $120+180+300$.<br>אולטרסאונד: $40+60+75$.<br>רנטגן: $25+35+37.5$.'],
+      solution:'CT: עלות מלאה $= 120+180+300 = 600$ ש״ח.<br>אולטרסאונד: עלות מלאה $= 40+60+75 = 175$ ש״ח.<br>רנטגן: עלות מלאה $= 25+35+37.5 = 97.5$ ש״ח.<br>אלו העלויות המלאות שכדאי להשוות למחירים שקרן אור מקבל מקופות החולים על כל שירות.'}
   ];
   document.getElementById('guidedEx').innerHTML = guided.map(renderNumeric).join('');
+
+  /* ================= GENERIC RENDERER: MULTIPLE CHOICE (5 options) ================= */
+  function renderMC(ex){
+    var qsHtml = ex.questions.map(function(q, qi){
+      var opts = q.opts.map(function(o,oi){
+        return '<button class="mc-opt" onclick="mcPick(\''+ex.id+'\','+qi+','+oi+','+q.correct+')"><span class="k">'+String.fromCharCode(1488+oi)+'</span><span>'+o+'</span></button>';
+      }).join('');
+      return '<div class="mc-block" data-q="'+qi+'"><div class="mc-q">'+(qi+1)+'. '+q.q+'</div>'+opts+'<div class="mc-fb" id="mcfb-'+ex.id+'-'+qi+'"></div></div>';
+    }).join('');
+    return '<div class="ex-card" id="'+ex.id+'" data-total-q="'+ex.questions.length+'" data-correct-q="0"><div class="ex-head"><div class="ex-num">'+ex.n+'</div><h4>'+ex.title+'</h4>'+diffTag(ex.difficulty)+'</div>'
+      +'<div class="ex-text">'+ex.text+'</div>'
+      +qsHtml
+      +hintTools(ex)+'</div>';
+  }
+  window.mcPick=function(id, qi, oi, correctIdx){
+    var card=document.getElementById(id);
+    var block=card.querySelector('.mc-block[data-q="'+qi+'"]');
+    if(block.dataset.answered) return; block.dataset.answered='1';
+    var btns=block.querySelectorAll('.mc-opt');
+    btns.forEach(function(b){ b.disabled=true; });
+    btns[correctIdx].classList.add('correct');
+    var ok = oi===correctIdx;
+    if(!ok) btns[oi].classList.add('wrong');
+    var fb=document.getElementById('mcfb-'+id+'-'+qi);
+    fb.textContent = ok ? '✅ נכון!' : '❌ לא נכון, התשובה הנכונה מסומנת למעלה.';
+    fb.style.color = ok ? '#059669' : '#dc2626';
+    if(ok) card.dataset.correctQ = (+card.dataset.correctQ||0)+1;
+    var totalQ=+card.dataset.totalQ;
+    var answered=card.querySelectorAll('.mc-block[data-answered]').length;
+    if(answered>=totalQ && +card.dataset.correctQ>=totalQ) markSolved(id);
+  };
+
+  /* ================= GENERIC RENDERER: TRUE/FALSE SET ================= */
+  function renderTF(ex){
+    var stHtml = ex.statements.map(function(s, si){
+      return '<div class="tf-block" data-s="'+si+'"><div class="tf-s">'+(si+1)+'. '+s.s+'</div>'
+        +'<div class="tf-btnrow"><button class="tf-btn t" onclick="tfPick(\''+ex.id+'\','+si+',true,'+s.correct+')">✔️ נכון</button><button class="tf-btn f" onclick="tfPick(\''+ex.id+'\','+si+',false,'+s.correct+')">❌ לא נכון</button></div>'
+        +'<div class="tf-explain" id="tfx-'+ex.id+'-'+si+'">'+s.explain+'</div></div>';
+    }).join('');
+    return '<div class="ex-card" id="'+ex.id+'" data-total-q="'+ex.statements.length+'" data-correct-q="0"><div class="ex-head"><div class="ex-num">'+ex.n+'</div><h4>'+ex.title+'</h4>'+diffTag(ex.difficulty)+'</div>'
+      +'<div class="ex-text">'+ex.text+'</div>'
+      +stHtml
+      +hintTools(ex)+'</div>';
+  }
+  window.tfPick=function(id, si, val, correct){
+    var card=document.getElementById(id);
+    var block=card.querySelector('.tf-block[data-s="'+si+'"]');
+    if(block.dataset.answered) return; block.dataset.answered='1';
+    var btns=block.querySelectorAll('.tf-btn');
+    var ok = val===correct;
+    (val ? btns[0] : btns[1]).classList.add(ok ? 'correct' : 'wrong');
+    if(!ok) (correct ? btns[0] : btns[1]).classList.add('correct');
+    btns.forEach(function(b){ b.disabled=true; });
+    document.getElementById('tfx-'+id+'-'+si).classList.add('show');
+    if(ok) card.dataset.correctQ = (+card.dataset.correctQ||0)+1;
+    var totalQ=+card.dataset.totalQ;
+    var answered=card.querySelectorAll('.tf-block[data-answered]').length;
+    if(answered>=totalQ && +card.dataset.correctQ>=totalQ) markSolved(id);
+  };
+
+  /* ================= GUIDED EVENT 2: "צעד קדימה" REHAB CENTER (MULTIPLE CHOICE) ================= */
+  var guidedMC=[
+    {id:'mcex1', n:3, difficulty:'בינוני', title:'"צעד קדימה": שלוש שאלות אמריקאיות', trap:true,
+      text:'על סמך התיאור למעלה: עלות עקיפה מתוקצבת 360,000 ש״ח, בסיס הקצאה 2,400 שעות עבודה ישירה מתוקצבות, טיפול בודד דורש 1.5 שעות בעלות 80 ש״ח לשעה, וחומרים ישירים 45 ש״ח.',
+      questions:[
+        {q:'מהו שיעור ההעמסה מוגדר מראש (POHR) של מרכז השיקום?',
+         opts:['150 ש״ח לשעת עבודה ישירה','2,400 ש״ח לשעת עבודה ישירה','0.0067 ש״ח לשעת עבודה ישירה','216 ש״ח לשעת עבודה ישירה','360,000 ש״ח לשעת עבודה ישירה'],
+         correct:0},
+        {q:'מהי העלות העקיפה שיש להעמיס על טיפול בודד (1.5 שעות עבודה ישירה)?',
+         opts:['225 ש״ח','150 ש״ח','360 ש״ח','45 ש״ח','82.5 ש״ח'],
+         correct:0},
+        {q:'מהי העלות המלאה (ישיר + עקיף) של טיפול פיזיותרפי בודד?',
+         opts:['390 ש״ח','345 ש״ח','270 ש״ח','165 ש״ח','225 ש״ח'],
+         correct:0}
+      ],
+      hints:['שלב 1: $POHR=\\dfrac{360{,}000}{2{,}400}$.<br>שלב 2: עלות עקיפה על טיפול = POHR כפול 1.5 שעות.<br>שלב 3: עבודה ישירה בש״ח = 80 כפול 1.5, ואז עלות מלאה = חומרים ישירים ועוד עבודה ישירה ועוד עקיפה שהועמסה.', 'POHR: $360{,}000\\div2{,}400=150$.<br>עקיפה על טיפול: $150\\times1.5=225$.<br>עבודה ישירה בש״ח: $80\\times1.5=120$.<br>עלות מלאה: $45+120+225=390$.'],
+      solution:'$POHR = 360{,}000\\div2{,}400 = 150$ ש״ח לשעת עבודה ישירה.<br>עלות עקיפה על טיפול $= 150\\times1.5 = 225$ ש״ח.<br>עבודה ישירה בש״ח $= 80\\times1.5 = 120$ ש״ח.<br>עלות מלאה $= 45+120+225 = 390$ ש״ח.<br>שימו לב לתשובות המסיחות: חלקן "שכחו" רכיב אחד לגמרי (פשוטות לזהות), וחלקן נראות סבירות אך מבוססות על טעות חישוב עדינה, בדיוק כדי לתרגל תשומת לב לפרטים.'}
+  ];
+  document.getElementById('guidedMC').innerHTML = guidedMC.map(renderMC).join('');
+
+  /* ================= GUIDED EVENT 3: "בדיקה מדויקת" LAB (TRUE/FALSE) ================= */
+  var guidedTF=[
+    {id:'tfex1', n:4, difficulty:'בינוני', title:'"בדיקה מדויקת": נכון או לא נכון',
+      text:'על סמך התיאור למעלה: עלות עקיפה מתוקצבת 600,000 ש״ח, בסיס הקצאה 3,000 שעות הפעלת ציוד, בדיקה בודדת דורשת 0.2 שעות, חומרים ישירים 15 ש״ח, עבודה ישירה 20 ש״ח.',
+      statements:[
+        {s:'שיעור ההעמסה מוגדר מראש (POHR) של המעבדה הוא 200 ש״ח לשעת הפעלת ציוד.', correct:true, explain:'נכון: $600{,}000\\div3{,}000=200$.'},
+        {s:'אילו הבסיס שנבחר היה שונה (למשל, מספר הבדיקות במקום שעות הפעלת ציוד), ה-POHR היה בהכרח זהה.', correct:false, explain:'לא נכון: POHR תלוי ישירות בבסיס שנבחר. בסיס שונה כמעט תמיד ייתן שיעור העמסה שונה במספרים, גם אם שניהם מייצגים "הקצאה הוגנת" בעיני הארגון.'},
+        {s:'העלות העקיפה שיש להעמיס על בדיקת דם בודדת היא 40 ש״ח.', correct:true, explain:'נכון: $200\\times0.2=40$.'},
+        {s:'העלות המלאה של בדיקת דם בודדת (ישיר + עקיף) היא 55 ש״ח.', correct:false, explain:'לא נכון: העלות המלאה היא $15+20+40=75$ ש״ח, לא 55. שווה לוודא שלא דילגתם על אחד משלושת הרכיבים.'},
+        {s:'אם כמות הבדיקות בפועל תחרוג משמעותית מהתקציב, ה-POHR יתעדכן אוטומטית באמצע השנה כדי לשקף זאת.', correct:false, explain:'לא נכון: POHR נקבע פעם אחת, מראש, ונשאר קבוע לאורך כל התקופה. פערים בין המתוכנן לבפועל מטופלים בסוף התקופה (כעלות עקיפה שהועמסה ביתר או בחסר), לא באמצעות עדכון אוטומטי של השיעור עצמו.'}
+      ],
+      hints:['חשבו קודם את שני המספרים הבסיסיים: POHR והעלות המלאה לבדיקה, ואז בדקו כל קביעה מולם. זכרו גם: POHR נקבע "מראש" (P ב-POHR), ולא מתעדכן תוך כדי התקופה.', 'POHR: $600{,}000\\div3{,}000=200$.<br>עלות עקיפה על בדיקה: $200\\times0.2=40$.<br>עלות מלאה: $15+20+40=75$.'],
+      solution:'$POHR = 600{,}000\\div3{,}000 = 200$ ש״ח לשעת הפעלת ציוד.<br>עלות עקיפה על בדיקה בודדת $= 200\\times0.2 = 40$ ש״ח.<br>עלות מלאה לבדיקה $= 15+20+40 = 75$ ש״ח.<br>קביעה 2 שגויה כי הבסיס קובע את השיעור, לא רק "מדיניות ההקצאה". קביעה 5 שגויה כי המשמעות של "מוגדר מראש" (Predetermined) היא בדיוק שהשיעור לא זז במהלך התקופה, גם אם המציאות בפועל שונה מהתחזית.'}
+  ];
+  document.getElementById('guidedTF').innerHTML = guidedTF.map(renderTF).join('');
 
   /* ================= HOMEWORK SECTION A: DIRECT/INDIRECT ================= */
   var A=[
