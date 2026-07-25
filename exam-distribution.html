@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>תיק נתונים: התפלגות ציוני הבחינה</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;800;900&family=Assistant:wght@300;400;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#071426;
+  --panel:#0C2039;
+  --panel-2:#0F2846;
+  --grid:rgba(99,164,224,.10);
+  --rule:rgba(99,164,224,.26);
+  --chalk:#E8EFF7;
+  --dim:#8FAFCC;
+  --amber:#F5A623;
+  --coral:#E2574C;
+  --mint:#4FD1A5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--ink);
+  color:var(--chalk);
+  font-family:'Assistant',system-ui,sans-serif;
+  font-weight:400;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:38px 38px;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px 90px}
+
+/* ---------- utility type ---------- */
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:12px;
+}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--rule)}
+
+/* ---------- masthead ---------- */
+header{padding:54px 0 30px;border-bottom:1px solid var(--rule)}
+.stamp{
+  display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.64rem;
+  letter-spacing:.18em;color:var(--mint);border:1px solid rgba(79,209,165,.45);
+  padding:5px 11px;margin-bottom:22px;
+}
+h1{
+  font-family:'Frank Ruhl Libre',serif;font-weight:900;
+  font-size:clamp(2.1rem,5.4vw,3.9rem);line-height:1.12;letter-spacing:-.01em;
+  max-width:20ch;
+}
+h1 em{font-style:normal;color:var(--amber)}
+.deck{margin-top:16px;max-width:56ch;color:var(--dim);font-size:1.06rem;font-weight:300}
+.filestrip{
+  margin-top:26px;display:flex;flex-wrap:wrap;gap:8px 26px;
+  font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--dim);letter-spacing:.06em;
+}
+.filestrip b{color:var(--chalk);font-weight:500}
+
+/* ---------- hero chart ---------- */
+.hero{margin:44px 0 0;position:relative}
+.chartbox{
+  background:linear-gradient(180deg,var(--panel) 0%,var(--panel-2) 100%);
+  border:1px solid var(--rule);position:relative;overflow:hidden;
+}
+.chartbox svg{display:block;width:100%;height:auto;direction:ltr}
+.readout{
+  position:absolute;top:16px;left:18px;direction:ltr;text-align:left;
+  font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--dim);
+  pointer-events:none;line-height:1.5;
+}
+.readout strong{display:block;font-size:1.5rem;color:var(--amber);font-weight:600}
+.caption{
+  margin-top:12px;font-size:.82rem;color:var(--dim);display:flex;
+  flex-wrap:wrap;gap:6px 22px;align-items:center;
+}
+.key{display:inline-flex;align-items:center;gap:7px}
+.key i{width:16px;height:2px;display:inline-block}
+
+/* ---------- kpi grid ---------- */
+.kpis{
+  margin-top:52px;display:grid;grid-template-columns:repeat(6,1fr);
+  border:1px solid var(--rule);border-left:0;border-bottom:0;
+}
+.kpi{border-left:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:20px 18px 22px}
+.kpi span{
+  display:block;font-family:'IBM Plex Mono',monospace;font-size:.63rem;
+  letter-spacing:.16em;color:var(--dim);margin-bottom:9px;
+}
+.kpi b{
+  font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:1.85rem;
+  color:var(--chalk);display:block;line-height:1;direction:ltr;text-align:right;
+}
+.kpi small{display:block;margin-top:7px;font-size:.76rem;color:var(--dim);font-weight:300}
+.kpi.hi b{color:var(--amber)}
+
+/* ---------- sections ---------- */
+section{margin-top:76px}
+h2{
+  font-family:'Frank Ruhl Libre',serif;font-weight:800;
+  font-size:clamp(1.5rem,3vw,2.15rem);margin:18px 0 10px;letter-spacing:-.01em;
+}
+.lede{color:var(--dim);max-width:62ch;font-weight:300;margin-bottom:30px}
+
+/* ---------- claim ledger ---------- */
+.ledger{display:grid;gap:0;border-top:1px solid var(--rule)}
+.entry{
+  display:grid;grid-template-columns:52px 1fr 1.35fr;
+  border-bottom:1px solid var(--rule);
+}
+.entry .num{
+  font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--dim);
+  padding:26px 0 0 0;text-align:center;border-left:1px solid var(--rule);
+}
+.claim{padding:24px 22px 26px;border-left:1px solid var(--rule);background:rgba(226,87,76,.045)}
+.claim h3{
+  font-family:'Assistant',sans-serif;font-weight:700;font-size:1.02rem;
+  color:var(--coral);margin-bottom:6px;
+}
+.claim h3::before{content:"טענה  ";font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.18em;color:var(--dim);display:block;margin-bottom:7px;font-weight:400}
+.claim p{color:#F0C9C5;font-weight:300;font-size:.95rem}
+.proof{padding:24px 22px 26px}
+.proof h4{
+  font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.18em;
+  color:var(--mint);font-weight:500;margin-bottom:9px;
+}
+.proof p{font-size:.97rem}
+.proof .fig{color:var(--amber);font-family:'IBM Plex Mono',monospace;font-weight:500;direction:ltr;unicode-bidi:isolate}
+
+/* ---------- per question ---------- */
+.qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.qcard{border:1px solid var(--rule);background:var(--panel);padding:24px 22px 26px}
+.qcard header{border:0;padding:0;display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.qcard h3{font-family:'Frank Ruhl Libre',serif;font-weight:800;font-size:1.3rem}
+.qcard .pct{font-family:'IBM Plex Mono',monospace;font-size:1.5rem;color:var(--amber)}
+.qcard .role{font-size:.82rem;color:var(--dim);font-weight:300;margin-bottom:20px;min-height:3.2em}
+.rangebar{position:relative;height:44px;margin-bottom:14px;direction:ltr}
+.rangebar .track{position:absolute;top:18px;left:0;right:0;height:6px;background:rgba(99,164,224,.14)}
+.rangebar .span{position:absolute;top:18px;height:6px;background:rgba(245,166,35,.32)}
+.rangebar .mean{position:absolute;top:11px;width:2px;height:20px;background:var(--amber)}
+.rangebar .lbl{position:absolute;font-family:'IBM Plex Mono',monospace;font-size:.62rem;color:var(--dim);top:30px;transform:translateX(-50%)}
+.rangebar .lbl.top{top:-2px;color:var(--amber)}
+.qstats{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule);border:1px solid var(--rule)}
+.qstats div{background:var(--panel);padding:9px 11px}
+.qstats dt{font-family:'IBM Plex Mono',monospace;font-size:.58rem;letter-spacing:.14em;color:var(--dim)}
+.qstats dd{font-family:'IBM Plex Mono',monospace;font-size:1.05rem;margin-top:2px;direction:ltr;text-align:right}
+
+/* ---------- verdict ---------- */
+.verdict{
+  border:1px solid rgba(79,209,165,.4);background:rgba(79,209,165,.06);
+  padding:34px 32px;margin-top:70px;
+}
+.verdict h2{margin-top:6px;color:var(--mint)}
+.verdict p{max-width:70ch;font-size:1.04rem}
+.verdict p + p{margin-top:14px}
+
+/* ---------- method ---------- */
+.method{
+  margin-top:56px;border-top:1px solid var(--rule);padding-top:22px;
+  font-size:.84rem;color:var(--dim);font-weight:300;max-width:78ch;
+}
+.method b{color:var(--chalk);font-weight:600}
+
+@media (max-width:900px){
+  .kpis{grid-template-columns:repeat(3,1fr)}
+  .qgrid{grid-template-columns:1fr}
+  .entry{grid-template-columns:36px 1fr}
+  .entry .proof{grid-column:2/3;border-top:1px dashed var(--rule)}
+}
+@media (max-width:560px){
+  .wrap{padding:0 18px 60px}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+@media print{
+  body{background:#fff;color:#111}
+  .chartbox{background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="stamp">STATISTIC / 25.07.2026</div>
+  <h1>מחצית מהכיתה קיבלה <em>84 ומעלה</em>. זה לא הפרופיל של מבחן קשה מדי.</h1>
+  <p class="deck">ניתוח ההתפלגות של 64 מחברות, שאלה אחר שאלה. כל טענה על קושי חריג או על חוסר הוגנות נבדקת מול המספרים שהבחינה עצמה ייצרה.</p>
+  <div class="filestrip">
+    <span>נבדקו <b class="mono">64</b> מחברות</span>
+    <span>ממוצע <b class="mono">79.52</b></span>
+    <span>חציון <b class="mono">84</b></span>
+    <span>טווח <b class="mono">26 - 100</b></span>
+    <span>ס.ת <b class="mono">18.73</b></span>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="chartbox">
+    <div class="readout" id="readout">
+      <span>סמן על העקומה</span>
+      <strong id="ro-val">84</strong>
+      <span id="ro-txt">ומעלה: 50% מהנבחנים</span>
+    </div>
+    <svg id="chart" viewBox="0 0 1000 428" role="img" aria-label="עקומת התפלגות הציונים, חציון 84, ממוצע 79.52">
+      <defs>
+        <linearGradient id="fillMain" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F5A623" stop-opacity=".55"/>
+          <stop offset="100%" stop-color="#F5A623" stop-opacity=".03"/>
+        </linearGradient>
+        <linearGradient id="fillFail" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#E2574C" stop-opacity=".42"/>
+          <stop offset="100%" stop-color="#E2574C" stop-opacity=".03"/>
+        </linearGradient>
+        <clipPath id="clipFail"><rect id="failRect" x="0" y="0" width="10" height="330"/></clipPath>
+      </defs>
+      <g id="gridlines"></g>
+      <path id="area" fill="url(#fillMain)"/>
+      <g clip-path="url(#clipFail)"><path id="areaFail" fill="url(#fillFail)"/></g>
+      <path id="line" fill="none" stroke="#F5A623" stroke-width="2.5" stroke-linejoin="round"/>
+      <g id="markers"></g>
+      <g id="axis"></g>
+      <line id="scrub" y1="34" y2="330" stroke="#E8EFF7" stroke-width="1" stroke-dasharray="3 4" opacity="0"/>
+      <rect id="hit" x="60" y="20" width="900" height="320" fill="transparent" style="cursor:crosshair"/>
+    </svg>
+  </div>
+  <div class="caption">
+    <span class="key"><i style="background:#F5A623"></i> צפיפות הציונים</span>
+    <span class="key"><i style="background:#E2574C"></i> אזור מתחת ל־60</span>
+    <span class="key"><i style="background:#E8EFF7;height:0;border-top:2px dashed #E8EFF7"></i> ממוצע 79.52</span>
+    <span class="key"><i style="background:#4FD1A5"></i> חציון 84</span>
+  </div>
+</div>
+
+<div class="kpis">
+  <div class="kpi hi"><span>חציון</span><b>84</b><small>מחצית מהנבחנים מעל הרף הזה</small></div>
+  <div class="kpi"><span>ממוצע</span><b>79.52</b><small>נמוך מהחציון, כלומר היסט שלילי</small></div>
+  <div class="kpi hi"><span>מקסימום</span><b>100</b><small>הבחינה נפתרה במלואה בפועל</small></div>
+  <div class="kpi"><span>ס.ת</span><b>18.73</b><small>מקדם שונות 23.5%</small></div>
+  <div class="kpi"><span>היסט (פירסון)</span><b>-0.72</b><small>מסת הציונים בקצה הגבוה</small></div>
+  <div class="kpi"><span>מעל 60 (אומדן)</span><b>~83%</b><small>כ־11 נבחנים מתחת לרף</small></div>
+</div>
+
+<section>
+  <div class="eyebrow">חמש טענות, חמש בדיקות</div>
+  <h2>מה שנטען מול מה שהנתונים מראים</h2>
+  <p class="lede">כל טענה מנוסחת כאן בצורתה החזקה ביותר, ואז נבדקת מול הסטטיסטיקה שהבחינה עצמה ייצרה. אין כאן שיקול דעת, יש כאן שישה מספרים.</p>
+
+  <div class="ledger">
+
+    <article class="entry">
+      <div class="num">01</div>
+      <div class="claim">
+        <h3>"המבחן היה קשה מדי"</h3>
+        <p>הרמה הייתה גבוהה מהמצופה ורוב הכיתה נכשלה או נפגעה קשות.</p>
+      </div>
+      <div class="proof">
+        <h4>מה שהנתונים מראים</h4>
+        <p>החציון הוא <span class="fig">84</span>. מחצית מהנבחנים קיבלו 84 ומעלה. במבחן קשה מדי החציון נופל <em>מתחת</em> לממוצע, כי מעט מאוד נבחנים מצליחים למשוך את הקצה העליון. כאן קורה ההפך המדויק: החציון גבוה מהממוצע ב־<span class="fig">4.48</span> נקודות. ההיסט השלילי הזה הוא החתימה הסטטיסטית של מבחן שרוב הנבחנים שלטו בו, עם זנב קטן של נבחנים שלא נערכו.</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="num">02</div>
+      <div class="claim">
+        <h3>"אי אפשר היה לסיים בזמן"</h3>
+        <p>היקף הבחינה לא תאם את משך הזמן שהוקצב.</p>
+      </div>
+      <div class="proof">
+        <h4>מה שהנתונים מראים</h4>
+        <p>הציון המקסימלי הוא <span class="fig">100</span>. לפחות נבחן אחד פתר את כל שלוש השאלות במלואן, באותה מסגרת זמן, עם אותו חומר עזר ובאותם תנאים. ציון מלא הוא הפרכה ישירה של טענת אי־ישימות: אם המשימה לא ניתנת להשלמה, איש אינו משלים אותה.</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="num">03</div>
+      <div class="claim">
+        <h3>"שאלה 3 הייתה בלתי פתירה"</h3>
+        <p>הממוצע בשאלה 3 הוא הנמוך ביותר, ויש בה גם ציוני אפס.</p>
+      </div>
+      <div class="proof">
+        <h4>מה שהנתונים מראים</h4>
+        <p>המקסימום בשאלה 3 הוא <span class="fig">33 מתוך 33</span>, ציון מלא. כך גם בשאלות 1 ו־2. אין ולו שאלה אחת בבחינה שאיש לא פתר במלואה. ציון אפס מופיע רק בשאלות 2 ו־3, ולצדו ציון מלא באותן שאלות בדיוק. אפס לצד מקסימום מסמן שאלה שלא נענתה, לא שאלה שאי אפשר לענות עליה.</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="num">04</div>
+      <div class="claim">
+        <h3>"הציונים היו שרירותיים"</h3>
+        <p>הפיזור הרחב מעיד על בדיקה לא עקבית ולא על ידע.</p>
+      </div>
+      <div class="proof">
+        <h4>מה שהנתונים מראים</h4>
+        <p>הפיזור אינו אחיד לאורך הבחינה, והוא בדיוק במקום שבו הוא אמור להיות. שאלה 1 מרוכזת מאוד (ס.ת <span class="fig">4.49</span>, ממוצע <span class="fig">87%</span> מהניקוד): כמעט כולם שלטו בבסיס. שאלה 3 פרושה (ס.ת <span class="fig">10.49</span>): היא זו שמבחינה. בדיקה שרירותית מייצרת רעש אחיד בכל השאלות. כאן יש מדרג מכוון: בסיס נגיש, ליבה יישומית, ושאלה אחת שמפרידה בין שליטה לשינון.</p>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="num">05</div>
+      <div class="claim">
+        <h3>"הבדיקה הייתה קשוחה"</h3>
+        <p>הניקוד ניתן ביד קמוצה ובלי התחשבות.</p>
+      </div>
+      <div class="proof">
+        <h4>מה שהנתונים מראים</h4>
+        <p>סכום ממוצעי שלוש השאלות הוא <span class="fig">73.77</span>, בעוד ממוצע הציון הסופי הוא <span class="fig">79.52</span>. הפער, כ־<span class="fig">5.75</span> נקודות לנבחן, הוא התאמה שכבר הופעלה לטובת הנבחנים לפני פרסום הציונים. הציון שהתקבל גבוה מהביצוע הגולמי, לא נמוך ממנו.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow">פירוק לפי שאלה</div>
+  <h2>שלוש שאלות, שלושה תפקידים</h2>
+  <p class="lede">כל שאלה מנוקדת עד 33. ההבדל בין השאלות אינו במידת ההוגנות אלא בתפקיד שכל אחת ממלאת במבנה הבחינה. בשלושתן הושג ציון מלא.</p>
+  <div class="qgrid" id="qgrid"></div>
+</section>
+
+<div class="verdict">
+  <div class="eyebrow">שורה תחתונה</div>
+  <h2>בחינה מדורגת, לא בחינה עוינת</h2>
+  <p>בחינה קשה מדי מייצרת חתימה סטטיסטית מזוהה: ממוצע נמוך, חציון מתחת לממוצע, מקסימום שאינו מגיע לציון מלא, ופיזור אחיד ורחב בכל השאלות. אף אחד מהסימנים האלה אינו מופיע כאן.</p>
+  <p>מה שכן מופיע: ממוצע <span class="fig mono">79.52</span>, חציון <span class="fig mono">84</span>, ציון מלא שהושג בפועל בכל אחת משלוש השאלות, שאלה ראשונה שכמעט כל הכיתה שלטה בה, ותוספת של כ־<span class="fig mono">5.75</span> נקודות לטובת הנבחנים מעבר לביצוע הגולמי. הפיזור בבחינה הזו מודד את ההבדל בהיערכות בין נבחן לנבחן, וזה בדיוק מה שבחינה אמורה למדוד.</p>
+</div>
+
+<p class="method">
+  <b>הערת מתודולוגיה.</b> קובץ המקור מכיל סטטיסטיקה מסכמת בלבד ולא רשימת ציונים פרטנית. עקומת ההתפלגות המוצגת כאן היא <b>אומדן</b>: התאמת התפלגות ביתא חסומה בטווח 26 עד 100 למומנטים המדווחים. המודל משחזר ממוצע 79.1, סטיית תקן 18.5 וחציון 84.3 מול הערכים המדווחים 79.52, 18.73 ו־84. כל המספרים המצוטטים בטענות ובהפרכות (ממוצע, חציון, מינימום, מקסימום, סטיות תקן, ממוצעים לפי שאלה) לקוחים ישירות מקובץ המקור ואינם תלויים במודל. האחוזים המסומנים "אומדן" נגזרים מהמודל. עם קובץ הציונים הפרטני אפשר להחליף את העקומה המשוערת בהיסטוגרמה מדויקת.
+</p>
+
+</div>
+
+<script>
+const PDF = [0,0.0039,0.0059,0.0076,0.009,0.0103,0.0116,0.0127,0.0138,0.0148,0.0158,0.0168,0.0177,0.0186,0.0195,0.0204,0.0212,0.022,0.0229,0.0237,0.0244,0.0252,0.026,0.0267,0.0274,0.0282,0.0289,0.0296,0.0303,0.031,0.0317,0.0324,0.033,0.0337,0.0344,0.035,0.0357,0.0363,0.037,0.0376,0.0382,0.0389,0.0395,0.0401,0.0408,0.0414,0.042,0.0426,0.0432,0.0438,0.0444,0.045,0.0456,0.0462,0.0468,0.0474,0.048,0.0486,0.0492,0.0498,0.0504,0.051,0.0516,0.0521,0.0527,0.0533,0.0539,0.0545,0.055,0.0556,0.0562,0.0568,0.0574,0.0579,0.0585,0.0591,0.0597,0.0602,0.0608,0.0614,0.062,0.0625,0.0631,0.0637,0.0643,0.0648,0.0654,0.066,0.0666,0.0671,0.0677,0.0683,0.0689,0.0694,0.07,0.0706,0.0712,0.0717,0.0723,0.0729,0.0735,0.0741,0.0747,0.0752,0.0758,0.0764,0.077,0.0776,0.0782,0.0788,0.0794,0.0799,0.0805,0.0811,0.0817,0.0823,0.0829,0.0835,0.0841,0.0847,0.0853,0.086,0.0866,0.0872,0.0878,0.0884,0.089,0.0896,0.0903,0.0909,0.0915,0.0921,0.0928,0.0934,0.094,0.0947,0.0953,0.096,0.0966,0.0972,0.0979,0.0985,0.0992,0.0999,0.1005,0.1012,0.1019,0.1025,0.1032,0.1039,0.1046,0.1052,0.1059,0.1066,0.1073,0.108,0.1087,0.1094,0.1101,0.1108,0.1115,0.1123,0.113,0.1137,0.1145,0.1152,0.1159,0.1167,0.1174,0.1182,0.119,0.1197,0.1205,0.1213,0.122,0.1228,0.1236,0.1244,0.1252,0.126,0.1269,0.1277,0.1285,0.1293,0.1302,0.131,0.1319,0.1328,0.1336,0.1345,0.1354,0.1363,0.1372,0.1381,0.139,0.1399,0.1409,0.1418,0.1428,0.1437,0.1447,0.1457,0.1467,0.1477,0.1487,0.1497,0.1508,0.1518,0.1529,0.1539,0.155,0.1561,0.1572,0.1583,0.1595,0.1606,0.1618,0.163,0.1642,0.1654,0.1666,0.1679,0.1691,0.1704,0.1717,0.173,0.1743,0.1757,0.1771,0.1785,0.1799,0.1814,0.1828,0.1843,0.1858,0.1874,0.189,0.1906,0.1922,0.1939,0.1956,0.1973,0.1991,0.2009,0.2027,0.2046,0.2065,0.2085,0.2105,0.2125,0.2146,0.2168,0.219,0.2213,0.2236,0.226,0.2285,0.231,0.2336,0.2363,0.2391,0.2419,0.2449,0.2479,0.2511,0.2544,0.2578,0.2613,0.265,0.2688,0.2728,0.277,0.2813,0.2859,0.2907,0.2958,0.3011,0.3067,0.3127,0.3191,0.3258,0.3331,0.3409,0.3494,0.3585,0.3685,0.3795,0.3917,0.4053,0.4207,0.4382,0.4586,0.4827,0.5119,0.5486,0.5967,0.6647,0.7733,1,1];
+const ABOVE = [100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,99.9,99.8,99.6,99.4,99.1,98.9,98.6,98.2,97.9,97.5,97.1,96.7,96.3,95.8,95.3,94.8,94.2,93.7,93.1,92.5,91.8,91.2,90.5,89.8,89.1,88.3,87.6,86.8,86,85.1,84.3,83.4,82.5,81.5,80.6,79.6,78.6,77.5,76.5,75.4,74.2,73.1,71.9,70.7,69.4,68.1,66.8,65.5,64.1,62.6,61.2,59.7,58.1,56.5,54.9,53.2,51.4,49.6,47.7,45.8,43.7,41.6,39.4,37.2,34.7,32.2,29.5,26.7,23.6,20.2,16.4,11.9,6];
+
+const S0 = 26, S1 = 100;          // domain of the fitted curve
+const X0 = 20, X1 = 102;          // drawn axis range
+const L = 62, R = 962, TOP = 40, BASE = 330;
+
+const sx = s => L + (s - X0) / (X1 - X0) * (R - L);
+const sy = d => BASE - d * (BASE - TOP);
+
+/* gridlines + axis */
+(function(){
+  const g = document.getElementById('gridlines');
+  const ax = document.getElementById('axis');
+  let gh = '';
+  for (let s = 20; s <= 100; s += 10){
+    gh += `<line x1="${sx(s)}" y1="${TOP-14}" x2="${sx(s)}" y2="${BASE}" stroke="rgba(99,164,224,.13)" stroke-width="1"/>`;
+  }
+  gh += `<line x1="${L}" y1="${BASE}" x2="${R}" y2="${BASE}" stroke="rgba(99,164,224,.45)" stroke-width="1"/>`;
+  g.innerHTML = gh;
+  let ah = '';
+  for (let s = 20; s <= 100; s += 10){
+    ah += `<text x="${sx(s)}" y="${BASE+24}" text-anchor="middle" fill="#8FAFCC" font-family="IBM Plex Mono,monospace" font-size="12">${s}</text>`;
+  }
+  ax.innerHTML = ah;
+})();
+
+/* curve paths */
+(function(){
+  const pts = PDF.map((d,i) => [sx(S0 + i*(S1-S0)/(PDF.length-1)), sy(d*0.92)]);
+  const line = pts.map((p,i) => (i?'L':'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  const area = line + ` L ${pts[pts.length-1][0].toFixed(1)} ${BASE} L ${pts[0][0].toFixed(1)} ${BASE} Z`;
+  document.getElementById('line').setAttribute('d', line);
+  document.getElementById('area').setAttribute('d', area);
+  document.getElementById('areaFail').setAttribute('d', area);
+  const fr = document.getElementById('failRect');
+  fr.setAttribute('x', 0);
+  fr.setAttribute('width', sx(60));
+  fr.setAttribute('y', 0);
+  fr.setAttribute('height', BASE);
+
+  /* markers: mean, median, and the gap bracket */
+  const m = document.getElementById('markers');
+  const xm = sx(79.52), xd = sx(84);
+  m.innerHTML = `
+    <line x1="${xm}" y1="${TOP-8}" x2="${xm}" y2="${BASE}" stroke="#E8EFF7" stroke-width="1.5" stroke-dasharray="5 5" opacity=".75"/>
+    <text x="${xm}" y="${TOP-16}" text-anchor="middle" fill="#E8EFF7" font-family="IBM Plex Mono,monospace" font-size="12">MEAN 79.52</text>
+    <line x1="${xd}" y1="${TOP+34}" x2="${xd}" y2="${BASE}" stroke="#4FD1A5" stroke-width="2.5"/>
+    <text x="${xd}" y="${TOP+26}" text-anchor="middle" fill="#4FD1A5" font-family="IBM Plex Mono,monospace" font-size="13" font-weight="600">MEDIAN 84</text>
+    <path d="M ${xm} ${BASE+42} L ${xm} ${BASE+52} L ${xd} ${BASE+52} L ${xd} ${BASE+42}" fill="none" stroke="#F5A623" stroke-width="1.5"/>
+    <text x="${(xm+xd)/2}" y="${BASE+72}" text-anchor="middle" fill="#F5A623" font-family="Assistant,sans-serif" font-size="14" direction="rtl">היסט שלילי 4.48 נק'</text>
+    <text x="${sx(41)}" y="${BASE-16}" text-anchor="middle" fill="#E2574C" font-family="Assistant,sans-serif" font-size="14" direction="rtl">מתחת ל־60</text>
+    <text x="${sx(41)}" y="${BASE-38}" text-anchor="middle" fill="#E2574C" font-family="IBM Plex Mono,monospace" font-size="17" font-weight="600">~17%</text>
+    <text x="${sx(92)}" y="${TOP+96}" text-anchor="middle" fill="#F5A623" font-family="Assistant,sans-serif" font-size="14" direction="rtl">מסת הציונים</text>
+  `;
+})();
+
+/* scrub interaction */
+(function(){
+  const svg = document.getElementById('chart');
+  const hit = document.getElementById('hit');
+  const scrub = document.getElementById('scrub');
+  const val = document.getElementById('ro-val');
+  const txt = document.getElementById('ro-txt');
+  const move = e => {
+    const r = svg.getBoundingClientRect();
+    const cx = ((e.touches ? e.touches[0].clientX : e.clientX) - r.left) / r.width * 1000;
+    let s = Math.round(X0 + (cx - L) / (R - L) * (X1 - X0));
+    s = Math.max(0, Math.min(100, s));
+    scrub.setAttribute('x1', sx(s));
+    scrub.setAttribute('x2', sx(s));
+    scrub.setAttribute('opacity', '.7');
+    val.textContent = s;
+    txt.textContent = 'ומעלה: ' + ABOVE[s] + '% מהנבחנים (אומדן)';
+  };
+  hit.addEventListener('mousemove', move);
+  hit.addEventListener('touchmove', e => { move(e); e.preventDefault(); }, {passive:false});
+  hit.addEventListener('mouseleave', () => {
+    scrub.setAttribute('opacity','0');
+    val.textContent = '84';
+    txt.textContent = 'ומעלה: 50% מהנבחנים';
+  });
+})();
+
+/* per-question cards */
+(function(){
+  const Q = [
+    {n:1, mean:28.7,  max:33, min:14, sd:4.49,  med:29, role:'הבסיס. כמעט כל הכיתה שלטה בה, והפיזור בה הצר ביותר בבחינה.'},
+    {n:2, mean:24.48, max:33, min:0,  sd:6.8,   med:26, role:'הליבה היישומית. ממוצע גבוה עם זנב של נבחנים שלא ניגשו אליה.'},
+    {n:3, mean:20.59, max:33, min:0,  sd:10.49, med:23, role:'השאלה המבחינה. הפיזור הגדול בה הוא מה שמייצר את הדירוג בין הנבחנים.'}
+  ];
+  const html = Q.map(q => {
+    const pct = Math.round(q.mean / 33 * 100);
+    const p = v => (v / 33 * 100);
+    return `<div class="qcard">
+      <header><h3>שאלה ${q.n}</h3><span class="pct">${pct}%</span></header>
+      <p class="role">${q.role}</p>
+      <div class="rangebar">
+        <div class="track"></div>
+        <div class="span" style="left:${p(q.min)}%;width:${p(q.max)-p(q.min)}%"></div>
+        <div class="mean" style="left:calc(${p(q.mean)}% - 1px)"></div>
+        <span class="lbl top" style="left:${p(q.mean)}%">${q.mean}</span>
+        <span class="lbl" style="left:${p(q.min)}%">${q.min}</span>
+        <span class="lbl" style="left:${p(q.max)}%">${q.max}</span>
+      </div>
+      <dl class="qstats">
+        <div><dt>MEDIAN</dt><dd>${q.med}</dd></div>
+        <div><dt>SD</dt><dd>${q.sd}</dd></div>
+        <div><dt>RANGE</dt><dd>${q.min}&ndash;${q.max}</dd></div>
+        <div><dt>CV</dt><dd>${Math.round(q.sd/q.mean*100)}%</dd></div>
+      </dl>
+    </div>`;
+  }).join('');
+  document.getElementById('qgrid').innerHTML = html;
+})();
+</script>
+</body>
+</html>
