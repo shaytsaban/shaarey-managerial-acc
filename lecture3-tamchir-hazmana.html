@@ -1,0 +1,2430 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>שיעור 3: תמחיר הזמנה | ד״ר שי צבאן</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInDocument()"></script>
+<style>
+:root{
+  --rose:#db2777; --rose-dark:#9d174d; --rose-light:#fdf2f8;
+  --amber:#f59e0b; --amber-light:#fffbeb;
+  --fixed:#ea580c; --fixed-light:#fff7ed;
+  --variable:#059669; --variable-light:#ecfdf5;
+  --mixed:#4f46e5; --mixed-light:#eef2ff;
+  --direct:#0891b2; --direct-light:#ecfeff;
+  --indirect:#7c3aed; --indirect-light:#f5f3ff;
+  --easy:#059669; --easy-light:#ecfdf5;
+  --med:#d97706; --med-light:#fffbeb;
+  --hard:#dc2626; --hard-light:#fef2f2;
+  --ink:#1e293b; --ink-soft:#334155; --muted:#64748b; --line:#e7e2da; --bg:#fffaf5; --white:#fff;
+  --shadow:0 10px 30px rgba(30,23,15,.08); --shadow-lg:0 20px 50px rgba(30,23,15,.16);
+  --radius:26px;
+  --navy-900:#142a45; --navy-800:#1c3a5e; --gold-400:#d8b862;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Heebo',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:20px;line-height:1.75;direction:rtl;-webkit-font-smoothing:antialiased}
+b,strong{font-weight:800}
+h1,h2,h3,h4{line-height:1.15}
+button{font-family:inherit}
+input{font-family:'Heebo',sans-serif}
+/* ---------- katex RTL-page fix ---------- */
+.katex{direction:ltr;unicode-bidi:isolate;text-align:left}
+.katex-display{direction:ltr;unicode-bidi:isolate;text-align:left;margin:0}
+/* ---------- progress + lesson pill ---------- */
+.progress{position:fixed;top:0;right:0;left:0;height:5px;background:transparent;z-index:1000}
+.progress>span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--amber));transition:width .1s linear}
+.lesson-prog{position:fixed;top:64px;left:50%;transform:translateX(-50%);z-index:850;background:rgba(30,23,15,.9);color:#fff;font-weight:800;font-size:13px;padding:6px 16px;border-radius:999px;backdrop-filter:blur(8px);box-shadow:var(--shadow);transition:opacity .3s}
+@media(max-width:600px){.lesson-prog{font-size:11px;top:60px}}
+/* ---------- topbar ---------- */
+.topbar{position:sticky;top:0;z-index:900;background:rgba(255,250,245,.9);backdrop-filter:blur(12px);border-bottom:3px solid var(--line)}
+.nav-inner{max-width:1240px;margin:0 auto;padding:11px 22px;display:flex;align-items:center;gap:16px;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.badge-bi{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;font-weight:900;font-size:18px;display:grid;place-items:center;box-shadow:var(--shadow)}
+.brand .t{font-weight:800;font-size:15px;line-height:1.25}
+.brand .s{font-weight:500;font-size:11.5px;color:var(--muted)}
+.nav-links{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.nav-block{font-size:12px;font-weight:700;color:var(--ink-soft);text-decoration:none;padding:7px 11px;border-radius:999px;background:#fff;border:2px solid var(--line);white-space:nowrap;transition:.15s}
+.nav-block:hover{border-color:var(--rose);color:var(--rose)}
+.nav-block.active{background:var(--rose);color:#fff;border-color:var(--rose)}
+@media(max-width:1240px){.nav-links{display:none}}
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;background:radial-gradient(1100px 480px at 82% -12%, #fdf2f8 0%, #fffaf5 62%)}
+.hero-inner{max-width:1240px;margin:0 auto;padding:60px 22px 50px;display:grid;grid-template-columns:1.35fr .85fr;gap:42px;align-items:center}
+@media(max-width:1000px){.hero-inner{grid-template-columns:1fr;gap:30px}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:2px solid var(--line);color:var(--rose-dark);font-weight:800;font-size:14px;padding:8px 16px;border-radius:999px}
+.hero h1{font-size:clamp(32px,4.6vw,54px);font-weight:900;line-height:1.14;margin:18px 0 14px}
+.hero h1 .grad{background:linear-gradient(120deg,var(--rose),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{font-size:clamp(16px,2vw,21px);color:var(--ink-soft);max-width:700px;line-height:1.7}
+.meta-chips{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 20px}
+.chip{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px 14px;font-weight:700;font-size:13.5px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:inherit;font-weight:800;font-size:16px;padding:13px 24px;border-radius:14px;text-decoration:none;transition:.18s}
+.btn-primary{background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;box-shadow:var(--shadow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.btn-ghost{background:#fff;border:2px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--rose);color:var(--rose)}
+.hero-art{border-radius:24px;background:linear-gradient(135deg,var(--rose),#9333ea);padding:16px;box-shadow:var(--shadow-lg);display:grid;grid-template-columns:1fr 1fr 1fr;grid-auto-rows:minmax(110px,1fr);gap:12px}
+.art-tile{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#fff;text-align:center;padding:8px;font-weight:700}
+.art-tile .l{font-size:12.5px}
+/* ---------- sections ---------- */
+main{display:block}
+.section{max-width:1060px;margin:0 auto;padding:70px 22px;scroll-margin-top:84px;border-top:1px solid var(--line)}
+.section:first-child{border-top:none}
+.block-tag{display:inline-block;background:var(--rose-light);color:var(--rose-dark);font-weight:800;font-size:13.5px;padding:7px 15px;border-radius:999px}
+.section>h2{font-size:clamp(26px,3.6vw,42px);font-weight:900;margin:16px 0 6px;line-height:1.14}
+.section>h2 .g{background:linear-gradient(120deg,var(--rose),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.section-sub{font-size:clamp(15.5px,1.9vw,20px);color:var(--muted);margin-bottom:14px;max-width:840px}
+.deep-card{background:#fff;border:3px solid var(--line);border-radius:var(--radius);padding:clamp(20px,3.4vw,40px);box-shadow:var(--shadow);margin:22px 0}
+.deep-card h3{font-size:clamp(20px,2.4vw,27px);font-weight:900;margin:6px 0 12px}
+.deep-card h3 .g{background:linear-gradient(120deg,var(--rose),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.deep-card h4{font-size:19px;font-weight:800;margin:20px 0 8px}
+.deep-card p{margin:11px 0}
+.lead{font-size:clamp(17px,2vw,21px);color:var(--ink-soft)}
+.sub-h{font-size:clamp(20px,2.5vw,28px);font-weight:900;margin:36px 0 6px}
+.sub-h .g{background:linear-gradient(120deg,var(--rose),var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+/* ---------- info callouts ---------- */
+.info{border-radius:16px;padding:19px 22px;margin:18px 0;border-right:8px solid var(--rose);background:var(--rose-light)}
+.info .hd{font-weight:900;font-size:19px;margin-bottom:6px;display:flex;gap:8px;align-items:center}
+.info p{margin:8px 0;font-size:17.5px}
+.info.tip{border-right-color:var(--variable);background:var(--variable-light)}
+.info.warn{border-right-color:var(--amber);background:var(--amber-light)}
+.info.important{border-right-color:var(--hard);background:var(--hard-light)}
+.info.insight{border-right-color:var(--indirect);background:var(--indirect-light)}
+.info.term{border-right-color:var(--direct);background:var(--direct-light)}
+.soft-note{background:#fff;border:3px dashed var(--line);border-radius:14px;padding:15px 19px;color:var(--ink-soft);font-size:17.5px;font-weight:600;margin:16px 0}
+/* ---------- reminder card (warm recap) ---------- */
+.remind-card{background:linear-gradient(160deg,#fff,var(--rose-light));border:3px solid #fbcfe8;border-radius:20px;padding:20px 24px;margin:18px 0}
+.remind-card .rc-hd{font-weight:900;color:var(--rose-dark);font-size:18.5px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.remind-card p{font-size:17px;color:var(--ink-soft);margin:6px 0}
+/* ---------- two-col / grids ---------- */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+@media(max-width:760px){.two-col{grid-template-columns:1fr}}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px;margin:18px 0}
+.compare-card{background:#fff;border:2px solid var(--line);border-radius:18px;padding:20px;border-top:6px solid var(--rose)}
+.compare-card.a{border-top-color:var(--variable)} .compare-card.b{border-top-color:var(--amber)}
+.compare-card.c{border-top-color:var(--direct)} .compare-card.d{border-top-color:var(--indirect)}
+.compare-card h4{margin-top:0;font-size:18.5px}
+.compare-card p{margin:9px 0;font-size:16.5px}
+/* ---------- flow-steps ---------- */
+.flow-steps{display:flex;flex-direction:column;gap:12px;margin:18px 0}
+.flow-step{display:grid;grid-template-columns:52px 1fr;gap:15px;background:#fff;border:2px solid var(--line);border-radius:18px;padding:16px 18px}
+.flow-step .num{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;font-weight:900;font-size:21px;display:grid;place-items:center}
+.flow-step .fs-title{font-weight:800;font-size:18.5px}
+.flow-step .fs-sub{color:var(--muted);font-size:15px;margin-top:1px}
+.flow-step .fs-details{color:var(--ink-soft);font-size:16.5px;margin-top:10px}
+/* ---------- flip cards ---------- */
+.flip-grid{display:grid;gap:18px;margin:24px 0}
+.flip-grid.cols4{grid-template-columns:repeat(4,1fr)}
+.flip-grid.cols3{grid-template-columns:repeat(3,1fr)}
+.flip-grid.cols2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:980px){.flip-grid.cols3,.flip-grid.cols4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.flip-grid.cols2,.flip-grid.cols3,.flip-grid.cols4{grid-template-columns:1fr}}
+.flip{perspective:1600px;cursor:pointer}
+.flip-inner{position:relative;display:grid;height:100%;min-height:210px;transition:transform .6s cubic-bezier(.4,.15,.2,1);transform-style:preserve-3d}
+.flip.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-face{position:relative;grid-area:1/1;-webkit-backface-visibility:hidden;backface-visibility:hidden;border-radius:22px;padding:26px 22px 30px;display:flex;flex-direction:column;justify-content:center;border:3px solid var(--line);background:#fff;box-shadow:var(--shadow)}
+.flip-front{align-items:center;text-align:center}
+.flip-front .ic{font-size:52px;line-height:1;margin-bottom:10px}
+.flip-front .ttl{font-size:20px;font-weight:900;line-height:1.25}
+.flip-front .ttl .en{display:block;font-size:14px;color:var(--muted);font-weight:700;margin-top:4px}
+.flip-front .hint{position:absolute;bottom:12px;left:0;right:0;font-size:13px;color:var(--rose);font-weight:800}
+.flip-back{transform:rotateY(180deg);background:linear-gradient(155deg,#ffffff,var(--rose-light));text-align:right}
+.flip-back .bk-ttl{font-size:19px;font-weight:900;color:var(--rose-dark);margin-bottom:9px}
+.flip-back p{font-size:15.5px;margin:6px 0;line-height:1.55;color:var(--ink)}
+/* ---------- matrix table ---------- */
+.matrix-wrap{overflow-x:auto}
+.matrix{width:100%;border-collapse:collapse;margin:18px 0;font-size:15.5px;background:#fff;border-radius:14px;overflow:hidden;border:2px solid var(--line)}
+.matrix th{padding:12px 10px;text-align:center;font-weight:800;font-size:14.5px;color:#fff}
+.matrix th.corner{background:var(--ink);color:#fff}
+.matrix th.fx{background:var(--fixed)} .matrix th.vr{background:var(--variable)} .matrix th.mx{background:var(--mixed)}
+.matrix td{padding:12px 10px;border:1px solid var(--line);vertical-align:top;text-align:center}
+.matrix td.axis{background:#f8fafc;font-weight:800;color:#fff;writing-mode:horizontal-tb}
+.matrix td.axis.direct{background:var(--direct)} .matrix td.axis.indirect{background:var(--indirect)}
+.matrix td.cell{font-size:14px;line-height:1.5;color:var(--ink-soft)}
+/* ---------- takeaway ---------- */
+.takeaway{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--rose),#9333ea);color:#fff;border-radius:24px;padding:32px 30px;margin:24px 0;box-shadow:var(--shadow-lg)}
+.takeaway .big-emoji{position:absolute;left:16px;top:-10px;font-size:110px;opacity:.16}
+.takeaway .hd{font-weight:900;font-size:15.5px;letter-spacing:.6px;opacity:.95;margin-bottom:8px}
+.takeaway .tx{font-weight:800;font-size:clamp(19px,2.4vw,26px);line-height:1.45;position:relative;z-index:2}
+/* ---------- pipe tracker ---------- */
+.pipe{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0 6px}
+.pipe .pst{flex:1;min-width:96px;text-align:center;background:#fff;border:2px solid var(--line);border-radius:13px;padding:9px 5px 7px;font-size:11.5px;font-weight:800;color:var(--muted);line-height:1.3}
+.pipe .pst .n{display:block;font-size:17px;margin-bottom:2px}
+.pipe .pst.done{border-color:var(--variable);color:#047857;background:var(--variable-light)}
+.pipe .pst.on{border-color:var(--rose);color:var(--rose-dark);background:var(--rose-light);box-shadow:var(--shadow);transform:scale(1.04)}
+.pipe-cap{font-size:13.5px;color:var(--muted);font-weight:700;margin-bottom:16px}
+/* ---------- checkpoint ---------- */
+.checkpoint{background:var(--variable-light);border:3px solid var(--variable);border-radius:18px;padding:17px 21px;margin:17px 0}
+.checkpoint .hd{font-weight:900;color:#065f46;font-size:19px;margin-bottom:6px}
+.checkpoint p{margin:7px 0;font-size:17.5px}
+/* ---------- checklist ---------- */
+.checklist{list-style:none;padding:0!important}
+.checklist li{padding-right:32px;position:relative;margin:9px 0;font-size:17.5px}
+.checklist li::before{content:"✓";position:absolute;right:0;top:2px;width:23px;height:23px;background:var(--variable);color:#fff;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:900}
+/* ---------- decision block ---------- */
+.decision{background:linear-gradient(160deg,var(--rose-light),#ffffff);border:3px solid var(--line);border-right:9px solid var(--rose);border-radius:20px;padding:21px 25px;margin:18px 0;box-shadow:var(--shadow)}
+.d-quote{font-size:clamp(18px,2.2vw,24px);font-weight:800;color:var(--navy-900);line-height:1.5;font-style:italic;margin-bottom:6px}
+.d-role{display:inline-block;background:var(--rose);color:#fff;font-weight:800;font-size:13px;padding:5px 14px;border-radius:999px;margin-bottom:11px}
+.d-term{background:#fff;border:2px solid var(--line);border-radius:14px;padding:13px 17px;margin:11px 0;font-size:17px;line-height:1.6}
+.d-term b{color:var(--rose-dark)}
+.d-dilemma{background:var(--amber-light);border:2px solid var(--amber);border-radius:12px;padding:12px 17px;margin:13px 0 8px;font-size:17.5px}
+.d-lead-to{color:var(--rose-dark);font-weight:800;font-size:15.5px;margin-top:8px}
+/* ---- clean multi-column data table ---- */
+.datatbl-wrap{overflow-x:auto}
+.datatbl{width:100%;border-collapse:collapse;margin:18px 0;font-size:16px;background:#fff;border-radius:14px;overflow:hidden;border:2px solid var(--line)}
+.datatbl th{background:var(--navy-900);color:#fff;padding:12px 14px;text-align:center;font-weight:800;font-size:15px}
+.datatbl td{padding:11px 14px;border-top:1px solid var(--line);text-align:center;font-variant-numeric:tabular-nums}
+.datatbl td:first-child{text-align:right;font-weight:800}
+.datatbl tr:hover td{background:var(--rose-light)}
+/* ---- report card ---- */
+.report{background:#fff;border:3px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);margin:18px auto;max-width:620px}
+.report.wide{max-width:820px}
+.report-head{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));color:#fff;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.report-head .rh-co{font-weight:900;font-size:19px}
+.report-head .rh-t{color:var(--gold-400);font-size:13px;font-weight:700}
+.report-body{padding:8px 0}
+.report-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:10px 20px;font-size:16.5px;border-bottom:1px solid #eef1f6}
+.report-row .rr-label{font-weight:700}
+.report-row .rr-label small{display:block;font-weight:600;color:var(--muted);font-size:13px;margin-top:2px}
+.report-row .rr-num{text-align:left;direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;color:var(--ink-soft);font-weight:800;white-space:nowrap}
+.report-row.rr-total{border-top:2px solid var(--navy-900);border-bottom:3px double var(--navy-900);font-weight:900;background:#fbfcfe}
+.report-row.rr-total .rr-num{color:var(--ink);font-weight:900}
+.report-row.rr-flag{background:var(--amber-light)}
+.report-row.rr-sub .rr-label{color:var(--muted);font-weight:600;font-size:15.5px;padding-right:14px}
+.report-foot{padding:13px 20px;color:var(--muted);font-size:13.5px;border-top:1px solid var(--line)}
+/* ---- hard question ---- */
+.hardq{background:linear-gradient(160deg,#0f172a,#1e293b);color:#e2e8f0;border-radius:24px;padding:26px 26px;margin:24px 0;box-shadow:var(--shadow-lg)}
+.hardq .hqt{display:inline-block;background:var(--amber);color:#0f172a;font-weight:900;font-size:13.5px;padding:6px 14px;border-radius:999px;margin-bottom:11px}
+.hardq .hqq{font-size:18px;line-height:1.6;font-weight:600}
+.hardq .hqq b{color:#a5b4fc}
+.hardq .acc{margin-top:15px;background:#0b1220;border-radius:14px;overflow:hidden;border:1px solid #1e293b}
+.hardq .acc-h{display:flex;align-items:center;gap:11px;padding:14px 17px;cursor:pointer}
+.hardq .acc-h h4{font-size:17px;color:#fff;margin:0;flex:1}
+.hardq .acc-h .chev{font-size:19px;color:#94a3b8;transition:.3s}
+.hardq .acc.open .acc-h .chev{transform:rotate(180deg)}
+.hardq .acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.hardq .acc.open .acc-body{max-height:900px}
+.hardq .acc-bin{padding:0 17px 17px;font-size:16.5px;line-height:1.7;color:#cbd5e1}
+.hardq .acc-bin b{color:#a5b4fc}
+/* ---------- exercise card engine (recap + homework) ---------- */
+.ex-grid{display:grid;gap:16px}
+.ex-grid.two-col{grid-template-columns:1fr 1fr}
+@media(max-width:760px){.ex-grid.two-col{grid-template-columns:1fr}}
+.ex-card{background:#fff;border:3px solid var(--line);border-radius:20px;padding:20px 22px;box-shadow:var(--shadow);scroll-margin-top:80px}
+.ex-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.ex-num{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;font-weight:900;font-size:15px;display:grid;place-items:center;flex-shrink:0}
+.ex-head h4{font-size:16.5px;font-weight:800;flex:1;min-width:120px}
+.diff{font-size:11.5px;font-weight:800;padding:4px 11px;border-radius:999px}
+.diff.easy{background:var(--easy-light);color:var(--easy)}
+.diff.med{background:var(--med-light);color:var(--med)}
+.diff.hard{background:var(--hard-light);color:var(--hard)}
+.ex-text{font-size:17px;color:var(--ink-soft);margin-bottom:12px;line-height:1.7}
+.ex-text b{color:var(--ink)}
+.classify-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.classify-row.cols2{grid-template-columns:repeat(2,1fr)}
+.classify-btn{border:2.5px solid var(--line);border-radius:12px;padding:11px 6px;font-weight:800;font-size:14.5px;cursor:pointer;background:#fff}
+.classify-btn.fixed{color:var(--fixed)} .classify-btn.variable{color:var(--variable)} .classify-btn.mixed{color:var(--mixed)}
+.classify-btn.direct{color:var(--direct)} .classify-btn.indirect{color:var(--indirect)}
+.classify-btn.plan{color:var(--direct)} .classify-btn.control{color:var(--variable)} .classify-btn.decide{color:var(--indirect)}
+.classify-btn.yes{color:var(--variable)} .classify-btn.no{color:var(--hard)}
+.classify-btn.correct{background:var(--variable-light);border-color:var(--variable)}
+.classify-btn.wrong{background:var(--hard-light);border-color:var(--hard);color:var(--hard)}
+.classify-fb{font-size:15px;font-weight:700;min-height:22px;margin-top:6px}
+.axis-label{font-size:13px;font-weight:800;color:var(--muted);margin:10px 0 2px}
+.subrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--amber-light);border:2px dashed #fde68a;border-radius:12px;padding:10px 14px;margin:8px 0}
+.subrow label{font-size:15px;font-weight:700;color:var(--ink-soft)}
+.subrow .sr-hint{margin-inline-start:auto}
+.subrow input{width:120px;padding:8px 10px;border:2px solid var(--line);border-radius:9px;font-size:15px;direction:ltr;text-align:center}
+.subrow button{background:var(--rose);color:#fff;border:none;border-radius:9px;padding:8px 16px;font-weight:800;font-size:13.5px;cursor:pointer}
+.subrow .verdict{width:100%;font-weight:700;font-size:14.5px;margin-top:2px}
+.subrow .sub-hint-box{width:100%;display:none;margin-top:8px;background:#fff;border:2px solid #fbcfe8;border-radius:10px;padding:10px 12px;font-size:14px;line-height:1.6;color:var(--rose-dark)}
+.subrow .sub-hint-box.show{display:block}
+.sub-hint-btn{display:inline-flex;align-items:center;gap:5px;background:#fff;border:2px solid #fbcfe8;color:var(--rose-dark);font-weight:800;font-size:12px;padding:5px 11px;border-radius:999px;cursor:pointer}
+.sub-hint-btn:hover{background:var(--rose-light)}
+.fe-desc{font-weight:800;color:var(--ink);font-size:14.5px;margin-bottom:4px}
+.fe-formula{margin:4px 0}
+.fe-params{font-size:13.5px;color:var(--ink-soft);line-height:1.7}
+.fe-tip{font-size:13.5px;color:var(--rose-dark);margin-top:6px;padding-top:6px;border-top:1px dashed #fbcfe8}
+.ex-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.hint-btn{display:inline-flex;align-items:center;gap:6px;background:var(--rose-light);border:2px solid #fbcfe8;color:var(--rose-dark);font-weight:800;font-size:13px;padding:7px 14px;border-radius:999px;cursor:pointer}
+.hint-btn:hover{background:#fbcfe8}
+.hint-box{display:none;margin-top:10px;background:#fdf2f8;border:2px solid #fbcfe8;border-radius:12px;padding:12px 14px;font-size:14.5px;line-height:1.6;color:var(--rose-dark)}
+.hint-box.show{display:block}
+.hint-box .htier{margin:4px 0;padding-top:6px}
+.hint-box .htier:not(:first-child){border-top:1px dashed #fbcfe8;margin-top:8px}
+.sol-acc{margin-top:10px;border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.sol-acc .sh{display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;font-weight:800;font-size:14px;background:#f8fafc}
+.sol-acc .sh .chev{margin-inline-start:auto;transition:.3s}
+.sol-acc.open .sh .chev{transform:rotate(180deg)}
+.sol-acc .sb{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.sol-acc.open .sb{max-height:900px}
+.sol-acc .sbin{padding:0 14px 14px;font-size:15.5px;line-height:1.75;color:var(--ink-soft)}
+.sol-acc .sbin b{color:var(--ink)}
+.trap{display:inline-flex;align-items:center;gap:6px;background:var(--hard-light);border:2px solid #fca5a5;color:#991b1b;font-weight:800;font-size:12px;padding:4px 10px;border-radius:999px;margin-inline-start:6px}
+/* ---------- multiple-choice (5-option) ---------- */
+.mc-block{background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px 18px;margin:12px 0}
+.mc-block .mc-q{font-weight:700;font-size:17px;margin-bottom:10px;color:var(--ink)}
+.mc-opt{display:flex;align-items:center;gap:10px;width:100%;text-align:right;font-family:inherit;font-size:15.5px;font-weight:600;color:var(--ink);background:#f8fafc;border:2px solid var(--line);border-radius:11px;padding:11px 14px;margin:7px 0;cursor:pointer}
+.mc-opt:hover{border-color:var(--rose)}
+.mc-opt .k{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;flex-shrink:0;background:var(--line);border-radius:7px;font-weight:900;font-size:13px}
+.mc-opt.correct{background:var(--variable-light);border-color:var(--variable)}
+.mc-opt.wrong{background:var(--hard-light);border-color:var(--hard)}
+.mc-opt.correct .k{background:var(--variable);color:#fff}
+.mc-opt.wrong .k{background:var(--hard);color:#fff}
+.mc-opt:disabled{cursor:default}
+.mc-fb{font-size:14.5px;font-weight:700;margin-top:6px;min-height:20px}
+/* ---------- true/false set ---------- */
+.tf-block{background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 18px;margin:10px 0}
+.tf-block .tf-s{font-size:16px;font-weight:600;margin-bottom:10px;color:var(--ink-soft)}
+.tf-btnrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tf-btn{border:2px solid var(--line);border-radius:10px;padding:9px;font-weight:900;font-size:14.5px;cursor:pointer;background:#fff}
+.tf-btn.t{color:var(--variable)} .tf-btn.f{color:var(--hard)}
+.tf-btn.correct{background:var(--variable-light);border-color:var(--variable)}
+.tf-btn.wrong{background:var(--hard-light);border-color:var(--hard)}
+.tf-btn:disabled{cursor:default}
+.tf-explain{font-size:14px;color:var(--ink-soft);margin-top:9px;line-height:1.6;display:none;border-top:1px dashed var(--line);padding-top:9px}
+.tf-explain.show{display:block}
+/* ---------- formula cards ---------- */
+.formula-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+@media(max-width:800px){.formula-cards{grid-template-columns:1fr}}
+.formula-card{border-radius:20px;padding:20px 18px;text-align:center;border:2.5px solid var(--line)}
+.formula-card.a{background:linear-gradient(160deg,#fff,var(--direct-light));border-color:#a5e8f0}
+.formula-card.b{background:linear-gradient(160deg,#fff,var(--rose-light));border-color:#fbcfe8}
+.formula-card.c{background:linear-gradient(160deg,#fff,var(--indirect-light));border-color:#ddd6fe}
+.fc-tag{font-size:11.5px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:9px}
+.fc-eq{font-size:clamp(15px,1.9vw,19px);margin:6px 0;direction:ltr;overflow-x:auto}
+.fc-note{font-size:13.5px;color:var(--ink-soft);margin-top:9px;line-height:1.5}
+/* ---------- legend clickable ---------- */
+.legend-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+@media(max-width:700px){.legend-grid{grid-template-columns:repeat(2,1fr)}}
+.legend-card{border-radius:16px;padding:14px 8px;text-align:center;border:2px solid var(--line);cursor:pointer;transition:.15s}
+.legend-card:hover,.legend-card:focus-visible{transform:translateY(-3px);box-shadow:var(--shadow)}
+.legend-card .lsym{font-size:19px;font-weight:900}
+.legend-card .lname{font-size:12.5px;font-weight:700;margin-top:5px}
+.legend-card .ltap{font-size:10px;color:var(--muted);margin-top:5px;font-weight:700}
+.legend-card.direct{background:var(--direct-light);border-color:#a5e8f0}.legend-card.direct .lsym{color:var(--direct)}
+.legend-card.indirect{background:var(--indirect-light);border-color:#ddd6fe}.legend-card.indirect .lsym{color:var(--indirect)}
+/* ---------- libi ---------- */
+.libi{position:fixed;z-index:1200;bottom:20px;left:20px;display:flex;align-items:flex-end;gap:10px;max-width:330px;user-select:none;touch-action:none}
+.l-art{width:80px;height:80px;flex-shrink:0;cursor:grab;filter:drop-shadow(0 6px 14px rgba(157,23,77,.3))}
+.l-art:active{cursor:grabbing}
+.l-bubble{background:#fff;border:3px solid var(--rose);border-radius:18px 18px 4px 18px;padding:12px 16px;box-shadow:var(--shadow-lg);position:relative}
+.l-bhd{font-weight:900;color:var(--rose-dark);font-size:14px;margin-bottom:3px;display:flex;gap:8px;align-items:center;justify-content:space-between}
+.l-bhd .l-min{background:none;border:none;cursor:pointer;font-size:17px;color:var(--muted);font-weight:900}
+.l-tip{font-size:14px;line-height:1.5;color:var(--ink)}
+.libi.min .l-bubble{display:none}
+.l-reopen{display:none}
+.libi.min .l-reopen{display:grid;place-items:center;position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:var(--rose);color:#fff;font-size:11px;font-weight:900;cursor:pointer}
+.libi.pulse .l-bubble{animation:lpulse .9s ease}
+@keyframes lpulse{0%{transform:scale(1)}18%{transform:scale(1.1) rotate(1deg);box-shadow:0 0 0 9px rgba(219,39,119,.28)}100%{transform:scale(1)}}
+.libi.pulse .l-art{animation:lnudge .85s ease}
+@keyframes lnudge{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-10px) rotate(6deg)}50%{transform:translateY(0)}72%{transform:translateY(-5px) rotate(-5deg)}}
+@media(max-width:600px){.libi{max-width:210px;bottom:12px;left:12px}.l-art{width:60px;height:60px}.l-tip{font-size:12.5px}}
+/* ---------- KEYNOTE INTRO ---------- */
+.kn{background:#000;color:#fff;font-family:'Heebo',system-ui,sans-serif;overflow:hidden}
+.kn-slide{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px;position:relative}
+.kn-slide.short{min-height:70vh}
+.kn-eyebrow{font-size:clamp(14px,2vw,19px);font-weight:800;letter-spacing:4px;color:#8b93a7;margin-bottom:20px}
+.kn-title{font-size:clamp(34px,7vw,84px);font-weight:900;line-height:1.08;letter-spacing:-1px}
+.kn-title .g{background:linear-gradient(110deg,#f9a8d4,#f472b6 55%,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kn-sub{font-size:clamp(18px,3vw,30px);font-weight:600;color:#cbd5e1;margin-top:24px;max-width:900px;line-height:1.45}
+.kn-small{font-size:clamp(15px,2vw,20px);color:#8b93a7;margin-top:20px;max-width:740px;line-height:1.6}
+.kn-scroll{position:absolute;bottom:26px;left:50%;color:#5b6479;font-size:14px;font-weight:700;animation:knbob 1.8s infinite;transform:translateX(-50%)}
+@keyframes knbob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,9px)}}
+.kn-cta{margin-top:32px}
+.kn-cta button{font-family:inherit;font-weight:900;font-size:clamp(17px,2.2vw,23px);padding:16px 40px;border:none;border-radius:999px;cursor:pointer;background:linear-gradient(110deg,#f9a8d4,#c084fc);color:#1e1024;box-shadow:0 16px 44px rgba(192,132,252,.5);transition:.18s}
+.kn-cta button:hover{transform:translateY(-3px) scale(1.02)}
+.kn-skip{position:fixed;top:14px;left:18px;z-index:1300;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:9px 18px;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;backdrop-filter:blur(6px)}
+body:not(.pre-start) .kn-skip{display:none}
+body.pre-start .topbar,body.pre-start .progress,body.pre-start .lesson-prog{display:none}
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease}
+.reveal.show{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(22px);transition:opacity .55s ease, transform .55s ease}
+.stagger.show>*{opacity:1;transform:none}
+.stagger.show>*:nth-child(1){transition-delay:.04s}.stagger.show>*:nth-child(2){transition-delay:.16s}.stagger.show>*:nth-child(3){transition-delay:.28s}.stagger.show>*:nth-child(4){transition-delay:.40s}
+@media(prefers-reduced-motion:reduce){.reveal,.stagger>*{opacity:1!important;transform:none!important}}
+footer{background:#1e293b;color:#cbd5e1;padding:44px 22px;text-align:center;margin-top:30px}
+footer .big{font-weight:800;color:#fff;font-size:18px;margin-bottom:6px}
+footer .small{font-size:13.5px;color:#64748b;margin-top:12px}
+/* ============================================================
+   LECTURE 3 ADDITIONS · job-order costing components
+   ============================================================ */
+/* ---------- cost-flow map (animated svg) ---------- */
+.flowmap{background:#fff;border:3px solid var(--line);border-radius:var(--radius);padding:22px 18px 14px;margin:22px 0;box-shadow:var(--shadow);overflow-x:auto}
+.flowmap svg{display:block;margin:0 auto;min-width:600px;max-width:100%}
+.flowmap .dash{stroke-dasharray:9 11;animation:dashmove 1.5s linear infinite}
+@keyframes dashmove{to{stroke-dashoffset:-40}}
+.flowmap .boxl{font-family:'Heebo',sans-serif;font-weight:800;font-size:14px;fill:#fff}
+.flowmap .boxs{font-family:'Heebo',sans-serif;font-weight:600;font-size:11px;fill:rgba(255,255,255,.82)}
+.flowmap .edgel{font-family:'Heebo',sans-serif;font-weight:700;font-size:11.5px;fill:var(--muted)}
+.flowmap-cap{text-align:center;font-size:14px;color:var(--muted);font-weight:700;margin-top:8px}
+@media(prefers-reduced-motion:reduce){.flowmap .dash{animation:none}}
+
+/* ---------- animated job cost report ---------- */
+.jobrep{background:#fff;border:3px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin:24px 0;overflow:hidden;scroll-margin-top:80px}
+.jr-top{background:linear-gradient(135deg,var(--navy-900),var(--navy-800));color:#fff;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.jr-top .jt-co{font-weight:900;font-size:19px}
+.jr-top .jt-s{color:var(--gold-400);font-size:12.5px;font-weight:700;margin-top:2px}
+.jr-stage{display:flex;gap:6px;flex-wrap:wrap;padding:13px 16px 3px;background:#f8fafc}
+.jr-stage .st{flex:1;min-width:104px;text-align:center;border:2px solid var(--line);background:#fff;border-radius:12px;padding:8px 5px;font-size:11.5px;font-weight:800;color:var(--muted);transition:.3s;line-height:1.3}
+.jr-stage .st .ic{display:block;font-size:18px;margin-bottom:2px}
+.jr-stage .st.hot{border-color:var(--rose);background:var(--rose-light);color:var(--rose-dark);transform:translateY(-3px);box-shadow:var(--shadow)}
+.jr-scroll{overflow-x:auto}
+table.jtbl{width:100%;min-width:660px;border-collapse:collapse;font-size:15px}
+table.jtbl th{background:var(--navy-900);color:#fff;padding:9px 7px;font-weight:800;font-size:13px;text-align:center;line-height:1.3;border-inline-start:1px solid rgba(255,255,255,.15)}
+table.jtbl th.rowhead{background:#0d1c2f;text-align:right;min-width:186px}
+table.jtbl th .sub{display:block;font-weight:600;font-size:11px;color:#b9c6d6;margin-top:1px}
+table.jtbl th.jobcol{background:var(--mixed)}
+table.jtbl th.fgcol{background:#047857}
+table.jtbl th.matcol{background:#b45309}
+table.jtbl td{padding:8px 7px;border-top:1px solid var(--line);text-align:center;font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate;color:var(--ink-soft);font-weight:700}
+table.jtbl td.lbl{text-align:right;direction:rtl;font-weight:700;font-size:14px;color:var(--ink-soft)}
+table.jtbl td.lbl .tag{display:block;font-weight:600;font-size:11.5px;color:var(--muted)}
+table.jtbl td.neg{color:#b91c1c}
+table.jtbl td.zero{color:#cbd5e1}
+tr.jr-row{opacity:0;transform:translateY(-7px);transition:opacity .45s ease, transform .45s ease}
+tr.jr-row.on{opacity:1;transform:none}
+tr.jr-row.cur{background:var(--amber-light)}
+tr.jr-row.cur td.lbl{color:var(--ink);font-weight:900}
+tr.jr-row.cur td{box-shadow:inset 0 0 0 9999px rgba(253,230,138,.32)}
+td.pop{animation:cellpop .65s ease}
+@keyframes cellpop{0%{transform:scale(1)}32%{transform:scale(1.18);color:#b45309}100%{transform:scale(1)}}
+tr.jr-close{background:#fbfcfe}
+tr.jr-close td{border-top:2px solid var(--navy-900);border-bottom:3px double var(--navy-900);font-weight:900;color:var(--ink);font-size:16px}
+tr.jr-open td{background:#f1f5f9;font-weight:900;color:var(--ink)}
+.jr-ctrl{display:flex;gap:8px;flex-wrap:wrap;padding:13px 17px;border-top:1px solid var(--line);background:#f8fafc;align-items:center}
+.jr-btn{border:2px solid var(--line);background:#fff;border-radius:11px;padding:9px 15px;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit;color:var(--ink);transition:.15s}
+.jr-btn:hover:not(:disabled){border-color:var(--rose);color:var(--rose)}
+.jr-btn.primary{background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;border:none;box-shadow:var(--shadow)}
+.jr-btn.primary:hover:not(:disabled){transform:translateY(-2px);color:#fff}
+.jr-btn:disabled{opacity:.4;cursor:default}
+.jr-count{margin-inline-start:auto;font-weight:800;font-size:13px;color:var(--muted)}
+.jr-narr{padding:16px 20px;border-top:1px solid var(--line);font-size:16.5px;line-height:1.7;color:var(--ink-soft);background:#fff;min-height:104px}
+.jr-narr .nh{font-weight:900;color:var(--rose-dark);font-size:17.5px;margin-bottom:5px;display:flex;gap:8px;align-items:center}
+.jr-narr .calc{display:inline-block;background:var(--rose-light);border:2px solid #fbcfe8;border-radius:9px;padding:4px 11px;font-weight:800;direction:ltr;unicode-bidi:isolate;margin-top:7px;font-size:15px;color:var(--rose-dark)}
+.jr-narr .why{margin-top:7px;font-size:15.5px;color:var(--muted)}
+.jr-legend{display:flex;gap:14px;flex-wrap:wrap;padding:0 18px 12px;font-size:12.5px;color:var(--muted);font-weight:700;background:#f8fafc}
+.jr-legend span::before{content:"";display:inline-block;width:11px;height:11px;border-radius:3px;margin-inline-end:6px;vertical-align:-1px}
+.jr-legend .lg-m::before{background:#b45309}
+.jr-legend .lg-w::before{background:var(--mixed)}
+.jr-legend .lg-f::before{background:#047857}
+
+/* ---------- variance visualiser ---------- */
+.varviz{background:#fff;border:3px solid var(--line);border-radius:20px;padding:24px 22px 18px;margin:22px 0;box-shadow:var(--shadow)}
+.vv-plot{display:flex;gap:34px;align-items:flex-end;justify-content:center;height:216px;padding:0 10px;position:relative}
+.vv-item{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;width:126px}
+.vv-col{width:100%;border-radius:13px 13px 0 0;height:0;transition:height 1.2s cubic-bezier(.2,.8,.2,1);display:flex;align-items:flex-start;justify-content:center;color:#fff;font-weight:900;font-size:15px;padding-top:8px;direction:ltr}
+.vv-col.applied{background:linear-gradient(180deg,#818cf8,#4338ca)}
+.vv-col.actual{background:linear-gradient(180deg,#fbbf24,#c2410c)}
+.vv-cap{margin-top:9px;font-weight:800;font-size:14px;color:var(--ink-soft);text-align:center;line-height:1.35}
+.vv-cap small{display:block;font-weight:600;font-size:12px;color:var(--muted);margin-top:2px}
+.vv-cap small.num{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
+.vv-verdict{margin-top:18px;text-align:center;font-weight:900;font-size:17.5px;padding:14px 16px;border-radius:15px;line-height:1.5}
+.vv-verdict.under{background:var(--hard-light);color:#991b1b;border:2.5px solid #fca5a5}
+.vv-verdict.over{background:var(--variable-light);color:#065f46;border:2.5px solid #6ee7b7}
+.vv-verdict small{display:block;font-weight:700;font-size:14.5px;margin-top:6px;opacity:.9}
+
+/* ---------- side-by-side comparison of two bases ---------- */
+.basecmp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+@media(max-width:760px){.basecmp{grid-template-columns:1fr}}
+.basecol{background:#fff;border:3px solid var(--line);border-radius:20px;overflow:hidden}
+.basecol .bh{padding:13px 17px;font-weight:900;color:#fff;font-size:16.5px}
+.basecol.a .bh{background:linear-gradient(135deg,var(--direct),#0e7490)}
+.basecol.b .bh{background:linear-gradient(135deg,var(--indirect),#6d28d9)}
+.basecol .brow{display:flex;justify-content:space-between;gap:10px;padding:10px 17px;border-top:1px solid var(--line);font-size:15.5px}
+.basecol .brow:first-of-type{border-top:none}
+.basecol .brow b{unicode-bidi:isolate;font-variant-numeric:tabular-nums;white-space:nowrap}
+.basecol .brow.hi{background:var(--amber-light);font-weight:800}
+.basecol .brow.same{color:var(--muted)}
+
+/* ---------- row-type key ---------- */
+.rowkey{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:12px;margin:20px 0}
+.rk{background:#fff;border:2px solid var(--line);border-radius:16px;padding:14px 16px;border-right:7px solid var(--rose)}
+.rk .rkt{font-weight:900;font-size:16px;margin-bottom:3px}
+.rk .rks{font-size:14.5px;color:var(--ink-soft);line-height:1.6}
+.rk .rkm{display:inline-block;margin-top:7px;font-size:12.5px;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--rose-light);color:var(--rose-dark)}
+.rk.plus{border-right-color:var(--variable)} .rk.plus .rkm{background:var(--variable-light);color:#065f46}
+.rk.minus{border-right-color:var(--hard)} .rk.minus .rkm{background:var(--hard-light);color:#991b1b}
+.rk.both{border-right-color:var(--mixed)} .rk.both .rkm{background:var(--mixed-light);color:#3730a3}
+
+/* ---------- homework link cards ---------- */
+.hwlinks{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+@media(max-width:760px){.hwlinks{grid-template-columns:1fr}}
+.hwlink{display:block;text-decoration:none;color:inherit;background:#fff;border:3px solid var(--line);border-radius:20px;padding:20px 22px;transition:.18s;box-shadow:var(--shadow)}
+.hwlink:hover{transform:translateY(-3px);border-color:var(--rose);box-shadow:var(--shadow-lg)}
+.hwlink .hlt{font-weight:900;font-size:18.5px;margin-bottom:5px}
+.hwlink .hls{font-size:15.5px;color:var(--ink-soft);line-height:1.6}
+.hwlink .hlg{display:inline-block;margin-top:10px;font-weight:800;font-size:13.5px;color:var(--rose-dark)}
+.report-row .rr-label small.num{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums;text-align:right}
+.report-row .rr-num.he{direction:rtl;unicode-bidi:isolate;text-align:left}
+
+/* ---------- fix: hint boxes inside MC / TF blocks must stay closed until clicked ---------- */
+.mc-block .sub-hint-box,.tf-block .sub-hint-box{display:none;width:100%;margin-top:8px;background:#fff;border:2px solid #fbcfe8;border-radius:10px;padding:10px 12px;font-size:14px;line-height:1.6;color:var(--rose-dark)}
+.mc-block .sub-hint-box.show,.tf-block .sub-hint-box.show{display:block}
+</style>
+</head>
+<body class="pre-start">
+
+<!-- ============ SVG DEFS: Libi ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="libiFace" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="48" fill="#fdf2f8"/>
+  <path d="M14 100 Q22 72 40 68 L60 68 Q78 72 86 100 Z" fill="#db2777"/>
+  <circle cx="50" cy="46" r="27" fill="#f4c9a4"/>
+  <circle cx="24" cy="48" r="5" fill="#f4c9a4"/><circle cx="76" cy="48" r="5" fill="#f4c9a4"/>
+  <path d="M22 40 Q20 12 50 12 Q80 12 78 40 Q76 46 70 30 Q60 44 50 30 Q40 44 30 30 Q24 46 22 40 Z" fill="#7c4a2d"/>
+  <ellipse cx="50" cy="10" rx="16" ry="9" fill="#fff"/>
+  <rect x="36" y="4" width="28" height="8" rx="4" fill="#fff"/>
+  <circle cx="35" cy="54" r="5.5" fill="#f2a6a6" opacity=".5"/><circle cx="65" cy="54" r="5.5" fill="#f2a6a6" opacity=".5"/>
+  <path d="M33 39 Q38 35 44 39" stroke="#4a2e1c" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+  <path d="M56 39 Q62 35 67 39" stroke="#4a2e1c" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+  <circle cx="39" cy="46" r="3.2" fill="#3a2317"/><circle cx="61" cy="46" r="3.2" fill="#3a2317"/>
+  <circle cx="40.1" cy="45" r="1" fill="#fff"/><circle cx="62.1" cy="45" r="1" fill="#fff"/>
+  <path d="M38 58 Q50 67 62 58" fill="none" stroke="#a0522d" stroke-width="2.4" stroke-linecap="round"/>
+</symbol></svg>
+
+<!-- ============ KEYNOTE INTRO ============ -->
+<button class="kn-skip" onclick="startLesson()">דלגו לשיעור ←</button>
+<div class="kn" id="intro">
+  <section class="kn-slide">
+    <div class="kn-eyebrow reveal">חשבונאות ניהולית · שיעור 3</div>
+    <h1 class="kn-title reveal">מי בדיוק שילם על <span class="g">ההזמנה הזאת?</span></h1>
+    <p class="kn-sub reveal">בשיעור 2 למדנו להעמיס עלות עקיפה על שירות בודד. היום נעקוב אחרי הכסף לאורך כל המסע: מהמחסן, דרך רצפת הייצור, אל מחסן התוצרת הגמורה, ועד ללקוח.</p>
+    <p class="kn-small reveal">ד״ר שי צבאן</p>
+    <div class="kn-scroll">גללו למטה ↓</div>
+  </section>
+  <section class="kn-slide short">
+    <div class="kn-eyebrow reveal">הכלי המרכזי של היום</div>
+    <h2 class="kn-title reveal">טבלה אחת. <span class="g">חמש עמודות. שקט בראש.</span></h2>
+    <p class="kn-sub reveal">דוח תמחיר הזמנה נראה מאיים בפעם הראשונה, ואז מפסיק. בסוף השיעור תדעו למלא אותו שורה אחר שורה, בלי לנחש אף פעם לאן הולך המספר.</p>
+    <p class="kn-small reveal">ליבי כבר בפנים, עם רמזים לכל שלב. היא מבטיחה שהפעם היא לא תשכח את התנור דולק.</p>
+    <div class="kn-cta reveal"><button onclick="startLesson()">בואו נתחיל ←</button></div>
+  </section>
+</div>
+
+<div class="progress"><span id="bar"></span></div>
+<div class="lesson-prog" id="lessonProg">מודול 0 / 12 · 0%</div>
+
+<!-- ============ TOPBAR ============ -->
+<nav class="topbar">
+  <div class="nav-inner">
+    <div class="brand">
+      <div class="badge-bi">3</div>
+      <div>
+        <div class="t">חשבונאות ניהולית</div>
+        <div class="s">שיעור 3 · תמחיר הזמנה · ד״ר שי צבאן</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a class="nav-block" href="index.html">🏠 דף הבית</a>
+      <a class="nav-block" href="lecture2-nihul-hishbonaut.html">2️⃣ העמסת עקיפות</a>
+      <a class="nav-block" href="#anatomy">🗂 אנטומיה</a>
+      <a class="nav-block" href="#bubu">🧪 בובו</a>
+      <a class="nav-block" href="#alpha">🔌 אלפא טק</a>
+      <a class="nav-block" href="#wood">🪵 אמני העץ</a>
+      <a class="nav-block" href="#homework">📝 שיעורי בית</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="hero-badge">🗂 שיעור 3 · המשך ישיר לשיעור 2</span>
+      <h1>מהעמסה על שירות בודד <span class="grad">לדוח תמחיר הזמנה</span></h1>
+      <p class="hero-sub">שיעור 2 נתן לנו את שיעור ההעמסה ואת העלות המלאה של יחידה אחת. אבל בארגון אמיתי מיוצרות כמה הזמנות במקביל, חלקן התחילו בחודש שעבר, חלקן ייגמרו בחודש הבא, וחלקן כבר נמסרו ללקוח. דוח תמחיר ההזמנה הוא הכלי שעוקב אחרי כולן בו-זמנית, ומראה בדיוק כמה כסף יושב בכל רגע בכל מקום.</p>
+      <div class="meta-chips">
+        <span class="chip">👤 ד״ר שי צבאן</span>
+        <span class="chip">⏱ כ-180 דקות + שיעורי בית</span>
+        <span class="chip">🧪 שלושה מקרים מלאים ומונפשים</span>
+        <span class="chip">⚖️ כולל סטיית העמסה ורווח גולמי</span>
+      </div>
+      <div class="cta">
+        <a class="btn btn-primary" href="#recap">חימום על שיעור 2 ←</a>
+        <a class="btn btn-ghost" href="#anatomy">קפיצה לאנטומיה של הדוח</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="art-tile"><span style="font-size:36px">📦</span><span class="l">מחסן חומרים</span></div>
+      <div class="art-tile"><span style="font-size:36px">🏗️</span><span class="l">עבודה בתהליך</span></div>
+      <div class="art-tile"><span style="font-size:36px">✅</span><span class="l">תוצרת גמורה</span></div>
+      <div class="art-tile"><span style="font-size:36px">⚙️</span><span class="l">העמסת עקיפות</span></div>
+      <div class="art-tile"><span style="font-size:36px">⚖️</span><span class="l">סטיית העמסה</span></div>
+      <div class="art-tile"><span style="font-size:36px">💰</span><span class="l">רווח גולמי</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ LIBI FLOATING WIDGET ============ -->
+<div class="libi" id="libi">
+  <svg class="l-art" id="lArt" viewBox="0 0 100 100"><use href="#libiFace"/></svg>
+  <div class="l-bubble">
+    <div class="l-bhd"><span>ליבי 🧁</span><button class="l-min" onclick="libiMin()" title="מזער">–</button></div>
+    <div class="l-tip" id="lTip">היי, חזרתי. היום עוקבים אחרי עוגה אחת מהרגע שהקמח יוצא מהמזווה ועד שהיא על השולחן של הלקוח. בכל רגע נתון היא נמצאת במקום אחר, ובכל מקום היא שווה סכום אחר. זה כל תמחיר ההזמנה, רק בלי סוכר.</div>
+  </div>
+  <div class="l-reopen" onclick="libiReopen()" title="פתחו את ליבי">💬</div>
+</div>
+
+<main>
+<!-- ==================== MODULE 00 · BRIDGE ==================== -->
+<section class="section" id="bridge">
+  <span class="block-tag">00 · מאיפה המשכנו</span>
+  <h2>ברוכים הבאים <span class="g">לשיעור 3</span></h2>
+  <p class="section-sub">בשיעור 2 פתרנו שאלה אחת: איך לוקחים עלות משותפת ומחלקים אותה בהוגנות בין השירותים. קיבלנו שיעור העמסה מוגדר מראש, העמסנו אותו על שירות בודד, וחישבנו עלות מלאה. היום אנחנו מרחיבים את זה מיחידה אחת לארגון שלם שרץ במקביל על כמה הזמנות: חלקן נפתחו בחודש שעבר, חלקן ייגמרו בחודש הבא, אחת כבר נמסרה ללקוח. הכלי שמחזיק את כל זה יחד נקרא דוח תמחיר הזמנה, וזה כל השיעור.</p>
+  <div class="pipe">
+    <span class="pst on"><span class="n">🔁</span>חימום</span>
+    <span class="pst"><span class="n">🧩</span>מתי הזמנה</span>
+    <span class="pst"><span class="n">🗂</span>אנטומיה</span>
+    <span class="pst"><span class="n">🔄</span>שורות הדוח</span>
+    <span class="pst"><span class="n">⚖️</span>סטייה</span>
+    <span class="pst"><span class="n">💰</span>רווח</span>
+    <span class="pst"><span class="n">🧪</span>שלושה מקרים</span>
+    <span class="pst"><span class="n">⚠️</span>מלכודות</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 1 מתוך 9</div>
+
+  <div class="remind-card reveal">
+    <div class="rc-hd">🎈 שלוש שורות שמסכמות את שיעור 2</div>
+    <p><b>אחת.</b> שיעור העמסה מוגדר מראש נקבע בתחילת התקופה, מהצפי, לא מהפועל: עלות עקיפה מתוקצבת חלקי בסיס הקצאה מתוקצב.</p>
+    <p><b>שתיים.</b> העמסה על שירות מסוים היא השיעור הזה כפול השימוש בפועל של אותו שירות בבסיס ההקצאה.</p>
+    <p><b>שלוש.</b> עלות מלאה היא חומרים ישירים ועוד עבודה ישירה ועוד העלות העקיפה שהועמסה.</p>
+  </div>
+
+  <div class="info insight reveal">
+    <div class="hd">💡 מה בעצם משתנה היום</div>
+    <p>בשיעור 2 שאלנו "כמה עולה טיפול אחד". השאלה הזאת מניחה שהטיפול מתחיל ונגמר באותה שנייה. במפעל אמיתי זה לא קורה: הזמנה נפתחת, צוברת עלויות שבועות, ורק אז נסגרת. לכן צריך מנגנון שיודע להחזיק עלויות <b>באמצע הדרך</b>, ולדעת מתי הן עוברות משלב לשלב. זה בדיוק מה שדוח התמחיר עושה.</p>
+  </div>
+</section>
+
+<!-- ==================== MODULE 01 · WARM-UP ==================== -->
+<section class="section" id="recap">
+  <span class="block-tag">01 · חימום על שיעור 2</span>
+  <h2>לפני שנכנסים, <span class="g">נוודא שהבסיס יציב</span></h2>
+  <p class="section-sub">כל טור בדוח שנבנה היום נשען על מה שכבר יודעים. חמישה תרגילים קצרים, עם רמזים מליבי, ואפשר להמשיך. אין ציון, אין לחץ, רק בדיקה עצמית.</p>
+  <div class="pipe">
+    <span class="pst on"><span class="n">🔁</span>חימום</span>
+    <span class="pst"><span class="n">🧩</span>מתי הזמנה</span>
+    <span class="pst"><span class="n">🗂</span>אנטומיה</span>
+    <span class="pst"><span class="n">🔄</span>שורות הדוח</span>
+    <span class="pst"><span class="n">⚖️</span>סטייה</span>
+    <span class="pst"><span class="n">💰</span>רווח</span>
+    <span class="pst"><span class="n">🧪</span>שלושה מקרים</span>
+    <span class="pst"><span class="n">⚠️</span>מלכודות</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 1 מתוך 9</div>
+
+  <h3 class="sub-h reveal">א. סיווג: <span class="g">ישירה או עקיפה</span></h3>
+  <div class="ex-grid two-col" id="rA"></div>
+
+  <h3 class="sub-h reveal">ב. חישוב: <span class="g">שיעור העמסה ועלות מלאה</span></h3>
+  <div class="ex-grid" id="rB"></div>
+
+  <div class="checkpoint reveal">
+    <div class="hd">✅ נקודת בדיקה</div>
+    <p>אם חמשת התרגילים האלה עברו חלק, אתם מוכנים. אם אחד מהם נתקע, זה הרגע לחזור ל<a href="lecture2-nihul-hishbonaut.html" style="color:var(--rose-dark);font-weight:800">שיעור 2</a> לרגע. הכל היום נבנה בדיוק על שלוש הנוסחאות האלה.</p>
+  </div>
+</section>
+
+<!-- ==================== MODULE 02 · WHEN JOB COSTING ==================== -->
+<section class="section" id="whenjob">
+  <span class="block-tag">02 · מתי בכלל משתמשים בתמחיר הזמנה</span>
+  <h2>שתי שיטות, <span class="g">שתי מציאויות ייצור</span></h2>
+  <p class="section-sub">לא כל ארגון סופר עלויות באותה דרך, ולא בגלל גחמה. השיטה נגזרת מהשאלה הפשוטה: האם היחידות שאתם מייצרים שונות זו מזו, או זהות לחלוטין?</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst on"><span class="n">🧩</span>מתי הזמנה</span>
+    <span class="pst"><span class="n">🗂</span>אנטומיה</span>
+    <span class="pst"><span class="n">🔄</span>שורות הדוח</span>
+    <span class="pst"><span class="n">⚖️</span>סטייה</span>
+    <span class="pst"><span class="n">💰</span>רווח</span>
+    <span class="pst"><span class="n">🧪</span>שלושה מקרים</span>
+    <span class="pst"><span class="n">⚠️</span>מלכודות</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 2 מתוך 9</div>
+
+  <p class="lead reveal">הפכו כל כרטיס:</p>
+  <div class="flip-grid cols2 stagger">
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">🗂</div><div class="ttl">תמחיר הזמנה<span class="en">Job-Order Costing</span></div><div class="hint">↻ הפכו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">🗂 תמחיר הזמנה</div><p>כל הזמנה היא <b>עולם בפני עצמו</b> וצוברת את העלויות שלה בנפרד. מתאים כשכל יחידת עבודה שונה מקודמתה: נגרייה שמייצרת ספריות לפי מידה, מוסך, משרד עורכי דין, חברת בנייה, סטודיו לפיתוח תוכנה.</p></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">🌊</div><div class="ttl">תמחיר תהליך<span class="en">Process Costing</span></div><div class="hint">↻ הפכו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">🌊 תמחיר תהליך</div><p>העלות נצברת <b>למחלקה או לתהליך</b>, ואז מחולקת בממוצע על כל היחידות. מתאים כשהיחידות זהות ואין טעם להפריד ביניהן: מפעל סוכר, בית זיקוק, מחלבה, מפעל צמנט. אף אחד לא שואל כמה עלה בדיוק שקית הסוכר השלישית מימין.</p></div>
+    </div></div>
+  </div>
+
+  <div class="deep-card">
+    <h3>איך מחליטים <span class="g">בשלוש שניות</span></h3>
+    <p class="lead">שאלו את עצמכם: אם לקוח יתקשר וישאל "כמה עלתה ההזמנה שלי", האם יש לשאלה תשובה בעלת משמעות? אם כן, זה תמחיר הזמנה. אם התשובה היא "בערך כמו של כולם", זה תמחיר תהליך.</p>
+    <div class="matrix-wrap">
+      <table class="matrix">
+        <tr><th class="corner">שאלה</th><th class="mx">תמחיר הזמנה</th><th class="vr">תמחיר תהליך</th></tr>
+        <tr><td class="axis direct">היחידות</td><td class="cell">ייחודיות, מותאמות ללקוח</td><td class="cell">זהות, המוניות, רציפות</td></tr>
+        <tr><td class="axis direct">יחידת הצבירה</td><td class="cell">ההזמנה (Job)</td><td class="cell">המחלקה או התהליך</td></tr>
+        <tr><td class="axis indirect">מסמך המעקב</td><td class="cell">כרטיס הזמנה, טור נפרד בדוח</td><td class="cell">דוח תפוקה מחלקתי</td></tr>
+        <tr><td class="axis indirect">דוגמאות</td><td class="cell">נגרייה, מוסך, בנייה, ייעוץ, דפוס</td><td class="cell">סוכר, דלק, חלב, צמנט, נייר</td></tr>
+      </table>
+    </div>
+    <div class="info term">
+      <div class="hd">🎯 ההכרעה</div>
+      <p>כל שלושת המקרים שנפתור היום, וכל שיעורי הבית, הם תמחיר הזמנה: מפעל אלקטרוניקה, נגרייה, ומפעל מבנים ניידים. בכולם ההזמנה היא היחידה שנושאת את העלות, ולכן היא זו שמקבלת טור משלה בדוח.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MODULE 03 · ANATOMY ==================== -->
+<section class="section" id="anatomy">
+  <span class="block-tag">03 · אנטומיה של דוח התמחיר</span>
+  <h2>חמש עמודות, <span class="g">ושום דבר מסתורי</span></h2>
+  <p class="section-sub">לפני שממלאים משהו, צריך להבין מה כל עמודה מייצגת. וזה הרעיון החשוב ביותר בשיעור: <b>כל עמודה בדוח היא חשבון מלאי, והמספר בתחתיתה הוא כמה כסף יושב שם עכשיו.</b> לא הוצאה, לא רווח. מלאי.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">🧩</span>מתי הזמנה</span>
+    <span class="pst on"><span class="n">🗂</span>אנטומיה</span>
+    <span class="pst"><span class="n">🔄</span>שורות הדוח</span>
+    <span class="pst"><span class="n">⚖️</span>סטייה</span>
+    <span class="pst"><span class="n">💰</span>רווח</span>
+    <span class="pst"><span class="n">🧪</span>שלושה מקרים</span>
+    <span class="pst"><span class="n">⚠️</span>מלכודות</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 3 מתוך 9</div>
+
+  <div class="flowmap reveal">
+    <svg viewBox="0 0 900 285" role="img" aria-label="תרשים זרימת העלויות בין חשבונות המלאי">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+        </marker>
+      </defs>
+      <!-- boxes -->
+      <g>
+        <rect x="712" y="42" width="176" height="92" rx="18" fill="#b45309"/>
+        <text class="boxl" x="800" y="80" text-anchor="middle">📦 מחסן חומרים</text>
+        <text class="boxs" x="800" y="102" text-anchor="middle">חומרי גלם וחומרי עזר</text>
+        <text class="boxs" x="800" y="119" text-anchor="middle">מה שקנינו וטרם נצרך</text>
+      </g>
+      <g>
+        <rect x="482" y="42" width="176" height="92" rx="18" fill="#4f46e5"/>
+        <text class="boxl" x="570" y="80" text-anchor="middle">🏗️ עבודה בתהליך</text>
+        <text class="boxs" x="570" y="102" text-anchor="middle">טור נפרד לכל הזמנה</text>
+        <text class="boxs" x="570" y="119" text-anchor="middle">ייצור שטרם הסתיים</text>
+      </g>
+      <g>
+        <rect x="252" y="42" width="176" height="92" rx="18" fill="#047857"/>
+        <text class="boxl" x="340" y="80" text-anchor="middle">✅ תוצרת גמורה</text>
+        <text class="boxs" x="340" y="102" text-anchor="middle">הייצור הסתיים</text>
+        <text class="boxs" x="340" y="119" text-anchor="middle">מחכה ללקוח במחסן</text>
+      </g>
+      <g>
+        <rect x="22" y="42" width="176" height="92" rx="18" fill="#be123c"/>
+        <text class="boxl" x="110" y="80" text-anchor="middle">💸 עלות המכר</text>
+        <text class="boxs" x="110" y="102" text-anchor="middle">נמסר ללקוח</text>
+        <text class="boxs" x="110" y="119" text-anchor="middle">כאן זה כבר לא מלאי</text>
+      </g>
+      <!-- arrows -->
+      <line class="dash" x1="712" y1="88" x2="666" y2="88" stroke="#94a3b8" stroke-width="3.5" marker-end="url(#ar)"/>
+      <text class="edgel" x="689" y="74" text-anchor="middle">משיכה</text>
+      <line class="dash" x1="482" y1="88" x2="436" y2="88" stroke="#94a3b8" stroke-width="3.5" marker-end="url(#ar)"/>
+      <text class="edgel" x="459" y="74" text-anchor="middle">השלמה</text>
+      <line class="dash" x1="252" y1="88" x2="206" y2="88" stroke="#94a3b8" stroke-width="3.5" marker-end="url(#ar)"/>
+      <text class="edgel" x="229" y="74" text-anchor="middle">מסירה</text>
+      <!-- feeders -->
+      <g>
+        <rect x="398" y="196" width="164" height="66" rx="16" fill="#0891b2"/>
+        <text class="boxl" x="480" y="226" text-anchor="middle">👷 עבודה ישירה</text>
+        <text class="boxs" x="480" y="246" text-anchor="middle">שעות × תעריף לשעה</text>
+      </g>
+      <g>
+        <rect x="592" y="196" width="176" height="66" rx="16" fill="#7c3aed"/>
+        <text class="boxl" x="680" y="226" text-anchor="middle">⚙️ העמסת עקיפות</text>
+        <text class="boxs" x="680" y="246" text-anchor="middle">תעריף העמסה × בסיס</text>
+      </g>
+      <path class="dash" d="M480 196 L520 140" stroke="#94a3b8" stroke-width="3.5" fill="none" marker-end="url(#ar)"/>
+      <path class="dash" d="M680 196 L622 140" stroke="#94a3b8" stroke-width="3.5" fill="none" marker-end="url(#ar)"/>
+    </svg>
+    <div class="flowmap-cap">הכסף זורם מימין לשמאל. שלוש התחנות הראשונות הן מלאי, האחרונה כבר לא.</div>
+  </div>
+
+  <div class="deep-card">
+    <h3>מה יש בכל <span class="g">עמודה</span></h3>
+    <div class="compare-grid">
+      <div class="compare-card b">
+        <h4>📦 חומרי גלם וחומרי עזר</h4>
+        <p>עמודה אחת לכל המחסן. נכנס לתוכה מה שקונים, יוצא ממנה מה שמושכים לייצור.</p>
+        <p><b>הערה חשובה:</b> חומרי גלם שנמשכו נכנסים לטור של הזמנה מסוימת. חומרי עזר שנמשכו יוצאים מהמחסן אבל <b>לא נכנסים לאף הזמנה</b>, כי הם עקיפים. הם נאספים לצד, לסל העקיפות בפועל.</p>
+      </div>
+      <div class="compare-card d">
+        <h4>🏗️ עבודה בתהליך, טור לכל הזמנה</h4>
+        <p>זה הלב. כל הזמנה פעילה מקבלת טור משלה, וצוברת בו שלושה רכיבים בלבד: חומרים ישירים, עבודה ישירה, ועקיפות שהועמסו.</p>
+        <p>יתרת הטור בכל רגע היא "כמה כסף כבר הושקע בהזמנה הזאת ועדיין לא הסתיים".</p>
+      </div>
+      <div class="compare-card a">
+        <h4>✅ תוצרת גמורה</h4>
+        <p>עמודה אחת לכל המחסן. נכנס אליה סך העלות של הזמנה שהסתיימה, יוצא ממנה סך העלות של הזמנה שנמסרה ללקוח.</p>
+        <p>שימו לב שכאן נכנסים <b>סכומים שלמים של הזמנות</b>, לא רכיבים בודדים.</p>
+      </div>
+    </div>
+    <div class="info warn">
+      <div class="hd">⚠️ העמודה שלא קיימת בדוח</div>
+      <p>אין בדוח התמחיר עמודת מכירות, אין עמודת רווח, ואין עמודת הכנסה. הדוח מתאר <b>עלויות בלבד</b>. כשהזמנה נמסרת ללקוח, מפחיתים את <b>עלותה</b> מהתוצרת הגמורה, ולא מתייחסים בכלל לתמורה שהתקבלה. התמורה תופיע בהמשך, בחישוב הרווח, שהוא חישוב נפרד לגמרי.</p>
+    </div>
+  </div>
+
+  <div class="takeaway reveal">
+    <span class="big-emoji">🗂</span>
+    <div class="hd">שורה תחתונה</div>
+    <div class="tx">דוח התמחיר לא מחשב רווח. הוא עונה על שאלה אחת: איפה נמצא הכסף כרגע, ובאיזה סכום.</div>
+  </div>
+</section>
+
+<!-- ==================== MODULE 04 · THE ROWS ==================== -->
+<section class="section" id="rows">
+  <span class="block-tag">04 · שורות הדוח, אחת אחת</span>
+  <h2>שמונה סוגי שורות. <span class="g">זהו, אין יותר.</span></h2>
+  <p class="section-sub">כל שאלה בתמחיר הזמנה, בכל בחינה ובכל ספר, בנויה מאותם שמונה סוגי שורות. ברגע שמזהים לאיזה סוג שייכת שורה, יודעים בדיוק לאיזו עמודה היא הולכת ובאיזה סימן.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">🧩</span>מתי הזמנה</span>
+    <span class="pst done"><span class="n">🗂</span>אנטומיה</span>
+    <span class="pst on"><span class="n">🔄</span>שורות הדוח</span>
+    <span class="pst"><span class="n">⚖️</span>סטייה</span>
+    <span class="pst"><span class="n">💰</span>רווח</span>
+    <span class="pst"><span class="n">🧪</span>שלושה מקרים</span>
+    <span class="pst"><span class="n">⚠️</span>מלכודות</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 4 מתוך 9</div>
+
+  <div class="rowkey stagger">
+    <div class="rk"><div class="rkt">1 · יתרות פתיחה</div><div class="rks">מה שהיה בכל עמודה בתחילת החודש: חומרים במחסן, הזמנות שכבר היו בתהליך, ותוצרת גמורה שממתינה ללקוח.</div><span class="rkm">נקודת המוצא לכל עמודה</span></div>
+    <div class="rk plus"><div class="rkt">2 · קניות חומרי גלם</div><div class="rks">רכש מספקים. נכנס למחסן החומרים ואינו נוגע בשום הזמנה. קנייה איננה צריכה.</div><span class="rkm">+ מחסן חומרים בלבד</span></div>
+    <div class="rk both"><div class="rkt">3 · צריכת חומרי גלם</div><div class="rks">משיכה מהמחסן לרצפת הייצור. יוצא מהמחסן בסכום הכולל, ונכנס לטורים של ההזמנות לפי הפילוח שניתן בשאלה.</div><span class="rkm">− מחסן, + הזמנות</span></div>
+    <div class="rk minus"><div class="rkt">4 · צריכת חומרי עזר</div><div class="rks">גם זו משיכה, אבל של חומר עקיף: דבק, ברגים, חומרי ניקוי. יוצא מהמחסן, ולא נכנס לאף הזמנה. הוא ייכנס לסל העקיפות בפועל.</div><span class="rkm">− מחסן, ולשום מקום אחר</span></div>
+    <div class="rk plus"><div class="rkt">5 · עבודה ישירה</div><div class="rks">שעות עבודה בייצור כפול תעריף העלות לשעה, לכל הזמנה בנפרד. נכנס ישירות לטור ההזמנה.</div><span class="rkm">+ הזמנות בלבד</span></div>
+    <div class="rk plus"><div class="rkt">6 · העמסת עקיפות</div><div class="rks">תעריף ההעמסה כפול בסיס ההקצאה שההזמנה צרכה בפועל. זה השלב שדורש חישוב מקדים, ולכן נעשה אותו תמיד לפני שממלאים את הטבלה.</div><span class="rkm">+ הזמנות בלבד</span></div>
+    <div class="rk both"><div class="rkt">7 · השלמת הזמנה</div><div class="rks">שורה בעלת שתי רגליים: מאפסים את טור ההזמנה בסכום שלילי השווה לכל מה שנצבר בו, ובאותו סכום בדיוק מגדילים את התוצרת הגמורה.</div><span class="rkm">− הזמנה, + תוצרת גמורה</span></div>
+    <div class="rk minus"><div class="rkt">8 · מסירה ללקוח</div><div class="rks">ההזמנה יוצאת מהמחסן אל הלקוח. מפחיתים את עלותה מהתוצרת הגמורה. התמורה שהתקבלה איננה מופיעה כאן, בשום צורה.</div><span class="rkm">− תוצרת גמורה</span></div>
+  </div>
+
+  <div class="soft-note reveal">ואז שורה תשיעית, טכנית: <b>יתרות סגירה</b>, שהיא פשוט סכום אנכי של כל מה שמעליה בכל עמודה. אם עשיתם הכל נכון, טור של הזמנה שהושלמה יסתכם באפס.</div>
+
+  <div class="deep-card">
+    <h3>שתי שורות שכדאי <span class="g">לעצור עליהן</span></h3>
+
+    <h4>🔀 השלמת הזמנה: למה שתי רגליים</h4>
+    <p>כשהזמנה מסתיימת, שום כסף לא נעלם ושום כסף לא נוצר. הוא רק <b>עובר מקום</b>: מ"ייצור שעדיין רץ" ל"מוצר גמור שממתין ללקוח". לכן הרישום תמיד זוגי, ותמיד באותו סכום מדויק: מינוס בטור ההזמנה, פלוס בתוצרת הגמורה.</p>
+    <p>הסכום עצמו הוא <b>סך כל מה שנצבר בטור ההזמנה</b>, כולל יתרת הפתיחה שלה מהחודש הקודם. זו טעות נפוצה: לשכוח את יתרת הפתיחה ולסכום רק את עלויות החודש הנוכחי.</p>
+    <div class="datatbl-wrap">
+      <table class="datatbl">
+        <tr><th>רכיב בטור ההזמנה</th><th>נכלל בסכום ההשלמה?</th></tr>
+        <tr><td>יתרת פתיחה מהחודש הקודם</td><td>כן, בהחלט</td></tr>
+        <tr><td>חומרי גלם שנמשכו החודש</td><td>כן</td></tr>
+        <tr><td>עבודה ישירה של החודש</td><td>כן</td></tr>
+        <tr><td>עקיפות שהועמסו החודש</td><td>כן</td></tr>
+        <tr><td>עקיפות בפועל של המפעל</td><td>לא. הן לא נכנסות לטור הזמנה לעולם</td></tr>
+      </table>
+    </div>
+
+    <h4>🚚 מסירה ללקוח: העלות יוצאת, התמורה לא נכנסת</h4>
+    <p>זו הנקודה שהכי הרבה סטודנטים מועדים בה. כשהזמנה נמסרת, הפעולה בדוח היא <b>הפחתת עלותה</b> מהתוצרת הגמורה, בסכום שבו היא נכנסה לשם. התמורה שקיבלנו מהלקוח, גבוהה או נמוכה ככל שתהיה, לא רלוונטית לדוח התמחיר. היא תיכנס לתמונה רק בחישוב הרווח הגולמי, בהמשך.</p>
+    <div class="info important">
+      <div class="hd">🚨 נקודה למבחן</div>
+      <p>הזמנה שהושלמה אך <b>טרם נמסרה</b> נשארת ביתרת התוצרת הגמורה, ולא נכנסת לעלות המכר. רק מסירה בפועל מוציאה אותה משם. שימו לב תמיד לניסוח: "הושלם ייצורן" זה שלב אחד, "נמסרו ללקוחות" זה שלב אחר לגמרי.</p>
+    </div>
+  </div>
+
+  <h3 class="sub-h reveal">מלכודת השכר: <span class="g">איפה מסתתרת העבודה העקיפה</span></h3>
+  <p class="lead reveal">כמעט בכל שאלה נותנים לכם את <b>סך עלות השכר</b> של החודש, ובנפרד את שעות העבודה הישירות ואת התעריף לשעה. ההפרש ביניהם אינו טעות ואינו מיותר: הוא <b>העבודה העקיפה</b>, ומקומו בסל העקיפות בפועל.</p>
+  <div class="formula-cards reveal">
+    <div class="formula-card a">
+      <div class="fc-tag">שלב 1</div>
+      <div class="fc-eq">$$DL = \sum_{\text{הזמנות}} \left(\text{שעות} \times \text{תעריף}\right)$$</div>
+      <div class="fc-note">סך העבודה הישירה: מחשבים לכל הזמנה בנפרד, ואז מסכמים.</div>
+    </div>
+    <div class="formula-card b">
+      <div class="fc-tag">שלב 2</div>
+      <div class="fc-eq">$$\text{עבודה עקיפה} = \text{סך השכר} - DL$$</div>
+      <div class="fc-note">ההפרש. זהו שכר מנהלי משמרת, מבקרי איכות, מנקים, כל מי שלא מזוהה עם הזמנה ספציפית.</div>
+    </div>
+    <div class="formula-card c">
+      <div class="fc-tag">שלב 3</div>
+      <div class="fc-eq">$$OH_{\text{בפועל}} \mathrel{+}= \text{עבודה עקיפה}$$</div>
+      <div class="fc-note">העבודה העקיפה מצטרפת לסל העקיפות בפועל, יחד עם חומרי העזר, הפחת והחשמל.</div>
+    </div>
+  </div>
+  <div class="soft-note reveal">בדיקה שכדאי לעשות תמיד: אם השאלה נותנת פירוט של העקיפות בפועל וכוללת שם שורה בשם "עבודה עקיפה", המספר שלה חייב להיות זהה להפרש שחישבתם. אם לא, יש טעות באחד השניים.</div>
+</section>
+
+<!-- ==================== MODULE 05 · VARIANCE ==================== -->
+<section class="section" id="variance">
+  <span class="block-tag">05 · סטיית ההעמסה</span>
+  <h2>העמסנו לפי אומדן. <span class="g">מה קרה בפועל?</span></h2>
+  <p class="section-sub">שיעור ההעמסה נקבע בתחילת השנה, מהצפי. העלויות העקיפות בפועל מתגלות רק בסוף החודש. כמעט תמיד יש פער, וצריך לטפל בו לפני שמדברים על רווח.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">🧩</span>מתי הזמנה</span>
+    <span class="pst done"><span class="n">🗂</span>אנטומיה</span>
+    <span class="pst done"><span class="n">🔄</span>שורות הדוח</span>
+    <span class="pst on"><span class="n">⚖️</span>סטייה</span>
+    <span class="pst"><span class="n">💰</span>רווח</span>
+    <span class="pst"><span class="n">🧪</span>שלושה מקרים</span>
+    <span class="pst"><span class="n">⚠️</span>מלכודות</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 5 מתוך 9</div>
+
+  <div class="remind-card reveal">
+    <div class="rc-hd">🎈 קודם באנושית</div>
+    <p>נניח שהערכתם בתחילת השנה שחשבון החשמל של המאפייה יהיה 1,000 שקל בחודש, וחילקתם אותו מראש בין העוגות. בסוף החודש הגיע חשבון על 1,300. לא צריך לרוץ אחורה ולתקן כל עוגה בנפרד. פשוט אומרים: "העמסנו 300 שקל פחות ממה שבאמת בזבזנו", ומוסיפים את הפער לעלות הכוללת. זה כל הסיפור.</p>
+  </div>
+
+  <div class="two-col">
+    <div class="deep-card" style="margin:0">
+      <h3>העקיפות <span class="g">שהועמסו</span></h3>
+      <p>סכום כל שורות ההעמסה בטבלה, על פני כל ההזמנות. זהו מספר שאנחנו <b>המצאנו</b>, מהאומדן.</p>
+      <div class="fc-eq" style="text-align:center;margin-top:10px">$$OH_{\text{הועמס}} = \sum_{\text{הזמנות}} \left(POHR \times \text{בסיס בפועל}\right)$$</div>
+    </div>
+    <div class="deep-card" style="margin:0">
+      <h3>העקיפות <span class="g">בפועל</span></h3>
+      <p>סכום כל העלויות העקיפות שבאמת נצרכו: חומרי עזר, עבודה עקיפה, פחת, חשמל, ארנונה, ביטוח. מספר שהמציאות <b>נתנה</b> לנו.</p>
+      <div class="fc-eq" style="text-align:center;margin-top:10px">$$OH_{\text{בפועל}} = \text{חומרי עזר} + \text{עבודה עקיפה} + \dots$$</div>
+    </div>
+  </div>
+
+  <div class="varviz reveal" id="vvDemo">
+    <div class="vv-plot">
+      <div class="vv-item"><div class="vv-col applied" data-h="62">360,000</div><div class="vv-cap">הועמס<small>מה שרשמנו על ההזמנות</small></div></div>
+      <div class="vv-item"><div class="vv-col actual" data-h="86">500,000</div><div class="vv-cap">בפועל<small>מה שבאמת נצרך</small></div></div>
+    </div>
+    <div class="vv-verdict under">הועמס בחסר ב-140,000 ש״ח<small>הצגנו את ההזמנות כזולות מדי, ולכן נוסיף את הפער לעלות המכר</small></div>
+    <div class="soft-note" style="margin-bottom:0">הדוגמה שעל המסך היא מקרה אלפא טק שנפתור בהמשך. הרעיון זהה בכל שאלה.</div>
+  </div>
+
+  <div class="deep-card">
+    <h3>שני הכיוונים, <span class="g">ומה עושים בכל אחד</span></h3>
+    <div class="compare-grid">
+      <div class="compare-card b">
+        <h4>📉 הועמס בחסר (Under-applied)</h4>
+        <p>העקיפות בפועל <b>גדולות</b> מאלה שהועמסו. רשמנו על ההזמנות פחות ממה שבאמת עלה לנו.</p>
+        <p><b>הטיפול:</b> <b>מוסיפים</b> את ההפרש לעלות המכר. העלויות שלנו היו גבוהות ממה שהצגנו, והרווח יקטן בהתאם.</p>
+      </div>
+      <div class="compare-card a">
+        <h4>📈 הועמס ביתר (Over-applied)</h4>
+        <p>העקיפות בפועל <b>קטנות</b> מאלה שהועמסו. היינו פסימיים, וטענו על ההזמנות יותר ממה שבאמת בזבזנו.</p>
+        <p><b>הטיפול:</b> <b>מפחיתים</b> את ההפרש מעלות המכר. הצגנו את ההזמנות כיקרות מדי, והרווח יגדל בהתאם.</p>
+      </div>
+    </div>
+    <div class="info tip">
+      <div class="hd">🧭 איך לא להתבלבל בסימן</div>
+      <p>שאלו את עצמכם שאלה אחת: <b>האם באמת בזבזנו יותר או פחות ממה שאמרנו?</b> אם בזבזנו יותר, העלות שלנו גדלה. אם בזבזנו פחות, העלות שלנו קטנה. הכיוון תמיד נובע מהמציאות, אף פעם לא מהאומדן.</p>
+    </div>
+    <div class="info insight">
+      <div class="hd">💡 הנחת העבודה בקורס: טיפול מצרפי</div>
+      <p>אנחנו לא חוזרים אחורה ומתקנים כל הזמנה בנפרד לפי חלקה בסטייה. לוקחים את סך העקיפות שהועמסו, מנכים את סך העקיפות בפועל, ואת ההפרש כולו זוקפים לעלות המכר של החברה כולה. זו הנחת <b>"סטייה לא מהותית"</b>: החברה מוותרת על דיוק פרטני לכל הזמנה, ומסתפקת בתיקון אחד ברמת התקופה. תיקון פרטני קיים בתיאוריה, ושמור למקרים חריגים.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MODULE 06 · GROSS PROFIT ==================== -->
+<section class="section" id="profit">
+  <span class="block-tag">06 · הרווח הגולמי</span>
+  <h2>עכשיו, <span class="g">ורק עכשיו, מדברים על כסף שנכנס</span></h2>
+  <p class="section-sub">דוח התמחיר סיים את תפקידו. יש בידינו את עלות ההזמנות שנמסרו ואת סטיית ההעמסה. נותר לצרף את התמורה מהלקוחות.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">🧩</span>מתי הזמנה</span>
+    <span class="pst done"><span class="n">🗂</span>אנטומיה</span>
+    <span class="pst done"><span class="n">🔄</span>שורות הדוח</span>
+    <span class="pst done"><span class="n">⚖️</span>סטייה</span>
+    <span class="pst on"><span class="n">💰</span>רווח</span>
+    <span class="pst"><span class="n">🧪</span>שלושה מקרים</span>
+    <span class="pst"><span class="n">⚠️</span>מלכודות</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 6 מתוך 9</div>
+
+  <div class="flow-steps stagger">
+    <div class="flow-step"><div class="num">1</div><div><div class="fs-title">קחו את התמורה מהמכירות</div><div class="fs-sub">נתון בשאלה, כמעט תמיד במפורש</div><div class="fs-details">סך התמורה שהתקבלה עבור כל ההזמנות שנמסרו החודש. שימו לב שזה מספר אחד לכל ההזמנות יחד, ולא צריך לפצל אותו ביניהן.</div></div></div>
+    <div class="flow-step"><div class="num">2</div><div><div class="fs-title">אספו את עלות ההזמנות שנמסרו</div><div class="fs-sub">מתוך עמודת התוצרת הגמורה</div><div class="fs-details">אך ורק הזמנות שנמסרו בפועל. הזמנה שהושלמה ונשארה במחסן איננה נכללת. הסכומים נלקחים בדיוק כפי שהם מופיעים בשורות המסירה בדוח.</div></div></div>
+    <div class="flow-step"><div class="num">3</div><div><div class="fs-title">התאימו את סטיית ההעמסה</div><div class="fs-sub">הועמס בחסר מוסיפים, הועמס ביתר מפחיתים</div><div class="fs-details">זהו התיקון המצרפי שדיברנו עליו במודול הקודם. אחריו, ורק אחריו, מתקבלת עלות המכר האמיתית.</div></div></div>
+    <div class="flow-step"><div class="num">4</div><div><div class="fs-title">חסרו וקבלו רווח גולמי</div><div class="fs-sub">מכירות פחות עלות המכר</div><div class="fs-details">זהו הרווח <b>הגולמי</b>, לפני הוצאות הנהלה, שיווק ומכירה. הוא מודד את רווחיות הייצור עצמו, ולא את רווחיות החברה כולה.</div></div></div>
+  </div>
+
+  <div class="report wide reveal">
+    <div class="report-head"><div><div class="rh-co">מבנה החישוב, באופן כללי</div><div class="rh-t">עלות המכר ורווח גולמי</div></div></div>
+    <div class="report-body">
+      <div class="report-row"><span class="rr-label">מכירות<small>סך התמורה שהתקבלה מהלקוחות</small></span><span class="rr-num he">תמורה מהלקוחות</span></div>
+      <div class="report-row rr-sub"><span class="rr-label">עלות ההזמנות שנמסרו, מדוח התמחיר</span><span class="rr-num he">בניכוי עלותן</span></div>
+      <div class="report-row rr-sub rr-flag"><span class="rr-label">התאמת סטיית העמסה, בחסר או ביתר</span><span class="rr-num he">בתוספת או בניכוי</span></div>
+      <div class="report-row"><span class="rr-label">עלות המכר<small>אחרי התיקון המצרפי</small></span><span class="rr-num he">סך העלות המתוקנת</span></div>
+      <div class="report-row rr-total"><span class="rr-label">רווח גולמי</span><span class="rr-num he">מכירות בניכוי עלות המכר</span></div>
+    </div>
+    <div class="report-foot">שימו לב לסדר: הסטייה נכנסת לתוך עלות המכר, לא אחרי הרווח.</div>
+  </div>
+
+  <div class="hardq reveal">
+    <div class="hqt">🤔 שאלה קשה</div>
+    <div class="hqq">חברה סיימה החודש שתי הזמנות גדולות, אבל <b>לא מסרה אף אחת מהן</b> ללקוח. המכירות שלה החודש היו אפס. האם דוח התמחיר שלה ריק? והאם היא הפסידה את כל עלויות הייצור של החודש?</div>
+    <div class="acc"><div class="acc-h" onclick="toggleHardq(this)"><h4>הראו לי את התשובה</h4><span class="chev">⌄</span></div>
+      <div class="acc-body"><div class="acc-bin">
+        <p>דוח התמחיר <b>מלא לגמרי</b>. כל עלויות החודש נרשמו: חומרים נמשכו, שכר שולם, עקיפות הועמסו, ושתי ההזמנות עברו מטור העבודה בתהליך אל התוצרת הגמורה. פשוט אף שורת מסירה לא נרשמה.</p>
+        <p>והחברה <b>לא הפסידה</b> את העלויות האלה. הן לא נעלמו, הן <b>יושבות כמלאי</b> ביתרת התוצרת הגמורה, ומופיעות במאזן כנכס. בחשבונאות, עלות ייצור הופכת להוצאה רק ברגע שהמוצר נמסר. עד אז היא רכוש.</p>
+        <p>מה שכן קורה: עלות המכר החודש היא <b>אפס בלבד בתוספת סטיית ההעמסה</b>. מכירות אפס פחות סטייה שהועמסה בחסר תיתן הפסד גולמי בגובה הסטייה. זו התוצאה הנכונה, והיא מלמדת בדיוק למה סטיית ההעמסה נזקפת לתקופה ולא לנכס.</p>
+      </div></div>
+    </div>
+  </div>
+</section>
+<!-- ==================== MODULE 07 · CASE 1: BUBU ==================== -->
+<section class="section" id="bubu">
+  <span class="block-tag">07 · מקרה ראשון, מודרך במלואו</span>
+  <h2>חברת בובו בע״מ, <span class="g">פברואר 2021</span></h2>
+  <p class="section-sub">המקרה הראשון נבנה כדי ללמד את המנגנון, ולכן נעבור בו לאט: נחשב תעריף, נבנה את הדוח שורה אחר שורה בלחיצת כפתור, נטפל בסטייה, ונסיים ברווח. אחריו שני מקרים נוספים, מהירים יותר.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">🧩</span>מתי הזמנה</span>
+    <span class="pst done"><span class="n">🗂</span>אנטומיה</span>
+    <span class="pst done"><span class="n">🔄</span>שורות הדוח</span>
+    <span class="pst done"><span class="n">⚖️</span>סטייה</span>
+    <span class="pst done"><span class="n">💰</span>רווח</span>
+    <span class="pst on"><span class="n">🧪</span>שלושה מקרים</span>
+    <span class="pst"><span class="n">⚠️</span>מלכודות</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 7 מתוך 9</div>
+
+  <div class="deep-card">
+    <h3>הנתונים <span class="g">במלואם</span></h3>
+    <h4>יתרות פתיחה, 1.2.2021</h4>
+    <div class="datatbl-wrap">
+      <table class="datatbl">
+        <tr><th>מה</th><th>סכום (₪)</th><th>הערה</th></tr>
+        <tr><td>חומרי גלם וחומרי עזר במחסן</td><td>280,000</td><td>נתון מתוקן</td></tr>
+        <tr><td>הזמנה 101, בתהליך</td><td>180,000</td><td>נפתחה בחודש הקודם</td></tr>
+        <tr><td>הזמנה 107, בתהליך</td><td>220,000</td><td>נפתחה בחודש הקודם</td></tr>
+        <tr><td>הזמנה 108</td><td>0</td><td>תיפתח החודש</td></tr>
+        <tr><td>תוצרת גמורה</td><td>190,000</td><td>הזמנה 100, הושלמה וטרם נמסרה</td></tr>
+      </table>
+    </div>
+    <div class="soft-note">שימו לב לתיקון: יתרת הפתיחה של חומרי הגלם וחומרי העזר היא <b>280,000</b> ש״ח, ולא 80,000 כפי שהופיע בגרסה המקורית של השאלה.</div>
+
+    <h4>אירועי החודש</h4>
+    <ul class="checklist">
+      <li>נקנו חומרי גלם ב-200,000 ש״ח וחומרי עזר ב-60,000 ש״ח.</li>
+      <li>נמשכו מהמחסן חומרי גלם ב-370,000 ש״ח: הזמנה 101 קיבלה 90,000, הזמנה 107 קיבלה 120,000, והזמנה 108 קיבלה 160,000.</li>
+      <li>נצרכו חומרי עזר ב-40,000 ש״ח.</li>
+      <li>תעריף עלות שעת עבודה של עובד ייצור: 110 ש״ח. שעות בפועל: הזמנה 101 עבדה 1,500 שעות, הזמנה 107 עבדה 1,000 שעות, הזמנה 108 עבדה 1,500 שעות.</li>
+      <li>אומדן שנתי לעלויות עקיפות: 1,200,000 ש״ח. אומדן שנתי לשעות עבודה ישירה: 12,000 שעות. בסיס ההעמסה הוא שעות עבודה ישירה.</li>
+      <li>הושלם ייצורן של הזמנות 101 ו-107. נמכרו ונמסרו הזמנות 100 ו-107, בתמורה כוללת של 1,200,000 ש״ח.</li>
+    </ul>
+
+    <h4>העלויות העקיפות שנצרכו בפועל</h4>
+    <div class="datatbl-wrap">
+      <table class="datatbl">
+        <tr><th>סוג העלות</th><th>סכום (₪)</th></tr>
+        <tr><td>חומרי עזר</td><td>40,000</td></tr>
+        <tr><td>עבודה עקיפה, מנהלה ותחזוקה</td><td>60,000</td></tr>
+        <tr><td>פחת מכונות</td><td>160,000</td></tr>
+        <tr><td>חשמל, ארנונה וביטוח</td><td>120,000</td></tr>
+        <tr><td><b>סך עקיפות בפועל</b></td><td><b>380,000</b></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3 class="sub-h reveal">שלב א · <span class="g">תעריף ההעמסה, לפני הכל</span></h3>
+  <p class="lead reveal">שורת ההעמסה בטבלה דורשת מספר שעדיין אין לנו. לכן תמיד, בכל שאלה, מחשבים אותו ראשון.</p>
+  <div class="ex-grid" id="bubuA"></div>
+
+  <h3 class="sub-h reveal">שלב ב · <span class="g">בונים את הדוח, שורה אחר שורה</span></h3>
+  <p class="lead reveal">לחצו על "השורה הבאה" ועקבו אחרי ההסבר מתחת לטבלה. אפשר גם להריץ אוטומטית, לחזור אחורה, או לאפס ולהתחיל מחדש. שימו לב לרצועת התחנות שמעל הטבלה: היא מראה איפה בדיוק במסע נמצא הכסף בכל שורה.</p>
+  <div class="jobrep" id="jrBubu"></div>
+
+  <h3 class="sub-h reveal">שלב ג · <span class="g">סטיית ההעמסה</span></h3>
+  <p class="lead reveal">שלוש שורות ההעמסה בטבלה מסתכמות ב-150,000 ועוד 100,000 ועוד 150,000, כלומר 400,000 ש״ח. סך העקיפות בפועל, מהטבלה למעלה, הוא 380,000 ש״ח.</p>
+  <div class="varviz reveal">
+    <div class="vv-plot">
+      <div class="vv-item"><div class="vv-col applied" data-h="88">400,000</div><div class="vv-cap">הועמס<small class="num">150,000 + 100,000 + 150,000</small></div></div>
+      <div class="vv-item"><div class="vv-col actual" data-h="84">380,000</div><div class="vv-cap">בפועל<small class="num">40,000 + 60,000 + 160,000 + 120,000</small></div></div>
+    </div>
+    <div class="vv-verdict over">הועמס ביתר ב-20,000 ש״ח<small>טענו על ההזמנות יותר ממה שבאמת בזבזנו, ולכן נפחית 20,000 מעלות המכר</small></div>
+  </div>
+
+  <h3 class="sub-h reveal">שלב ד · <span class="g">הרווח הגולמי</span></h3>
+  <p class="lead reveal">נמסרו שתי הזמנות: הזמנה 100 שעלתה 190,000 והזמנה 107 שעלתה 550,000. עליהן חל תיקון הסטייה.</p>
+  <div class="report wide reveal">
+    <div class="report-head"><div><div class="rh-co">חברת בובו בע״מ</div><div class="rh-t">חישוב רווח גולמי · פברואר 2021</div></div><div class="rh-t">בש״ח</div></div>
+    <div class="report-body">
+      <div class="report-row"><span class="rr-label">מכירות<small>תמורה בגין הזמנות 100 ו-107</small></span><span class="rr-num">1,200,000</span></div>
+      <div class="report-row rr-sub"><span class="rr-label">עלות הזמנה 100 שנמסרה</span><span class="rr-num">(190,000)</span></div>
+      <div class="report-row rr-sub"><span class="rr-label">עלות הזמנה 107 שנמסרה</span><span class="rr-num">(550,000)</span></div>
+      <div class="report-row rr-sub rr-flag"><span class="rr-label">בניכוי סטייה, הועמס ביתר</span><span class="rr-num">20,000</span></div>
+      <div class="report-row"><span class="rr-label">עלות המכר<small class="num">190,000 + 550,000 − 20,000</small></span><span class="rr-num">(720,000)</span></div>
+      <div class="report-row rr-total"><span class="rr-label">רווח גולמי</span><span class="rr-num">480,000</span></div>
+    </div>
+    <div class="report-foot">הזמנה 101, שהושלמה אך לא נמסרה, איננה בחישוב. עלותה, 585,000 ש״ח, נשארה ביתרת התוצרת הגמורה.</div>
+  </div>
+
+  <h3 class="sub-h reveal">בדקו את עצמכם</h3>
+  <div class="ex-grid" id="bubuB"></div>
+
+  <div class="checkpoint reveal">
+    <div class="hd">✅ מה למדנו במקרה הראשון</div>
+    <p>תעריף לפני טבלה. חומרי עזר יוצאים מהמחסן ולא נכנסים לאף הזמנה. השלמה היא שתי רגליים באותו סכום, כולל יתרת הפתיחה. מסירה מפחיתה עלות בלבד. סטייה נסגרת לעלות המכר. הזמנה שהושלמה ולא נמסרה נשארת מלאי.</p>
+  </div>
+</section>
+
+<!-- ==================== MODULE 08 · CASE 2: ALPHA TECH ==================== -->
+<section class="section" id="alpha">
+  <span class="block-tag">08 · מקרה שני</span>
+  <h2>אלפא טק בע״מ, <span class="g">מרץ 2023</span></h2>
+  <p class="section-sub">יצרנית רכיבים אלקטרוניים. אותו מנגנון בדיוק, בתוספת שני קשיים חדשים: השכר ניתן כסכום כולל וצריך לחלץ ממנו את העבודה העקיפה, והסטייה הפעם בכיוון ההפוך.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">🧩</span>מתי הזמנה</span>
+    <span class="pst done"><span class="n">🗂</span>אנטומיה</span>
+    <span class="pst done"><span class="n">🔄</span>שורות הדוח</span>
+    <span class="pst done"><span class="n">⚖️</span>סטייה</span>
+    <span class="pst done"><span class="n">💰</span>רווח</span>
+    <span class="pst on"><span class="n">🧪</span>שלושה מקרים</span>
+    <span class="pst"><span class="n">⚠️</span>מלכודות</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 7 מתוך 9</div>
+
+  <div class="deep-card">
+    <h3>הנתונים <span class="g">במלואם</span></h3>
+    <h4>יתרות פתיחה, 1.3.2023</h4>
+    <div class="datatbl-wrap">
+      <table class="datatbl">
+        <tr><th>מס׳ הזמנה</th><th>חומרי גלם ישירים</th><th>עבודה ישירה</th><th>עקיפות שהועמסו</th><th>סך יתרת פתיחה</th></tr>
+        <tr><td>B2</td><td>100,000</td><td>80,000</td><td>40,000</td><td>220,000</td></tr>
+        <tr><td>C3</td><td>200,000</td><td>100,000</td><td>50,000</td><td>350,000</td></tr>
+        <tr><td>סה״כ בתהליך</td><td>300,000</td><td>180,000</td><td>90,000</td><td>570,000</td></tr>
+      </table>
+    </div>
+    <p>בנוסף: חומרי גלם וחומרי עזר במחסן 100,000 ש״ח, ותוצרת גמורה 250,000 ש״ח, השייכת להזמנה A1 שהושלמה בחודש הקודם.</p>
+    <div class="soft-note">הפילוח לשלושת הרכיבים נועד להראות מאיפה הגיעה יתרת הפתיחה. בדוח עצמו נכניס רק את הסכום הכולל של כל הזמנה, 220,000 ו-350,000, כי שם הן כבר יתרה אחת.</div>
+
+    <h4>אירועי מרץ 2023</h4>
+    <ul class="checklist">
+      <li>נרכשו חומרי גלם ב-500,000 ש״ח וחומרי עזר ב-80,000 ש״ח.</li>
+      <li>נמשכו חומרי גלם ישירים ב-450,000 ש״ח: B2 קיבלה 100,000, C3 קיבלה 150,000, וההזמנה החדשה D4 קיבלה 200,000. נצרכו גם חומרי עזר ב-50,000 ש״ח.</li>
+      <li>סך עלות השכר לחודש: 650,000 ש״ח. תעריף עובד ייצור: 150 ש״ח לשעה. שעות בפועל: B2 עבדה 1,000 שעות, C3 עבדה 1,200 שעות, D4 עבדה 1,400 שעות.</li>
+      <li>בסיס ההעמסה הוא שעות עבודה ישירה. האומדן לשנת 2023: עקיפות של 1,500,000 ש״ח ו-15,000 שעות עבודה ישירה.</li>
+      <li>הושלמו B2 ו-C3 והועברו למחסן. נמסרו ללקוחות A1 ו-C3, בתמורה כוללת של 1,800,000 ש״ח.</li>
+    </ul>
+
+    <h4>העלויות העקיפות שנצרכו בפועל</h4>
+    <div class="datatbl-wrap">
+      <table class="datatbl">
+        <tr><th>סוג העלות</th><th>סכום (₪)</th></tr>
+        <tr><td>חומרי עזר שנמשכו</td><td>50,000</td></tr>
+        <tr><td>עבודה עקיפה, מתוך השכר הכולל</td><td>110,000</td></tr>
+        <tr><td>פחת מכונות הרכבה</td><td>200,000</td></tr>
+        <tr><td>חשמל, ארנונה וביטוח למפעל</td><td>140,000</td></tr>
+        <tr><td><b>סך עקיפות בפועל</b></td><td><b>500,000</b></td></tr>
+      </table>
+    </div>
+    <div class="soft-note">שימו לב: קניות חומרי הגלם הן <b>500,000</b> ש״ח. זהו הנתון המעודכן לשאלה.</div>
+  </div>
+
+  <h3 class="sub-h reveal">שלב א · <span class="g">תעריף, שכר, וחילוץ העבודה העקיפה</span></h3>
+  <div class="ex-grid" id="alphaA"></div>
+
+  <h3 class="sub-h reveal">שלב ב · <span class="g">דוח התמחיר</span></h3>
+  <div class="jobrep" id="jrAlpha"></div>
+
+  <h3 class="sub-h reveal">שלב ג · <span class="g">סטיית ההעמסה, הפעם בחסר</span></h3>
+  <div class="varviz reveal">
+    <div class="vv-plot">
+      <div class="vv-item"><div class="vv-col applied" data-h="63">360,000</div><div class="vv-cap">הועמס<small class="num">100,000 + 120,000 + 140,000</small></div></div>
+      <div class="vv-item"><div class="vv-col actual" data-h="88">500,000</div><div class="vv-cap">בפועל<small class="num">50,000 + 110,000 + 200,000 + 140,000</small></div></div>
+    </div>
+    <div class="vv-verdict under">הועמס בחסר ב-140,000 ש״ח<small>בזבזנו יותר ממה שרשמנו על ההזמנות, ולכן נוסיף 140,000 לעלות המכר</small></div>
+  </div>
+  <div class="info warn reveal">
+    <div class="hd">⚠️ למה הפער כאן כל כך גדול</div>
+    <p>התעריף חושב מאומדן <b>שנתי</b>: 1,500,000 חלקי 15,000 שעות. בחודש בודד אין שום ערובה שהיחס יישמר, במיוחד אם היו החודש הוצאות חד-פעמיות או פעילות נמוכה מהרגיל. זו איננה טעות בחישוב, אלא התנהגות טבעית של שיעור העמסה שנתי כשמסתכלים עליו דרך חלון של חודש.</p>
+  </div>
+
+  <h3 class="sub-h reveal">שלב ד · <span class="g">הרווח הגולמי</span></h3>
+  <div class="report wide reveal">
+    <div class="report-head"><div><div class="rh-co">אלפא טק בע״מ</div><div class="rh-t">חישוב רווח גולמי · מרץ 2023</div></div><div class="rh-t">בש״ח</div></div>
+    <div class="report-body">
+      <div class="report-row"><span class="rr-label">מכירות<small>תמורה בגין הזמנות A1 ו-C3</small></span><span class="rr-num">1,800,000</span></div>
+      <div class="report-row rr-sub"><span class="rr-label">עלות הזמנה A1 שנמסרה</span><span class="rr-num">(250,000)</span></div>
+      <div class="report-row rr-sub"><span class="rr-label">עלות הזמנה C3 שנמסרה</span><span class="rr-num">(800,000)</span></div>
+      <div class="report-row rr-sub rr-flag"><span class="rr-label">בתוספת סטייה, הועמס בחסר</span><span class="rr-num">(140,000)</span></div>
+      <div class="report-row"><span class="rr-label">עלות המכר<small class="num">250,000 + 800,000 + 140,000</small></span><span class="rr-num">(1,190,000)</span></div>
+      <div class="report-row rr-total"><span class="rr-label">רווח גולמי</span><span class="rr-num">610,000</span></div>
+    </div>
+    <div class="report-foot">הזמנה B2, שהושלמה ולא נמסרה, נשארה במלאי התוצרת הגמורה בסך 570,000 ש״ח.</div>
+  </div>
+
+  <h3 class="sub-h reveal">בדקו את עצמכם</h3>
+  <div class="ex-grid" id="alphaB"></div>
+</section>
+
+<!-- ==================== MODULE 09 · CASE 3: WOOD ARTISTS ==================== -->
+<section class="section" id="wood">
+  <span class="block-tag">09 · מקרה שלישי, ובו התובנה הגדולה</span>
+  <h2>אמני העץ בע״מ, <span class="g">אוקטובר 2024</span></h2>
+  <p class="section-sub">נגרייה לריהוט יוקרתי. נפתור אותה פעמיים: פעם אחת בבסיס שעות עבודה, ופעם שנייה בבסיס שעות מכונה. ההשוואה בין שתי התוצאות היא הדבר החשוב ביותר בשיעור הזה.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">🧩</span>מתי הזמנה</span>
+    <span class="pst done"><span class="n">🗂</span>אנטומיה</span>
+    <span class="pst done"><span class="n">🔄</span>שורות הדוח</span>
+    <span class="pst done"><span class="n">⚖️</span>סטייה</span>
+    <span class="pst done"><span class="n">💰</span>רווח</span>
+    <span class="pst on"><span class="n">🧪</span>שלושה מקרים</span>
+    <span class="pst"><span class="n">⚠️</span>מלכודות</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 7 מתוך 9</div>
+
+  <div class="deep-card">
+    <h3>הנתונים <span class="g">במלואם</span></h3>
+    <h4>יתרות פתיחה, 1.10.2024</h4>
+    <div class="datatbl-wrap">
+      <table class="datatbl">
+        <tr><th>מס׳ הזמנה</th><th>חומרי גלם ישירים</th><th>עבודה ישירה</th><th>עקיפות שהועמסו</th><th>סך יתרת פתיחה</th></tr>
+        <tr><td>301</td><td>40,000</td><td>30,000</td><td>15,000</td><td>85,000</td></tr>
+        <tr><td>302</td><td>60,000</td><td>50,000</td><td>25,000</td><td>135,000</td></tr>
+        <tr><td>סה״כ בתהליך</td><td>100,000</td><td>80,000</td><td>40,000</td><td>220,000</td></tr>
+      </table>
+    </div>
+    <p>בנוסף: חומרי גלם וחומרי עזר במחסן 50,000 ש״ח, ותוצרת גמורה 120,000 ש״ח, השייכת להזמנה 300.</p>
+
+    <h4>אירועי אוקטובר 2024</h4>
+    <ul class="checklist">
+      <li>נרכשו חומרי גלם ב-150,000 ש״ח וחומרי עזר ב-30,000 ש״ח.</li>
+      <li>נמשכו חומרי גלם ישירים ב-180,000 ש״ח: 301 קיבלה 50,000, 302 קיבלה 60,000, וההזמנה החדשה 303, ספריות למוסד חינוכי, קיבלה 70,000. נצרכו חומרי עזר ב-20,000 ש״ח.</li>
+      <li>סך עלות השכר: 300,000 ש״ח. תעריף נגר: 80 ש״ח לשעה. שעות בפועל: 301 עבדה 800 שעות, 302 עבדה 1,000 שעות, 303 עבדה 1,200 שעות.</li>
+      <li>אומדן שנתי 2024: עקיפות של 600,000 ש״ח, 12,000 שעות עבודה ישירה, ו-6,000 שעות מכונה.</li>
+      <li>שעות מכונה בפועל באוקטובר: 301 צרכה 300 שעות, 302 צרכה 500 שעות, 303 צרכה 600 שעות.</li>
+      <li>הושלמו 301 ו-302. נמסרו ללקוחות 300 ו-301, בתמורה כוללת של 500,000 ש״ח.</li>
+      <li>עקיפות בפועל: חומרי עזר 20,000, עבודה עקיפה 60,000, פחת מכונות ניסור ו-CNC 50,000, חשמל מים ושכירות 30,000. סך הכל 160,000 ש״ח.</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-h reveal">חלק א · <span class="g">בסיס שעות עבודה ישירה</span></h3>
+  <div class="ex-grid" id="woodA"></div>
+  <div class="jobrep" id="jrWoodA"></div>
+
+  <div class="varviz reveal">
+    <div class="vv-plot">
+      <div class="vv-item"><div class="vv-col applied" data-h="82">150,000</div><div class="vv-cap">הועמס<small class="num">40,000 + 50,000 + 60,000</small></div></div>
+      <div class="vv-item"><div class="vv-col actual" data-h="88">160,000</div><div class="vv-cap">בפועל<small class="num">20,000 + 60,000 + 50,000 + 30,000</small></div></div>
+    </div>
+    <div class="vv-verdict under">הועמס בחסר ב-10,000 ש״ח<small>נוסיף 10,000 לעלות המכר</small></div>
+  </div>
+
+  <div class="report wide reveal">
+    <div class="report-head"><div><div class="rh-co">אמני העץ בע״מ</div><div class="rh-t">רווח גולמי · חלק א׳, בסיס שעות עבודה</div></div><div class="rh-t">בש״ח</div></div>
+    <div class="report-body">
+      <div class="report-row"><span class="rr-label">מכירות<small>הזמנות 300 ו-301</small></span><span class="rr-num">500,000</span></div>
+      <div class="report-row rr-sub"><span class="rr-label">עלות הזמנה 300 שנמסרה</span><span class="rr-num">(120,000)</span></div>
+      <div class="report-row rr-sub"><span class="rr-label">עלות הזמנה 301 שנמסרה</span><span class="rr-num">(239,000)</span></div>
+      <div class="report-row rr-sub rr-flag"><span class="rr-label">בתוספת סטייה, הועמס בחסר</span><span class="rr-num">(10,000)</span></div>
+      <div class="report-row"><span class="rr-label">עלות המכר</span><span class="rr-num">(369,000)</span></div>
+      <div class="report-row rr-total"><span class="rr-label">רווח גולמי</span><span class="rr-num">131,000</span></div>
+    </div>
+  </div>
+
+  <h3 class="sub-h reveal">חלק ב · <span class="g">אותה נגרייה, בסיס שעות מכונה</span></h3>
+  <p class="lead reveal">ההנהלה מחליטה שהעלויות העקיפות נובעות בעיקר ממכונות ה-CNC והניסור, ולא מהזמן שהנגרים עומדים ליד השולחן. הסכום השנתי הצפוי לא השתנה, 600,000 ש״ח כמו קודם. מה שהשתנה הוא רק <b>הדרך שבה הוא מתחלק</b>.</p>
+  <div class="ex-grid" id="woodB"></div>
+
+  <div class="info tip reveal">
+    <div class="hd">🧠 מה בכלל משתנה בטבלה</div>
+    <p>יתרות הפתיחה, הקניות, משיכת החומרים, חומרי העזר ושכר העבודה בייצור, כולם <b>ללא כל שינוי</b>. הם לא תלויים בשיטת ההעמסה. השינוי מתחיל בדיוק בשורה אחת: שורת העמסת העקיפות. ממנה ומטה הכל מתגלגל מחדש.</p>
+  </div>
+
+  <div class="jobrep" id="jrWoodB"></div>
+
+  <div class="varviz reveal">
+    <div class="vv-plot">
+      <div class="vv-item"><div class="vv-col applied" data-h="77">140,000</div><div class="vv-cap">הועמס<small class="num">30,000 + 50,000 + 60,000</small></div></div>
+      <div class="vv-item"><div class="vv-col actual" data-h="88">160,000</div><div class="vv-cap">בפועל<small>ללא שינוי</small></div></div>
+    </div>
+    <div class="vv-verdict under">הועמס בחסר ב-20,000 ש״ח<small>הפעם הסטייה גדולה יותר, כי העמסנו פחות</small></div>
+  </div>
+
+  <h3 class="sub-h reveal">ההשוואה, <span class="g">והפתעה קטנה</span></h3>
+  <div class="basecmp reveal">
+    <div class="basecol a">
+      <div class="bh">חלק א׳ · שעות עבודה</div>
+      <div class="brow"><span>תעריף העמסה</span><b>50 ₪ לשעת עבודה</b></div>
+      <div class="brow hi"><span>עקיפות שהועמסו על 301</span><b>40,000</b></div>
+      <div class="brow hi"><span>עלות הזמנה 301 בהשלמה</span><b>239,000</b></div>
+      <div class="brow same"><span>עלות הזמנה 302 בהשלמה</span><b>325,000</b></div>
+      <div class="brow same"><span>יתרת הזמנה 303 בתהליך</span><b>226,000</b></div>
+      <div class="brow hi"><span>סטיית העמסה</span><b>10,000 בחסר</b></div>
+      <div class="brow"><span>עלות המכר</span><b>369,000</b></div>
+      <div class="brow"><span>רווח גולמי</span><b>131,000</b></div>
+    </div>
+    <div class="basecol b">
+      <div class="bh">חלק ב׳ · שעות מכונה</div>
+      <div class="brow"><span>תעריף העמסה</span><b>100 ₪ לשעת מכונה</b></div>
+      <div class="brow hi"><span>עקיפות שהועמסו על 301</span><b>30,000</b></div>
+      <div class="brow hi"><span>עלות הזמנה 301 בהשלמה</span><b>229,000</b></div>
+      <div class="brow same"><span>עלות הזמנה 302 בהשלמה</span><b>325,000</b></div>
+      <div class="brow same"><span>יתרת הזמנה 303 בתהליך</span><b>226,000</b></div>
+      <div class="brow hi"><span>סטיית העמסה</span><b>20,000 בחסר</b></div>
+      <div class="brow"><span>עלות המכר</span><b>369,000</b></div>
+      <div class="brow"><span>רווח גולמי</span><b>131,000</b></div>
+    </div>
+  </div>
+
+  <div class="hardq reveal">
+    <div class="hqt">🤯 רגע, למה הרווח זהה?</div>
+    <div class="hqq">שינינו בסיס העמסה, עלות ההזמנה השתנתה מ-239,000 ל-229,000, והרווח הגולמי נשאר <b>בדיוק 131,000</b>. במקרה? ואם כן, מתי זה כן ישנה?</div>
+    <div class="acc"><div class="acc-h" onclick="toggleHardq(this)"><h4>הראו לי את ההסבר המלא</h4><span class="chev">⌄</span></div>
+      <div class="acc-body"><div class="acc-bin">
+        <p><b>זה לא במקרה, וזו בדיוק הנקודה.</b> סך העקיפות שהחברה באמת בזבזה הוא 160,000 ש״ח, ללא קשר לשאלה איך חילקנו אותן. בסופו של יום, כל 160,000 השקלים האלה חייבים למצוא את דרכם לדוח רווח והפסד של התקופה, דרך ההזמנות שנמסרו או דרך הסטייה.</p>
+        <p>ומה קרה כאן בפועל: העמסנו על הזמנה 301 פחות ב-10,000, ולכן עלותה ירדה ב-10,000. אבל בדיוק אותם 10,000 חסרים עכשיו בסך ההעמסה, ולכן הסטייה גדלה ב-10,000. הזמנה 301 <b>נמסרה באותו חודש</b>, כך ששני התיקונים נפגשים באותה שורה, עלות המכר, ומתקזזים במדויק.</p>
+        <p><b>מתי כן היה נוצר הבדל?</b> אילו הזמנה 301 הייתה נשארת במחסן ולא נמסרת. אז ההקלה של 10,000 הייתה נשארת כלואה בתוך המלאי במאזן, ואילו הסטייה הגדולה יותר הייתה נזקפת מיד לתקופה. הרווח החודשי היה נמוך יותר ב-10,000, והמלאי היה נמוך יותר באותו סכום.</p>
+        <p><b>אז בשביל מה כל זה?</b> בשביל ההחלטות, לא בשביל הרווח המצרפי. אם החברה מתמחרת הצעות מחיר לפי עלות ההזמנה, ההבדל בין 239,000 ל-229,000 הוא הבדל אמיתי מאוד. בנגרייה שנשענת על מכונות CNC יקרות, בסיס שעות מכונה מייצג טוב יותר את צריכת המשאבים: הזמנה שמעסיקה את המכונה שעות רבות אכן שורפת יותר פחת וחשמל, גם אם הנגר עצמו נגע בה מעט. בסיס שעות עבודה, במפעל כזה, יסבסד את ההזמנות עתירות המכונה על חשבון ההזמנות עתירות העבודה.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="takeaway reveal">
+    <span class="big-emoji">⚖️</span>
+    <div class="hd">שורה תחתונה של המקרה השלישי</div>
+    <div class="tx">בסיס ההעמסה לא משנה כמה כסף החברה הוציאה. הוא משנה על מי הכסף הזה נרשם, וזה בדיוק מה שקובע אילו הזמנות ייראו רווחיות ואילו לא.</div>
+  </div>
+</section>
+<!-- ==================== MODULE 10 · TRAPS ==================== -->
+<section class="section" id="traps">
+  <span class="block-tag">10 · מלכודות</span>
+  <h2>שמונה דרכים <span class="g">לאבד נקודות במבחן</span></h2>
+  <p class="section-sub">כל אחת מהן מופיעה בפועל, שנה אחר שנה. אם תזהו אותן מראש, פתרתם חצי מהשאלה עוד לפני שהתחלתם.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">🧩</span>מתי הזמנה</span>
+    <span class="pst done"><span class="n">🗂</span>אנטומיה</span>
+    <span class="pst done"><span class="n">🔄</span>שורות הדוח</span>
+    <span class="pst done"><span class="n">⚖️</span>סטייה</span>
+    <span class="pst done"><span class="n">💰</span>רווח</span>
+    <span class="pst done"><span class="n">🧪</span>שלושה מקרים</span>
+    <span class="pst on"><span class="n">⚠️</span>מלכודות</span>
+    <span class="pst"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 8 מתוך 9</div>
+
+  <div class="ex-grid" id="trapsMC"></div>
+  <div class="ex-grid" id="trapsTF"></div>
+</section>
+
+<!-- ==================== MODULE 11 · SUMMARY ==================== -->
+<section class="section" id="summary">
+  <span class="block-tag">11 · סיכום</span>
+  <h2>מה לוקחים <span class="g">מהשיעור הזה</span></h2>
+  <p class="section-sub">אם תזכרו רק דף אחד מהיום, שיהיה זה.</p>
+
+  <div class="deep-card">
+    <h3>סדר הפעולות, <span class="g">בכל שאלה, תמיד</span></h3>
+    <div class="flow-steps stagger">
+      <div class="flow-step"><div class="num">1</div><div><div class="fs-title">חשבו את תעריף ההעמסה</div><div class="fs-sub">מהאומדן השנתי, לפני שנוגעים בטבלה</div></div></div>
+      <div class="flow-step"><div class="num">2</div><div><div class="fs-title">חשבו את העבודה הישירה לכל הזמנה</div><div class="fs-sub">שעות כפול תעריף. ההפרש מסך השכר הוא עבודה עקיפה</div></div></div>
+      <div class="flow-step"><div class="num">3</div><div><div class="fs-title">מלאו את הטבלה לפי סדר האירועים</div><div class="fs-sub">פתיחה, קניות, משיכות, שכר, העמסה, השלמות, מסירות, סגירה</div></div></div>
+      <div class="flow-step"><div class="num">4</div><div><div class="fs-title">סכמו את ההעמסות והשוו לעקיפות בפועל</div><div class="fs-sub">ההפרש הוא הסטייה, וכיוונה נקבע מהמציאות</div></div></div>
+      <div class="flow-step"><div class="num">5</div><div><div class="fs-title">חשבו רווח גולמי</div><div class="fs-sub">מכירות פחות עלות ההזמנות שנמסרו, בתיקון הסטייה</div></div></div>
+    </div>
+
+    <h4>רשימת בדיקה לפני שמגישים</h4>
+    <ul class="checklist">
+      <li>טור של הזמנה שהושלמה מסתכם באפס.</li>
+      <li>סכום ההשלמה כלל את יתרת הפתיחה של אותה הזמנה.</li>
+      <li>חומרי העזר יצאו מהמחסן ולא נכנסו לאף הזמנה.</li>
+      <li>העבודה העקיפה שחישבתם כהפרש זהה לזו שבפירוט העקיפות בפועל.</li>
+      <li>לעלות המכר נכנסו רק הזמנות שנמסרו, לא כאלה שרק הושלמו.</li>
+      <li>תמורת המכירה לא הופיעה בשום מקום בתוך דוח התמחיר.</li>
+      <li>הסטייה נסגרה לעלות המכר, בכיוון הנכון.</li>
+    </ul>
+  </div>
+
+  <div class="flip-grid cols3 stagger">
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">🗂</div><div class="ttl">הרעיון המרכזי<span class="en">The big idea</span></div><div class="hint">↻ הפכו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">🗂 הרעיון המרכזי</div><p>הדוח הוא מפה של המלאי, לא של הרווח. כל עמודה היא מקום שבו כסף יכול לשבת, וכל שורה היא תנועה בין מקומות.</p></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">⚖️</div><div class="ttl">הסטייה<span class="en">The variance</span></div><div class="hint">↻ הפכו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">⚖️ הסטייה</div><p>לא כישלון, אלא תוצאה בלתי נמנעת של עבודה עם אומדן. מטפלים בה פעם אחת, מצרפית, ברמת התקופה.</p></div>
+    </div></div>
+    <div class="flip"><div class="flip-inner">
+      <div class="flip-face flip-front"><div class="ic">🎯</div><div class="ttl">בסיס ההעמסה<span class="en">The base</span></div><div class="hint">↻ הפכו</div></div>
+      <div class="flip-face flip-back"><div class="bk-ttl">🎯 בסיס ההעמסה</div><p>לא משנה את סך העלות של החברה, רק את חלוקתה. בוחרים אותו לפי מה שבאמת מניע את העלות העקיפה באותו מפעל.</p></div>
+    </div></div>
+  </div>
+
+  <div class="takeaway reveal">
+    <span class="big-emoji">🧾</span>
+    <div class="hd">שורה תחתונה של השיעור</div>
+    <div class="tx">תמחיר הזמנה הוא לא טכניקה של רואי חשבון. זו היכולת לענות ללקוח, לבנק ולעצמכם על השאלה כמה באמת עלתה העבודה הזאת, בזמן שהיא עוד רצה.</div>
+  </div>
+</section>
+
+<!-- ==================== MODULE 12 · HOMEWORK ==================== -->
+<section class="section" id="homework">
+  <span class="block-tag">12 · שיעורי בית</span>
+  <h2>שתי שאלות מלאות, <span class="g">בדיוק ברמת המבחן</span></h2>
+  <p class="section-sub">שתיהן שאלות תמחיר הזמנה מקיפות, עם דוח מלא, סטייה ורווח גולמי. פתרו אותן על נייר, ואז השתמשו בשדות הבדיקה כאן כדי לוודא. הרמזים של ליבי בנויים בשכבות: קודם הנוסחה, אחר כך ההצבה.</p>
+  <div class="pipe">
+    <span class="pst done"><span class="n">🔁</span>חימום</span>
+    <span class="pst done"><span class="n">🧩</span>מתי הזמנה</span>
+    <span class="pst done"><span class="n">🗂</span>אנטומיה</span>
+    <span class="pst done"><span class="n">🔄</span>שורות הדוח</span>
+    <span class="pst done"><span class="n">⚖️</span>סטייה</span>
+    <span class="pst done"><span class="n">💰</span>רווח</span>
+    <span class="pst done"><span class="n">🧪</span>שלושה מקרים</span>
+    <span class="pst done"><span class="n">⚠️</span>מלכודות</span>
+    <span class="pst on"><span class="n">📝</span>ש. בית</span>
+  </div>
+  <div class="pipe-cap">אתם בתחנה 9 מתוך 9</div>
+
+  <div class="hwlinks reveal">
+    <a class="hwlink" href="lec4_hw1.html">
+      <div class="hlt">🔩 מפעלי מתכת מתקדמים בע״מ</div>
+      <div class="hls">ינואר 2025. חמש הזמנות במקביל, שתיים מהן חדשות, אחת נשארת בתהליך. בסיס העמסה: שעות עבודה ישירה.</div>
+      <div class="hlg">פתחו את השאלה המלאה ←</div>
+    </a>
+    <a class="hwlink" href="lec4_hw2.html">
+      <div class="hlt">🏠 פסגות מבנים ניידים בע״מ</div>
+      <div class="hls">מאי 2026. בסיס העמסה חריג ומעניין: שטח רצפת ייצור במטרים רבועים. חשבו למה דווקא הוא נבחר.</div>
+      <div class="hlg">פתחו את השאלה המלאה ←</div>
+    </a>
+  </div>
+
+  <div class="soft-note reveal">הנתונים המלאים נמצאים בדפי השאלות עצמם. כאן, למטה, יש שדות בדיקה לתשובות המספריות המרכזיות של כל שאלה, לפי סדר הפתרון.</div>
+
+  <div class="checkpoint reveal" id="scoreCounter" style="font-weight:800">התקדמות בתרגול (חימום, מקרים, מלכודות ובית): 0 / 17</div>
+
+  <h3 class="sub-h reveal">א. <span class="g">מפעלי מתכת מתקדמים</span>, ינואר 2025</h3>
+  <div class="ex-grid" id="hwA"></div>
+
+  <h3 class="sub-h reveal">ב. <span class="g">פסגות מבנים ניידים</span>, מאי 2026</h3>
+  <div class="ex-grid" id="hwB"></div>
+
+  <div class="checkpoint reveal">
+    <div class="hd">📌 השאלה התיאורטית, בשתי השאלות</div>
+    <p>בשתיהן מתבקש הסבר על בחירת בסיס ההעמסה. אל תסתפקו ב"כי כך נתון". התשובה הטובה מסבירה <b>מה מניע את העלות העקיפה באותו מפעל בפרט</b>: במפעל מתכת עתיר עבודה ידנית, שעות עבודה סבירות; במפעל אוטומטי, שעות מכונה יתאימו יותר; ובמפעל שמייצר מבנים ענקיים שתופסים שטח חודשים, השטח הוא מה שבאמת נצרך, ולכן מטר רבוע הוא הבסיס ההגיוני. תמיד קשרו את הבסיס למשאב שההזמנה באמת בולעת.</p>
+  </div>
+
+  <div class="info tip reveal">
+    <div class="hd">💬 מילה אישית לפני שסוגרים</div>
+    <p>אם דוח התמחיר עדיין מרגיש כמו רשת של מספרים, זה בסדר גמור. הוא נעשה ברור בערך בשאלה השלישית שפותרים לבד, לא בשאלה הראשונה שרואים על המסך. פתרו את שתי שאלות הבית מההתחלה ועד הסוף, בלי להציץ, ואז השוו. זה מה שעובד.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="big">חשבונאות ניהולית · שיעור 3: תמחיר הזמנה</div>
+  <div>ד״ר שי צבאן · מעקב עלויות בייצור לפי הזמנות</div>
+  <div class="small">כל התרחישים במסמך זה הם דוגמאות לימודיות בלבד.</div>
+</footer>
+<script>
+var MATH_DELIMS=[
+  {left:"$$", right:"$$", display:true},
+  {left:"$", right:"$", display:false}
+];
+function renderMathInDocument(){
+  if(window.renderMathInElement){
+    renderMathInElement(document.body, {delimiters:MATH_DELIMS, throwOnError:false});
+  }
+}
+function renderMathIn(el){
+  if(window.renderMathInElement && el){
+    renderMathInElement(el, {delimiters:MATH_DELIMS, throwOnError:false});
+  }
+}
+</script>
+<script>
+(function(){
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- keynote start ---------- */
+  window.startLesson=function(){
+    document.body.classList.remove('pre-start');
+    var h=document.querySelector('.hero'); if(h) h.scrollIntoView({behavior:RM?'auto':'smooth'});
+  };
+  var hero=document.querySelector('.hero');
+  if(hero){ var startO=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ document.body.classList.remove('pre-start'); startO.disconnect(); } }); },{threshold:.08}); startO.observe(hero); }
+
+  /* ---------- reveal + stagger ---------- */
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } }); }, {threshold:.1});
+  document.querySelectorAll('.reveal,.stagger').forEach(function(el){ io.observe(el); });
+
+  /* ---------- flip cards ---------- */
+  document.querySelectorAll('.flip').forEach(function(f){
+    f.setAttribute('tabindex','0'); f.setAttribute('role','button');
+    function tog(e){ if(e && e.target && e.target.closest('a,button')) return; f.classList.toggle('flipped'); }
+    f.addEventListener('click',tog);
+    f.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();f.classList.toggle('flipped');} });
+  });
+
+  /* ---------- hardq accordion ---------- */
+  window.toggleHardq=function(h){ h.parentElement.classList.toggle('open'); };
+
+  /* ---------- module progress (scroll) ---------- */
+  var sections=Array.prototype.slice.call(document.querySelectorAll('main .section'));
+  var bar=document.getElementById('bar'), lp=document.getElementById('lessonProg');
+  function onScroll(){
+    var h=document.documentElement, sc=h.scrollTop, max=h.scrollHeight-h.clientHeight;
+    if(bar) bar.style.width=(max>0?(sc/max*100):0)+'%';
+    var idx=0;
+    for(var i=0;i<sections.length;i++){ if(sections[i].getBoundingClientRect().top<=140){ idx=i; } }
+    var pct = max>0 ? Math.round(sc/max*100) : 0;
+    if(lp) lp.textContent='מודול '+(idx+1)+' / '+sections.length+' · '+pct+'%';
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('load', onScroll); onScroll();
+
+  /* ================= LIBI MASCOT ================= */
+  var libi=document.getElementById('libi'), lTip=document.getElementById('lTip'), lArt=document.getElementById('lArt');
+  function setTip(txt){ lTip.innerHTML=txt; renderMathIn(lTip); libi.classList.remove('pulse'); void libi.offsetWidth; libi.classList.add('pulse'); if(libi.classList.contains('min')) libiReopen(); }
+  window.libiMin=function(){ libi.classList.add('min'); };
+  window.libiReopen=function(){ libi.classList.remove('min'); };
+  function clampX(x){ return Math.max(6, Math.min(x, window.innerWidth - libi.offsetWidth - 6)); }
+  function clampY(y){ return Math.max(6, Math.min(y, window.innerHeight - libi.offsetHeight - 6)); }
+  var dragging=false, dx=0, dy=0;
+  function down(e){ dragging=true; var r=libi.getBoundingClientRect();
+    var cx=(e.touches?e.touches[0].clientX:e.clientX), cy=(e.touches?e.touches[0].clientY:e.clientY);
+    dx=cx-r.left; dy=cy-r.top; libi.style.bottom='auto'; e.preventDefault(); }
+  function move(e){ if(!dragging) return;
+    var cx=(e.touches?e.touches[0].clientX:e.clientX), cy=(e.touches?e.touches[0].clientY:e.clientY);
+    libi.style.left=clampX(cx-dx)+'px'; libi.style.top=clampY(cy-dy)+'px'; libi.style.right='auto'; }
+  function up(){ dragging=false; }
+  lArt.addEventListener('mousedown',down); lArt.addEventListener('touchstart',down,{passive:false});
+  window.addEventListener('mousemove',move); window.addEventListener('touchmove',move,{passive:false});
+  window.addEventListener('mouseup',up); window.addEventListener('touchend',up);
+
+  var SYMBOL_EXPLAIN={
+    direct:'עלות ישירה: אפשר לשייך אותה לשירות מסוים בלי מאמץ או ניחוש, בעלות מעקב זולה. אם אתם יכולים להצביע על בדיקה ספציפית ולומר "זה בשבילה", זו עלות ישירה.',
+    indirect:'עלות עקיפה: משותפת לכמה שירותים בבת אחת. אי אפשר (או לא כדאי) לעקוב אחריה לשירות בודד, ולכן צריך שיטת הקצאה, בדיוק כמו שאי אפשר לדעת בדיוק כמה מהחשמל במאפייה שייך לכל רוגלית בנפרד.',
+    pohr:'POHR הוא שיעור העמסה מוגדר מראש: עלות עקיפה מתוקצבת חלקי בסיס הקצאה מתוקצב. הוא נקבע פעם אחת, בתחילת התקופה, ונשאר קבוע לאורכה.',
+    applied:'עלות עקיפה שהועמסה היא ה"מנה" שכל שירות מקבל מהעלויות המשותפות: POHR כפול השימוש בפועל שלו בבסיס ההקצאה. סכום כל ההעמסות אמור להתקרב לסך העלות העקיפה בפועל.'
+  };
+  window.libiExplain=function(sym){ if(SYMBOL_EXPLAIN[sym]) setTip(SYMBOL_EXPLAIN[sym]); };
+
+  /* ================= SCORE TRACKER ================= */
+  var TOTAL_EX=17, solved={};
+  function markSolved(id){ if(!solved[id]){ solved[id]=true; var el=document.getElementById('scoreCounter'); if(el) el.textContent='התקדמות בתרגול (חימום, מקרים, מלכודות ובית): '+Object.keys(solved).length+' / '+TOTAL_EX; } }
+
+  /* ================= HINT ENGINE ================= */
+  var hintTier={};
+  window.showHint=function(id, hints){
+    var t = hintTier[id]===undefined ? 0 : Math.min(hintTier[id]+1, hints.length-1);
+    hintTier[id]=t;
+    var html='';
+    for(var i=0;i<=t;i++) html+='<div class="htier">'+hints[i]+'</div>';
+    var box=document.getElementById('hint-'+id);
+    box.innerHTML=html; box.classList.add('show');
+    renderMathIn(box);
+    var btn=document.getElementById('hbtn-'+id);
+    if(t>=hints.length-1) btn.textContent='💡 זה הכל, נסו את הפתרון המלא';
+    else btn.textContent='💡 עוד מליבי';
+    setTip(hints[t]);
+  };
+  window.toggleSol=function(id){ document.getElementById('sol-'+id).classList.toggle('open'); };
+
+  /* ================= GENERIC RENDERERS ================= */
+  function diffTag(d){ return '<span class="diff '+(d==='קל'?'easy':d==='בינוני'?'med':'hard')+'">'+d+'</span>'; }
+  function hintTools(ex){
+    return '<div class="ex-tools">'
+      +'<button class="hint-btn" id="hbtn-'+ex.id+'" onclick=\'showHint("'+ex.id+'", '+JSON.stringify(ex.hints)+')\'>💡 רמז מליבי</button>'
+      +'</div><div class="hint-box" id="hint-'+ex.id+'"></div>'
+      +'<div class="sol-acc" id="sol-'+ex.id+'"><div class="sh" onclick="toggleSol(\''+ex.id+'\')"><span>📖 הצג פתרון מלא</span><span class="chev">⌄</span></div><div class="sb"><div class="sbin">'+ex.solution+'</div></div></div>';
+  }
+
+  /* classify: supports 1 or 2 axes via ex.axes = [{key,label,options:[{v,label,icon}],correct}, ...] */
+  function renderClassify(ex){
+    var axesHtml = ex.axes.map(function(axis, ai){
+      var cols = axis.options.length===2 ? ' cols2' : '';
+      var label = axis.label ? '<div class="axis-label">'+axis.label+'</div>' : '';
+      var btns = axis.options.map(function(o){
+        return '<button class="classify-btn '+o.v+'" onclick="classifyPick(\''+ex.id+'\','+ai+',\''+o.v+'\',\''+axis.correct+'\','+ex.axes.length+')">'+o.icon+' '+o.label+'</button>';
+      }).join('');
+      return label+'<div class="classify-row'+cols+'" data-axis="'+ai+'">'+btns+'</div>';
+    }).join('');
+    return '<div class="ex-card" id="'+ex.id+'" data-correct-axes="0" data-total-axes="'+ex.axes.length+'"><div class="ex-head"><div class="ex-num">'+ex.n+'</div><h4>'+ex.title+'</h4>'+diffTag(ex.difficulty)+'</div>'
+      +'<div class="ex-text">'+ex.text+'</div>'
+      +axesHtml
+      +'<div class="classify-fb" id="fb-'+ex.id+'"></div>'
+      +hintTools(ex)+'</div>';
+  }
+  var LBL={fixed:'קבועה',variable:'משתנה',mixed:'מעורבת',direct:'ישירה',indirect:'עקיפה',plan:'תכנון',control:'בקרה',decide:'קבלת החלטות',yes:'נכון',no:'לא נכון'};
+  window.classifyPick=function(id, axisIdx, choice, correct, totalAxes){
+    var card=document.getElementById(id);
+    var row=card.querySelector('.classify-row[data-axis="'+axisIdx+'"]');
+    if(row.dataset.answered) return; row.dataset.answered='1';
+    row.querySelectorAll('.classify-btn').forEach(function(b){ b.disabled=true; });
+    row.querySelector('.classify-btn.'+correct).classList.add('correct');
+    var ok = choice===correct;
+    if(!ok) row.querySelector('.classify-btn.'+choice).classList.add('wrong');
+    var fb=document.getElementById('fb-'+id);
+    var msg = ok ? '✅ נכון! זו '+LBL[correct]+'.' : '❌ לא בדיוק, זו '+LBL[correct]+'.';
+    fb.textContent = fb.textContent ? fb.textContent+' '+msg : msg;
+    fb.style.color = ok ? '#059669' : '#dc2626';
+    if(ok) card.dataset.correctAxes = (+card.dataset.correctAxes||0)+1;
+    var answeredCount = card.querySelectorAll('.classify-row[data-answered]').length;
+    if(answeredCount>=totalAxes){
+      if(+card.dataset.correctAxes>=totalAxes) markSolved(id);
+      else fb.textContent += ' פתחו את הפתרון המלא כדי לראות למה.';
+    }
+  };
+
+  /* build a self-contained "formula explanation" block: description, bare formula, per-symbol reminder, applied tip */
+  function feBlock(desc, tex, params, tip){
+    var html = desc ? '<div class="fe-desc">'+desc+'</div>' : '';
+    if(tex) html += '<div class="fe-formula">$'+tex+'$</div>';
+    if(params && params.length) html += '<div class="fe-params">'+params.join('<br>')+'</div>';
+    if(tip) html += '<div class="fe-tip">'+tip+'</div>';
+    return html;
+  }
+  window.toggleClass=function(id){ document.getElementById(id).classList.toggle('show'); };
+
+  function renderNumeric(ex){
+    var subsHtml='';
+    ex.subs.forEach(function(s){
+      var hintBtn = s.subhint ? '<button class="sub-hint-btn sr-hint" onclick="toggleClass(\'subhint-'+s.id+'\')">💡 '+(s.hintBtnLabel||'רמז מליבי')+'</button>' : '';
+      var hintBox = s.subhint ? '<div class="sub-hint-box" id="subhint-'+s.id+'">'+s.subhint+'</div>' : '';
+      subsHtml+='<div class="subrow" id="row-'+s.id+'">'
+        +'<label>'+s.label+'</label>'
+        +'<input type="text" inputmode="decimal" id="in-'+s.id+'" placeholder="'+ (s.unit||'') +'">'
+        +'<button onclick="checkSub(\''+ex.id+'\',\''+s.id+'\','+s.expected+','+(s.tol!==undefined?s.tol:1)+')">בדקו</button>'
+        +hintBtn
+        +'<div class="verdict" id="v-'+s.id+'"></div>'
+        +hintBox+'</div>';
+    });
+    return '<div class="ex-card" id="'+ex.id+'"><div class="ex-head"><div class="ex-num">'+ex.n+'</div><h4>'+ex.title+'</h4>'+diffTag(ex.difficulty)+(ex.trap?'<span class="trap">⚠️ מלכודת</span>':'')+'</div>'
+      +'<div class="ex-text">'+ex.text+'</div>'
+      +subsHtml
+      +hintTools(ex)+'</div>';
+  }
+  window.checkSub=function(exId, subId, expected, tol){
+    var input=document.getElementById('in-'+subId);
+    var given=parseFloat((input.value||'').replace(',',''));
+    var v=document.getElementById('v-'+subId);
+    if(isNaN(given)){ v.textContent='הקלידו מספר קודם.'; v.style.color='#dc2626'; return; }
+    var ok=Math.abs(given-expected)<=tol;
+    v.textContent = ok ? '✅ נכון!' : '❌ לא מדויק. נסו שוב, או בקשו רמז.';
+    v.style.color = ok ? '#059669' : '#dc2626';
+    document.getElementById('row-'+subId).style.borderColor = ok ? 'var(--variable)' : '#fca5a5';
+    if(ok){
+      var card=input.closest('.ex-card');
+      var allOk=true;
+      card.querySelectorAll('.subrow').forEach(function(r){ if(!r.style.borderColor || r.style.borderColor==='rgb(252, 165, 165)') allOk=false; });
+      if(allOk) markSolved(card.id);
+    }
+  };
+
+  /* ================= GENERIC RENDERER: MULTIPLE CHOICE (5 options) ================= */
+  function renderMC(ex){
+    var qsHtml = ex.questions.map(function(q, qi){
+      var opts = q.opts.map(function(o,oi){
+        return '<button class="mc-opt" onclick="mcPick(\''+ex.id+'\','+qi+','+oi+','+q.correct+')"><span class="k">'+String.fromCharCode(1488+oi)+'</span><span>'+o+'</span></button>';
+      }).join('');
+      var hintBtn = q.hint ? '<button class="sub-hint-btn" onclick="toggleClass(\'mchint-'+ex.id+'-'+qi+'\')">💡 '+(q.hintBtnLabel||'רמז מליבי')+'</button>' : '';
+      var hintBox = q.hint ? '<div class="sub-hint-box" id="mchint-'+ex.id+'-'+qi+'">'+q.hint+'</div>' : '';
+      return '<div class="mc-block" data-q="'+qi+'"><div class="mc-q">'+(qi+1)+'. '+q.q+' '+hintBtn+'</div>'+hintBox+opts+'<div class="mc-fb" id="mcfb-'+ex.id+'-'+qi+'"></div></div>';
+    }).join('');
+    return '<div class="ex-card" id="'+ex.id+'" data-total-q="'+ex.questions.length+'" data-correct-q="0"><div class="ex-head"><div class="ex-num">'+ex.n+'</div><h4>'+ex.title+'</h4>'+diffTag(ex.difficulty)+'</div>'
+      +'<div class="ex-text">'+ex.text+'</div>'
+      +qsHtml
+      +hintTools(ex)+'</div>';
+  }
+  window.mcPick=function(id, qi, oi, correctIdx){
+    var card=document.getElementById(id);
+    var block=card.querySelector('.mc-block[data-q="'+qi+'"]');
+    if(block.dataset.answered) return; block.dataset.answered='1';
+    var btns=block.querySelectorAll('.mc-opt');
+    btns.forEach(function(b){ b.disabled=true; });
+    btns[correctIdx].classList.add('correct');
+    var ok = oi===correctIdx;
+    if(!ok) btns[oi].classList.add('wrong');
+    var fb=document.getElementById('mcfb-'+id+'-'+qi);
+    fb.textContent = ok ? '✅ נכון!' : '❌ לא נכון, התשובה הנכונה מסומנת למעלה.';
+    fb.style.color = ok ? '#059669' : '#dc2626';
+    if(ok) card.dataset.correctQ = (+card.dataset.correctQ||0)+1;
+    var totalQ=+card.dataset.totalQ;
+    var answered=card.querySelectorAll('.mc-block[data-answered]').length;
+    if(answered>=totalQ && +card.dataset.correctQ>=totalQ) markSolved(id);
+  };
+
+  /* ================= GENERIC RENDERER: TRUE/FALSE SET ================= */
+  function renderTF(ex){
+    var stHtml = ex.statements.map(function(s, si){
+      var hintBtn = s.hint ? '<button class="sub-hint-btn" onclick="toggleClass(\'tfhint-'+ex.id+'-'+si+'\')">💡 '+(s.hintBtnLabel||'רמז מליבי')+'</button>' : '';
+      var hintBox = s.hint ? '<div class="sub-hint-box" id="tfhint-'+ex.id+'-'+si+'">'+s.hint+'</div>' : '';
+      return '<div class="tf-block" data-s="'+si+'"><div class="tf-s">'+(si+1)+'. '+s.s+' '+hintBtn+'</div>'+hintBox
+        +'<div class="tf-btnrow"><button class="tf-btn t" onclick="tfPick(\''+ex.id+'\','+si+',true,'+s.correct+')">✔️ נכון</button><button class="tf-btn f" onclick="tfPick(\''+ex.id+'\','+si+',false,'+s.correct+')">❌ לא נכון</button></div>'
+        +'<div class="tf-explain" id="tfx-'+ex.id+'-'+si+'">'+s.explain+'</div></div>';
+    }).join('');
+    return '<div class="ex-card" id="'+ex.id+'" data-total-q="'+ex.statements.length+'" data-correct-q="0"><div class="ex-head"><div class="ex-num">'+ex.n+'</div><h4>'+ex.title+'</h4>'+diffTag(ex.difficulty)+'</div>'
+      +'<div class="ex-text">'+ex.text+'</div>'
+      +stHtml
+      +hintTools(ex)+'</div>';
+  }
+  window.tfPick=function(id, si, val, correct){
+    var card=document.getElementById(id);
+    var block=card.querySelector('.tf-block[data-s="'+si+'"]');
+    if(block.dataset.answered) return; block.dataset.answered='1';
+    var btns=block.querySelectorAll('.tf-btn');
+    var ok = val===correct;
+    (val ? btns[0] : btns[1]).classList.add(ok ? 'correct' : 'wrong');
+    if(!ok) (correct ? btns[0] : btns[1]).classList.add('correct');
+    btns.forEach(function(b){ b.disabled=true; });
+    document.getElementById('tfx-'+id+'-'+si).classList.add('show');
+    if(ok) card.dataset.correctQ = (+card.dataset.correctQ||0)+1;
+    var totalQ=+card.dataset.totalQ;
+    var answered=card.querySelectorAll('.tf-block[data-answered]').length;
+    if(answered>=totalQ && +card.dataset.correctQ>=totalQ) markSolved(id);
+  };
+
+
+  /* ================= VARIANCE BARS: animate on scroll ================= */
+  var vvIO=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.vv-col').forEach(function(c){ c.style.height=(RM?c.dataset.h:c.dataset.h)+'%'; });
+        vvIO.unobserve(e.target);
+      }
+    });
+  },{threshold:.35});
+  document.querySelectorAll('.varviz').forEach(function(v){ vvIO.observe(v); });
+
+  /* ================= ANIMATED JOB-COST REPORT ENGINE ================= */
+  var STAGES=[
+    {k:'store', ic:'📦', t:'מחסן חומרים'},
+    {k:'wip',   ic:'🏗️', t:'עבודה בתהליך'},
+    {k:'oh',    ic:'⚙️', t:'סל העקיפות'},
+    {k:'fg',    ic:'✅', t:'תוצרת גמורה'},
+    {k:'cogs',  ic:'💸', t:'יצא ללקוח'}
+  ];
+  function nfmt(v){
+    if(v===undefined||v===null) return '';
+    if(v===0) return '0';
+    var s=Math.abs(v).toLocaleString('en-US');
+    return v<0 ? '−'+s : s;
+  }
+  var JR={};
+  window.buildJobReport=function(cfg){
+    var root=document.getElementById(cfg.mount);
+    if(!root) return;
+    var cols=cfg.cols, steps=cfg.steps.slice();
+
+    /* auto-append the closing-balance row */
+    var totals={};
+    cols.forEach(function(c){ totals[c.k]=0; });
+    steps.forEach(function(s){ cols.forEach(function(c){ if(typeof s.cells[c.k]==='number') totals[c.k]+=s.cells[c.k]; }); });
+    steps.push({
+      lbl:cfg.closeLabel, tag:'סכום אנכי של כל השורות מעליה', kind:'close', stage:'',
+      cells:totals,
+      nh:'שורה אחרונה · יתרות סגירה',
+      nb:cfg.closeNarr,
+      why:'זו התשובה לשאלה "מה יש לחברה במלאי בסוף החודש". טור של הזמנה שהושלמה חייב להסתכם באפס, וזו בדיקת השפיות הכי מהירה שיש.'
+    });
+
+    var head='<tr><th class="rowhead">פרטים</th>'+cols.map(function(c){
+      return '<th class="'+(c.cls||'')+'">'+c.label+(c.sub?'<span class="sub">'+c.sub+'</span>':'')+'</th>';
+    }).join('')+'</tr>';
+
+    var body=steps.map(function(s,i){
+      var tds=cols.map(function(c){
+        var v=s.cells[c.k];
+        var cls=[];
+        if(typeof v==='number' && v<0) cls.push('neg');
+        if(v===0 && s.kind!=='close' && s.kind!=='open') cls.push('zero');
+        return '<td class="'+cls.join(' ')+'" data-c="'+c.k+'">'+nfmt(v)+'</td>';
+      }).join('');
+      return '<tr class="jr-row'+(s.kind==='close'?' jr-close':'')+(s.kind==='open'?' jr-open':'')+'" data-i="'+i+'">'
+        +'<td class="lbl">'+s.lbl+(s.tag?'<span class="tag">'+s.tag+'</span>':'')+'</td>'+tds+'</tr>';
+    }).join('');
+
+    root.innerHTML=
+      '<div class="jr-top"><div><div class="jt-co">'+cfg.co+'</div><div class="jt-s">'+cfg.sub+'</div></div>'
+      +'<div class="jt-s">כל הסכומים בש״ח</div></div>'
+      +'<div class="jr-stage">'+STAGES.map(function(st){
+          return '<span class="st" data-st="'+st.k+'"><span class="ic">'+st.ic+'</span>'+st.t+'</span>';
+        }).join('')+'</div>'
+      +'<div class="jr-legend"><span class="lg-m">מחסן</span><span class="lg-w">הזמנות בתהליך</span><span class="lg-f">תוצרת גמורה</span></div>'
+      +'<div class="jr-scroll"><table class="jtbl"><thead>'+head+'</thead><tbody>'+body+'</tbody></table></div>'
+      +'<div class="jr-ctrl">'
+        +'<button class="jr-btn primary" data-a="next">השורה הבאה ←</button>'
+        +'<button class="jr-btn" data-a="prev">→ אחורה</button>'
+        +'<button class="jr-btn" data-a="play">▶ הרצה אוטומטית</button>'
+        +'<button class="jr-btn" data-a="all">⏭ הצג הכל</button>'
+        +'<button class="jr-btn" data-a="reset">↺ איפוס</button>'
+        +'<span class="jr-count"></span>'
+      +'</div>'
+      +'<div class="jr-narr"><div class="nh">👋 מוכנים?</div><div class="nbody">'+cfg.intro+'</div></div>';
+
+    var st={i:-1, timer:null, steps:steps, root:root, cfg:cfg};
+    JR[cfg.mount]=st;
+    render(st);
+    root.querySelectorAll('.jr-btn').forEach(function(b){
+      b.addEventListener('click', function(){ act(cfg.mount, b.dataset.a); });
+    });
+  };
+
+  function render(st){
+    var rows=st.root.querySelectorAll('tr.jr-row');
+    rows.forEach(function(r,idx){
+      r.classList.toggle('on', idx<=st.i);
+      r.classList.toggle('cur', idx===st.i);
+    });
+    var s=st.i>=0 ? st.steps[st.i] : null;
+    /* stage strip */
+    st.root.querySelectorAll('.jr-stage .st').forEach(function(el){
+      el.classList.toggle('hot', !!s && (s.stage===el.dataset.st || s.stage==='all'));
+    });
+    /* narration */
+    var nar=st.root.querySelector('.jr-narr');
+    if(s){
+      nar.innerHTML='<div class="nh">'+s.nh+'</div><div class="nbody">'+s.nb+'</div>'
+        +(s.calc?'<div class="calc">'+s.calc+'</div>':'')
+        +(s.why?'<div class="why">'+s.why+'</div>':'');
+    }else{
+      nar.innerHTML='<div class="nh">👋 מוכנים?</div><div class="nbody">'+st.cfg.intro+'</div>';
+    }
+    /* counter + buttons */
+    st.root.querySelector('.jr-count').textContent = st.i<0 ? ('0 מתוך '+st.steps.length+' שורות') : ('שורה '+(st.i+1)+' מתוך '+st.steps.length);
+    var nx=st.root.querySelector('[data-a="next"]'), pv=st.root.querySelector('[data-a="prev"]');
+    nx.disabled = st.i>=st.steps.length-1;
+    pv.disabled = st.i<0;
+    nx.textContent = st.i>=st.steps.length-1 ? 'הגענו לסוף ✓' : 'השורה הבאה ←';
+  }
+
+  function pop(st){
+    if(st.i<0) return;
+    var row=st.root.querySelector('tr.jr-row[data-i="'+st.i+'"]');
+    if(!row) return;
+    row.querySelectorAll('td[data-c]').forEach(function(td){
+      if(td.textContent.trim()===''){ return; }
+      td.classList.remove('pop'); void td.offsetWidth; td.classList.add('pop');
+    });
+  }
+
+  function act(mount, a){
+    var st=JR[mount]; if(!st) return;
+    if(a==='next'){ stopPlay(st); if(st.i<st.steps.length-1){ st.i++; render(st); pop(st); libiFromStep(st); } }
+    else if(a==='prev'){ stopPlay(st); if(st.i>=0){ st.i--; render(st); } }
+    else if(a==='reset'){ stopPlay(st); st.i=-1; render(st); }
+    else if(a==='all'){ stopPlay(st); st.i=st.steps.length-1; render(st); }
+    else if(a==='play'){
+      if(st.timer){ stopPlay(st); return; }
+      var btn=st.root.querySelector('[data-a="play"]');
+      btn.textContent='⏸ עצרו';
+      if(st.i>=st.steps.length-1) st.i=-1;
+      st.timer=setInterval(function(){
+        if(st.i>=st.steps.length-1){ stopPlay(st); return; }
+        st.i++; render(st); pop(st);
+      }, RM?900:2600);
+      st.i++; render(st); pop(st);
+    }
+  }
+  function stopPlay(st){
+    if(st.timer){ clearInterval(st.timer); st.timer=null; }
+    var btn=st.root.querySelector('[data-a="play"]');
+    if(btn) btn.textContent='▶ הרצה אוטומטית';
+  }
+  function libiFromStep(st){
+    var s=st.steps[st.i];
+    if(s && s.libi) setTip(s.libi);
+  }
+
+  /* ================= JOB REPORT 1 · BUBU ================= */
+  buildJobReport({
+    mount:'jrBubu',
+    co:'חברת בובו בע״מ',
+    sub:'דוח תמחיר הזמנה · פברואר 2021',
+    closeLabel:'יתרת סגירה, 28.2.2021',
+    intro:'הטבלה ריקה בכוונה. לחצו על "השורה הבאה" ונמלא אותה יחד, שורה אחר שורה, עם הסבר לכל תנועה. אם תרצו לראות איך זה נראה בזרימה אחת, לחצו על ההרצה האוטומטית ותנו לזה לרוץ.',
+    closeNarr:'סוכמנו כל עמודה מלמעלה למטה. במחסן נשארו חומרים ב-130,000. הזמנות 101 ו-107 מסתכמות באפס, בדיוק כפי שצריך, כי הן הושלמו ועזבו את התהליך. הזמנה 108 עדיין בתהליך עם 475,000. במחסן התוצרת הגמורה נשארו 585,000, שהם בדיוק עלות הזמנה 101 שהושלמה אך טרם נמסרה ללקוח.',
+    cols:[
+      {k:'mat', label:'חומרי גלם', sub:'וחומרי עזר', cls:'matcol'},
+      {k:'j101', label:'הזמנה בתהליך', sub:'101', cls:'jobcol'},
+      {k:'j107', label:'הזמנה בתהליך', sub:'107', cls:'jobcol'},
+      {k:'j108', label:'הזמנה בתהליך', sub:'108', cls:'jobcol'},
+      {k:'fg', label:'תוצרת', sub:'גמורה', cls:'fgcol'}
+    ],
+    steps:[
+      {lbl:'יתרת פתיחה, 1.2.2021', tag:'נקודת המוצא', kind:'open', stage:'all',
+       cells:{mat:280000, j101:180000, j107:220000, j108:0, fg:190000},
+       nh:'שורה 1 · יתרות פתיחה',
+       nb:'לפני שקורה משהו, נרשום כמה כסף כבר יושב בכל מקום. במחסן חומרים ב-280,000. שתי הזמנות כבר רצות מהחודש הקודם: 101 עם 180,000 ו-107 עם 220,000. במחסן התוצרת הגמורה ממתינה הזמנה 100 בעלות 190,000. הזמנה 108 עוד לא נפתחה, ולכן טורה מתחיל באפס.',
+       why:'יתרת פתיחה איננה אירוע של החודש. זו רק נקודת המוצא, והיא תמיד נכנסת לחישוב ההשלמה בהמשך.',
+       libi:'שימו לב שהזמנה 108 מתחילה מאפס ולא ריקה. היא פשוט טרם נולדה החודש. גם עוגה מתחילה מקערה ריקה, וזה עדיין מצב שראוי לרשום.'},
+
+      {lbl:'קניית חומרי גלם', tag:'רכש מספקים', stage:'store',
+       cells:{mat:200000},
+       nh:'שורה 2 · קניות חומרי גלם',
+       nb:'קנינו חומרי גלם ב-200,000 ש״ח. הם נכנסו למחסן, ותו לא. אף הזמנה לא נגעה בהם עדיין.',
+       why:'קנייה איננה צריכה. עמודות ההזמנות נשארות ריקות בשורה הזאת, וזו טעות נפוצה מאוד.'},
+
+      {lbl:'קניית חומרי עזר', tag:'רכש מספקים', stage:'store',
+       cells:{mat:60000},
+       nh:'שורה 3 · קניות חומרי עזר',
+       nb:'גם חומרי העזר, ב-60,000 ש״ח, נכנסים לאותה עמודת מחסן. בשלב הרכש אין הבדל בין גלם לעזר, שניהם פשוט מלאי.',
+       why:'ההבדל בין גלם לעזר יתגלה רק ברגע המשיכה. עד אז שניהם חומר שקנינו ועדיין לא השתמשנו בו.'},
+
+      {lbl:'משיכת חומרי גלם לייצור', tag:'370,000 מפוצלים בין ההזמנות', stage:'wip',
+       cells:{mat:-370000, j101:90000, j107:120000, j108:160000},
+       nh:'שורה 4 · צריכת חומרי גלם',
+       nb:'הפעם הראשונה שבה שורה אחת נוגעת בכמה עמודות. סכום כולל של 370,000 יוצא מהמחסן בסימן מינוס, ואותו סכום בדיוק מתפזר בין שלוש ההזמנות לפי הפילוח שניתן בשאלה. שימו לב שהזמנה 108 נולדת בדיוק כאן.',
+       calc:'90,000 + 120,000 + 160,000 = 370,000',
+       why:'בדיקה מהירה: סכום מה שנכנס להזמנות חייב להיות שווה למה שיצא מהמחסן. אם לא, יש טעות בקריאת הנתונים.',
+       libi:'זו השורה שאני הכי אוהבת. הקמח יצא מהמזווה ונכנס לשלוש קעריות שונות. כלום לא נעלם, הכל רק החליף מקום.'},
+
+      {lbl:'צריכת חומרי עזר', tag:'עלות עקיפה, לא שייכת להזמנה', stage:'oh',
+       cells:{mat:-40000},
+       nh:'שורה 5 · צריכת חומרי עזר',
+       nb:'40,000 ש״ח של חומרי עזר יצאו מהמחסן. ועכשיו הרגע החשוב: הם לא נכנסים לאף טור הזמנה. אי אפשר לדעת כמה דבק בדיוק הלך להזמנה 101, ולכן זו עלות עקיפה.',
+       why:'לאן הם כן הולכים? לסל של העלויות העקיפות בפועל, שנשווה אליו בהמשך את סך ההעמסות. הסל הזה חי מחוץ לטבלה.'},
+
+      {lbl:'עבודה ישירה בייצור', tag:'שעות × 110 ש״ח לשעה', stage:'wip',
+       cells:{j101:165000, j107:110000, j108:165000},
+       nh:'שורה 6 · שכר עובדי הייצור',
+       nb:'עלות העבודה הישירה מחושבת לכל הזמנה בנפרד: מספר השעות שהושקעו בה, כפול תעריף העלות לשעה. עמודת החומרים אינה מעורבת כלל, כי שכר אינו יוצא מהמחסן.',
+       calc:'1,500 × 110 = 165,000 · 1,000 × 110 = 110,000 · 1,500 × 110 = 165,000'},
+
+      {lbl:'העמסת עלויות עקיפות', tag:'100 ש״ח × שעות עבודה', stage:'oh',
+       cells:{j101:150000, j107:100000, j108:150000},
+       nh:'שורה 7 · העמסת העקיפות',
+       nb:'זו השורה שדרשה חישוב מקדים. תעריף ההעמסה, 100 ש״ח לשעת עבודה, נקבע מהאומדן השנתי, ועכשיו הוא מוכפל בשעות שכל הזמנה באמת צרכה. שימו לב שאלה אותן שעות מהשורה הקודמת.',
+       calc:'100 × 1,500 = 150,000 · 100 × 1,000 = 100,000 · 100 × 1,500 = 150,000',
+       why:'אלה מספרים שהמצאנו מהאומדן, לא מהמציאות. בדיוק בגלל זה תיווצר בהמשך סטייה.',
+       libi:'שימו לב מה עשינו: לקחנו עלות שאף אחד לא יודע למי היא שייכת, והצמדנו אותה להזמנות לפי כלל שקבענו מראש. זו לא מדידה, זו הסכמה.'},
+
+      {lbl:'השלמת הזמנה 101', tag:'שתי רגליים, אותו סכום', stage:'fg',
+       cells:{j101:-585000, fg:585000},
+       nh:'שורה 8 · הזמנה 101 הסתיימה',
+       nb:'הזמנה 101 גמורה. סוכמים את כל מה שנצבר בטור שלה, כולל יתרת הפתיחה מהחודש הקודם, מאפסים את הטור בסכום שלילי, ומעבירים את אותו סכום בדיוק לתוצרת הגמורה.',
+       calc:'180,000 + 90,000 + 165,000 + 150,000 = 585,000',
+       why:'שום כסף לא נוצר ולא נעלם כאן. הוא רק עבר מ״ייצור שרץ״ ל״מוצר גמור במחסן״.',
+       libi:'הטעות הכי נפוצה בעולם בשורה הזאת היא לשכוח את יתרת הפתיחה, 180,000. ההזמנה לא נולדה החודש, ואי אפשר להתעלם מהעבר שלה.'},
+
+      {lbl:'השלמת הזמנה 107', tag:'שתי רגליים, אותו סכום', stage:'fg',
+       cells:{j107:-550000, fg:550000},
+       nh:'שורה 9 · הזמנה 107 הסתיימה',
+       nb:'אותו מהלך בדיוק, הפעם עבור הזמנה 107. סוכמים את הטור כולו, מאפסים אותו, ומגדילים את התוצרת הגמורה באותו סכום.',
+       calc:'220,000 + 120,000 + 110,000 + 100,000 = 550,000'},
+
+      {lbl:'מסירת הזמנה 100 ללקוח', tag:'עלות יוצאת, תמורה לא נכנסת', stage:'cogs',
+       cells:{fg:-190000},
+       nh:'שורה 10 · הזמנה 100 נמסרה',
+       nb:'הזמנה 100, שחיכתה במחסן מהחודש הקודם, יצאה ללקוח. מפחיתים מהתוצרת הגמורה בדיוק את הסכום שבו היא נכנסה לשם, 190,000.',
+       why:'התמורה שהתקבלה מהלקוח איננה מופיעה בדוח הזה בשום צורה. הדוח מתאר עלויות בלבד. התמורה תגיע בחישוב הרווח, בנפרד.'},
+
+      {lbl:'מסירת הזמנה 107 ללקוח', tag:'עלות יוצאת, תמורה לא נכנסת', stage:'cogs',
+       cells:{fg:-550000},
+       nh:'שורה 11 · הזמנה 107 נמסרה',
+       nb:'הזמנה 107 הושלמה החודש, ובאותו חודש גם נמסרה. שני האירועים נרשמים בנפרד: פעם אחת נכנסה לתוצרת הגמורה, ופעם אחת יצאה ממנה.',
+       why:'הזמנה 101 לעומתה הושלמה ולא נמסרה, ולכן היא תישאר במלאי. זה בדיוק ההבדל שמכריע מי נכנס לעלות המכר.',
+       libi:'שימו לב לניסוח בשאלות: ״הושלם ייצורן״ ו״נמסרו ללקוחות״ הן שתי רשימות שונות, וכמעט אף פעם לא זהות. תסמנו אותן בשני צבעים.'}
+    ]
+  });
+
+  /* ================= JOB REPORT 2 · ALPHA TECH ================= */
+  buildJobReport({
+    mount:'jrAlpha',
+    co:'אלפא טק בע״מ',
+    sub:'דוח תמחיר הזמנה · מרץ 2023',
+    closeLabel:'יתרת סגירה, 31.3.2023',
+    intro:'הפעם קצת יותר מהר. נסו לחזות כל שורה לפני שאתם לוחצים, ואז בדקו את עצמכם מול ההסבר.',
+    closeNarr:'במחסן נשארו חומרים ב-180,000. B2 ו-C3 התאפסו כי הושלמו. D4 ממשיכה לחודש הבא עם 550,000. בתוצרת הגמורה נשארו 570,000, שהם עלות הזמנה B2 שהושלמה וטרם נמסרה.',
+    cols:[
+      {k:'mat', label:'חומרי גלם', sub:'וחומרי עזר', cls:'matcol'},
+      {k:'B2', label:'הזמנה בתהליך', sub:'B2', cls:'jobcol'},
+      {k:'C3', label:'הזמנה בתהליך', sub:'C3', cls:'jobcol'},
+      {k:'D4', label:'הזמנה חדשה', sub:'D4', cls:'jobcol'},
+      {k:'fg', label:'תוצרת', sub:'גמורה', cls:'fgcol'}
+    ],
+    steps:[
+      {lbl:'יתרת פתיחה, 1.3.2023', tag:'תוצרת גמורה = הזמנה A1', kind:'open', stage:'all',
+       cells:{mat:100000, B2:220000, C3:350000, D4:0, fg:250000},
+       nh:'שורה 1 · יתרות פתיחה',
+       nb:'שימו לב שהזמנות B2 ו-C3 נכנסות בסכום הכולל שלהן, 220,000 ו-350,000, ולא בפילוח לשלושת הרכיבים. הפילוח בשאלה נועד רק להסביר מאיפה הגיעה היתרה.',
+       why:'בתוצרת הגמורה יושבת הזמנה A1 בעלות 250,000. היא הושלמה בחודש הקודם וממתינה ללקוח.'},
+
+      {lbl:'קניית חומרי גלם', tag:'נתון מעודכן', stage:'store',
+       cells:{mat:500000},
+       nh:'שורה 2 · קניות חומרי גלם',
+       nb:'500,000 ש״ח נכנסים למחסן. שוב, קנייה בלבד, בלי שום נגיעה בהזמנות.'},
+
+      {lbl:'קניית חומרי עזר', tag:'', stage:'store',
+       cells:{mat:80000},
+       nh:'שורה 3 · קניות חומרי עזר',
+       nb:'עוד 80,000 ש״ח למחסן.'},
+
+      {lbl:'משיכת חומרי גלם לייצור', tag:'450,000 מפוצלים', stage:'wip',
+       cells:{mat:-450000, B2:100000, C3:150000, D4:200000},
+       nh:'שורה 4 · צריכת חומרי גלם',
+       nb:'450,000 יוצאים מהמחסן ומתפזרים בין שלוש ההזמנות. כאן נולדת הזמנה D4.',
+       calc:'100,000 + 150,000 + 200,000 = 450,000'},
+
+      {lbl:'צריכת חומרי עזר', tag:'לסל העקיפות בפועל', stage:'oh',
+       cells:{mat:-50000},
+       nh:'שורה 5 · צריכת חומרי עזר',
+       nb:'50,000 יוצאים מהמחסן ולא נכנסים לאף הזמנה. הם ייספרו בסל העקיפות בפועל, ואכן מופיעים שם בפירוט שבשאלה.'},
+
+      {lbl:'עבודה ישירה בייצור', tag:'שעות × 150 ש״ח', stage:'wip',
+       cells:{B2:150000, C3:180000, D4:210000},
+       nh:'שורה 6 · שכר עובדי הייצור',
+       nb:'סך העבודה הישירה הוא 540,000 ש״ח. מכיוון שסך השכר בחודש היה 650,000, ההפרש, 110,000, הוא עבודה עקיפה, והוא לא נכנס לטבלה אלא לסל העקיפות.',
+       calc:'1,000 × 150 = 150,000 · 1,200 × 150 = 180,000 · 1,400 × 150 = 210,000',
+       libi:'650,000 פחות 540,000 שווה 110,000. פתחו את פירוט העקיפות בפועל ותראו שם בדיוק את המספר הזה. אם הוא לא שם, משהו בחישוב שלכם הלך לאיבוד.'},
+
+      {lbl:'העמסת עלויות עקיפות', tag:'100 ש״ח × שעות עבודה', stage:'oh',
+       cells:{B2:100000, C3:120000, D4:140000},
+       nh:'שורה 7 · העמסת העקיפות',
+       nb:'תעריף ההעמסה הוא 1,500,000 חלקי 15,000 שעות, כלומר 100 ש״ח לשעת עבודה ישירה. מכפילים אותו בשעות של כל הזמנה.',
+       calc:'100 × 1,000 = 100,000 · 100 × 1,200 = 120,000 · 100 × 1,400 = 140,000',
+       why:'סך ההעמסה הוא 360,000 ש״ח. שמרו את המספר הזה, נזדקק לו לחישוב הסטייה.'},
+
+      {lbl:'השלמת הזמנה B2', tag:'', stage:'fg',
+       cells:{B2:-570000, fg:570000},
+       nh:'שורה 8 · הזמנה B2 הסתיימה',
+       nb:'סוכמים את כל טור B2 ומעבירים לתוצרת גמורה.',
+       calc:'220,000 + 100,000 + 150,000 + 100,000 = 570,000'},
+
+      {lbl:'השלמת הזמנה C3', tag:'', stage:'fg',
+       cells:{C3:-800000, fg:800000},
+       nh:'שורה 9 · הזמנה C3 הסתיימה',
+       nb:'אותו מהלך עבור C3.',
+       calc:'350,000 + 150,000 + 180,000 + 120,000 = 800,000'},
+
+      {lbl:'מסירת הזמנה A1 ללקוח', tag:'', stage:'cogs',
+       cells:{fg:-250000},
+       nh:'שורה 10 · הזמנה A1 נמסרה',
+       nb:'A1 חיכתה מהחודש הקודם ועכשיו יצאה. מפחיתים 250,000 מהתוצרת הגמורה.'},
+
+      {lbl:'מסירת הזמנה C3 ללקוח', tag:'', stage:'cogs',
+       cells:{fg:-800000},
+       nh:'שורה 11 · הזמנה C3 נמסרה',
+       nb:'C3 הושלמה ונמסרה באותו חודש, ולכן שתי השורות נרשמו בזו אחר זו. B2, לעומתה, נשארת במחסן.',
+       why:'שימו לב שהתמורה של 1,800,000 ש״ח, שהתקבלה עבור A1 ו-C3 יחד, לא הופיעה בדוח אף לא פעם אחת.'}
+    ]
+  });
+
+  /* ================= JOB REPORT 3 · WOOD ARTISTS, BASE = LABOUR HOURS ================= */
+  buildJobReport({
+    mount:'jrWoodA',
+    co:'אמני העץ בע״מ · חלק א׳',
+    sub:'דוח תמחיר הזמנה · אוקטובר 2024 · בסיס שעות עבודה ישירה',
+    closeLabel:'יתרת סגירה, 31.10.2024',
+    intro:'הפעם נסו לבנות את הדוח לבד על נייר, ורק אז להריץ. ההרצה האוטומטית כאן שימושית במיוחד לבדיקה מהירה.',
+    closeNarr:'במחסן נשארו 30,000. הזמנות 301 ו-302 התאפסו. הזמנה 303 ממשיכה עם 226,000. בתוצרת הגמורה נשארו 325,000, שהם עלות הזמנה 302 שהושלמה ולא נמסרה. שמרו את שלושת המספרים האלה, מיד נשווה אותם לחלק ב׳.',
+    cols:[
+      {k:'mat', label:'חומרי גלם', sub:'וחומרי עזר', cls:'matcol'},
+      {k:'j301', label:'הזמנה בתהליך', sub:'301', cls:'jobcol'},
+      {k:'j302', label:'הזמנה בתהליך', sub:'302', cls:'jobcol'},
+      {k:'j303', label:'הזמנה חדשה', sub:'303', cls:'jobcol'},
+      {k:'fg', label:'תוצרת', sub:'גמורה', cls:'fgcol'}
+    ],
+    steps:[
+      {lbl:'יתרת פתיחה, 1.10.2024', tag:'תוצרת גמורה = הזמנה 300', kind:'open', stage:'all',
+       cells:{mat:50000, j301:85000, j302:135000, j303:0, fg:120000},
+       nh:'שורה 1 · יתרות פתיחה',
+       nb:'נגרייה קטנה יותר, ולכן גם הסכומים קטנים יותר, אבל המבנה זהה לחלוטין: מחסן, שתי הזמנות בתהליך, ותוצרת גמורה שממתינה.'},
+
+      {lbl:'קניית חומרי גלם', tag:'לוחות עץ', stage:'store',
+       cells:{mat:150000}, nh:'שורה 2 · קניות חומרי גלם', nb:'150,000 ש״ח של לוחות עץ נכנסים למחסן.'},
+
+      {lbl:'קניית חומרי עזר', tag:'דבקים וברגים', stage:'store',
+       cells:{mat:30000}, nh:'שורה 3 · קניות חומרי עזר', nb:'30,000 ש״ח של דבקים וברגים. הם חומר עזר, ולכן בהמשך לא ישויכו לאף הזמנה.'},
+
+      {lbl:'משיכת חומרי גלם לנגרייה', tag:'180,000 מפוצלים', stage:'wip',
+       cells:{mat:-180000, j301:50000, j302:60000, j303:70000},
+       nh:'שורה 4 · צריכת חומרי גלם', nb:'180,000 יוצאים מהמחסן ומתפזרים. הזמנה 303, ספריות למוסד חינוכי, נפתחת כאן.',
+       calc:'50,000 + 60,000 + 70,000 = 180,000'},
+
+      {lbl:'צריכת חומרי עזר', tag:'לסל העקיפות בפועל', stage:'oh',
+       cells:{mat:-20000}, nh:'שורה 5 · צריכת חומרי עזר', nb:'20,000 יוצאים מהמחסן אל סל העקיפות בפועל, ולא אל שום הזמנה.'},
+
+      {lbl:'עבודה ישירה, נגרים', tag:'שעות × 80 ש״ח', stage:'wip',
+       cells:{j301:64000, j302:80000, j303:96000},
+       nh:'שורה 6 · שכר הנגרים',
+       nb:'סך העבודה הישירה הוא 240,000. סך השכר בחודש היה 300,000, ולכן העבודה העקיפה, שכר מנהל הנגרייה והמנקה, היא 60,000. בדיוק כפי שמופיע בפירוט העקיפות בפועל.',
+       calc:'800 × 80 = 64,000 · 1,000 × 80 = 80,000 · 1,200 × 80 = 96,000'},
+
+      {lbl:'העמסה לפי שעות עבודה', tag:'50 ש״ח לשעת עבודה', stage:'oh',
+       cells:{j301:40000, j302:50000, j303:60000},
+       nh:'שורה 7 · העמסת העקיפות, חלק א׳',
+       nb:'תעריף ההעמסה הוא 600,000 חלקי 12,000 שעות עבודה, כלומר 50 ש״ח לשעה. זו השורה היחידה שתשתנה בחלק ב׳.',
+       calc:'50 × 800 = 40,000 · 50 × 1,000 = 50,000 · 50 × 1,200 = 60,000',
+       libi:'סמנו את השורה הזאת בעיפרון. כשנעבור לשעות מכונה, כל מה שמעליה יישאר בדיוק אותו דבר, וכל מה שממנה ומטה יתגלגל מחדש.'},
+
+      {lbl:'השלמת הזמנה 301', tag:'', stage:'fg',
+       cells:{j301:-239000, fg:239000},
+       nh:'שורה 8 · הזמנה 301 הסתיימה', nb:'סוכמים את טור 301 כולו ומעבירים לתוצרת גמורה.',
+       calc:'85,000 + 50,000 + 64,000 + 40,000 = 239,000'},
+
+      {lbl:'השלמת הזמנה 302', tag:'', stage:'fg',
+       cells:{j302:-325000, fg:325000},
+       nh:'שורה 9 · הזמנה 302 הסתיימה', nb:'אותו מהלך עבור 302.',
+       calc:'135,000 + 60,000 + 80,000 + 50,000 = 325,000'},
+
+      {lbl:'מסירת הזמנה 300 ללקוח', tag:'', stage:'cogs',
+       cells:{fg:-120000}, nh:'שורה 10 · הזמנה 300 נמסרה', nb:'ההזמנה שחיכתה מהחודש הקודם יצאה ללקוח.'},
+
+      {lbl:'מסירת הזמנה 301 ללקוח', tag:'', stage:'cogs',
+       cells:{fg:-239000}, nh:'שורה 11 · הזמנה 301 נמסרה',
+       nb:'301 הושלמה ונמסרה באותו חודש. 302 הושלמה ונשארה במחסן.',
+       why:'זכרו את העובדה הזאת. היא תהיה המפתח להבנת ההפתעה בהשוואה שבסוף חלק ב׳.'}
+    ]
+  });
+
+  /* ================= JOB REPORT 4 · WOOD ARTISTS, BASE = MACHINE HOURS ================= */
+  buildJobReport({
+    mount:'jrWoodB',
+    co:'אמני העץ בע״מ · חלק ב׳',
+    sub:'דוח תמחיר הזמנה · אוקטובר 2024 · בסיס שעות מכונה',
+    closeLabel:'יתרת סגירה, 31.10.2024',
+    intro:'שימו לב במיוחד לשורה 7 ואילך. חמש השורות הראשונות זהות אות באות לחלק א׳, ובכוונה: הן אינן מושפעות כלל מבסיס ההעמסה.',
+    closeNarr:'שימו לב לתוצאה המפתיעה: המחסן נשאר 30,000, הזמנה 303 נשארה 226,000, והתוצרת הגמורה נשארה 325,000. שלושתם זהים לחלק א׳. הדבר היחיד שבאמת השתנה הוא עלות הזמנה 301, שירדה מ-239,000 ל-229,000, והיא כבר נמסרה ללקוח.',
+    cols:[
+      {k:'mat', label:'חומרי גלם', sub:'וחומרי עזר', cls:'matcol'},
+      {k:'j301', label:'הזמנה בתהליך', sub:'301', cls:'jobcol'},
+      {k:'j302', label:'הזמנה בתהליך', sub:'302', cls:'jobcol'},
+      {k:'j303', label:'הזמנה חדשה', sub:'303', cls:'jobcol'},
+      {k:'fg', label:'תוצרת', sub:'גמורה', cls:'fgcol'}
+    ],
+    steps:[
+      {lbl:'יתרת פתיחה, 1.10.2024', tag:'ללא שינוי', kind:'open', stage:'all',
+       cells:{mat:50000, j301:85000, j302:135000, j303:0, fg:120000},
+       nh:'שורה 1 · יתרות פתיחה, ללא שינוי',
+       nb:'יתרות הפתיחה נקבעו בחודש הקודם, לפי השיטה שהייתה נהוגה אז. אנחנו לא חוזרים אחורה ולא מתקנים אותן. השינוי חל רק על פעילות אוקטובר.',
+       why:'זו נקודה שנבחנת. השאלה מבקשת במפורש להשאיר את יתרת הפתיחה כפי שהיא.'},
+
+      {lbl:'קניית חומרי גלם', tag:'ללא שינוי', stage:'store',
+       cells:{mat:150000}, nh:'שורה 2 · קניות חומרי גלם', nb:'זהה לחלק א׳. רכש אינו מושפע מבסיס ההעמסה.'},
+
+      {lbl:'קניית חומרי עזר', tag:'ללא שינוי', stage:'store',
+       cells:{mat:30000}, nh:'שורה 3 · קניות חומרי עזר', nb:'זהה לחלק א׳.'},
+
+      {lbl:'משיכת חומרי גלם לנגרייה', tag:'ללא שינוי', stage:'wip',
+       cells:{mat:-180000, j301:50000, j302:60000, j303:70000},
+       nh:'שורה 4 · צריכת חומרי גלם', nb:'זהה לחלק א׳. כמות העץ שנכנסה לכל הזמנה איננה תלויה בשאלה איך אנחנו מחלקים תקורה.'},
+
+      {lbl:'צריכת חומרי עזר', tag:'ללא שינוי', stage:'oh',
+       cells:{mat:-20000}, nh:'שורה 5 · צריכת חומרי עזר', nb:'זהה לחלק א׳.'},
+
+      {lbl:'עבודה ישירה, נגרים', tag:'ללא שינוי', stage:'wip',
+       cells:{j301:64000, j302:80000, j303:96000},
+       nh:'שורה 6 · שכר הנגרים',
+       nb:'זהה לחלק א׳. הנגרים עבדו את אותן שעות בדיוק, וקיבלו את אותו שכר.',
+       calc:'800 × 80 = 64,000 · 1,000 × 80 = 80,000 · 1,200 × 80 = 96,000',
+       libi:'עד כאן שש שורות זהות לחלוטין. אם יצא לכם אחרת, הבעיה איננה בבסיס ההעמסה.'},
+
+      {lbl:'העמסה לפי שעות מכונה', tag:'100 ש״ח לשעת מכונה', stage:'oh',
+       cells:{j301:30000, j302:50000, j303:60000},
+       nh:'שורה 7 · כאן מתחיל השינוי',
+       nb:'סך העקיפות הצפויות לא השתנה, 600,000 ש״ח כמו קודם. מה שהשתנה הוא המכנה: 6,000 שעות מכונה במקום 12,000 שעות עבודה. התעריף החדש הוא 100 ש״ח לשעת מכונה, ומכפילים אותו בשעות המכונה בפועל של כל הזמנה.',
+       calc:'100 × 300 = 30,000 · 100 × 500 = 50,000 · 100 × 600 = 60,000',
+       why:'שימו לב שדווקא 302 ו-303 לא זזו במקרה. רק הזמנה 301, שצרכה יחסית מעט שעות מכונה, קיבלה פחות תקורה.',
+       libi:'הזמנה 301 העסיקה נגרים הרבה שעות, אבל את המכונה מעט. בשיטה החדשה היא מפסיקה לשלם על שעות מכונה שהיא לא צרכה. זה הרעיון כולו.'},
+
+      {lbl:'השלמת הזמנה 301', tag:'הסכום השתנה', stage:'fg',
+       cells:{j301:-229000, fg:229000},
+       nh:'שורה 8 · הזמנה 301 הסתיימה, זולה יותר',
+       nb:'כל הרכיבים זהים לחלק א׳ מלבד ההעמסה, שירדה מ-40,000 ל-30,000. לכן העלות הכוללת יורדת ב-10,000 בדיוק.',
+       calc:'85,000 + 50,000 + 64,000 + 30,000 = 229,000'},
+
+      {lbl:'השלמת הזמנה 302', tag:'ללא שינוי', stage:'fg',
+       cells:{j302:-325000, fg:325000},
+       nh:'שורה 9 · הזמנה 302 הסתיימה',
+       nb:'כאן ההעמסה הייתה 50,000 בשתי השיטות, במקרה. ולכן עלות ההשלמה זהה לחלוטין, 325,000.'},
+
+      {lbl:'מסירת הזמנה 300 ללקוח', tag:'', stage:'cogs',
+       cells:{fg:-120000}, nh:'שורה 10 · הזמנה 300 נמסרה', nb:'עלותה נקבעה בחודש הקודם, ולכן לא הושפעה כלל.'},
+
+      {lbl:'מסירת הזמנה 301 ללקוח', tag:'229,000 במקום 239,000', stage:'cogs',
+       cells:{fg:-229000},
+       nh:'שורה 11 · הזמנה 301 נמסרה',
+       nb:'וכאן הנקודה הקריטית: ההזמנה שהעלות שלה השתנתה היא בדיוק ההזמנה שיצאה מהמחסן החודש.',
+       why:'לכן כל השינוי בעלות נוחת ישירות בעלות המכר של החודש, ולא נשאר תקוע במלאי. תכף נראה מה זה עושה לרווח.'}
+    ]
+  });
+
+  /* ================= WARM-UP A · direct vs indirect ================= */
+  var rA=[
+    {id:'ra1', n:1, difficulty:'קל', title:'לוחות עץ אלון להזמנה 303',
+     axes:[{options:[{v:'direct',label:'ישירה',icon:'📍'},{v:'indirect',label:'עקיפה',icon:'🌐'}], correct:'direct'}],
+     text:'לוחות עץ אלון שנמשכו מהמחסן במיוחד עבור הספריות של הזמנה 303, ונרשמו על שמה בטופס המשיכה.',
+     hints:['שאלו: האם אפשר להצביע על ההזמנה ולומר בוודאות ״זה בשבילה״, בלי לנחש?','טופס המשיכה נושא את מספר ההזמנה. אין כאן שום הקצאה ושום אומדן.'],
+     solution:'זו <b>עלות ישירה</b>. החומר שויך להזמנה מסוימת ברגע המשיכה, ולכן ייכנס ישירות לטור שלה בדוח התמחיר.'},
+    {id:'ra2', n:2, difficulty:'בינוני', title:'דבק וברגים שנצרכו בנגרייה',
+     axes:[{options:[{v:'direct',label:'ישירה',icon:'📍'},{v:'indirect',label:'עקיפה',icon:'🌐'}], correct:'indirect'}],
+     text:'דבק, ברגים וחומרי גימור שנצרכו בנגרייה במהלך החודש, בסך 20,000 ש״ח. איש לא רשם כמה מהם הלכו לכל הזמנה.',
+     hints:['זה אמנם חומר, אבל השאלה איננה ״האם זה חומר״ אלא ״האם ניתן לשייך אותו בכלכליות סבירה״.','אפשר תיאורטית לספור ברגים לכל ספרייה. פשוט לא כדאי. עלות המעקב גבוהה מהתועלת.'],
+     solution:'זו <b>עלות עקיפה</b>, ולכן היא נקראת חומר עזר. בדוח התמחיר היא יוצאת מעמודת המחסן ואיננה נכנסת לאף טור הזמנה. היא מצטרפת לסל העקיפות בפועל. <b>לא כל חומר הוא חומר ישיר.</b>'},
+    {id:'ra3', n:3, difficulty:'קל', title:'שכר הנגר שעבד על הזמנה 301',
+     axes:[{options:[{v:'direct',label:'ישירה',icon:'📍'},{v:'indirect',label:'עקיפה',icon:'🌐'}], correct:'direct'}],
+     text:'שכרו של הנגר עבור 800 שעות שהושקעו בהזמנה 301, לפי דיווח שעות מסודר ותעריף של 80 ש״ח לשעה.',
+     hints:['יש דיווח שעות לכל הזמנה בנפרד, ויש תעריף לשעה. מה חסר כדי לשייך?','שעות כפול תעריף נותן בדיוק את עלות ההזמנה. אין כאן שום הקצאה.'],
+     solution:'זו <b>עלות ישירה</b>. זהו בדיוק המצב שממנו נגזרת שורת העבודה הישירה בדוח: 800 כפול 80, כלומר 64,000 ש״ח לטור של 301. שכרו של מנהל הנגרייה, לעומת זאת, היה עקיף.'}
+  ];
+  document.getElementById('rA').innerHTML = rA.map(renderClassify).join('');
+
+  /* ================= WARM-UP B · POHR and full cost ================= */
+  var rB=[
+    {id:'rb1', n:4, difficulty:'קל', title:'תעריף העמסה והעמסה על הזמנה',
+     text:'מפעל אמד את עלויותיו העקיפות לשנה ב-900,000 ש״ח, ואת בסיס ההקצאה ב-18,000 שעות עבודה ישירה. הזמנה מסוימת צרכה במהלך החודש 220 שעות עבודה ישירה.<br>(א) חשבו את תעריף ההעמסה.<br>(ב) חשבו את העלות העקיפה שיש להעמיס על ההזמנה.',
+     subs:[{id:'rb1-a', label:'(א) תעריף העמסה (₪ לשעה)', expected:50, tol:0.5, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+            subhint:feBlock('נוסחת תעריף ההעמסה', 'POHR = \\dfrac{\\text{עקיפות מתוקצבות}}{\\text{בסיס מתוקצב}}', ['עקיפות מתוקצבות: 900,000 ש״ח.','בסיס מתוקצב: 18,000 שעות עבודה ישירה.'], 'שימו לב שהחישוב נעשה משני מספרי האומדן בלבד. שעות ההזמנה עדיין לא נכנסות לתמונה.')},
+           {id:'rb1-b', label:'(ב) עקיפות שהועמסו (₪)', expected:11000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+            subhint:feBlock('נוסחת ההעמסה על הזמנה', 'OH_{\\text{applied}} = POHR \\times \\text{בסיס בפועל}', ['POHR, מה שחישבתם בסעיף (א).','בסיס בפועל: 220 שעות עבודה שההזמנה צרכה.'], 'כאן, ורק כאן, נכנסות השעות בפועל של ההזמנה.')}],
+     hints:['התעריף מחושב מהאומדן: 900,000 חלקי 18,000. ההעמסה היא התעריף כפול השעות בפועל.','$900{,}000 \\div 18{,}000 = 50$. אחר כך $50 \\times 220$.'],
+     solution:'<p><b>(א)</b> $POHR = \\dfrac{900{,}000}{18{,}000} = 50$ ש״ח לשעת עבודה.</p><p><b>(ב)</b> $OH = 50 \\times 220 = 11{,}000$ ש״ח.</p><p>שימו לב לחלוקת התפקידים: המונה והמכנה של התעריף באים מהאומדן השנתי, ואילו הכפל נעשה בשעות שההזמנה באמת צרכה. זה בדיוק מקור הסטייה שנפגוש בהמשך.</p>'},
+    {id:'rb2', n:5, difficulty:'בינוני', title:'עלות מלאה של הזמנה בודדת',
+     text:'מפעל מעמיס עקיפות לפי שעות מכונה. האומדן השנתי: עקיפות של 480,000 ש״ח ו-8,000 שעות מכונה. הזמנה מסוימת צרכה 25 שעות מכונה, חומרים ישירים ב-9,000 ש״ח ועבודה ישירה ב-14,000 ש״ח.<br>(א) תעריף ההעמסה. (ב) העקיפות שהועמסו. (ג) העלות המלאה של ההזמנה.',
+     subs:[{id:'rb2-a', label:'(א) תעריף (₪ לשעת מכונה)', expected:60, tol:0.5, unit:'₪'},
+           {id:'rb2-b', label:'(ב) עקיפות שהועמסו (₪)', expected:1500, tol:1, unit:'₪'},
+           {id:'rb2-c', label:'(ג) עלות מלאה (₪)', expected:24500, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+            subhint:feBlock('נוסחת העלות המלאה של הזמנה', '\\text{עלות מלאה} = DM + DL + OH_{\\text{applied}}', ['DM, חומרים ישירים: 9,000 ש״ח.','DL, עבודה ישירה: 14,000 ש״ח.','העקיפות שהועמסו, מה שחישבתם בסעיף (ב).'], 'שלושה רכיבים, לא ארבעה. העקיפות בפועל אינן נכנסות לעלות של הזמנה בודדת, לעולם.')}],
+     hints:['(א) 480,000 חלקי 8,000. (ב) התעריף כפול 25. (ג) חברו את שלושת הרכיבים.','(א) $60$. (ב) $60 \\times 25 = 1{,}500$. (ג) $9{,}000 + 14{,}000 + 1{,}500$.'],
+     solution:'<p><b>(א)</b> $POHR = \\dfrac{480{,}000}{8{,}000} = 60$ ש״ח לשעת מכונה.</p><p><b>(ב)</b> $OH = 60 \\times 25 = 1{,}500$ ש״ח.</p><p><b>(ג)</b> עלות מלאה $= 9{,}000 + 14{,}000 + 1{,}500 = 24{,}500$ ש״ח.</p><p>שלושת הרכיבים האלה הם בדיוק שלוש השורות שכל הזמנה צוברת בטור שלה בדוח התמחיר, ולכן התרגיל הזה הוא בעצם טור אחד של דוח, בזעיר אנפין.</p>'}
+  ];
+  document.getElementById('rB').innerHTML = rB.map(renderNumeric).join('');
+
+  /* ================= CASE 1 · BUBU ================= */
+  var bubuA=[
+    {id:'bua1', n:6, difficulty:'קל', title:'שלב א׳: תעריף ההעמסה של בובו',
+     text:'האומדן לשנה: עלויות עקיפות של 1,200,000 ש״ח, ו-12,000 שעות עבודה ישירה. בסיס ההעמסה הוא שעות עבודה ישירה.<br>(א) חשבו את תעריף ההעמסה לשעה.<br>(ב) חשבו את עלות העבודה הישירה של הזמנה 101, שעבדה 1,500 שעות בתעריף של 110 ש״ח לשעה.',
+     subs:[{id:'bua1-a', label:'(א) תעריף העמסה (₪ לשעה)', expected:100, tol:0.5, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+            subhint:feBlock('נוסחת תעריף ההעמסה', 'POHR = \\dfrac{\\text{עקיפות מתוקצבות}}{\\text{שעות מתוקצבות}}', ['עקיפות מתוקצבות: 1,200,000 ש״ח, נתון שנתי.','שעות מתוקצבות: 12,000 שעות עבודה ישירה, גם הוא שנתי.'], 'אל תתפתו להשתמש בעקיפות בפועל של החודש. התעריף נקבע מראש, מהאומדן בלבד.')},
+           {id:'bua1-b', label:'(ב) עבודה ישירה, הזמנה 101 (₪)', expected:165000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+            subhint:feBlock('נוסחת העבודה הישירה להזמנה', 'DL_{\\text{הזמנה}} = \\text{שעות} \\times \\text{תעריף לשעה}', ['שעות שהושקעו בהזמנה 101: 1,500.','תעריף עלות שעת עבודה: 110 ש״ח.'], 'שימו לב: 110 הוא תעריף השכר, ו-100 הוא תעריף ההעמסה. שני מספרים שונים לחלוטין, שקל לבלבל ביניהם.')}],
+     hints:['(א) חלקו את האומדן השנתי של העקיפות באומדן השנתי של השעות.<br>(ב) הכפילו את שעות ההזמנה בתעריף השכר לשעה.','(א) $1{,}200{,}000 \\div 12{,}000 = 100$.<br>(ב) $1{,}500 \\times 110 = 165{,}000$.'],
+     solution:'<p><b>(א)</b> $POHR = \\dfrac{1{,}200{,}000}{12{,}000} = 100$ ש״ח לשעת עבודה ישירה.</p><p><b>(ב)</b> $DL = 1{,}500 \\times 110 = 165{,}000$ ש״ח.</p><p>שימו לב לשני התעריפים שחיים זה לצד זה בשאלה אחת: <b>110 ש״ח</b> הוא מה שעולה לחברה שעת עבודה של פועל, ו<b>100 ש״ח</b> הוא כמה תקורה אנחנו מצמידים לכל שעת עבודה כזאת. הראשון הוא עלות אמיתית, השני הוא כלל חלוקה שהמצאנו.</p>'}
+  ];
+  document.getElementById('bubuA').innerHTML = bubuA.map(renderNumeric).join('');
+
+  var bubuB=[
+    {id:'bub1', n:7, difficulty:'בינוני', title:'עלויות השלמה ויתרות סגירה',
+     text:'על סמך הדוח שבניתם למעלה, חשבו:<br>(א) עלות הזמנה 101 בהשלמתה. (ב) עלות הזמנה 107 בהשלמתה. (ג) יתרת הסגירה של המחסן. (ד) יתרת הזמנה 108 בתהליך. (ה) יתרת התוצרת הגמורה בסוף החודש.',
+     subs:[{id:'bub1-a', label:'(א) עלות הזמנה 101 (₪)', expected:585000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+            subhint:feBlock('סכום ההשלמה של הזמנה', '\\text{עלות ההזמנה} = \\text{יתרת פתיחה} + DM + DL + OH_{\\text{applied}}', ['יתרת פתיחה של 101: 180,000 ש״ח.','חומרי גלם שנמשכו עבורה: 90,000 ש״ח.','עבודה ישירה: 1,500 שעות כפול 110, כלומר 165,000 ש״ח.','עקיפות שהועמסו: 100 כפול 1,500, כלומר 150,000 ש״ח.'], 'ארבעה רכיבים. הרכיב שהכי קל לשכוח הוא הראשון.')},
+           {id:'bub1-b', label:'(ב) עלות הזמנה 107 (₪)', expected:550000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+            subhint:feBlock('אותו חישוב, עבור הזמנה 107', '\\text{עלות ההזמנה} = \\text{יתרת פתיחה} + DM + DL + OH_{\\text{applied}}', ['יתרת פתיחה של 107: 220,000 ש״ח.','חומרי גלם: 120,000 ש״ח.','עבודה ישירה: 1,000 כפול 110.','עקיפות שהועמסו: 100 כפול 1,000.'], 'שימו לב ש-107 עבדה פחות שעות מ-101, ולכן קיבלה גם פחות שכר וגם פחות תקורה.')},
+           {id:'bub1-c', label:'(ג) יתרת סגירה, מחסן חומרים (₪)', expected:130000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+            subhint:feBlock('סכימה אנכית של עמודת המחסן', '\\text{סגירה} = \\text{פתיחה} + \\text{קניות} - \\text{משיכות}', ['פתיחה: 280,000.','קניות: 200,000 גלם ועוד 60,000 עזר.','משיכות: 370,000 גלם ועוד 40,000 עזר.'], 'שימו לב שגם חומרי העזר יוצאים מהמחסן, למרות שאינם נכנסים לאף הזמנה.')},
+           {id:'bub1-d', label:'(ד) יתרת הזמנה 108 (₪)', expected:475000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ד)',
+            subhint:feBlock('הזמנה שלא הושלמה, מה נשאר בטור שלה', '\\text{יתרה} = DM + DL + OH_{\\text{applied}}', ['חומרי גלם: 160,000.','עבודה ישירה: 1,500 כפול 110.','עקיפות שהועמסו: 100 כפול 1,500.'], 'אין כאן יתרת פתיחה, כי ההזמנה נפתחה החודש. ואין שורת השלמה, כי היא עדיין רצה.')},
+           {id:'bub1-e', label:'(ה) יתרת תוצרת גמורה (₪)', expected:585000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ה)',
+            subhint:feBlock('סכימה אנכית של עמודת התוצרת הגמורה', '\\text{סגירה} = \\text{פתיחה} + \\text{השלמות} - \\text{מסירות}', ['פתיחה: 190,000, הזמנה 100.','השלמות: 585,000 ועוד 550,000.','מסירות: 190,000 ועוד 550,000.'], 'אחרי הקיזוזים נשארת בדיוק הזמנה אחת. נסו לזהות איזו, עוד לפני שאתם מחשבים.')}],
+     hints:['לכל הזמנה: יתרת פתיחה ועוד חומרים ועוד עבודה ועוד עקיפות שהועמסו. ליתרות הסגירה: פשוט סכמו כל עמודה מלמעלה למטה.','(א) $180+90+165+150$ באלפים.<br>(ב) $220+120+110+100$ באלפים.<br>(ג) $280+200+60-370-40$ באלפים.<br>(ד) $160+165+150$ באלפים.<br>(ה) $190+585+550-190-550$ באלפים.'],
+     solution:'<p><b>(א)</b> $180{,}000+90{,}000+165{,}000+150{,}000 = 585{,}000$ ש״ח.</p><p><b>(ב)</b> $220{,}000+120{,}000+110{,}000+100{,}000 = 550{,}000$ ש״ח.</p><p><b>(ג)</b> $280{,}000+200{,}000+60{,}000-370{,}000-40{,}000 = 130{,}000$ ש״ח.</p><p><b>(ד)</b> $160{,}000+165{,}000+150{,}000 = 475{,}000$ ש״ח.</p><p><b>(ה)</b> $190{,}000+585{,}000+550{,}000-190{,}000-550{,}000 = 585{,}000$ ש״ח.</p><p>שימו לב לסעיף (ה): הסכום שנשאר, 585,000, הוא בדיוק עלות הזמנה 101. היא הושלמה ולא נמסרה, ולכן היא, וכל כולה, יתרת התוצרת הגמורה של סוף החודש. זו בדיקת שפיות מצוינת.</p>'},
+    {id:'bub2', n:8, difficulty:'מאתגר', title:'סטיית ההעמסה והרווח הגולמי', trap:true,
+     text:'המשך לאותם נתונים.<br>(א) מהו סך העקיפות שהועמסו על שלוש ההזמנות? (ב) מהו גודל הסטייה במונחים מוחלטים? (ג) מהי עלות המכר לאחר טיפול בסטייה? (ד) מהו הרווח הגולמי, אם התמורה בגין הזמנות 100 ו-107 הייתה 1,200,000 ש״ח?',
+     subs:[{id:'bub2-a', label:'(א) סך עקיפות שהועמסו (₪)', expected:400000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+            subhint:feBlock('סכימת כל שורות ההעמסה', 'OH_{\\text{הועמס}} = \\sum \\left(POHR \\times \\text{שעות ההזמנה}\\right)', ['הזמנה 101: 100 כפול 1,500.','הזמנה 107: 100 כפול 1,000.','הזמנה 108: 100 כפול 1,500.'], 'שימו לב שגם הזמנה 108, שלא הושלמה, נכללת. ההעמסה נרשמה עליה בפועל.')},
+           {id:'bub2-b', label:'(ב) גודל הסטייה (₪)', expected:20000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+            subhint:feBlock('נוסחת הסטייה', '\\text{סטייה} = OH_{\\text{הועמס}} - OH_{\\text{בפועל}}', ['סך שהועמס: מה שחישבתם בסעיף (א).','סך בפועל: 40,000 ועוד 60,000 ועוד 160,000 ועוד 120,000.'], 'הקלידו את הגודל המוחלט. את הכיוון, ביתר או בחסר, נקבע בסעיף הבא לפי ההיגיון ולא לפי הסימן.')},
+           {id:'bub2-c', label:'(ג) עלות המכר (₪)', expected:720000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+            subhint:'<div class="fe-desc">שני שלבים, ואת השני אי אפשר לדלג</div><div class="fe-params">שלב ראשון: אספו את עלות ההזמנות ש<b>נמסרו</b> בפועל, ולא של אלה שרק הושלמו. נמסרו הזמנה 100 בעלות 190,000, והזמנה 107 בעלות 550,000.</div><div class="fe-formula">$\\text{עלות ההזמנות שנמסרו} = 190{,}000 + 550{,}000$</div><div class="fe-params">שלב שני: תקנו בסטייה. כאן העקיפות בפועל היו <b>נמוכות</b> מאלה שהועמסו, כלומר בזבזנו פחות ממה שרשמנו על ההזמנות. אם בזבזנו פחות, העלות שלנו קטנה.</div><div class="fe-formula">$\\text{עלות המכר} = \\text{עלות ההזמנות שנמסרו} - 20{,}000$</div><div class="fe-tip">הזמנה 101 הושלמה אך לא נמסרה, ולכן איננה בחישוב הזה בשום צורה.</div>'},
+           {id:'bub2-d', label:'(ד) רווח גולמי (₪)', expected:480000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ד)',
+            subhint:feBlock('נוסחת הרווח הגולמי', '\\text{רווח גולמי} = \\text{מכירות} - \\text{עלות המכר}', ['מכירות: 1,200,000 ש״ח, התמורה עבור שתי ההזמנות שנמסרו.','עלות המכר: מה שחישבתם בסעיף (ג), אחרי תיקון הסטייה.'], 'זהו הרגע היחיד בכל השאלה שבו תמורת המכירה נכנסת לחישוב.')}],
+     hints:['(א) שלוש שורות ההעמסה מהטבלה, מחוברות.<br>(ב) ההפרש בין ההעמסה לבין 380,000 בפועל.<br>(ג) עלות ההזמנות שנמסרו, בתיקון הסטייה בכיוון הנכון.<br>(ד) מכירות פחות עלות המכר.','(א) $150+100+150 = 400$ אלף.<br>(ב) $400{,}000-380{,}000 = 20{,}000$, הועמס ביתר.<br>(ג) $190{,}000+550{,}000-20{,}000$.<br>(ד) $1{,}200{,}000-720{,}000$.'],
+     solution:'<p><b>(א)</b> $150{,}000+100{,}000+150{,}000 = 400{,}000$ ש״ח הועמסו.</p><p><b>(ב)</b> העקיפות בפועל היו $40{,}000+60{,}000+160{,}000+120{,}000 = 380{,}000$. ההפרש הוא $400{,}000-380{,}000 = 20{,}000$ ש״ח, <b>הועמס ביתר</b>.</p><p><b>(ג)</b> נמסרו הזמנה 100 בעלות 190,000 והזמנה 107 בעלות 550,000. מכיוון שהעמסנו יותר ממה שבאמת בזבזנו, נפחית את ההפרש: $190{,}000+550{,}000-20{,}000 = 720{,}000$ ש״ח.</p><p><b>(ד)</b> $1{,}200{,}000-720{,}000 = 480{,}000$ ש״ח רווח גולמי.</p><p><b>המלכודת בשאלה הזאת</b> היא סעיף (ג). הזמנה 101 עלתה 585,000 ש״ח והושלמה החודש, אבל היא <b>לא נמסרה</b>. מי שיכניס אותה לעלות המכר יקבל תשובה שגויה לחלוטין, וגם רווח גולמי שלילי. עלות הופכת להוצאה רק כשהמוצר יוצא ללקוח.</p>'}
+  ];
+  document.getElementById('bubuB').innerHTML = bubuB.map(renderNumeric).join('');
+
+  /* ================= CASE 2 · ALPHA TECH ================= */
+  var alphaA=[
+    {id:'ala1', n:9, difficulty:'בינוני', title:'שלב א׳: תעריף, שכר ישיר, ועבודה עקיפה', trap:true,
+     text:'האומדן לשנת 2023: עקיפות של 1,500,000 ש״ח ו-15,000 שעות עבודה ישירה. תעריף עובד ייצור: 150 ש״ח לשעה. שעות בפועל: B2 עבדה 1,000, C3 עבדה 1,200, D4 עבדה 1,400. סך עלות השכר לחודש: 650,000 ש״ח.<br>(א) תעריף ההעמסה. (ב) סך עלות העבודה הישירה של שלוש ההזמנות. (ג) עלות העבודה העקיפה.',
+     subs:[{id:'ala1-a', label:'(א) תעריף העמסה (₪ לשעה)', expected:100, tol:0.5, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+            subhint:feBlock('נוסחת תעריף ההעמסה', 'POHR = \\dfrac{\\text{עקיפות מתוקצבות}}{\\text{שעות מתוקצבות}}', ['עקיפות מתוקצבות: 1,500,000 ש״ח.','שעות מתוקצבות: 15,000 שעות עבודה ישירה.'], 'שני מספרים שנתיים. אל תתפתו לחלק בשעות של החודש הנוכחי.')},
+           {id:'ala1-b', label:'(ב) סך עבודה ישירה (₪)', expected:540000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+            subhint:feBlock('סך העבודה הישירה', 'DL = \\sum \\left(\\text{שעות ההזמנה} \\times \\text{תעריף}\\right)', ['B2: 1,000 שעות כפול 150.','C3: 1,200 שעות כפול 150.','D4: 1,400 שעות כפול 150.'], 'אפשר גם לקצר: סכמו קודם את השעות, 3,600, והכפילו פעם אחת ב-150.')},
+           {id:'ala1-c', label:'(ג) עבודה עקיפה (₪)', expected:110000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+            subhint:feBlock('חילוץ העבודה העקיפה', '\\text{עבודה עקיפה} = \\text{סך השכר} - DL', ['סך השכר בחודש: 650,000 ש״ח, נתון בשאלה.','DL, סך העבודה הישירה, מה שחישבתם בסעיף (ב).'], 'המספר שתקבלו חייב להופיע בדיוק בפירוט העקיפות בפועל, בשורה ״עבודה עקיפה״. זו בדיקה עצמית מצוינת.')}],
+     hints:['(א) האומדן השנתי חלקי האומדן השנתי.<br>(ב) שעות כפול תעריף, לכל הזמנה, ואז לסכם.<br>(ג) סך השכר פחות מה שחישבתם בסעיף (ב).','(א) $1{,}500{,}000 \\div 15{,}000 = 100$.<br>(ב) $\\left(1{,}000+1{,}200+1{,}400\\right) \\times 150$.<br>(ג) $650{,}000-540{,}000$.'],
+     solution:'<p><b>(א)</b> $POHR = \\dfrac{1{,}500{,}000}{15{,}000} = 100$ ש״ח לשעת עבודה ישירה.</p><p><b>(ב)</b> $DL = \\left(1{,}000+1{,}200+1{,}400\\right)\\times150 = 3{,}600\\times150 = 540{,}000$ ש״ח.</p><p><b>(ג)</b> עבודה עקיפה $= 650{,}000-540{,}000 = 110{,}000$ ש״ח.</p><p><b>למה זה חשוב:</b> ה-110,000 האלה אינם נכנסים לאף טור הזמנה. הם עלות עקיפה, ולכן מקומם בסל העקיפות בפועל, שאליו נשווה בהמשך את סך ההעמסות. ואכן, בטבלת העקיפות בפועל שבשאלה מופיעה שורה ״עבודה עקיפה 110,000״. אם המספר שלכם שונה, אחד משני החישובים שגוי.</p>'}
+  ];
+  document.getElementById('alphaA').innerHTML = alphaA.map(renderNumeric).join('');
+
+  var alphaB=[
+    {id:'alb1', n:10, difficulty:'בינוני', title:'עלויות השלמה ויתרות סגירה',
+     text:'(א) עלות הזמנה B2 בהשלמתה. (ב) עלות הזמנה C3 בהשלמתה. (ג) יתרת הזמנה D4 בתהליך. (ד) יתרת הסגירה של מחסן החומרים.',
+     subs:[{id:'alb1-a', label:'(א) עלות הזמנה B2 (₪)', expected:570000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+            subhint:feBlock('סכום ההשלמה', '\\text{עלות ההזמנה} = \\text{יתרת פתיחה} + DM + DL + OH_{\\text{applied}}', ['יתרת פתיחה של B2: 220,000 ש״ח.','חומרי גלם: 100,000 ש״ח.','עבודה ישירה: 1,000 שעות כפול 150.','עקיפות שהועמסו: 100 כפול 1,000.'], 'שימו לב שיתרת הפתיחה נלקחת כסכום אחד, 220,000, ולא מפוצלת לשלושת רכיביה.')},
+           {id:'alb1-b', label:'(ב) עלות הזמנה C3 (₪)', expected:800000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+            subhint:feBlock('אותו חישוב, עבור C3', '\\text{עלות ההזמנה} = \\text{יתרת פתיחה} + DM + DL + OH_{\\text{applied}}', ['יתרת פתיחה של C3: 350,000 ש״ח.','חומרי גלם: 150,000 ש״ח.','עבודה ישירה: 1,200 כפול 150.','עקיפות שהועמסו: 100 כפול 1,200.'], 'זו ההזמנה היקרה בחודש, וגם זו שנמסרה. שמרו את הסכום לחישוב הרווח.')},
+           {id:'alb1-c', label:'(ג) יתרת הזמנה D4 (₪)', expected:550000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+            subhint:feBlock('הזמנה שנפתחה החודש ולא הושלמה', '\\text{יתרה} = DM + DL + OH_{\\text{applied}}', ['חומרי גלם: 200,000 ש״ח.','עבודה ישירה: 1,400 כפול 150.','עקיפות שהועמסו: 100 כפול 1,400.'], 'שלושה רכיבים בלבד. אין יתרת פתיחה, כי ההזמנה נולדה החודש.')},
+           {id:'alb1-d', label:'(ד) יתרת מחסן החומרים (₪)', expected:180000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ד)',
+            subhint:feBlock('סכימה אנכית של עמודת המחסן', '\\text{סגירה} = \\text{פתיחה} + \\text{קניות} - \\text{משיכות}', ['פתיחה: 100,000.','קניות: 500,000 גלם ועוד 80,000 עזר.','משיכות: 450,000 גלם ועוד 50,000 עזר.'], 'קניות חומרי הגלם הן 500,000 לפי הנתון המעודכן.')}],
+     hints:['לכל הזמנה: פתיחה ועוד חומרים ועוד עבודה ועוד עקיפות. למחסן: פתיחה ועוד קניות פחות משיכות.','(א) $220+100+150+100$ אלף.<br>(ב) $350+150+180+120$ אלף.<br>(ג) $200+210+140$ אלף.<br>(ד) $100+500+80-450-50$ אלף.'],
+     solution:'<p><b>(א)</b> $220{,}000+100{,}000+150{,}000+100{,}000 = 570{,}000$ ש״ח.</p><p><b>(ב)</b> $350{,}000+150{,}000+180{,}000+120{,}000 = 800{,}000$ ש״ח.</p><p><b>(ג)</b> $200{,}000+210{,}000+140{,}000 = 550{,}000$ ש״ח, וזו יתרת העבודה בתהליך שתעבור לחודש אפריל.</p><p><b>(ד)</b> $100{,}000+500{,}000+80{,}000-450{,}000-50{,}000 = 180{,}000$ ש״ח.</p>'},
+    {id:'alb2', n:11, difficulty:'מאתגר', title:'סטייה, עלות מכר ורווח גולמי',
+     text:'(א) סך העקיפות שהועמסו. (ב) גודל הסטייה. (ג) עלות המכר. (ד) הרווח הגולמי, כאשר התמורה בגין A1 ו-C3 יחד הייתה 1,800,000 ש״ח.',
+     subs:[{id:'alb2-a', label:'(א) סך עקיפות שהועמסו (₪)', expected:360000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+            subhint:feBlock('סכימת שורת ההעמסה', 'OH_{\\text{הועמס}} = \\sum\\left(100 \\times \\text{שעות ההזמנה}\\right)', ['B2: 100 כפול 1,000.','C3: 100 כפול 1,200.','D4: 100 כפול 1,400.'], 'גם D4 נכללת, למרות שהיא עדיין בתהליך. ההעמסה נרשמה עליה בפועל בחודש הזה.')},
+           {id:'alb2-b', label:'(ב) גודל הסטייה (₪)', expected:140000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+            subhint:feBlock('נוסחת הסטייה', '\\text{סטייה} = OH_{\\text{בפועל}} - OH_{\\text{הועמס}}', ['בפועל: 50,000 ועוד 110,000 ועוד 200,000 ועוד 140,000, כלומר 500,000.','הועמס: מה שחישבתם בסעיף (א).'], 'הפעם המציאות גדולה מהאומדן. שאלו את עצמכם מה זה אומר על העלות שלנו, לפני שאתם ניגשים לסעיף (ג).')},
+           {id:'alb2-c', label:'(ג) עלות המכר (₪)', expected:1190000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+            subhint:'<div class="fe-desc">שני שלבים</div><div class="fe-params">שלב ראשון: אספו את עלות ההזמנות שנמסרו. נמסרו A1 בעלות 250,000, ו-C3 בעלות 800,000.</div><div class="fe-formula">$250{,}000 + 800{,}000 = 1{,}050{,}000$</div><div class="fe-params">שלב שני: תקנו בסטייה. הפעם בזבזנו <b>יותר</b> ממה שהעמסנו על ההזמנות, ולכן העלות שלנו גדולה יותר ממה שהצגנו.</div><div class="fe-formula">$\\text{עלות המכר} = 1{,}050{,}000 + 140{,}000$</div><div class="fe-tip">הזמנה B2, שהושלמה ולא נמסרה, איננה חלק מעלות המכר. עלותה נשארת במלאי.</div>'},
+           {id:'alb2-d', label:'(ד) רווח גולמי (₪)', expected:610000, tol:1, unit:'₪'}],
+     hints:['(א) שלוש שורות ההעמסה מהטבלה.<br>(ב) 500,000 בפועל מול מה שהועמס.<br>(ג) עלות ההזמנות שנמסרו, בתוספת הסטייה שהועמסה בחסר.<br>(ד) 1,800,000 פחות עלות המכר.','(א) $100+120+140 = 360$ אלף.<br>(ב) $500{,}000-360{,}000 = 140{,}000$, הועמס בחסר.<br>(ג) $250{,}000+800{,}000+140{,}000$.<br>(ד) $1{,}800{,}000-1{,}190{,}000$.'],
+     solution:'<p><b>(א)</b> $100{,}000+120{,}000+140{,}000 = 360{,}000$ ש״ח הועמסו.</p><p><b>(ב)</b> העקיפות בפועל היו 500,000 ש״ח. ההפרש הוא $500{,}000-360{,}000 = 140{,}000$ ש״ח, <b>הועמס בחסר</b>.</p><p><b>(ג)</b> נמסרו A1 בעלות 250,000 ו-C3 בעלות 800,000. מכיוון שבזבזנו יותר ממה שרשמנו, נוסיף את ההפרש: $250{,}000+800{,}000+140{,}000 = 1{,}190{,}000$ ש״ח.</p><p><b>(ד)</b> $1{,}800{,}000-1{,}190{,}000 = 610{,}000$ ש״ח רווח גולמי.</p><p>שימו לב לניגוד מול מקרה בובו: שם הסטייה <b>הקטינה</b> את עלות המכר, וכאן היא <b>הגדילה</b> אותה. הכיוון תמיד נגזר מהשאלה האם בזבזנו יותר או פחות ממה שהעמסנו, ולעולם לא מכלל שיש לשנן.</p>'}
+  ];
+  document.getElementById('alphaB').innerHTML = alphaB.map(renderNumeric).join('');
+
+  /* ================= CASE 3 · WOOD ARTISTS ================= */
+  var woodA=[
+    {id:'woa1', n:12, difficulty:'בינוני', title:'חלק א׳: תעריף, עבודה עקיפה, השלמת 301, ורווח',
+     text:'האומדן לשנת 2024: עקיפות של 600,000 ש״ח ו-12,000 שעות עבודה ישירה. תעריף נגר: 80 ש״ח לשעה. סך השכר בחודש: 300,000 ש״ח. שעות: 301 עבדה 800, 302 עבדה 1,000, 303 עבדה 1,200.<br>(א) תעריף ההעמסה. (ב) העבודה העקיפה. (ג) עלות הזמנה 301 בהשלמתה. (ד) הרווח הגולמי, כאשר התמורה הייתה 500,000 ש״ח.',
+     subs:[{id:'woa1-a', label:'(א) תעריף (₪ לשעת עבודה)', expected:50, tol:0.5, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+            subhint:feBlock('נוסחת תעריף ההעמסה', 'POHR = \\dfrac{600{,}000}{12{,}000}', ['600,000 ש״ח, אומדן העקיפות השנתי.','12,000 שעות עבודה ישירה, האומדן השנתי.'], 'שמרו את התוצאה. בחלק ב׳ נחליף רק את המכנה, והמונה יישאר בדיוק אותו דבר.')},
+           {id:'woa1-b', label:'(ב) עבודה עקיפה (₪)', expected:60000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+            subhint:feBlock('חילוץ העבודה העקיפה', '\\text{עבודה עקיפה} = \\text{סך השכר} - DL', ['סך השכר: 300,000 ש״ח.','DL: סכמו את השעות, 800 ועוד 1,000 ועוד 1,200, והכפילו ב-80.'], 'בדקו את עצמכם מול פירוט העקיפות בפועל שבשאלה. השורה ״עבודה עקיפה״ שם חייבת להיות זהה.')},
+           {id:'woa1-c', label:'(ג) עלות הזמנה 301 (₪)', expected:239000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+            subhint:feBlock('סכום ההשלמה של 301', '\\text{עלות} = \\text{פתיחה} + DM + DL + OH_{\\text{applied}}', ['פתיחה: 85,000 ש״ח.','חומרי גלם: 50,000 ש״ח.','עבודה ישירה: 800 שעות כפול 80.','עקיפות שהועמסו: 50 כפול 800 שעות עבודה.'], 'זהו המספר שנשווה אליו בחלק ב׳. סמנו אותו.')},
+           {id:'woa1-d', label:'(ד) רווח גולמי (₪)', expected:131000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ד)',
+            subhint:'<div class="fe-desc">שלושה צעדים</div><div class="fe-params">אחד: עלות ההזמנות שנמסרו. נמסרו 300 בעלות 120,000, ו-301 בעלות שחישבתם בסעיף (ג).</div><div class="fe-params">שניים: הסטייה. הועמסו 40,000 ועוד 50,000 ועוד 60,000, כלומר 150,000. בפועל נצרכו 160,000. בזבזנו יותר, ולכן מוסיפים את ההפרש לעלות.</div><div class="fe-formula">$\\text{עלות המכר} = 120{,}000 + 239{,}000 + 10{,}000$</div><div class="fe-params">שלושה: רווח גולמי הוא המכירות, 500,000, פחות עלות המכר.</div>'}],
+     hints:['(א) 600,000 חלקי 12,000.<br>(ב) 300,000 פחות סך שעות כפול 80.<br>(ג) ארבעה רכיבים, כולל יתרת פתיחה.<br>(ד) 500,000 פחות עלות ההזמנות שנמסרו, בתוספת הסטייה.','(א) $50$.<br>(ב) $300{,}000-3{,}000\\times80 = 60{,}000$.<br>(ג) $85+50+64+40 = 239$ אלף.<br>(ד) $500{,}000-\\left(120{,}000+239{,}000+10{,}000\\right)$.'],
+     solution:'<p><b>(א)</b> $POHR = \\dfrac{600{,}000}{12{,}000} = 50$ ש״ח לשעת עבודה.</p><p><b>(ב)</b> סך העבודה הישירה: $\\left(800+1{,}000+1{,}200\\right)\\times80 = 3{,}000\\times80 = 240{,}000$. לכן עבודה עקיפה $= 300{,}000-240{,}000 = 60{,}000$ ש״ח, בדיוק כמו בפירוט העקיפות בפועל.</p><p><b>(ג)</b> $85{,}000+50{,}000+64{,}000+40{,}000 = 239{,}000$ ש״ח.</p><p><b>(ד)</b> הועמסו $40{,}000+50{,}000+60{,}000 = 150{,}000$, ובפועל נצרכו 160,000. סטייה של 10,000 בחסר. עלות המכר $= 120{,}000+239{,}000+10{,}000 = 369{,}000$. רווח גולמי $= 500{,}000-369{,}000 = 131{,}000$ ש״ח.</p>'}
+  ];
+  document.getElementById('woodA').innerHTML = woodA.map(renderNumeric).join('');
+
+  var woodB=[
+    {id:'wob1', n:13, difficulty:'מאתגר', title:'חלק ב׳: אותה נגרייה, בסיס שעות מכונה', trap:true,
+     text:'האומדן לעקיפות נשאר 600,000 ש״ח. אומדן שעות המכונה השנתי: 6,000 שעות. שעות מכונה בפועל באוקטובר: 301 צרכה 300, 302 צרכה 500, 303 צרכה 600.<br>(א) התעריף החדש. (ב) העקיפות שיועמסו על 301. (ג) עלות 301 בהשלמתה, בשיטה החדשה. (ד) גודל הסטייה החדשה. (ה) הרווח הגולמי המעודכן.',
+     subs:[{id:'wob1-a', label:'(א) תעריף (₪ לשעת מכונה)', expected:100, tol:0.5, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+            subhint:feBlock('אותה נוסחה, מכנה אחר', 'POHR = \\dfrac{\\text{עקיפות מתוקצבות}}{\\text{שעות מכונה מתוקצבות}}', ['עקיפות מתוקצבות: 600,000 ש״ח, <b>ללא שינוי</b>. השאלה לא אמרה שהעלות הצפויה השתנתה.','שעות מכונה מתוקצבות: 6,000.'], 'זו הנקודה שהכי הרבה סטודנטים מפספסים: מה שהשתנה הוא רק הדרך לחלק את העוגה, לא גודלה.')},
+           {id:'wob1-b', label:'(ב) עקיפות על 301 (₪)', expected:30000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+            subhint:feBlock('העמסה בבסיס החדש', 'OH_{\\text{applied}} = \\text{תעריף לשעת מכונה} \\times \\text{שעות מכונה בפועל}', ['התעריף מסעיף (א).','שעות מכונה של הזמנה 301: 300 שעות.'], 'שימו לב שאלה שעות מכונה, ולא 800 שעות העבודה. אלה שני נתונים שונים לגמרי באותה שאלה.')},
+           {id:'wob1-c', label:'(ג) עלות 301 בהשלמתה (₪)', expected:229000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+            subhint:feBlock('אותם ארבעה רכיבים, רק אחד מהם השתנה', '\\text{עלות} = \\text{פתיחה} + DM + DL + OH_{\\text{applied}}', ['פתיחה: 85,000, ללא שינוי.','חומרי גלם: 50,000, ללא שינוי.','עבודה ישירה: 64,000, ללא שינוי.','עקיפות שהועמסו: מה שחישבתם בסעיף (ב), וזה הרכיב היחיד שזז.'], 'הדרך המהירה: קחו את 239,000 מחלק א׳ והפחיתו את ההפרש בהעמסה.')},
+           {id:'wob1-d', label:'(ד) גודל הסטייה (₪)', expected:20000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ד)',
+            subhint:feBlock('סטייה בבסיס החדש', '\\text{סטייה} = OH_{\\text{בפועל}} - OH_{\\text{הועמס}}', ['בפועל: 160,000 ש״ח, ללא שינוי. אותן מכונות, אותו חשמל, אותו מנהל נגרייה.','הועמס: 30,000 ועוד 50,000 ועוד 60,000.'], 'שימו לב שהסטייה גדלה בדיוק באותם 10,000 שהזמנה 301 חסכה. זה לא צירוף מקרים.')},
+           {id:'wob1-e', label:'(ה) רווח גולמי מעודכן (₪)', expected:131000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ה)',
+            subhint:'<div class="fe-desc">חשבו לפני שאתם מחשבים</div><div class="fe-params">עלות המכר עכשיו היא 120,000 בגין הזמנה 300, ועוד עלות 301 בשיטה החדשה, ועוד הסטייה החדשה.</div><div class="fe-formula">$120{,}000 + 229{,}000 + 20{,}000$</div><div class="fe-params">השוו את התוצאה לחלק א׳, שם היה $120{,}000 + 239{,}000 + 10{,}000$. שני הסכומים זהים, ולא במקרה: מה שהזמנה 301 חסכה בהעמסה, הסטייה החזירה.</div><div class="fe-tip">לכן הרווח הגולמי המעודכן זהה לזה שבחלק א׳. אחרי שתקבלו את התוצאה, קראו את ההסבר המלא מתחת להשוואה.</div>'}],
+     hints:['(א) 600,000 חלקי 6,000 שעות מכונה.<br>(ב) התעריף כפול 300 שעות מכונה.<br>(ג) קחו את 239,000 והורידו את ההפרש בהעמסה.<br>(ד) 160,000 בפועל מול סך ההעמסה החדש.<br>(ה) 500,000 פחות עלות המכר החדשה.','(א) $100$.<br>(ב) $100\\times300 = 30{,}000$.<br>(ג) $85+50+64+30 = 229$ אלף.<br>(ד) $160{,}000-140{,}000 = 20{,}000$.<br>(ה) $500{,}000-\\left(120{,}000+229{,}000+20{,}000\\right)$.'],
+     solution:'<p><b>(א)</b> $POHR = \\dfrac{600{,}000}{6{,}000} = 100$ ש״ח לשעת מכונה. שימו לב שהמונה לא השתנה: החברה לא צופה להוציא יותר או פחות, היא רק בוחרת לחלק אחרת.</p><p><b>(ב)</b> $100\\times300 = 30{,}000$ ש״ח, לעומת 40,000 בחלק א׳.</p><p><b>(ג)</b> $85{,}000+50{,}000+64{,}000+30{,}000 = 229{,}000$ ש״ח. שלושת הרכיבים הראשונים זהים לחלק א׳, ורק הרביעי ירד ב-10,000.</p><p><b>(ד)</b> הועמסו $30{,}000+50{,}000+60{,}000 = 140{,}000$. בפועל 160,000. הסטייה היא 20,000 ש״ח בחסר, לעומת 10,000 בחלק א׳.</p><p><b>(ה)</b> עלות המכר $= 120{,}000+229{,}000+20{,}000 = 369{,}000$, בדיוק כמו בחלק א׳. הרווח הגולמי $= 500{,}000-369{,}000 = 131{,}000$ ש״ח, גם הוא זהה.</p><p><b>למה זה קרה:</b> החברה בזבזה 160,000 ש״ח על עקיפות, ללא קשר לשיטה. הסכום הזה חייב להגיע לדוח רווח והפסד באותה תקופה, בין אם דרך עלות ההזמנה שנמסרה ובין אם דרך הסטייה. הזמנה 301 נמסרה באותו חודש, ולכן שני המסלולים נפגשים באותה שורה ומתקזזים. אילו 301 הייתה נשארת במחסן, ההקלה של 10,000 הייתה נשארת כלואה במלאי, הסטייה הייתה נזקפת מיד לתקופה, והרווח היה נמוך יותר ב-10,000.</p>'}
+  ];
+  document.getElementById('woodB').innerHTML = woodB.map(renderNumeric).join('');
+
+  /* ================= TRAPS · multiple choice ================= */
+  var trapsMC=[
+    {id:'tmc1', n:14, difficulty:'מאתגר', title:'חמש שאלות אמריקאיות על המלכודות הקלאסיות',
+     text:'כל שאלה כאן מבוססת על טעות שחוזרת שנה אחר שנה. קראו לאט, במיוחד את הניסוח.',
+     questions:[
+       {q:'חברה השלימה החודש הזמנה בעלות 400,000 ש״ח, אך טרם מסרה אותה ללקוח. כיצד יטופלו 400,000 אלה?',
+        opts:['הם נשארים ביתרת התוצרת הגמורה ואינם נכנסים לעלות המכר','הם נכנסים לעלות המכר, כי הייצור הסתיים','הם נשארים ביתרת העבודה בתהליך עד המסירה','הם נזקפים כהוצאה תקופתית, כמו הוצאות הנהלה','הם מתקזזים מול סטיית ההעמסה'],
+        correct:0, hintBtnLabel:'רמז מליבי לשאלה זו',
+        hint:'<div class="fe-desc">שאלו: איפה פיזית נמצא המוצר?</div><div class="fe-params">הייצור הסתיים, ולכן הוא כבר לא בתהליך. הלקוח לא קיבל אותו, ולכן הוא עדיין של החברה. עלות ייצור הופכת להוצאה רק כשהמוצר עוזב.</div>'},
+       {q:'נצרכו חומרי עזר בסך 30,000 ש״ח. כיצד ירשמו בדוח התמחיר?',
+        opts:['יוצאים ממחסן החומרים, ואינם נכנסים לאף טור הזמנה','יוצאים מהמחסן ומתחלקים שווה בשווה בין ההזמנות הפעילות','יוצאים מהמחסן ונכנסים להזמנה הגדולה ביותר','אינם נרשמים בדוח כלל, כי הם עקיפים','נרשמים ישירות בעמודת התוצרת הגמורה'],
+        correct:0, hintBtnLabel:'רמז מליבי לשאלה זו',
+        hint:'<div class="fe-desc">חומר עזר הוא חומר, אבל הוא עקיף</div><div class="fe-params">הוא בהחלט עזב את המחסן, אז המחסן קטן. אבל אי אפשר לומר לאיזו הזמנה הוא שייך, ולכן הוא לא נכנס לאף טור. הוא מצטרף לסל העקיפות בפועל, שקיים מחוץ לטבלה.</div>'},
+       {q:'סך עלות השכר בחודש היה 500,000 ש״ח. חישוב שעות העבודה הישירה כפול התעריף נתן 380,000 ש״ח. מהם 120,000 הנותרים?',
+        opts:['עבודה עקיפה, המצטרפת לעלויות העקיפות בפועל','טעות בנתוני השאלה שיש להתעלם ממנה','עבודה ישירה שטרם שולמה','חלק מהעמסת העקיפות על ההזמנות','הוצאות הנהלה וכלליות שאינן קשורות לייצור'],
+        correct:0, hintBtnLabel:'רמז מליבי לשאלה זו',
+        hint:'<div class="fe-desc">מי עוד עובד במפעל חוץ מפועלי הייצור?</div><div class="fe-params">מנהל משמרת, מבקר איכות, מנקה, מחסנאי. כולם מקבלים שכר, ואף אחד מהם לא מדווח שעות על הזמנה מסוימת. השכר שלהם הוא עלות עקיפה בפועל.</div>'},
+       {q:'העקיפות שהועמסו הסתכמו ב-250,000 ש״ח, והעקיפות בפועל ב-300,000 ש״ח. מהו הטיפול הנכון?',
+        opts:['מוסיפים 50,000 ש״ח לעלות המכר','מפחיתים 50,000 ש״ח מעלות המכר','מוסיפים 50,000 ש״ח לרווח הגולמי','מחלקים את 50,000 בין ההזמנות שטרם הושלמו','מעבירים 50,000 ליתרת התוצרת הגמורה'],
+        correct:0, hintBtnLabel:'רמז מליבי לשאלה זו',
+        hint:'<div class="fe-desc">שאלה אחת בלבד</div><div class="fe-params">האם בזבזנו יותר או פחות ממה שרשמנו על ההזמנות? בזבזנו 300,000 ורשמנו 250,000, כלומר יותר. אם בזבזנו יותר, העלות האמיתית שלנו גדולה יותר ממה שהצגנו, והרווח יקטן.</div>'},
+       {q:'הזמנה שיתרת הפתיחה שלה הייתה 150,000 ש״ח צברה החודש 200,000 ש״ח נוספים והושלמה. מה יועבר לתוצרת גמורה?',
+        opts:['350,000 ש״ח, סך כל מה שנצבר בטור כולל יתרת הפתיחה','200,000 ש״ח, רק עלויות החודש הנוכחי','150,000 ש״ח, יתרת הפתיחה בלבד','350,000 ש״ח בניכוי חלקה היחסי בסטיית ההעמסה','שום דבר, עד שההזמנה תימסר ללקוח'],
+        correct:0, hintBtnLabel:'רמז מליבי לשאלה זו',
+        hint:'<div class="fe-desc">מה בעצם עובר מקום?</div><div class="fe-params">ההזמנה כולה עוברת ממצב ״בייצור״ למצב ״גמורה במחסן״. היא לא מתחלקת לשניים, ולא משאירה חלק מעצמה מאחור. לכן עובר כל מה שנצבר בטור שלה, מהיום הראשון.</div>'}
+     ],
+     hints:['בכל שאלה, שאלו קודם באיזה שלב פיזי נמצאת ההזמנה: בתהליך, במחסן הגמורים, או אצל הלקוח. השלב קובע את התשובה.','חמש התשובות הנכונות הן חמישה כללים שכבר ראיתם: מלאי עד המסירה, חומר עזר לא נכנס להזמנה, ההפרש בשכר הוא עקיף, סטייה נסגרת לעלות המכר, וההשלמה כוללת את יתרת הפתיחה.'],
+     solution:'<p>חמש התשובות הנכונות הן א׳ בכל השאלות, וזה לא במקרה: כולן מבטאות את אותו עיקרון אחד. <b>עלות עוקבת אחרי המיקום הפיזי של המוצר, ולא אחרי הכוונות שלנו לגביו.</b></p><p>1. הושלם אך לא נמסר, ולכן מלאי, ולכן לא עלות מכר.<br>2. חומר עזר עזב את המחסן אבל אין לו הזמנה, ולכן הוא הולך לסל העקיפות.<br>3. ההפרש בשכר הוא עבודה עקיפה, וזו עלות עקיפה בפועל.<br>4. בזבזנו יותר ממה שהעמסנו, ולכן העלות שלנו גדלה.<br>5. השלמה מעבירה את הטור כולו, כולל העבר.</p>'}
+  ];
+  document.getElementById('trapsMC').innerHTML = trapsMC.map(renderMC).join('');
+
+  /* ================= TRAPS · true / false ================= */
+  var trapsTF=[
+    {id:'ttf1', n:15, difficulty:'בינוני', title:'שש קביעות. נכון או לא נכון?',
+     text:'סמנו לכל קביעה, וקראו את ההסבר שנפתח אחריה גם כשצדקתם.',
+     statements:[
+       {s:'רכישת חומרי גלם מספק מגדילה מיד את עלות ההזמנות שבתהליך.', correct:false,
+        explain:'<b>לא נכון.</b> רכישה מגדילה את מחסן החומרים בלבד. רק <b>משיכה</b> לרצפת הייצור מעבירה עלות אל טורי ההזמנות. חברה יכולה לקנות חומרים ולא לגעת בהם חודשים.'},
+       {s:'תמורת המכירה שהתקבלה מהלקוח נרשמת בעמודת התוצרת הגמורה בדוח התמחיר.', correct:false,
+        explain:'<b>לא נכון, וזו אולי המלכודת המרכזית בפרק.</b> בדוח התמחיר נרשמת רק <b>עלות</b> ההזמנה שיצאה, בסכום שבו היא נכנסה למחסן. התמורה מופיעה אך ורק בחישוב הרווח הגולמי, שנעשה בנפרד.'},
+       {s:'תעריף ההעמסה מחושב מהעלויות העקיפות שנצרכו בפועל באותו חודש.', correct:false,
+        explain:'<b>לא נכון.</b> התעריף נקבע <b>מראש</b>, מהאומדן השנתי, עוד לפני שהתקופה התחילה. אילו חיכינו לנתוני הפועל, לא היינו יכולים לתמחר הזמנה באמצע החודש, וזו כל מטרת השיטה.'},
+       {s:'טור של הזמנה שהושלמה חייב להסתכם באפס ביתרת הסגירה.', correct:true,
+        explain:'<b>נכון.</b> שורת ההשלמה מאפסת את הטור בדיוק בגובה כל מה שנצבר בו. אם נשאר בטור סכום כלשהו, אחת משתיים: או ששכחתם רכיב בסכום ההשלמה, או שההזמנה בכלל לא הושלמה. זו בדיקת השפיות המהירה ביותר בדוח.'},
+       {s:'שינוי בסיס ההעמסה משנה את סך העלויות העקיפות שהחברה הוציאה בפועל.', correct:false,
+        explain:'<b>לא נכון.</b> בסיס ההעמסה הוא כלל חלוקה, לא ברז. החשמל, הפחת והשכירות נשארים בדיוק אותו סכום. מה שמשתנה הוא <b>על מי</b> הם נרשמים, וזה משפיע על תמחור הצעות מחיר ועל השאלה איזו הזמנה נראית רווחית.'},
+       {s:'הזמנה שנפתחה החודש ולא הושלמה תופיע ביתרת הסגירה של העבודה בתהליך.', correct:true,
+        explain:'<b>נכון.</b> היא צברה חומרים, עבודה ועקיפות, ולא עברה לשום מקום. יתרתה היא בדיוק סכום שלושת הרכיבים האלה, בלי יתרת פתיחה, כי לא הייתה לה כזאת. היא תיפתח את החודש הבא כיתרת פתיחה.'}
+     ],
+     hints:['רוב הקביעות השגויות מנסות לערבב בין שני שלבים: קנייה מול משיכה, השלמה מול מסירה, אומדן מול פועל.','ארבע מהקביעות שגויות ושתיים נכונות. אם סימנתם יותר משתיים נכונות, כדאי לחזור למודול השורות.'],
+     solution:'<p>ההיגיון שמאחד את שש הקביעות: <b>כל שלב בדוח מופעל על ידי אירוע פיזי אחר.</b> קנייה מפעילה את המחסן. משיכה מפעילה את ההזמנה. השלמה מעבירה לתוצרת גמורה. מסירה מוציאה מהמלאי. אף אחד מהשלבים האלה לא מופעל על ידי כסף שנכנס מהלקוח, ואף אחד מהם לא מושפע מהעלויות שהתגלו בסוף החודש. הסטייה מטופלת בסוף, מצרפית, ומחוץ לטבלה.</p>'}
+  ];
+  document.getElementById('trapsTF').innerHTML = trapsTF.map(renderTF).join('');
+
+  /* ================= HOMEWORK A · METAL WORKS ================= */
+  var hwA=[
+    {id:'hwa1', n:16, difficulty:'מאתגר', title:'מפעלי מתכת מתקדמים בע״מ, ינואר 2025',
+     text:'<p>חמש הזמנות רצות במקביל, שתיים מהן נפתחות החודש, ואחת נשארת בתהליך בסופו. פתרו את השאלה במלואה מתוך <a href="lec4_hw1.html" style="color:var(--rose-dark);font-weight:800">דף השאלה</a>, ואז בדקו כאן עשרה מספרי ביניים לפי סדר הפתרון.</p><p><b>תזכורת נתונים</b></p><div class="datatbl-wrap"><table class="datatbl"><tr><th>נתוני התקופה</th><th>ערך</th></tr><tr><td>אומדן עקיפות שנתי 2025</td><td>2,500,000 ₪</td></tr><tr><td>אומדן שעות עבודה ישירה שנתי</td><td>50,000 שעות</td></tr><tr><td>תעריף עלות שעת עבודה</td><td>120 ₪</td></tr><tr><td>סך עלות השכר בינואר</td><td>1,000,000 ₪</td></tr><tr><td>תמורה מהמכירות</td><td>2,500,000 ₪</td></tr></table></div><div class="datatbl-wrap"><table class="datatbl"><tr><th>הזמנה</th><th>יתרת פתיחה</th><th>חומרי גלם שנמשכו</th><th>שעות עבודה</th><th>סטטוס בסוף החודש</th></tr><tr><td>402</td><td>255,000</td><td>100,000</td><td>1,000</td><td>הושלמה ונמכרה</td></tr><tr><td>403</td><td>345,000</td><td>150,000</td><td>1,500</td><td>הושלמה ונמכרה</td></tr><tr><td>404</td><td>110,000</td><td>100,000</td><td>1,000</td><td>הושלמה, לא נמכרה</td></tr><tr><td>405</td><td>נפתחה החודש</td><td>150,000</td><td>2,000</td><td>הושלמה, לא נמכרה</td></tr><tr><td>406</td><td>נפתחה החודש</td><td>150,000</td><td>1,500</td><td>נשארה בתהליך</td></tr></table></div><div class="datatbl-wrap"><table class="datatbl"><tr><th>עלויות עקיפות בפועל</th><th>סכום (₪)</th></tr><tr><td>חומרי עזר שנצרכו</td><td>90,000</td></tr><tr><td>עבודה עקיפה</td><td>ההפרש, לחישובכם</td></tr><tr><td>פחת ציוד כבד</td><td>300,000</td></tr><tr><td>ביטוח ושכירות המפעל</td><td>150,000</td></tr></table></div><p>בתוצרת הגמורה בפתיחה: הזמנה 400 בעלות 400,000 ש״ח והזמנה 401 בעלות 200,000 ש״ח. במהלך החודש נמכרו ונמסרו הזמנות 400, 402 ו-403.</p>',
+     subs:[{id:'hwa-a', label:'(א) תעריף העמסה (₪ לשעה)', expected:50, tol:0.5, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+            subhint:feBlock('נוסחת תעריף ההעמסה', 'POHR = \\dfrac{2{,}500{,}000}{50{,}000}', ['2,500,000 ש״ח, אומדן העקיפות לשנת 2025.','50,000 שעות עבודה ישירה, האומדן השנתי.'], 'מספרים שנתיים בלבד. שעות ינואר לא מופיעות כאן.')},
+           {id:'hwa-b', label:'(ב) עבודה עקיפה (₪)', expected:160000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+            subhint:feBlock('חילוץ העבודה העקיפה', '\\text{עבודה עקיפה} = \\text{סך השכר} - DL', ['סך השכר: 1,000,000 ש״ח.','DL: סכמו את השעות של חמש ההזמנות, 7,000 בסך הכל, והכפילו ב-120.'], 'המספר הזה יצטרף לסל העקיפות בפועל, יחד עם חומרי העזר, הפחת והביטוח.')},
+           {id:'hwa-c', label:'(ג) עלות הזמנה 402 בהשלמתה (₪)', expected:525000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+            subhint:feBlock('סכום ההשלמה', '\\text{עלות} = \\text{פתיחה} + DM + DL + OH_{\\text{applied}}', ['פתיחה: 255,000.','חומרי גלם: 100,000.','עבודה ישירה: 1,000 שעות כפול 120.','עקיפות: 50 כפול 1,000 שעות.'], 'שימו לב שהתעריף לשעת עבודה, 120, והתעריף להעמסה, 50, הם שני מספרים שונים.')},
+           {id:'hwa-d', label:'(ד) עלות הזמנה 403 בהשלמתה (₪)', expected:750000, tol:1, unit:'₪'},
+           {id:'hwa-e', label:'(ה) עלות הזמנה 404 בהשלמתה (₪)', expected:380000, tol:1, unit:'₪'},
+           {id:'hwa-f', label:'(ו) עלות הזמנה 405 בהשלמתה (₪)', expected:490000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ו)',
+            subhint:feBlock('הזמנה שנפתחה החודש והושלמה החודש', '\\text{עלות} = DM + DL + OH_{\\text{applied}}', ['אין יתרת פתיחה, כי 405 נפתחה בינואר.','חומרי גלם: 150,000.','עבודה ישירה: 2,000 שעות כפול 120.','עקיפות: 50 כפול 2,000.'], 'שלושה רכיבים בלבד. זו ההזמנה היחידה שנולדה והושלמה באותו חודש.')},
+           {id:'hwa-g', label:'(ז) יתרת הזמנה 406 בתהליך (₪)', expected:405000, tol:1, unit:'₪'},
+           {id:'hwa-h', label:'(ח) גודל סטיית ההעמסה (₪)', expected:350000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ח)',
+            subhint:feBlock('הסטייה', '\\text{סטייה} = OH_{\\text{בפועל}} - OH_{\\text{הועמס}}', ['הועמס: 50 כפול סך השעות בפועל, 7,000 שעות.','בפועל: חומרי עזר 90,000, עבודה עקיפה 160,000, פחת 300,000, ביטוח ושכירות 150,000.'], 'הסטייה כאן גדולה במיוחד. חשבו לרגע למה זה סביר כשמסתכלים על חודש בודד דרך תעריף שנתי.')},
+           {id:'hwa-i', label:'(ט) עלות המכר (₪)', expected:2025000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ט)',
+            subhint:'<div class="fe-desc">מי נמכר בפועל?</div><div class="fe-params">נמכרו שלוש הזמנות: 400 בעלות 400,000, 402 בעלות שחישבתם בסעיף (ג), ו-403 בעלות שחישבתם בסעיף (ד).</div><div class="fe-params">שימו לב: הזמנות 404 ו-405 <b>הושלמו אך לא נמכרו</b>, ולכן אינן נכנסות. הן נשארות ביתרת התוצרת הגמורה. גם הזמנה 401, בעלות 200,000, נשארה במחסן מהחודש הקודם.</div><div class="fe-formula">$\\text{עלות המכר} = 400{,}000 + 525{,}000 + 750{,}000 + \\text{הסטייה}$</div><div class="fe-tip">הסטייה כאן בחסר, ולכן היא מתווספת.</div>'},
+           {id:'hwa-j', label:'(י) רווח גולמי (₪)', expected:475000, tol:1, unit:'₪'}],
+     hints:['סדר העבודה: תעריף, עבודה ישירה וממנה העקיפה, טבלה מלאה, סכימת ההעמסות מול הפועל, ואז רווח.','$POHR=50$. $DL = 7{,}000\\times120 = 840{,}000$, ולכן עקיפה $=160{,}000$. הועמסו $7{,}000\\times50 = 350{,}000$, בפועל $700{,}000$, סטייה $350{,}000$ בחסר. עלות המכר $=400+525+750+350$ אלף.'],
+     solution:'<p><b>(א)</b> $POHR = \\dfrac{2{,}500{,}000}{50{,}000} = 50$ ש״ח לשעת עבודה ישירה.</p><p><b>(ב)</b> סך השעות: $1{,}000+1{,}500+1{,}000+2{,}000+1{,}500 = 7{,}000$. לכן $DL = 7{,}000\\times120 = 840{,}000$, והעבודה העקיפה היא $1{,}000{,}000-840{,}000 = 160{,}000$ ש״ח.</p><p><b>(ג)</b> $255{,}000+100{,}000+120{,}000+50{,}000 = 525{,}000$ ש״ח.</p><p><b>(ד)</b> $345{,}000+150{,}000+180{,}000+75{,}000 = 750{,}000$ ש״ח.</p><p><b>(ה)</b> $110{,}000+100{,}000+120{,}000+50{,}000 = 380{,}000$ ש״ח.</p><p><b>(ו)</b> $150{,}000+240{,}000+100{,}000 = 490{,}000$ ש״ח, ללא יתרת פתיחה.</p><p><b>(ז)</b> $150{,}000+180{,}000+75{,}000 = 405{,}000$ ש״ח, וזו היתרה שתעבור לפברואר.</p><p><b>(ח)</b> הועמסו $7{,}000\\times50 = 350{,}000$. בפועל: $90{,}000+160{,}000+300{,}000+150{,}000 = 700{,}000$. סטייה של $350{,}000$ ש״ח <b>בחסר</b>.</p><p><b>(ט)</b> נמכרו 400, 402 ו-403: $400{,}000+525{,}000+750{,}000 = 1{,}675{,}000$, ובתוספת הסטייה $= 2{,}025{,}000$ ש״ח.</p><p><b>(י)</b> $2{,}500{,}000-2{,}025{,}000 = 475{,}000$ ש״ח.</p><p><b>הערה לגבי הסטייה הענקית:</b> תעריף ההעמסה נגזר מאומדן שנתי של 2,500,000 ש״ח על פני 50,000 שעות. בינואר בלבד נצרכו עקיפות של 700,000 ש״ח, כלומר קרוב לשליש מהתקציב השנתי בחודש אחד. יכול להיות שהיו הוצאות חד-פעמיות, ויכול להיות שהאומדן השנתי נמוך מדי. בכל מקרה, זה בדיוק סוג המידע שההנהלה צריכה לראות: התעריף שנקבע מראש כבר לא מייצג את המציאות, וכדאי לבחון אותו מחדש.</p>'}
+  ];
+  document.getElementById('hwA').innerHTML = hwA.map(renderNumeric).join('');
+
+  /* ================= HOMEWORK B · PSAGOT MOBILE STRUCTURES ================= */
+  var hwB=[
+    {id:'hwb1', n:17, difficulty:'מאתגר', title:'פסגות מבנים ניידים בע״מ, מאי 2026',
+     text:'<p>בסיס העמסה חריג ומעניין: <b>שטח רצפת ייצור במטרים רבועים</b>. פתרו את השאלה במלואה מתוך <a href="lec4_hw2.html" style="color:var(--rose-dark);font-weight:800">דף השאלה</a>, ובדקו כאן שמונה מספרי ביניים.</p><p><b>תזכורת נתונים</b></p><div class="datatbl-wrap"><table class="datatbl"><tr><th>נתוני התקופה</th><th>ערך</th></tr><tr><td>אומדן עקיפות שנתי 2026</td><td>2,400,000 ₪</td></tr><tr><td>אומדן שימוש בשטח שנתי</td><td>12,000 מ״ר</td></tr><tr><td>תעריף עלות שעת עבודה של מתקין</td><td>100 ₪</td></tr><tr><td>סך עלות השכר במאי</td><td>400,000 ₪</td></tr><tr><td>תמורה מהמכירות</td><td>1,200,000 ₪</td></tr></table></div><div class="datatbl-wrap"><table class="datatbl"><tr><th>הזמנה</th><th>יתרת פתיחה</th><th>חומרי גלם שנמשכו</th><th>שעות עבודה</th><th>שטח במ״ר</th><th>סטטוס בסוף החודש</th></tr><tr><td>501</td><td>280,000</td><td>100,000</td><td>800</td><td>200</td><td>הושלמה ונמכרה</td></tr><tr><td>502</td><td>390,000</td><td>150,000</td><td>1,000</td><td>300</td><td>הושלמה, לא נמכרה</td></tr><tr><td>503</td><td>נפתחה החודש</td><td>200,000</td><td>1,500</td><td>400</td><td>נשארה בתהליך</td></tr></table></div><div class="datatbl-wrap"><table class="datatbl"><tr><th>עלויות עקיפות בפועל</th><th>סכום (₪)</th></tr><tr><td>חומרי עזר שנצרכו</td><td>40,000</td></tr><tr><td>עבודה עקיפה</td><td>ההפרש, לחישובכם</td></tr><tr><td>שכירות וארנונה על אולם הייצור</td><td>100,000</td></tr><tr><td>פחת מנופים וחשמל מפעל</td><td>80,000</td></tr></table></div><p>בתוצרת הגמורה בפתיחה: הזמנה 500 בעלות 300,000 ש״ח. במהלך החודש נמסרו ללקוחות הזמנות 500 ו-501.</p>',
+     subs:[{id:'hwb-a', label:'(א) תעריף העמסה (₪ למ״ר)', expected:200, tol:0.5, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (א)',
+            subhint:feBlock('אותה נוסחה, בסיס אחר', 'POHR = \\dfrac{\\text{עקיפות מתוקצבות}}{\\text{מ״ר מתוקצבים}}', ['2,400,000 ש״ח, אומדן העקיפות לשנה.','12,000 מ״ר, אומדן השימוש בשטח לשנה.'], 'שימו לב ליחידת המידה של התוצאה: ש״ח למטר רבוע, ולא ש״ח לשעה. במבחן, יחידת המידה שווה נקודות.')},
+           {id:'hwb-b', label:'(ב) עבודה עקיפה (₪)', expected:70000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ב)',
+            subhint:feBlock('חילוץ העבודה העקיפה', '\\text{עבודה עקיפה} = \\text{סך השכר} - DL', ['סך השכר: 400,000 ש״ח.','DL: סכמו את השעות, 3,300, והכפילו ב-100.'], 'בדקו מול פירוט העקיפות בפועל שבשאלה. השורה ״עבודה עקיפה״ שם חייבת להיות זהה למספר שקיבלתם.')},
+           {id:'hwb-c', label:'(ג) עקיפות שהועמסו על 501 (₪)', expected:40000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ג)',
+            subhint:feBlock('העמסה לפי שטח', 'OH_{\\text{applied}} = \\text{תעריף למ״ר} \\times \\text{מ״ר בפועל}', ['התעריף מסעיף (א).','שטח שהוקצה להזמנה 501 במאי: 200 מ״ר.'], 'אל תשתמשו כאן ב-800 שעות העבודה. הבסיס בשאלה הזאת הוא שטח, ורק שטח.')},
+           {id:'hwb-d', label:'(ד) עלות הזמנה 501 בהשלמתה (₪)', expected:500000, tol:1, unit:'₪'},
+           {id:'hwb-e', label:'(ה) עלות הזמנה 502 בהשלמתה (₪)', expected:700000, tol:1, unit:'₪'},
+           {id:'hwb-f', label:'(ו) יתרת הזמנה 503 בתהליך (₪)', expected:430000, tol:1, unit:'₪'},
+           {id:'hwb-g', label:'(ז) גודל סטיית ההעמסה (₪)', expected:110000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ז)',
+            subhint:feBlock('הסטייה', '\\text{סטייה} = OH_{\\text{בפועל}} - OH_{\\text{הועמס}}', ['הועמס: 200 כפול סך המ״ר, כלומר 900 מ״ר.','בפועל: חומרי עזר 40,000, עבודה עקיפה 70,000, שכירות וארנונה 100,000, פחת וחשמל 80,000.'], 'סכמו קודם את השטח של שלוש ההזמנות, ורק אז הכפילו. זה מהיר יותר משלוש הכפלות נפרדות.')},
+           {id:'hwb-h', label:'(ח) רווח גולמי (₪)', expected:290000, tol:1, unit:'₪', hintBtnLabel:'רמז מליבי לנדרש (ח)',
+            subhint:'<div class="fe-desc">שני שלבים</div><div class="fe-params">עלות המכר: נמכרו רק שתי הזמנות, 500 בעלות 300,000 ו-501 בעלות שחישבתם בסעיף (ד). הזמנה 502 הושלמה ולא נמכרה, ולכן איננה בחישוב.</div><div class="fe-formula">$\\text{עלות המכר} = 300{,}000 + 500{,}000 + \\text{הסטייה}$</div><div class="fe-params">ואז: רווח גולמי הוא 1,200,000 פחות עלות המכר.</div>'}],
+     hints:['התהליך זהה לחלוטין לשאלות הקודמות. הדבר היחיד שהשתנה הוא שם הבסיס: מ״ר במקום שעות.','$POHR=200$ למ״ר. $DL=3{,}300\\times100=330{,}000$, ולכן עקיפה $=70{,}000$. הועמסו $900\\times200=180{,}000$, בפועל $290{,}000$, סטייה $110{,}000$ בחסר.'],
+     solution:'<p><b>(א)</b> $POHR = \\dfrac{2{,}400{,}000}{12{,}000} = 200$ ש״ח למטר רבוע.</p><p><b>(ב)</b> סך השעות: $800+1{,}000+1{,}500 = 3{,}300$. לכן $DL = 330{,}000$, והעבודה העקיפה היא $400{,}000-330{,}000 = 70{,}000$ ש״ח, בדיוק כמו בפירוט.</p><p><b>(ג)</b> $200\\times200 = 40{,}000$ ש״ח.</p><p><b>(ד)</b> $280{,}000+100{,}000+80{,}000+40{,}000 = 500{,}000$ ש״ח.</p><p><b>(ה)</b> $390{,}000+150{,}000+100{,}000+60{,}000 = 700{,}000$ ש״ח.</p><p><b>(ו)</b> $200{,}000+150{,}000+80{,}000 = 430{,}000$ ש״ח.</p><p><b>(ז)</b> הועמסו $\\left(200+300+400\\right)\\times200 = 180{,}000$. בפועל $40{,}000+70{,}000+100{,}000+80{,}000 = 290{,}000$. סטייה של $110{,}000$ ש״ח <b>בחסר</b>.</p><p><b>(ח)</b> עלות המכר $= 300{,}000+500{,}000+110{,}000 = 910{,}000$. רווח גולמי $= 1{,}200{,}000-910{,}000 = 290{,}000$ ש״ח.</p><p><b>לשאלה התיאורטית:</b> במפעל שמייצר מבנים ניידים, מה שהזמנה באמת ״בולעת״ הוא שטח, ולאורך זמן. קרוואן שתופס 400 מ״ר במשך חודש חוסם שטח שאי אפשר להשתמש בו לשום דבר אחר, וצורך בהתאם שכירות, ארנונה, תאורה וחימום. שעות עבודה לא היו מייצגות זאת: אפשר לבנות מבנה ענק בשעות עבודה מעטות יחסית, ואפשר להשקיע שעות רבות בגימור של מבנה קטן. לכן דווקא כאן, מטר רבוע הוא הבסיס שמשקף בצורה הטובה ביותר את צריכת המשאב היקר של המפעל.</p>'}
+  ];
+  document.getElementById('hwB').innerHTML = hwB.map(renderNumeric).join('');
+})();
+</script>
+</body></html>
